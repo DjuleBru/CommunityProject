@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveDir = new Vector2(inputVector.x,inputVector.y);
 
-        Vector2 force = moveDir * moveSpeed;
+        Vector2 force = moveDir * moveSpeed * Time.deltaTime;
         rb.velocity = force;
     }
 

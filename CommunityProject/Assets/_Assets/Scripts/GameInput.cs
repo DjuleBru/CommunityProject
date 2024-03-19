@@ -9,6 +9,7 @@ public class GameInput : MonoBehaviour
     public static GameInput Instance { get; private set; }
 
     public event EventHandler OnInteractAction;
+    public event EventHandler OnAttackAction;
 
     private PlayerInputActions playerInputActions;
     private void Awake() {
@@ -20,12 +21,16 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Enable();
 
         playerInputActions.Player.Interact.performed += Interact_performed;
+        playerInputActions.Player.Attack.performed += Attack_performed;
     }
 
-
+    private void Attack_performed(InputAction.CallbackContext obj) {
+        OnAttackAction?.Invoke(this, EventArgs.Empty);
+    }
 
     private void OnDestroy() {
         playerInputActions.Player.Interact.performed -= Interact_performed;
+        playerInputActions.Player.Attack.performed -= Attack_performed;
 
         playerInputActions.Dispose();
     }

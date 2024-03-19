@@ -5,7 +5,6 @@ using UnityEngine;
 public class DungeonGenerationManager : MonoBehaviour {
     public static DungeonGenerationManager Instance { get; private set; }
 
-    [SerializeField] private int totalRoomNumber;
     [SerializeField] private List<DungeonRoom> dungeonRoomPoolList;
 
     private List<DungeonRoom> dungeonRoomList = new List<DungeonRoom>();
@@ -16,6 +15,7 @@ public class DungeonGenerationManager : MonoBehaviour {
     private void Awake() {
         Instance = this;
         GenerateDungeon();
+        SetRoomDifficultyValues();
         DeActivateRooms();
     }
 
@@ -25,7 +25,7 @@ public class DungeonGenerationManager : MonoBehaviour {
         DungeonRoom initialDungeonRoom = dungeonRoomPoolList[Random.Range(0, dungeonRoomPoolList.Count)];
         previousDungeonRoom = initialDungeonRoom;
 
-        for (int i = 0; i < totalRoomNumber; i++) {
+        for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
 
             DungeonRoom pooledDungeonRoom = dungeonRoomPoolList[Random.Range(0, dungeonRoomPoolList.Count)];
 
@@ -39,7 +39,8 @@ public class DungeonGenerationManager : MonoBehaviour {
                 absoluteRoomPosition = Vector3.zero;
             }
 
-            DungeonRoom newDungeonRoom = Instantiate(pooledDungeonRoom.transform, absoluteRoomPosition, Quaternion.identity, this.transform).GetComponent<DungeonRoom>();
+            Transform newDungeonRoomTransform = Instantiate(pooledDungeonRoom.transform, absoluteRoomPosition, Quaternion.identity, transform);
+            DungeonRoom newDungeonRoom = newDungeonRoomTransform.GetComponent<DungeonRoom>();
 
             if (i == 0) {
                 newDungeonRoom.SetRoomAsFirstDungeonRoom();
@@ -53,9 +54,33 @@ public class DungeonGenerationManager : MonoBehaviour {
     }
 
     private void DeActivateRooms() {
-        for(int i = 1;i < totalRoomNumber;i++) {
+        for(int i = 1;i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
             dungeonRoomList[i].gameObject.SetActive(false);
         }
+    }
+
+    private void SetRoomDifficultyValues() {
+        int dungeonDifficultyValue = DungeonManager.Instance.GetDungeonDifficultyValue();
+
+        List<float> roomDifficultyValues = new List<float>();
+        float totalDifficultyValue = 0;
+
+        for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
+            float roomDifficultyValue = Random.Range(0, 100);
+
+            roomDifficultyValues.Add(roomDifficultyValue);
+            totalDifficultyValue += roomDifficultyValue;
+
+        }
+
+
+        for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
+            float roomDifficultyValue = roomDifficultyValues[i];
+            float roomDifficultyValueScaled = (roomDifficultyValue / totalDifficultyValue)*dungeonDifficultyValue;
+
+            dungeonRoomList[i].SetRoomDifficultyValue((int)roomDifficultyValueScaled);
+        }
+
     }
 
     public List<DungeonRoom> GetDungeonRoomList() { 

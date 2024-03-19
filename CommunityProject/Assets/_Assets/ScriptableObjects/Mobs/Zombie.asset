@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d955697926fe3224cb82d0abe09f3391, type: 3}
+  m_Name: Zombie
+  m_EditorClassIdentifier: 
+  mobDifficultyValue: 3
+  mobToSpawnPrefab: {fileID: 2762617982298062805, guid: 7e10d27036c3e714aaecf7f49b87e81d, type: 3}
+  foundInDungeonTypes: 0000000001000000
+  mobHP: 0
+  mobMoveSpeed: 100
+  attackType: 0
+  attackDmg: 0
+  mobAttackRate: 2
+  mobAttackRange: 0.5
+  mobAggroRange: 10
