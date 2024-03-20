@@ -1,16 +1,17 @@
+using AllIn1SpriteShader;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponVisual : MonoBehaviour
 {
-    private SpriteRenderer weaponSpriteRenderer;
+    [SerializeField] private SpriteRenderer weaponIdleSpriteRenderer;
     private Animator animator;
 
     [SerializeField] private Transform WeaponHoldPoint;
 
+
     private void Awake() {
-        weaponSpriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
     }
 
@@ -22,10 +23,50 @@ public class WeaponVisual : MonoBehaviour
     }
 
     private void Update() {
-        //transform.position = WeaponHoldPoint.position;
+        HandleWeaponIdleVisual();
+        HandleWeaponSortingLayer();
 
-        animator.SetFloat("X", PlayerAnimatorManager.Instance.GetLastMoveDir().x);
-        animator.SetFloat("Y", PlayerAnimatorManager.Instance.GetLastMoveDir().y);
+        if (PlayerAttack.Instance.GetAttacking()) return;
+        Vector2 watchDir = PlayerMovement.Instance.GetWatchVectorNormalized();
+
+        if (watchDir != Vector2.zero) {
+            animator.SetFloat("X", watchDir.x);
+            animator.SetFloat("Y", watchDir.y);
+        }
+        else {
+            animator.SetFloat("X", PlayerAnimatorManager.Instance.GetLastMoveDir().x);
+            animator.SetFloat("Y", PlayerAnimatorManager.Instance.GetLastMoveDir().y);
+        }
+    }
+
+    private void HandleWeaponIdleVisual() {
+        if(!PlayerAttack.Instance.GetAttacking()) {
+            weaponIdleSpriteRenderer.enabled = true;
+        } else {
+            weaponIdleSpriteRenderer.enabled = false;
+        }
+    }
+
+    private void HandleWeaponSortingLayer() {
+        Vector2 moveDir = PlayerMovement.Instance.GetMovementVectorNormalized();
+        Vector2 watchDir = PlayerMovement.Instance.GetWatchVectorNormalized();
+
+        if(watchDir != Vector2.zero) {
+
+            if(watchDir.y > 0) {
+                weaponIdleSpriteRenderer.sortingOrder = -1;
+            } else {
+                weaponIdleSpriteRenderer.sortingOrder = 1;
+            }
+
+        } else {
+            if (moveDir.y > 0) {
+                weaponIdleSpriteRenderer.sortingOrder = -1;
+            }
+            else {
+                weaponIdleSpriteRenderer.sortingOrder = 1;
+            }
+        }
     }
 
     private void PlayerAttack_OnPlayerAttack(object sender, System.EventArgs e) {
@@ -37,8 +78,9 @@ public class WeaponVisual : MonoBehaviour
     }
 
     private void UpdateWeaponVisuals() {
-        //weaponSpriteRenderer.sprite = PlayerAttack.Instance.GetActiveWeaponSO().weaponSprite;
         animator.runtimeAnimatorController = PlayerAttack.Instance.GetActiveWeaponSO().weaponAnimatorController;
+        weaponIdleSpriteRenderer.sprite = PlayerAttack.Instance.GetActiveWeaponSO().weaponSprite;
     }
+
 
 }

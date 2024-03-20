@@ -16,7 +16,8 @@ public class MobAttack : MonoBehaviour
     private Mob mob;
     private AttackType attackType;
     private int attackDmg;
-    private int attackRate;
+    private float attackRate;
+    private float attackDelay;
 
     private float attackTimer;
 
@@ -25,8 +26,9 @@ public class MobAttack : MonoBehaviour
         attackType = mob.GetMobSO().attackType;
         attackDmg = mob.GetMobSO().attackDmg;
         attackRate = mob.GetMobSO().mobAttackRate;
+        attackDelay = mob.GetMobSO().mobAttackDelay;
 
-        attackTimer = 0;
+        attackTimer = attackDelay;
     }
 
     public void AttackTarget(Vector3 targetPosition) {
@@ -39,7 +41,7 @@ public class MobAttack : MonoBehaviour
     }
 
     public void ResetAttackTimer() {
-        attackTimer = 0;
+        attackTimer = attackDelay;
     }
 
     public int GetAttackDamage() {

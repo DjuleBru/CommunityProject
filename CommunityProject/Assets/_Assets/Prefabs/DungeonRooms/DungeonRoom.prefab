@@ -589,6 +589,7 @@ GameObject:
   - component: {fileID: 6115012990518482235}
   - component: {fileID: 9113977865151718588}
   - component: {fileID: 460544295858262229}
+  - component: {fileID: 1844724211144785247}
   m_Layer: 0
   m_Name: DungeonRoom
   m_TagString: Untagged
@@ -632,12 +633,12 @@ MonoBehaviour:
   roomEnterPosition: {fileID: 8681145609735819294}
   roomExitPosition: {fileID: 4933481234980980996}
   roomCenterSprite: {fileID: 4680936145326242948}
-  roomExitDoorVisual: {fileID: 2205114882452768408}
-  roomEntryDoorVisual: {fileID: 3157458417154835106}
+  roomExitDoorVisual: {fileID: 2491777677906395028}
+  roomEntryDoorVisual: {fileID: 3444090516030324830}
+  roomExitDoorShadowVisual: {fileID: 1569488326508538607}
+  roomEntryDoorShadowVisual: {fileID: 4805010368197718839}
   roomExitPassageVisual: {fileID: 3119840947266516416}
   roomEnterPassageVisual: {fileID: 4758629056466912376}
-  roomExitDoorShadowVisual: {fileID: 8322764194464868126}
-  roomEntryDoorShadowVisual: {fileID: 5489526866641673357}
   cameraOrthographicSize: 0
   roomCamera: {fileID: 2246301319067438050}
   mobSpawnPoints: {fileID: 4089085986714164197}
@@ -671,6 +672,19 @@ PolygonCollider2D:
       - {x: -0.5877852, y: -0.80901706}
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
+--- !u!114 &1844724211144785247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944270955962781926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815bbcf2bb69d4643b973a1d301cb468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphUpdateRate: 0.2
 --- !u!1 &1124151139649629954
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +814,8 @@ GameObject:
   - component: {fileID: 8738830976500242035}
   - component: {fileID: 600010042541671636}
   - component: {fileID: 3086537079753463737}
+  - component: {fileID: 17977651515655682}
+  - component: {fileID: 2491777677906395028}
   m_Layer: 6
   m_Name: ExitDoor
   m_TagString: Untagged
@@ -960,7 +976,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 30ecd7538b7e6a541bd7ec00541ca675, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1050,6 +1066,40 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!95 &17977651515655682
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205114882452768408}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5543a402d4e515a49be931b5e452c512, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2491777677906395028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205114882452768408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f63748b432db24a99012a16f1fb863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShadow: 0
 --- !u!1 &3119840947266516416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,6 +1378,8 @@ GameObject:
   - component: {fileID: 6855352045891294978}
   - component: {fileID: 6374953651518157214}
   - component: {fileID: 3848234053792664786}
+  - component: {fileID: 3215631159532242474}
+  - component: {fileID: 3444090516030324830}
   m_Layer: 6
   m_Name: EntryDoor
   m_TagString: Untagged
@@ -1488,7 +1540,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 8cc43087c3f3b41448c0edf5d6ae4054, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1578,6 +1630,40 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!95 &3215631159532242474
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157458417154835106}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5543a402d4e515a49be931b5e452c512, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3444090516030324830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157458417154835106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f63748b432db24a99012a16f1fb863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShadow: 0
 --- !u!1 &3564853338081435195
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,6 +2502,8 @@ GameObject:
   - component: {fileID: 3343952550812440430}
   - component: {fileID: 8774176000870866580}
   - component: {fileID: 4536794684426492589}
+  - component: {fileID: 4530130461523008062}
+  - component: {fileID: 4805010368197718839}
   m_Layer: 0
   m_Name: EntryDoorShadows
   m_TagString: Untagged
@@ -2524,7 +2612,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 8cc43087c3f3b41448c0edf5d6ae4054, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2553,6 +2641,40 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!95 &4530130461523008062
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5489526866641673357}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5543a402d4e515a49be931b5e452c512, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4805010368197718839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5489526866641673357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f63748b432db24a99012a16f1fb863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShadow: 1
 --- !u!1 &5785397658769211403
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,6 +3153,8 @@ GameObject:
   - component: {fileID: 3207407905220523338}
   - component: {fileID: 8659786916847625629}
   - component: {fileID: 8463184209739265651}
+  - component: {fileID: 5915549491432055285}
+  - component: {fileID: 1569488326508538607}
   m_Layer: 0
   m_Name: ExitDoorShadows
   m_TagString: Untagged
@@ -3139,7 +3263,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 30ecd7538b7e6a541bd7ec00541ca675, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3168,6 +3292,40 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!95 &5915549491432055285
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8322764194464868126}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5543a402d4e515a49be931b5e452c512, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1569488326508538607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8322764194464868126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f63748b432db24a99012a16f1fb863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShadow: 1
 --- !u!1 &8931435342854313643
 GameObject:
   m_ObjectHideFlags: 0

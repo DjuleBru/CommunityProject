@@ -10,12 +10,13 @@ public class DungeonRoom : MonoBehaviour
     [SerializeField] private Transform roomExitPosition;
     [SerializeField] private GameObject roomCenterSprite;
 
-    [SerializeField] private GameObject roomExitDoorVisual;
-    [SerializeField] private GameObject roomEntryDoorVisual;
+    [SerializeField] private DungeonDoorVisual roomExitDoorVisual;
+    [SerializeField] private DungeonDoorVisual roomEntryDoorVisual;
+    [SerializeField] private DungeonDoorVisual roomExitDoorShadowVisual;
+    [SerializeField] private DungeonDoorVisual roomEntryDoorShadowVisual;
+
     [SerializeField] private GameObject roomExitPassageVisual;
     [SerializeField] private GameObject roomEnterPassageVisual;
-    [SerializeField] private GameObject roomExitDoorShadowVisual;
-    [SerializeField] private GameObject roomEntryDoorShadowVisual;
 
     [SerializeField] float cameraOrthographicSize;
     [SerializeField] private CinemachineVirtualCamera roomCamera;
@@ -46,13 +47,11 @@ public class DungeonRoom : MonoBehaviour
         while(setDifficultyValue < dungeonRoomDifficultyValue) {
             SpawnMobs();
         };
-
-        Debug.Log("initial room difficulty value " + dungeonRoomDifficultyValue + "Set room difficulty value" + setDifficultyValue);
     }
 
     private void Update() {
         if(Input.GetKeyDown(KeyCode.T) && PlayerIsInRoom()) {
-            CompleteRoom();
+            OpenNextDungeonRoom();
         }
     }
 
@@ -61,7 +60,7 @@ public class DungeonRoom : MonoBehaviour
         playerIsInRoom = true;
 
         if(!roomIsComplete) {
-            StartCombat();
+            StartCoroutine(CloseDungeonRoom());
         }
     }
 
@@ -94,13 +93,22 @@ public class DungeonRoom : MonoBehaviour
 
                 // Spawn if we have not reached the room difficulty value
 
-                Instantiate(mobToSwawn, mobSpawnPoint.transform.position, Quaternion.identity);
+                Vector3 spawnPosition = Utils.Randomize2DPoint(mobSpawnPoint.transform.position, .5f);
 
-                Mob mobSpawned = mobSpawnPoint.GetComponent<Mob>();
+                Mob mobSpawned = Instantiate(mobToSwawn, spawnPosition, Quaternion.identity, this.transform).GetComponent<Mob>();
+                mobSpawned.SetParentDungeonRoom(this);
+                mobSpawned.gameObject.SetActive(false);
                 mobsInRoom.Add(mobSpawned);
 
                 setDifficultyValue += mobToSpawnSO.mobDifficultyValue;
             } 
+        }
+    }
+
+    public void RemoveMobFromDungeonRoomMobList(Mob mob) {
+        mobsInRoom.Remove(mob);
+        if(mobsInRoom.Count == 0) {
+            CompleteRoom();
         }
     }
 
@@ -125,9 +133,8 @@ public class DungeonRoom : MonoBehaviour
         nextDungeonRoom.gameObject.SetActive(true);
         nextDungeonRoom.OpenDungeonRoomEntrance();
 
-
-        roomExitDoorVisual.SetActive(false);
-        roomExitDoorShadowVisual.SetActive(false);
+        roomExitDoorVisual.OpenDoor();
+        roomExitDoorShadowVisual.OpenDoor();
         roomExitPassageVisual.SetActive(true);
     }
 
@@ -144,9 +151,30 @@ public class DungeonRoom : MonoBehaviour
         ResetRoomCameraPriority();
         previousDungeonRoom.SetRoomCameraAsMainCamera();
     }
-    private void StartCombat() {
-        roomEntryDoorVisual.SetActive(true);
-        roomEntryDoorShadowVisual.SetActive(true);
+
+    private IEnumerator CloseDungeonRoom() {
+        roomEntryDoorVisual.CloseDoor();
+        roomEntryDoorShadowVisual.CloseDoor();
+
+
+        float delayToMonsterActivation = .2f;
+        yield return new WaitForSeconds(delayToMonsterActivation);
+
+        StartCoroutine(StartCombat());
+    }
+
+    private IEnumerator StartCombat() {
+
+        float delayBetweenMobActivation = .2f;
+
+        foreach(Mob mob in mobsInRoom) {
+            mob.gameObject.SetActive(true);
+            yield return new WaitForSeconds(delayBetweenMobActivation);
+        }
+
+        foreach (Mob mob in mobsInRoom) {
+            mob.SetAllMobsSpawned();
+        }
 
         // Recalculate pathfinding Graph
         AstarPath.active.Scan();
@@ -160,13 +188,13 @@ public class DungeonRoom : MonoBehaviour
     }
 
     public void OpenExitDoor() {
-        roomExitDoorVisual.SetActive(false);
-        roomExitDoorShadowVisual.SetActive(false);
+        roomExitDoorVisual.OpenDoor();
+        roomExitDoorShadowVisual.OpenDoor();
     }
 
     public void OpenDungeonRoomEntrance() {
-        roomEntryDoorVisual.SetActive(false);
-        roomEntryDoorShadowVisual.SetActive(false);
+        roomEntryDoorVisual.OpenDoor();
+        roomEntryDoorShadowVisual.OpenDoor();
 
         // Recalculate pathfinding Graph
         AstarPath.active.Scan();

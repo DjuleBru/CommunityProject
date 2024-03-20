@@ -10,16 +10,25 @@ public class MobAnimatorManager : MonoBehaviour
     protected MobAttack mobAttack;
     protected Mob mob;
 
+    private bool dead;
+
     private void Awake() {
         animator = GetComponent<Animator>();
         mobMovement = GetComponentInParent<MobMovement>();
         mobAttack = GetComponentInParent<MobAttack>();
         mob = GetComponentInParent<Mob>();
     }
+
     protected virtual void Start() {
-        mob.OnMobDamaged += Mob_OnMobDamaged;
+        mob.OnIDamageableHealthChanged += Mob_OnIDamageableHealthChanged;
         mob.OnMobDied += Mob_OnModDied;
         mobAttack.OnMobAttack += MobAttack_OnMobAttack;
+    }
+
+    private void Mob_OnIDamageableHealthChanged(object sender, IDamageable.OnIDamageableHealthChangedEventArgs e) {
+        if (animator != null) {
+            bodyAnimator.SetTrigger("Damaged");
+        }
     }
 
     private void MobAttack_OnMobAttack(object sender, System.EventArgs e) {
@@ -28,15 +37,17 @@ public class MobAnimatorManager : MonoBehaviour
 
     private void Mob_OnModDied(object sender, System.EventArgs e) {
         animator.SetTrigger("Die");
-    }
-
-    private void Mob_OnMobDamaged(object sender, System.EventArgs e) {
-        if (animator != null) {
-            bodyAnimator.SetTrigger("Damaged");
-        }
+        dead = true;
     }
 
     private void Update() {
+
+        if (dead) {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Die") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .95) {
+                //Die animation finished playing
+                mob.DestroyMob();
+            }
+        }
 
         Vector3 moveDirNormalized = mobMovement.GetMoveDirNormalized();
         bool reachedEndOfPath = mobMovement.GetReachedEndOfPath();

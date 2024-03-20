@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement Instance { get; private set; }
 
     private Rigidbody2D rb;
-    private Vector2 moveDir;
+    private Vector2 moveDirNormalized;
+    private Vector2 watchDirNormalized;
 
     [SerializeField] private float moveSpeed;
 
@@ -20,19 +22,37 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() {
         HandleMovement();
+        HandleWatchDir();
+    }
+
+    private void HandleWatchDir() {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 playerPos = Player.Instance.transform.position;
+
+        watchDirNormalized = (mousePos - playerPos).normalized;
     }
 
     private void HandleMovement() {
-        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
+        Vector2 force = Vector2.zero;
 
-        moveDir = new Vector2(inputVector.x,inputVector.y);
+        if (!PlayerAttack.Instance.GetAttacking()) {
+            // If Player is not attacking, move
 
-        Vector2 force = moveDir * moveSpeed * Time.deltaTime;
+            Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
+
+            moveDirNormalized = new Vector2(inputVector.x, inputVector.y).normalized;
+
+            force = moveDirNormalized * moveSpeed * Time.fixedDeltaTime;
+        }
         rb.velocity = force;
     }
 
     public Vector2 GetMovementVectorNormalized() {
-        return moveDir;
+        return moveDirNormalized;
+    }
+
+    public Vector2 GetWatchVectorNormalized() {
+        return watchDirNormalized;
     }
 
 }

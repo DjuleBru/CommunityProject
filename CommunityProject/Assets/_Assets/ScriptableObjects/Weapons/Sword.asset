@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a507851cbae87c74faf7bf505155e85b, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  weaponSprite: {fileID: 1771171627, guid: c76fc7f81ae3073429c77dd64363d610, type: 3}
-  weaponDamage: 5
+  weaponSprite: {fileID: 1777395493, guid: 97de20bdab8e858488e2cba91d056929, type: 3}
+  weaponDamage: 20
+  weaponAttackRate: 0.35
+  weaponCanPierce: 1
+  weaponKnockback: 2000
+  weaponDazeTime: 0
   bodyAnimationType: 1
   weaponAnimatorController: {fileID: 22100000, guid: 6c6bfa57c433c9041bff77a5a209643e, type: 2}

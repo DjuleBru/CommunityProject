@@ -13,13 +13,14 @@ public class PlayerAnimatorManager : MonoBehaviour {
 
     private string bodyAnimationType;
 
+    private bool attacking;
     private void Awake() {
         Instance = this;
         animator = GetComponent<Animator>();
     }
 
     private void Start() {
-        Player.Instance.OnPlayerDamaged += Player_OnPlayerDamaged;
+        Player.Instance.OnIDamageableHealthChanged += Player_OnIDamageableHealthChanged;
         PlayerAttack.Instance.OnPlayerAttack += PlayerAttack_OnPlayerAttack;
         PlayerAttack.Instance.OnActiveWeaponSOChanged += PlayerAttack_OnActiveWeaponSOChanged;
 
@@ -27,36 +28,64 @@ public class PlayerAnimatorManager : MonoBehaviour {
         animator.SetBool(bodyAnimationType, true);
     }
 
-    private void Update() {
-        Vector2 moveDir = PlayerMovement.Instance.GetMovementVectorNormalized();
 
+    private void Update() {
+
+        CheckIfPlayerIsAttackingAnimation();
+        if (attacking) return;
+
+        Vector2 moveDir = PlayerMovement.Instance.GetMovementVectorNormalized();
         if (moveDir != Vector2.zero) {
             animator.SetBool("Walking", true);
         } else {
             animator.SetBool("Walking", false);
         }
 
-        // Handle last move dir
+        HandleLastMoveDir(moveDir);
+        Vector2 watchDir = PlayerMovement.Instance.GetWatchVectorNormalized();
+
+        if (watchDir != Vector2.zero) {
+            animator.SetFloat("X", watchDir.x);
+            animator.SetFloat("Y", watchDir.y);
+        } else {
+            animator.SetFloat("X", lastMoveDir.x);
+            animator.SetFloat("Y", lastMoveDir.y);
+        }
+    }
+
+    private void CheckIfPlayerIsAttackingAnimation() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash")) {
+            attacking = true;
+        } else {
+            if(attacking) {
+                PlayerAttack.Instance.SetAttackEnded();
+            }
+            attacking = false;
+        }
+
+        PlayerAttack.Instance.SetAttacking(attacking);
+    }
+
+    private void HandleLastMoveDir(Vector2 moveDir) {
         if (moveDir == Vector2.zero) {
             moveDir = lastMoveDir;
         }
 
         lastMoveDir = moveDir;
-        if(lastMoveDir.y == 0) {
+        if (lastMoveDir.y == 0) {
             lastMoveDir.y = -0.01f;
         }
-        if(lastMoveDir.x == 0) {
+        if (lastMoveDir.x == 0) {
             lastMoveDir.x = 0.01f;
         }
-        animator.SetFloat("X", lastMoveDir.x);
-        animator.SetFloat("Y", lastMoveDir.y);
     }
 
     private void PlayerAttack_OnPlayerAttack(object sender, System.EventArgs e) {
         animator.SetTrigger("Attack");
     }
 
-    private void Player_OnPlayerDamaged(object sender, System.EventArgs e) {
+
+    private void Player_OnIDamageableHealthChanged(object sender, IDamageable.OnIDamageableHealthChangedEventArgs e) {
         bodyAnimator.SetTrigger("Damaged");
     }
 

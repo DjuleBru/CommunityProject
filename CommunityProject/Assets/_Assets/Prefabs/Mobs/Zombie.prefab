@@ -35,17 +35,29 @@ PrefabInstance:
       propertyPath: nextWaypointDistance
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 5543994707156660417, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5543994707156660417, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5543994707156660417, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.77
+      objectReference: {fileID: 0}
     - target: {fileID: 6032853960031060455, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
       propertyPath: m_Name
       value: Zombie
       objectReference: {fileID: 0}
     - target: {fileID: 7201920053369235757, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
       propertyPath: m_Radius
-      value: 0.17757517
+      value: 0.23655832
       objectReference: {fileID: 0}
     - target: {fileID: 7201920053369235757, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
       propertyPath: m_Offset.x
-      value: -0.048852265
+      value: 0.010130882
       objectReference: {fileID: 0}
     - target: {fileID: 8365579109153928039, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
       propertyPath: m_Sprite

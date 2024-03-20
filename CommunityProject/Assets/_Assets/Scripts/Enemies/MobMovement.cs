@@ -2,6 +2,7 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 
 public class MobMovement : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class MobMovement : MonoBehaviour
 
     private Mob mob;
     private float moveSpeed;
+    private bool dead;
 
     protected Vector3 moveDirNormalized;
     protected Vector2 moveDir2DNormalized;
@@ -45,19 +47,19 @@ public class MobMovement : MonoBehaviour
     }
     protected virtual void Start() {
         seeker = GetComponent<Seeker>();
-        //Initialise path
-        CalculatePath(transform.position);
-
+        mob.OnMobDied += Mob_OnMobDied;
         pathCalculationTimer = pathCalculationRate;
     }
+
+
     protected virtual void Update() {
         if (path != null) {
             FollowPath(path);
         }
     }
-    protected virtual void LateUpdate() {
-        pathCalculationTimer -= Time.deltaTime;
-        roamCalculationTimer -= Time.deltaTime;
+    protected virtual void FixedUpdate() {
+        pathCalculationTimer -= Time.fixedDeltaTime;
+        roamCalculationTimer -= Time.fixedDeltaTime;
         if (path != null) {
             Move(velocity);
         }
@@ -94,17 +96,14 @@ public class MobMovement : MonoBehaviour
     }
 
     protected virtual void Move(Vector3 velocity) {
-        if (!reachedEndOfPath) {
-            rb.velocity = velocity * Time.fixedDeltaTime;
-        }
-        else {
-            rb.velocity = Vector3.zero;
+        if (!reachedEndOfPath & !dead) {
+            rb.AddForce(velocity * Time.fixedDeltaTime * 100);
         }
     }
 
-    public void CalculatePath(Vector3 destinationPoint) {
+    public void CalculatePath(Vector3 startPoint, Vector3 destinationPoint) {
         if (pathCalculationTimer <= 0) {
-            seeker.StartPath(transform.position, destinationPoint, PathComplete);
+            seeker.StartPath(startPoint, destinationPoint, PathComplete);
             pathCalculationTimer = pathCalculationRate;
         }
     }
@@ -118,6 +117,15 @@ public class MobMovement : MonoBehaviour
     }
     public bool GetReachedEndOfPath() {
         return reachedEndOfPath;
+    }
+
+    private void Mob_OnMobDied(object sender, System.EventArgs e) {
+        StopMoving();
+    }
+
+    public void StopMoving() {
+        dead = true;
+        rb.velocity = Vector3.zero;
     }
 
 }

@@ -22,6 +22,9 @@ public class MobAI : MonoBehaviour
     private bool playerEnteredAggroRange;
 
     private float distanceToPlayerCollider;
+
+    private bool dead;
+
     private void Awake() {
         collider2D = GetComponent<Collider2D>();
         mobMovement = GetComponent<MobMovement>();
@@ -35,7 +38,16 @@ public class MobAI : MonoBehaviour
         attackTriggerRange = attackRange / 2;
     }
 
+    private void Start() {
+        mob.OnMobDied += Mob_OnMobDied;
+    }
+
     private void Update() {
+
+        if(dead) {
+            return;
+        }
+
         ColliderDistance2D colliderDistance2DToPlayerCollider = playerCollider.Distance(collider2D);
         distanceToPlayerCollider = colliderDistance2DToPlayerCollider.distance;
 
@@ -51,13 +63,17 @@ public class MobAI : MonoBehaviour
     }
 
     private void FollowPlayer(ColliderDistance2D colliderDistance2DToPlayerCollider) {
-        mobMovement.CalculatePath(colliderDistance2DToPlayerCollider.pointA);
+        mobMovement.CalculatePath(colliderDistance2DToPlayerCollider.pointB, colliderDistance2DToPlayerCollider.pointA);
     }
 
     private void CheckIfPlayerEntersAggroRange() {
         if(distanceToPlayerCollider < aggroRange) {
             playerEnteredAggroRange = true;
         }
+    }
+
+    private void Mob_OnMobDied(object sender, System.EventArgs e) {
+        dead = true;
     }
 
 }

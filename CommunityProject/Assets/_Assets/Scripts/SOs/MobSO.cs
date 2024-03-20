@@ -14,7 +14,8 @@ public class MobSO : ScriptableObject
 
     public MobAttack.AttackType attackType;
     public int attackDmg;
-    public int mobAttackRate;
+    public float mobAttackRate;
+    public float mobAttackDelay;
     public float mobAttackRange;
 
     public float mobAggroRange;

@@ -66,7 +66,13 @@ public class DungeonGenerationManager : MonoBehaviour {
         float totalDifficultyValue = 0;
 
         for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
+
             float roomDifficultyValue = Random.Range(0, 100);
+
+            if (i == 0) {
+                // First room : no mobs
+                roomDifficultyValue = 0;
+            }
 
             roomDifficultyValues.Add(roomDifficultyValue);
             totalDifficultyValue += roomDifficultyValue;
