@@ -6,7 +6,7 @@ using UnityEngine;
 public class Mob : MonoBehaviour, IDamageable
 {
     [SerializeField] private MobSO mobSO;
-    private Collider2D collider;
+    private Collider2D mobCollider;
     private Rigidbody2D rb;
 
     public event EventHandler<IDamageable.OnIDamageableHealthChangedEventArgs> OnIDamageableHealthChanged;
@@ -24,7 +24,7 @@ public class Mob : MonoBehaviour, IDamageable
 
     private void Awake() {
         mobHP = mobSO.mobHP;
-        collider = GetComponent<Collider2D>();
+        mobCollider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -47,7 +47,7 @@ public class Mob : MonoBehaviour, IDamageable
     }
 
     public void SetDead() {
-        collider.enabled = false;
+        mobCollider.enabled = false;
         OnMobDied?.Invoke(this, EventArgs.Empty);
         parentDungeonRoom.RemoveMobFromDungeonRoomMobList(this);
         dead = true;

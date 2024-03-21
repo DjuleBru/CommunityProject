@@ -31,8 +31,10 @@ public class PlayerAnimatorManager : MonoBehaviour {
 
     private void Update() {
 
-        CheckIfPlayerIsAttackingAnimation();
-        if (attacking) return;
+        CheckIfPlayerFinishedAttackAnimation();
+
+        if (CheckAttackingAnimationProgress(.7f)) return;
+        // Update movedir around 2/3 of the attack animation
 
         Vector2 moveDir = PlayerMovement.Instance.GetMovementVectorNormalized();
         if (moveDir != Vector2.zero) {
@@ -41,7 +43,10 @@ public class PlayerAnimatorManager : MonoBehaviour {
             animator.SetBool("Walking", false);
         }
 
-        HandleLastMoveDir(moveDir);
+        HandleLastMoveDir(moveDir); 
+        
+        if (attacking) return;
+        // Don't allow player to change watch dir during attack animation
         Vector2 watchDir = PlayerMovement.Instance.GetWatchVectorNormalized();
 
         if (watchDir != Vector2.zero) {
@@ -53,17 +58,36 @@ public class PlayerAnimatorManager : MonoBehaviour {
         }
     }
 
-    private void CheckIfPlayerIsAttackingAnimation() {
+    private void CheckIfPlayerFinishedAttackAnimation() {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash")) {
-            attacking = true;
-        } else {
-            if(attacking) {
-                PlayerAttack.Instance.SetAttackEnded();
+            // Attack animation is playing
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < .95f) {
+                attacking = true;
             }
+            else {
+                PlayerAttack.Instance.SetAttackEnded();
+                attacking = false;
+            }
+        }
+        else {
+            PlayerAttack.Instance.SetAttackEnded();
             attacking = false;
         }
 
         PlayerAttack.Instance.SetAttacking(attacking);
+    }
+
+    public bool CheckAttackingAnimationProgress(float animationProgress) {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash")) {
+            // Attack animation is playing
+            if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < animationProgress) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     private void HandleLastMoveDir(Vector2 moveDir) {

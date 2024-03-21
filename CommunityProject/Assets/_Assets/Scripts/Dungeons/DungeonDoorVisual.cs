@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class DungeonDoorVisual : MonoBehaviour
 {
     private Animator animator;
-    private TilemapCollider2D collider;
+    private TilemapCollider2D tilemapCollider;
 
     private bool doorOpening;
     private bool doorClosing;
@@ -16,7 +16,7 @@ public class DungeonDoorVisual : MonoBehaviour
 
     private void Awake() {
         animator = GetComponent<Animator>();
-        collider = GetComponent<TilemapCollider2D>();   
+        tilemapCollider = GetComponent<TilemapCollider2D>();   
     }
 
     private void Update() {
@@ -24,7 +24,7 @@ public class DungeonDoorVisual : MonoBehaviour
             if(animator.GetCurrentAnimatorStateInfo(0).IsName("OpenDoor") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .95) {
                 doorOpening = false;
                 if (!isShadow) {
-                    collider.enabled = false;
+                    tilemapCollider.enabled = false;
                 }
             };
         }
@@ -32,7 +32,7 @@ public class DungeonDoorVisual : MonoBehaviour
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("CloseDoor") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .95) {
                 doorClosing = false;
                 if (!isShadow) {
-                    collider.enabled = true;
+                    tilemapCollider.enabled = true;
                 }
             };
         }

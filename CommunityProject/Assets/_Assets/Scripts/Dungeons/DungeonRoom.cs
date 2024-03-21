@@ -25,7 +25,7 @@ public class DungeonRoom : MonoBehaviour
 
     [SerializeField] private GameObject mobSpawnPoints;
     private Transform[] mobSpawnPointsList;
-    private List<Mob> mobsInRoom = new List<Mob>();
+    private List<Mob> mobsInRoom;
     private float dungeonRoomDifficultyValue;
     private int setDifficultyValue = 0;
 
@@ -90,6 +90,7 @@ public class DungeonRoom : MonoBehaviour
 
     private void SpawnMobs() {
         List<MobSO> mobSOs = DungeonManager.Instance.GetDungeonMobList();
+        mobsInRoom = new List<Mob>();
 
         foreach (Transform mobSpawnPoint in mobSpawnPointsList) {
             if(setDifficultyValue < dungeonRoomDifficultyValue) {
@@ -99,7 +100,7 @@ public class DungeonRoom : MonoBehaviour
 
                 // Spawn if we have not reached the room difficulty value
 
-                Vector3 spawnPosition = Utils.Randomize2DPoint(mobSpawnPoint.transform.position, .5f);
+                Vector3 spawnPosition = Utils.Randomize2DPoint(mobSpawnPoint.transform.position, 1.5f);
 
                 Mob mobSpawned = Instantiate(mobToSwawn, spawnPosition, Quaternion.identity, this.transform).GetComponent<Mob>();
                 mobSpawned.SetParentDungeonRoom(this);
@@ -170,7 +171,7 @@ public class DungeonRoom : MonoBehaviour
         yield return new WaitForSeconds(delayToPlayerDeActivation);
         Player.Instance.DisablePlayerActions();
 
-        float delayToMonsterActivation = 2f;
+        float delayToMonsterActivation = 1f;
         yield return new WaitForSeconds(delayToMonsterActivation);
 
         StartCoroutine(StartCombat());
@@ -192,6 +193,8 @@ public class DungeonRoom : MonoBehaviour
             mob.SetAllMobsSpawned();
         }
 
+        Player.Instance.EnablePlayerActions();
+
         float delayAfterMobActivationToReturnToBattleCamera = 1f;
         yield return new WaitForSeconds(delayAfterMobActivationToReturnToBattleCamera);
 
@@ -199,7 +202,6 @@ public class DungeonRoom : MonoBehaviour
         AstarPath.active.Scan();
 
         //Enable player actions
-        Player.Instance.EnablePlayerActions();
         SetBattleCamera();
     }
 

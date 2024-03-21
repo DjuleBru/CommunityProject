@@ -22,8 +22,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() {
         if (!canMove) return;
+
+        if (!PlayerAnimatorManager.Instance.CheckAttackingAnimationProgress(.5f)) {
+            HandleMovementInput();
+        } else {
+            moveDirNormalized = Vector2.zero;
+        }
+
         HandleMovement();
-        HandleWatchDir();
+
+        if (!PlayerAttack.Instance.GetAttacking()) {
+            HandleWatchDir();
+        }
     }
 
     private void HandleWatchDir() {
@@ -33,18 +43,16 @@ public class PlayerMovement : MonoBehaviour
         watchDirNormalized = (mousePos - playerPos).normalized;
     }
 
+    private void HandleMovementInput() {
+        // If Player is not attacking, move
+
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
+
+        moveDirNormalized = new Vector2(inputVector.x, inputVector.y).normalized;
+    }
+
     private void HandleMovement() {
-        Vector2 force = Vector2.zero;
-
-        if (!PlayerAttack.Instance.GetAttacking()) {
-            // If Player is not attacking, move
-
-            Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-
-            moveDirNormalized = new Vector2(inputVector.x, inputVector.y).normalized;
-
-            force = moveDirNormalized * moveSpeed * Time.fixedDeltaTime;
-        }
+        Vector2 force = moveDirNormalized * moveSpeed * Time.fixedDeltaTime;
         rb.velocity = force;
     }
 

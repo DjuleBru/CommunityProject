@@ -36,7 +36,7 @@ public class DungeonGenerationManager : MonoBehaviour {
             Vector3 relativeRoomExitPosition = new Vector3(Mathf.Abs(previousDungeonRoom.GetRoomExitPosition().x - newRoomEnterPosition.x), 0, 0);
             absoluteRoomPosition = relativeRoomExitPosition;
 
-            DungeonRoom newDungeonRoom = new DungeonRoom();
+            DungeonRoom newDungeonRoom = null;
 
             if (i == 0) {
                 absoluteRoomPosition = Vector3.zero;

@@ -74,7 +74,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public bool GetAttacking() {
-        return this.attacking;
+        return attacking;
     }
 
     public float GetAttackRate() { 
