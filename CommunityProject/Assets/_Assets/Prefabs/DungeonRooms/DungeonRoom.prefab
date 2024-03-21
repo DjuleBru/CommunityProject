@@ -615,6 +615,7 @@ Transform:
   - {fileID: 4933481234980980996}
   - {fileID: 1395551868350950905}
   - {fileID: 4066159428122864580}
+  - {fileID: 9061449842171436960}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -637,8 +638,9 @@ MonoBehaviour:
   roomEntryDoorVisual: {fileID: 3444090516030324830}
   roomExitDoorShadowVisual: {fileID: 1569488326508538607}
   roomEntryDoorShadowVisual: {fileID: 4805010368197718839}
-  roomExitPassageVisual: {fileID: 3119840947266516416}
-  roomEnterPassageVisual: {fileID: 4758629056466912376}
+  roomExitPassageVisual: {fileID: 8834952207107490526}
+  roomEnterPassageVisual: {fileID: 4289879240873964665}
+  playerSpawnPoint: {fileID: 9061449842171436960}
   cameraOrthographicSize: 0
   roomCamera: {fileID: 2246301319067438050}
   mobSpawnPoints: {fileID: 4089085986714164197}
@@ -1114,6 +1116,8 @@ GameObject:
   - component: {fileID: 3452700448228965205}
   - component: {fileID: 583241680394671793}
   - component: {fileID: 2778841206444876942}
+  - component: {fileID: 8834952207107490526}
+  - component: {fileID: 534090416170353853}
   m_Layer: 6
   m_Name: ExitPassage
   m_TagString: Untagged
@@ -1274,7 +1278,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 8cc43087c3f3b41448c0edf5d6ae4054, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1364,6 +1368,40 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &8834952207107490526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119840947266516416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f63748b432db24a99012a16f1fb863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShadow: 0
+--- !u!95 &534090416170353853
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119840947266516416}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5543a402d4e515a49be931b5e452c512, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3157458417154835106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,6 +2131,8 @@ GameObject:
   - component: {fileID: 7492669566451256435}
   - component: {fileID: 5512117285492530915}
   - component: {fileID: 5165197228104957329}
+  - component: {fileID: 4289879240873964665}
+  - component: {fileID: 6170057315147772655}
   m_Layer: 6
   m_Name: EnterPassage
   m_TagString: Untagged
@@ -2253,7 +2293,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 30ecd7538b7e6a541bd7ec00541ca675, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2343,6 +2383,40 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &4289879240873964665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4758629056466912376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f63748b432db24a99012a16f1fb863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShadow: 0
+--- !u!95 &6170057315147772655
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4758629056466912376}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5543a402d4e515a49be931b5e452c512, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4955571301525654347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,6 +2565,37 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!1 &5082362912742719647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9061449842171436960}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9061449842171436960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5082362912742719647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6115012990518482235}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5489526866641673357
 GameObject:
   m_ObjectHideFlags: 0

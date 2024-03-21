@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 watchDirNormalized;
 
     [SerializeField] private float moveSpeed;
-
+    private bool canMove = true;
 
     private void Awake() {
         Instance = this;
@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if (!canMove) return;
         HandleMovement();
         HandleWatchDir();
     }
@@ -55,4 +56,13 @@ public class PlayerMovement : MonoBehaviour
         return watchDirNormalized;
     }
 
+    public void DisableMovement() {
+        rb.velocity = Vector2.zero;
+        moveDirNormalized = Vector2.zero;
+        canMove = false;
+    }
+
+    public void EnableMovement() {
+        canMove = true;
+    }
 }

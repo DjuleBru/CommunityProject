@@ -53,4 +53,14 @@ public class Player : MonoBehaviour, IDamageable
     public int GetMaxHP() {
         return playerBaseHP;
     }
+
+    public void DisablePlayerActions() {
+        PlayerMovement.Instance.DisableMovement();
+        PlayerAttack.Instance.DisableAttacks();
+    }
+
+    public void EnablePlayerActions() {
+        PlayerMovement.Instance.EnableMovement();
+        PlayerAttack.Instance.EnableAttacks();
+    }
 }

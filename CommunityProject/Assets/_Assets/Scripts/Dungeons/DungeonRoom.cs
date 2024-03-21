@@ -15,8 +15,10 @@ public class DungeonRoom : MonoBehaviour
     [SerializeField] private DungeonDoorVisual roomExitDoorShadowVisual;
     [SerializeField] private DungeonDoorVisual roomEntryDoorShadowVisual;
 
-    [SerializeField] private GameObject roomExitPassageVisual;
-    [SerializeField] private GameObject roomEnterPassageVisual;
+    [SerializeField] private DungeonDoorVisual roomExitPassageVisual;
+    [SerializeField] private DungeonDoorVisual roomEnterPassageVisual;
+
+    [SerializeField] private Transform playerSpawnPoint;
 
     [SerializeField] float cameraOrthographicSize;
     [SerializeField] private CinemachineVirtualCamera roomCamera;
@@ -33,7 +35,7 @@ public class DungeonRoom : MonoBehaviour
 
     private void Awake() {
         roomCenterSprite.SetActive(false);
-        roomExitPassageVisual.SetActive(false);
+        roomExitPassageVisual.gameObject.SetActive(false);
         roomCamera.m_Lens.OrthographicSize = cameraOrthographicSize;
 
         FillMobSpawnPointsList();
@@ -41,7 +43,7 @@ public class DungeonRoom : MonoBehaviour
 
     private void Start() {
         if(isFirstDungeonRoom) {
-            roomEnterPassageVisual.SetActive(false);
+            roomEnterPassageVisual.gameObject.SetActive(false);
         }
 
         while(setDifficultyValue < dungeonRoomDifficultyValue) {
@@ -59,8 +61,12 @@ public class DungeonRoom : MonoBehaviour
         if (!collision.gameObject.TryGetComponent(out Player player)) return;
         playerIsInRoom = true;
 
-        if(!roomIsComplete) {
-            StartCoroutine(CloseDungeonRoom());
+        if(isFirstDungeonRoom) {
+            CloseEntryDoor();
+        } else {
+            if (!roomIsComplete) {
+                StartCoroutine(CloseDungeonRoom());
+            }
         }
     }
 
@@ -130,12 +136,15 @@ public class DungeonRoom : MonoBehaviour
     public void OpenNextDungeonRoom() {
         int roomIndex = DungeonGenerationManager.Instance.GetDungeonRoomList().IndexOf(this);
         DungeonRoom nextDungeonRoom = DungeonGenerationManager.Instance.GetDungeonRoomList()[roomIndex + 1];
+
         nextDungeonRoom.gameObject.SetActive(true);
         nextDungeonRoom.OpenDungeonRoomEntrance();
 
         roomExitDoorVisual.OpenDoor();
         roomExitDoorShadowVisual.OpenDoor();
-        roomExitPassageVisual.SetActive(true);
+        
+        roomExitPassageVisual.gameObject.SetActive(true);
+        roomExitPassageVisual.CloseDoor();
     }
 
     private void GoToNextDungeonRoom() {
@@ -153,16 +162,23 @@ public class DungeonRoom : MonoBehaviour
     }
 
     private IEnumerator CloseDungeonRoom() {
-        roomEntryDoorVisual.CloseDoor();
-        roomEntryDoorShadowVisual.CloseDoor();
+        CloseEntryDoor();
+        SetRoomCamera();
 
+        //Disable player actions
+        float delayToPlayerDeActivation = .5f;
+        yield return new WaitForSeconds(delayToPlayerDeActivation);
+        Player.Instance.DisablePlayerActions();
 
-        float delayToMonsterActivation = .2f;
+        float delayToMonsterActivation = 2f;
         yield return new WaitForSeconds(delayToMonsterActivation);
 
         StartCoroutine(StartCombat());
     }
-
+    private void CloseEntryDoor() {
+        roomEntryDoorVisual.CloseDoor();
+        roomEntryDoorShadowVisual.CloseDoor();
+    }
     private IEnumerator StartCombat() {
 
         float delayBetweenMobActivation = .2f;
@@ -176,15 +192,23 @@ public class DungeonRoom : MonoBehaviour
             mob.SetAllMobsSpawned();
         }
 
+        float delayAfterMobActivationToReturnToBattleCamera = 1f;
+        yield return new WaitForSeconds(delayAfterMobActivationToReturnToBattleCamera);
+
         // Recalculate pathfinding Graph
         AstarPath.active.Scan();
 
-        StartCoroutine(SetBattleCamera());
+        //Enable player actions
+        Player.Instance.EnablePlayerActions();
+        SetBattleCamera();
     }
 
-    private IEnumerator SetBattleCamera() {
-        yield return new WaitForSeconds(2f);
+    private void SetBattleCamera() {
         Player.Instance.SetBattleCameraAsPriority();
+    }
+
+    private void SetRoomCamera() {
+        Player.Instance.ResetBattleCameraPriority();
     }
 
     public void OpenExitDoor() {
@@ -195,6 +219,8 @@ public class DungeonRoom : MonoBehaviour
     public void OpenDungeonRoomEntrance() {
         roomEntryDoorVisual.OpenDoor();
         roomEntryDoorShadowVisual.OpenDoor();
+        roomEnterPassageVisual.gameObject.SetActive(true);
+        roomEnterPassageVisual.CloseDoor();
 
         // Recalculate pathfinding Graph
         AstarPath.active.Scan();
@@ -244,6 +270,10 @@ public class DungeonRoom : MonoBehaviour
 
     public void SetRoomDifficultyValue(int difficultyValue) {
         dungeonRoomDifficultyValue = difficultyValue;
+    }
+
+    public Transform GetPlayerSpawnPoint() {
+        return playerSpawnPoint;
     }
 
 }

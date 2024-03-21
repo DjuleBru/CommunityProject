@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     public event EventHandler OnActiveWeaponSOChanged;
 
     private bool attacking;
+    private bool canAttack = true;
 
     private int attackDamage;
     private float attackKnockback;
@@ -37,6 +38,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     private void GameInput_OnAttackAction(object sender, EventArgs e) {
+        if (!canAttack) return;
         if(attackTimer < 0) {
             attackTimer = attackRate;
             OnPlayerAttack?.Invoke(this, EventArgs.Empty);
@@ -85,5 +87,13 @@ public class PlayerAttack : MonoBehaviour
 
     public float GetAttackKnockback() {
         return attackKnockback;
+    }
+
+    public void EnableAttacks() {
+        canAttack = true;
+    }
+
+    public void DisableAttacks() {
+        canAttack = false;
     }
 }

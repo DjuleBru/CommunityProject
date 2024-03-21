@@ -5,6 +5,7 @@ using UnityEngine;
 public class DungeonGenerationManager : MonoBehaviour {
     public static DungeonGenerationManager Instance { get; private set; }
 
+    [SerializeField] private DungeonRoom firstDungeonRoom;
     [SerializeField] private List<DungeonRoom> dungeonRoomPoolList;
 
     private List<DungeonRoom> dungeonRoomList = new List<DungeonRoom>();
@@ -35,15 +36,19 @@ public class DungeonGenerationManager : MonoBehaviour {
             Vector3 relativeRoomExitPosition = new Vector3(Mathf.Abs(previousDungeonRoom.GetRoomExitPosition().x - newRoomEnterPosition.x), 0, 0);
             absoluteRoomPosition = relativeRoomExitPosition;
 
+            DungeonRoom newDungeonRoom = new DungeonRoom();
+
             if (i == 0) {
                 absoluteRoomPosition = Vector3.zero;
+                pooledDungeonRoom = firstDungeonRoom;
             }
 
             Transform newDungeonRoomTransform = Instantiate(pooledDungeonRoom.transform, absoluteRoomPosition, Quaternion.identity, transform);
-            DungeonRoom newDungeonRoom = newDungeonRoomTransform.GetComponent<DungeonRoom>();
+            newDungeonRoom = newDungeonRoomTransform.GetComponent<DungeonRoom>();
 
-            if (i == 0) {
+            if(i == 0) {
                 newDungeonRoom.SetRoomAsFirstDungeonRoom();
+                Player.Instance.transform.position = newDungeonRoom.GetPlayerSpawnPoint().position;
             }
 
             dungeonRoomList.Add(newDungeonRoom);
