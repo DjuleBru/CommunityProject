@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobDifficultyValue: 3
   mobToSpawnPrefab: {fileID: 2762617982298062805, guid: 7e10d27036c3e714aaecf7f49b87e81d, type: 3}
+  mobIconSprite: {fileID: -1872155313, guid: 8458235636a0671419c486171f327a6a, type: 3}
   foundInDungeonTypes: 0000000001000000
   mobHP: 50
   mobMoveSpeed: 100
@@ -23,3 +24,15 @@ MonoBehaviour:
   mobAttackDelay: 0.75
   mobAttackRange: 0.5
   mobAggroRange: 10
+  dropProbability: 50
+  maxItemDrops: 5
+  itemDropRateList:
+  - itemSO: {fileID: 11400000, guid: 21753a9b1a2cb804eacdb389675b51a6, type: 2}
+    dropRate: 10
+    maxDropAmount: 1
+  - itemSO: {fileID: 11400000, guid: ef377009d07f54b48bd8d9d816ee7d44, type: 2}
+    dropRate: 30
+    maxDropAmount: 5
+  - itemSO: {fileID: 11400000, guid: 611e91fb308509f4d949ba22d4b85478, type: 2}
+    dropRate: 60
+    maxDropAmount: 10

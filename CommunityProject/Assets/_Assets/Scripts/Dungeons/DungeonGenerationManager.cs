@@ -51,6 +51,10 @@ public class DungeonGenerationManager : MonoBehaviour {
                 Player.Instance.transform.position = newDungeonRoom.GetPlayerSpawnPoint().position;
             }
 
+            if( i == DungeonManager.Instance.GetTotalRoomNumber() -1) {
+                newDungeonRoom.SetRoomAsLastDungeonRoom();
+            }
+
             dungeonRoomList.Add(newDungeonRoom);
             dungeonRoomPositionDictionary[i] = absoluteRoomPosition;
 

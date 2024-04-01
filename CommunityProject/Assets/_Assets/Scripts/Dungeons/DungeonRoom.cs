@@ -18,6 +18,7 @@ public class DungeonRoom : MonoBehaviour
     [SerializeField] private DungeonDoorVisual roomExitPassageVisual;
     [SerializeField] private DungeonDoorVisual roomEnterPassageVisual;
 
+    [SerializeField] private GameObject dungeonExit;
     [SerializeField] private Transform playerSpawnPoint;
 
     [SerializeField] float cameraOrthographicSize;
@@ -30,6 +31,7 @@ public class DungeonRoom : MonoBehaviour
     private int setDifficultyValue = 0;
 
     private bool isFirstDungeonRoom;
+    private bool isLastDungeonRoom;
     private bool roomIsComplete;
     private bool playerIsInRoom;
 
@@ -42,11 +44,11 @@ public class DungeonRoom : MonoBehaviour
     }
 
     private void Start() {
-        if(isFirstDungeonRoom) {
+        if (isFirstDungeonRoom) {
             roomEnterPassageVisual.gameObject.SetActive(false);
         }
 
-        while(setDifficultyValue < dungeonRoomDifficultyValue) {
+        while (setDifficultyValue < dungeonRoomDifficultyValue) {
             SpawnMobs();
         };
     }
@@ -63,6 +65,7 @@ public class DungeonRoom : MonoBehaviour
 
         if(isFirstDungeonRoom) {
             CloseEntryDoor();
+            CompleteRoom();
         } else {
             if (!roomIsComplete) {
                 StartCoroutine(CloseDungeonRoom());
@@ -75,7 +78,9 @@ public class DungeonRoom : MonoBehaviour
         playerIsInRoom = false;
 
         if (Player.Instance.transform.position.x > transform.position.x) {
+            if (isLastDungeonRoom) return;
             GoToNextDungeonRoom();
+
         } else {
             GoBackToPreviousRoom();
         }
@@ -136,6 +141,12 @@ public class DungeonRoom : MonoBehaviour
     #region RoomManagement
     public void OpenNextDungeonRoom() {
         int roomIndex = DungeonGenerationManager.Instance.GetDungeonRoomList().IndexOf(this);
+
+        if (isLastDungeonRoom) {
+            OpenDungeonExit();
+            return;
+        }
+
         DungeonRoom nextDungeonRoom = DungeonGenerationManager.Instance.GetDungeonRoomList()[roomIndex + 1];
 
         nextDungeonRoom.gameObject.SetActive(true);
@@ -150,6 +161,7 @@ public class DungeonRoom : MonoBehaviour
 
     private void GoToNextDungeonRoom() {
         int roomIndex = DungeonGenerationManager.Instance.GetDungeonRoomList().IndexOf(this);
+
         DungeonRoom nextDungeonRoom = DungeonGenerationManager.Instance.GetDungeonRoomList()[roomIndex + 1];
         nextDungeonRoom.SetRoomCameraAsMainCamera();
         ResetRoomCameraPriority();
@@ -228,6 +240,11 @@ public class DungeonRoom : MonoBehaviour
         AstarPath.active.Scan();
     }
 
+    private void OpenDungeonExit() {
+        OpenExitDoor();
+        Instantiate(dungeonExit, roomExitPosition.position, Quaternion.identity);
+    }
+
     #endregion
 
     public float GetCameraOrthographicSize() {
@@ -268,6 +285,10 @@ public class DungeonRoom : MonoBehaviour
 
         isFirstDungeonRoom = true;
         playerIsInRoom = true;
+    }
+
+    public void SetRoomAsLastDungeonRoom() {
+        isLastDungeonRoom = true;
     }
 
     public void SetRoomDifficultyValue(int difficultyValue) {

@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobDifficultyValue: 2
   mobToSpawnPrefab: {fileID: 2762617982298062805, guid: 35c9d027d762740469491d12ee90ae92, type: 3}
-  foundInDungeonTypes: 00000000
+  mobIconSprite: {fileID: -1033818191, guid: 54ff3329be0bc8b4b84393c7fb8d5eee, type: 3}
+  foundInDungeonTypes: 0100000000000000
   mobHP: 0
   mobMoveSpeed: 100
   attackType: 0
   attackDmg: 0
   mobAttackRate: 0
+  mobAttackDelay: 0
   mobAttackRange: 0
   mobAggroRange: 10

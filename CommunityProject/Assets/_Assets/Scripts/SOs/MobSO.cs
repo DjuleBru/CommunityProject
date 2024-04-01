@@ -7,6 +7,7 @@ public class MobSO : ScriptableObject
 {
     public int mobDifficultyValue;
     public Transform mobToSpawnPrefab;
+    public Sprite mobIconSprite;
     public List<DungeonManager.DungeonType> foundInDungeonTypes;
 
     public int mobHP;
@@ -19,4 +20,8 @@ public class MobSO : ScriptableObject
     public float mobAttackRange;
 
     public float mobAggroRange;
+
+    public float dropProbability;
+    public int maxItemDrops;
+    public List<ItemDropRate> itemDropRateList;
 }

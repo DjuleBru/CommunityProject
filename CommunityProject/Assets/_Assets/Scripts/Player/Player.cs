@@ -4,13 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] private CinemachineVirtualCamera battleCamera;
 
-    private Inventory inventory;    
-    [SerializeField] private InventoryUI inventoryUI;
+    private Inventory playerInventory;
+    private Inventory dungeonInventory;
+
+    [SerializeField] private InventoryUI playerInventoryUI;
+    [SerializeField] private InventoryUI dungeonInventoryUI;
     public static Player Instance { get; private set; }
 
     public event EventHandler OnPlayerDamaged;
@@ -22,15 +26,15 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Awake() {
         Instance = this;
-
         playerHP = playerBaseHP;
+    }
 
-        inventory = new Inventory(true, 3, 3);
-        inventoryUI.SetInventory(inventory);
+    private void Start() {
+        playerInventory = new Inventory(true, 3, 3);
+        dungeonInventory = new Inventory(false, 10, 3);
 
-        ItemWorld.SpawnItemWorld(new Vector3(2, 2), new Item { itemType = Item.ItemType.Wood, amount = 1 });
-        ItemWorld.SpawnItemWorld(new Vector3(-2, 2), new Item { itemType = Item.ItemType.Stone, amount = 10 });
-        ItemWorld.SpawnItemWorld(new Vector3(-2, -2), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        playerInventoryUI.SetInventory(playerInventory);
+        dungeonInventoryUI.SetInventory(dungeonInventory);
     }
 
     public void SetBattleCameraAsPriority() {
@@ -54,6 +58,7 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     public void SetDead() {
+
     }
 
     public int GetHP() {
@@ -76,8 +81,14 @@ public class Player : MonoBehaviour, IDamageable
 
     private void OnTriggerEnter2D(Collider2D collider) {
         ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+
         if(itemWorld != null) {
-            inventory.AddItem(itemWorld.GetItem());
+            if(SavingSystem.Instance.GetSceneIsOverworld()) {
+                playerInventory.AddItem(itemWorld.GetItem());
+            } else {
+                dungeonInventory.AddItem(itemWorld.GetItem());
+            }
+
             itemWorld.DestroySelf();
         }
     }

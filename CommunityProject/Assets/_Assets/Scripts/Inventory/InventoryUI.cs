@@ -5,17 +5,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventoryUI : MonoBehaviour, IDropHandler {
+public class InventoryUI : MonoBehaviour {
     private Inventory inventory;
+
     [SerializeField] private Transform itemSlotContainer;
     [SerializeField] private Transform itemSlotTemplate;
     [SerializeField] private Transform emptyItemSlotTemplate;
+    [SerializeField] private TransferItemsUI transferItemsUI;
+
+    [SerializeField] private GameObject inventoryPanel;
+    private bool opened;
 
     public void SetInventory(Inventory inventory) {
         this.inventory = inventory;
 
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
         RefreshInventoryUI();
+
+        if (inventory.HasLimitedSlots()) {
+            transferItemsUI.gameObject.SetActive(false);
+        }
+        inventoryPanel.SetActive(false);
     }
 
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e) {
@@ -28,10 +38,10 @@ public class InventoryUI : MonoBehaviour, IDropHandler {
             if(child == emptyItemSlotTemplate) continue;
             Destroy(child.gameObject);
         }
+
         if (!inventory.HasLimitedSlots()) {
             RefreshUnlimitedInventoryUI();
         } else {
-            Debug.Log("refreshLimited");
             RefreshLimitedInventoryUI();
         }
     }
@@ -42,8 +52,9 @@ public class InventoryUI : MonoBehaviour, IDropHandler {
         foreach (Item item in inventory.GetItemList()) {
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
-
-            SetSlotTemplateVisuals(item, itemSlotRectTransform);
+            ItemSlot inventoryItemSlot = itemSlotRectTransform.GetComponent<ItemSlot>();
+            inventoryItemSlot.SetItem(item);
+            inventoryItemSlot.SetParentInventory(inventory);
         }
     }
 
@@ -53,38 +64,39 @@ public class InventoryUI : MonoBehaviour, IDropHandler {
         for(int x = 0;  x < inventory.GetSlotNumberX(); x++) {
             for(int y = 0;  y < inventory.GetSlotNumberY(); y++) {
 
-                RectTransform emptyItemSlotRectTransform = Instantiate(emptyItemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
-                emptyItemSlotRectTransform.gameObject.SetActive(true);
+                RectTransform itemSlotRectTransform = Instantiate(emptyItemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
+                itemSlotRectTransform.gameObject.SetActive(true);
 
                 if (itemNumber < inventory.GetItemList().Count) {
                     // The item slot is filled with an item
                     Item item = inventory.GetItemList()[itemNumber];
-                    SetSlotTemplateVisuals(item, emptyItemSlotRectTransform);
-                } else {
-                    emptyItemSlotRectTransform.Find("Item").Find("ItemImage").GetComponent<Image>().enabled = false;
+
+                    ItemSlot inventoryItemSlot = itemSlotRectTransform.GetComponent<ItemSlot>();
+                    inventoryItemSlot.SetItem(item);
+                    inventoryItemSlot.SetParentInventory(inventory);
                 }
                 itemNumber++;
             }
         }
     }
 
-    private void SetSlotTemplateVisuals(Item item, RectTransform slotTemplate) {
-        Image image = slotTemplate.Find("Item").Find("ItemImage").GetComponent<Image>();
-        image.sprite = ItemAssets.Instance.GetItemSO(item.itemType).itemSprite;
+    public Inventory GetInventory() {
+        return inventory;
+    }
 
-        TextMeshProUGUI text = slotTemplate.Find("Item").Find("ItemAmount").GetComponent<TextMeshProUGUI>();
-
-        if (item.amount > 1) {
-            text.text = item.amount.ToString();
-        }
-        else {
-            text.text = "";
+    public void OpenTransferItemsPanelGameObject() {
+        if (inventory.HasLimitedSlots()) {
+            transferItemsUI.gameObject.SetActive(true);
         }
     }
 
-    public void OnDrop(PointerEventData eventData) {
-        if (eventData.pointerDrag != null) {
-            // Handle drag & drop between inventories
-        }
+    public void CloseTransferItemsPanelGameObject() {
+        transferItemsUI.ResetItemToTransfer();
+        transferItemsUI.gameObject.SetActive(false);
+    }
+
+    public void OpenCloseInventoryPanel() {
+        inventoryPanel.SetActive(!opened);
+        opened = !opened;
     }
 }

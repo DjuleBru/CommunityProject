@@ -11,11 +11,14 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private RectTransform rectTransform;
 
     private Vector2 initialPosition;
+    private InventoryUI parentInventoryUI;
 
     private void Awake() {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         group = GetComponentInChildren<CanvasGroup>();
+
+        parentInventoryUI = GetComponentInParent<InventoryUI>();
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
@@ -32,13 +35,37 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         group.blocksRaycasts = true;
         group.alpha = 1f;
 
+        PointerEventData pointer = new PointerEventData(EventSystem.current);
+        pointer.position = Input.mousePosition;
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointer, raycastResults);
+
+        if (raycastResults.Count > 0) {
+            foreach (var go in raycastResults) {
+                if(go.gameObject.GetComponent<InventoryUI>()) {
+                    // Dropped on any kind of inventory
+                    if(go.gameObject == parentInventoryUI.gameObject) {
+                        rectTransform.anchoredPosition = initialPosition;
+                    } else {
+                        // Transfer item from inventory to another
+
+                    }
+
+                } else {
+                    // Not dropped on inventory : Drop Item
+                    //parentInventoryUI.GetInventory().RemoveItem();
+                }
+            }
+        }
+
         if (eventData.pointerCurrentRaycast.gameObject == null) {
             // Drop item
+            Debug.Log("Item drop");
             rectTransform.anchoredPosition = initialPosition;
 
         } else {
             // Reset position
-            rectTransform.anchoredPosition = initialPosition;
         }
     }
 
