@@ -111,9 +111,10 @@ public class InventoryUI : MonoBehaviour {
                 yPosition = slot.position.y;
             }
         }
-        float height = (rowNumber+1) * itemSlotContainer.GetComponent<GridLayoutGroup>().cellSize.y;
 
-        this.GetComponent<RectTransform>().sizeDelta = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, height);
+        float height = (rowNumber +1) * itemSlotContainer.GetComponent<GridLayoutGroup>().cellSize.y;
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, height);
     }
 
     public void OpenCloseInventoryPanel() {
