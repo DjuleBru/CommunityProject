@@ -39,6 +39,10 @@ PrefabInstance:
       propertyPath: m_Padding.m_Left
       value: 81
       objectReference: {fileID: 0}
+    - target: {fileID: 260728986144212040, guid: 88e938ebb0004f54c834c4e33cd3f255, type: 3}
+      propertyPath: itemSlotTemplate
+      value: 
+      objectReference: {fileID: 629745514041612982}
     - target: {fileID: 260728986144212054, guid: 88e938ebb0004f54c834c4e33cd3f255, type: 3}
       propertyPath: m_Name
       value: UI_DungeonInventory
@@ -209,3 +213,8 @@ PrefabInstance:
       objectReference: {fileID: -587775039, guid: 0a6973059568138488c5adcd99af4344, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88e938ebb0004f54c834c4e33cd3f255, type: 3}
+--- !u!224 &629745514041612982 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 260728985729093508, guid: 88e938ebb0004f54c834c4e33cd3f255, type: 3}
+  m_PrefabInstance: {fileID: 802491295277733170}
+  m_PrefabAsset: {fileID: 0}

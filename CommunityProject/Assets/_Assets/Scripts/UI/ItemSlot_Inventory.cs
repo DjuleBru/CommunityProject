@@ -14,17 +14,16 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
     InventoryUI previousInventoryUIDraggedOn;
     private bool draggedOnInventory;
 
+    [SerializeField] private bool disableInteraction;
+
     protected override void Awake() {
         base.Awake();
         parentInventoryUI = GetComponentInParent<InventoryUI>();
-    }
 
-    protected void Start() {
-
-        if (parentInventoryUI.GetInventory().HasLimitedSlots()) {
-            // Disable any interactions with the itemslot
+        if(disableInteraction) {
             group.blocksRaycasts = false;
         }
+
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
@@ -63,9 +62,6 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
             }
             draggedOnInventory = false;
         };
-
-
-
     }
 
     public void OnEndDrag(PointerEventData eventData) {
@@ -80,6 +76,7 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
             if(inventoryDraggedOn != parentInventoryUI.GetInventory()) {
                 // Dragged on another inventory : Transfer item from inventory to another
                 TransferItemBetweenInventories(inventoryDraggedOn);
+                GetInventoryUIDraggedOn().CloseTransferItemsPanelGameObject();
             } else {
                 // Dragged on this inventory : Reset position
                 rectTransform.anchoredPosition = initialPosition;

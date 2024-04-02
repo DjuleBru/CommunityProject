@@ -5,6 +5,7 @@ using UnityEngine;
 public class DungeonExit : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision) {
+        DungeonManager.Instance.CompleteDungeon();
         SceneLoader.Load(SceneLoader.Scene.OverWorld);
     }
 }

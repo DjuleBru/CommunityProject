@@ -4,19 +4,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Sirenix.OdinInspector;
 
 public class InventoryUI : MonoBehaviour {
-    private Inventory inventory;
+    protected Inventory inventory;
 
-    [SerializeField] private Transform itemSlotContainer;
-    [SerializeField] private Transform itemSlotTemplate;
-    [SerializeField] private Transform emptyItemSlotTemplate;
-    [SerializeField] private TransferItemsUI transferItemsUI;
+    [SerializeField] protected Transform itemSlotContainer;
+    [SerializeField] protected Transform itemSlotTemplate;
+    [SerializeField] protected TransferItemsUI transferItemsUI;
 
-    [SerializeField] private GameObject inventoryPanel;
-    private bool opened;
+    [SerializeField] protected GameObject inventoryPanel;
+    [SerializeField] protected bool ignoreInventoryPanel;
+    protected bool opened;
 
-    public void SetInventory(Inventory inventory) {
+    protected GridLayout gridLayout;
+
+    public virtual void SetInventory(Inventory inventory) {
         this.inventory = inventory;
 
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
@@ -25,17 +28,19 @@ public class InventoryUI : MonoBehaviour {
         if (inventory.HasLimitedSlots()) {
             transferItemsUI.gameObject.SetActive(false);
         }
-        inventoryPanel.SetActive(false);
+
+        if(!ignoreInventoryPanel) {
+            inventoryPanel.SetActive(false);
+        }
     }
 
-    private void Inventory_OnItemListChanged(object sender, System.EventArgs e) {
+    protected void Inventory_OnItemListChanged(object sender, System.EventArgs e) {
         RefreshInventoryUI();
     }
 
-    private void RefreshInventoryUI() {
+    protected void RefreshInventoryUI() {
         foreach(Transform child in itemSlotContainer) {
             if (child == itemSlotTemplate) continue;
-            if(child == emptyItemSlotTemplate) continue;
             Destroy(child.gameObject);
         }
 
@@ -46,10 +51,10 @@ public class InventoryUI : MonoBehaviour {
         }
     }
 
-    private void RefreshUnlimitedInventoryUI() {
-        
+    protected void RefreshUnlimitedInventoryUI() {
         // Inventory is unlimited
         foreach (Item item in inventory.GetItemList()) {
+
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
             ItemSlot inventoryItemSlot = itemSlotRectTransform.GetComponent<ItemSlot>();
@@ -58,13 +63,13 @@ public class InventoryUI : MonoBehaviour {
         }
     }
 
-    private void RefreshLimitedInventoryUI() {
+    protected void RefreshLimitedInventoryUI() {
         int itemNumber = 0;
 
         for(int x = 0;  x < inventory.GetSlotNumberX(); x++) {
             for(int y = 0;  y < inventory.GetSlotNumberY(); y++) {
 
-                RectTransform itemSlotRectTransform = Instantiate(emptyItemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
+                RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
                 itemSlotRectTransform.gameObject.SetActive(true);
 
                 if (itemNumber < inventory.GetItemList().Count) {
@@ -93,6 +98,22 @@ public class InventoryUI : MonoBehaviour {
     public void CloseTransferItemsPanelGameObject() {
         transferItemsUI.ResetItemToTransfer();
         transferItemsUI.gameObject.SetActive(false);
+    }
+
+    [Button]
+    public void RefreshInventorySize() {
+        float yPosition = 0;
+        int rowNumber = 0;
+
+        foreach(RectTransform slot in itemSlotContainer) {
+            if(slot.position.y != yPosition) {
+                rowNumber++;
+                yPosition = slot.position.y;
+            }
+        }
+        float height = (rowNumber+1) * itemSlotContainer.GetComponent<GridLayoutGroup>().cellSize.y;
+
+        this.GetComponent<RectTransform>().sizeDelta = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, height);
     }
 
     public void OpenCloseInventoryPanel() {

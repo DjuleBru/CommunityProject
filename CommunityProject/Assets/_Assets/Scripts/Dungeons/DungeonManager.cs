@@ -18,10 +18,25 @@ public class DungeonManager : MonoBehaviour {
     [SerializeField] private List<MobSO> completeMobList;
     private List<MobSO> dungeonMobList = new List<MobSO>();
 
+
+    [SerializeField] private InventoryUI dungeonInventoryUI;
+    private Inventory dungeonInventory;
+
+    private float dungeonTimer;
+
     private void Awake() {
         Instance = this;
 
         FillMobList();
+    }
+
+    private void Start() {
+        dungeonInventory = new Inventory(false, 10, 3);
+        dungeonInventoryUI.SetInventory(dungeonInventory);
+    }
+
+    private void Update() {
+        dungeonTimer += Time.deltaTime;
     }
 
     private void FillMobList() {
@@ -30,6 +45,10 @@ public class DungeonManager : MonoBehaviour {
                 dungeonMobList.Add(mobSO);
             }
         }
+    }
+
+    public void CompleteDungeon() {
+        SavingSystem.Instance.CompleteDungeon(dungeonInventory.GetItemList(), dungeonTimer);
     }
 
     public List<MobSO> GetDungeonMobList() {
@@ -42,5 +61,9 @@ public class DungeonManager : MonoBehaviour {
 
     public int GetTotalRoomNumber() {
         return totalRoomNumber;
+    }
+
+    public Inventory GetDungeonInventory() {
+        return dungeonInventory;
     }
 }

@@ -10,24 +10,36 @@ public class DungeonEntrance : MonoBehaviour
     [SerializeField] private DungeonSO dungeonSO;
 
     [SerializeField] private Transform exitDungeonSpawnPoint;
-    [SerializeField] private Transform chestSpawnPoint;
+    [SerializeField] private Chest dungeonChest;
+    [SerializeField] private DungeonStatsBoard dungeonStatsBoard;
+
+    [SerializeField] private bool dungeonIsComplete;
 
     private void Start() {
         dungeonEntranceUI.SetActive(false);
         enterUI.SetActive(false);
+
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        playerIsInEntranceArea = true;
-        dungeonEntranceUI.SetActive(true);
-        enterUI.SetActive(true);
+        Player player = collision.GetComponent<Player>();
+
+        if (player != null) {
+            playerIsInEntranceArea = true;
+            dungeonEntranceUI.SetActive(true);
+            enterUI.SetActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        playerIsInEntranceArea = false;
-        dungeonEntranceUI.SetActive(false);
-        enterUI.SetActive(false);
+        Player player = collision.GetComponent<Player>();
+
+        if (player != null) {
+            playerIsInEntranceArea = false;
+            dungeonEntranceUI.SetActive(false);
+            enterUI.SetActive(false);
+        }
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
@@ -41,8 +53,34 @@ public class DungeonEntrance : MonoBehaviour
         return dungeonSO;
     }
 
-    public Transform GetExitDungeonSpawnPoint() {
-        return exitDungeonSpawnPoint;
+    public void RecordDungeon(List<Item> loot, float time) {
+        dungeonStatsBoard.RecordDungeon(loot, time);
+        SaveDungeon();
+    }
+
+    public void RecordLastRun(List<Item> loot, float time) {
+        dungeonStatsBoard.RecordLastRun(loot, time);
+        SaveDungeon();
+    }
+
+    public void AddItemsToInventory(List<Item> itemList) {
+        dungeonChest.AddItemsToChest(itemList);
+    }
+
+    public void SetDungeonAsComplete() {
+        dungeonIsComplete = true;
+        dungeonChest.gameObject.SetActive(true);
+        dungeonStatsBoard.gameObject.SetActive(true);
+
+        SaveDungeon();
+    }
+
+    public bool GetDungeonComplete() {
+        return dungeonIsComplete;
+    }
+
+    public void SaveDungeon() {
+        ES3AutoSaveMgr.Current.Save();
     }
 
 }

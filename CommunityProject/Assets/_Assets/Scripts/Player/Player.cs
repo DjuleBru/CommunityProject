@@ -11,10 +11,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private CinemachineVirtualCamera battleCamera;
 
     private Inventory playerInventory;
-    private Inventory dungeonInventory;
 
     [SerializeField] private InventoryUI playerInventoryUI;
-    [SerializeField] private InventoryUI dungeonInventoryUI;
     public static Player Instance { get; private set; }
 
     public event EventHandler OnPlayerDamaged;
@@ -27,14 +25,13 @@ public class Player : MonoBehaviour, IDamageable
     private void Awake() {
         Instance = this;
         playerHP = playerBaseHP;
+
+        playerInventory = new Inventory(true, 3, 3);
+        playerInventoryUI.SetInventory(playerInventory);
     }
 
     private void Start() {
-        playerInventory = new Inventory(true, 3, 3);
-        dungeonInventory = new Inventory(false, 10, 3);
-
-        playerInventoryUI.SetInventory(playerInventory);
-        dungeonInventoryUI.SetInventory(dungeonInventory);
+        playerInventory.AddItem(new Item { itemType = Item.ItemType.Wood, amount = 5 });
     }
 
     public void SetBattleCameraAsPriority() {
@@ -85,8 +82,9 @@ public class Player : MonoBehaviour, IDamageable
         if(itemWorld != null) {
             if(SavingSystem.Instance.GetSceneIsOverworld()) {
                 playerInventory.AddItem(itemWorld.GetItem());
-            } else {
-                dungeonInventory.AddItem(itemWorld.GetItem());
+            } 
+            if(SavingSystem.Instance.GetSceneIsDungeon()) {
+                DungeonManager.Instance.GetDungeonInventory().AddItem(itemWorld.GetItem());
             }
 
             itemWorld.DestroySelf();

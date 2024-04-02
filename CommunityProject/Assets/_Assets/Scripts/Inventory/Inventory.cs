@@ -13,10 +13,9 @@ public class Inventory
     private int slotNumberY;
     private int totalSlotNumber;
 
-    public Inventory(bool hasLimitedStorage, int slotNumberX, int slotNumberY) {
+    public Inventory(bool hasLimitedSlots, int slotNumberX, int slotNumberY) {
         itemList = new List<Item>();
-
-        this.hasLimitedSlots = hasLimitedStorage;
+        this.hasLimitedSlots = hasLimitedSlots;
         this.slotNumberX = slotNumberX;
         this.slotNumberY = slotNumberY;
         totalSlotNumber = slotNumberX * slotNumberY;
@@ -89,7 +88,6 @@ public class Inventory
     }
 
     private void AddUnStackableItemToInventory(Item item) {
-
         if (!hasLimitedSlots | itemList.Count < totalSlotNumber) {
             itemList.Add(item);
         }
@@ -219,6 +217,13 @@ public class Inventory
         return itemList;
     }
 
+    public void AddItemList(List<Item> itemList) {
+        foreach (Item item in itemList) {
+            AddItem(item);
+        }
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     public bool HasLimitedSlots() {
         return hasLimitedSlots;
     }
@@ -231,4 +236,9 @@ public class Inventory
         return slotNumberY;
     }
 
+    public void ShowInventoryDebug() {
+        foreach (Item inventoryItem in itemList) {
+            Debug.Log(inventoryItem.itemType + " " + inventoryItem.amount);
+        }
+    }
 }

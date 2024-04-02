@@ -16,8 +16,6 @@ public static class SceneLoader
 
     public static void Load(Scene targetScene) {
         SceneLoader.targetScene = targetScene;
-
-        //SceneManager.LoadScene(Scene.LoadingScene.ToString());
         SceneManager.LoadScene(targetScene.ToString());
     }
 
