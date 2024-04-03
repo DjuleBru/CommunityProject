@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
+  m_Name: LumberMill
+  m_EditorClassIdentifier: 
+  buildingCategory: 0
+  buildingType: 0
+  buildingWorksCategory: 0
+  buildingCostItems:
+  - itemType: 1
+    itemTier: 0
+    amount: 20
+  buildingName: Lumber mill
+  buildingIconSprite: {fileID: 278719842, guid: f19d10c4ddea4ed4fa315422e6625193, type: 3}
+  buildingDescriptionPanelSprite: {fileID: -373889290, guid: f19d10c4ddea4ed4fa315422e6625193, type: 3}
+  buildingDescription: All about wood
+  buildingPrefab: {fileID: 3039747477055091862, guid: 8ea3f24015901b84faaae19fe084fc2e, type: 3}

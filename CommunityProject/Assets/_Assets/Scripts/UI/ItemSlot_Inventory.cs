@@ -42,7 +42,7 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
 
             if(!draggedOnInventory) {
                 // ItemSlot enters inventory UI
-                if(ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
+                if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
                     // Item is stackable : oepn transfer items panel
                     inventoryUIDraggedOn.OpenTransferItemsPanelGameObject();
                 }
@@ -72,7 +72,6 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
 
         if(inventoryDraggedOn != null) {
             // Dragged on an inventory
-
             if(inventoryDraggedOn != parentInventoryUI.GetInventory()) {
                 // Dragged on another inventory : Transfer item from inventory to another
                 TransferItemBetweenInventories(inventoryDraggedOn);

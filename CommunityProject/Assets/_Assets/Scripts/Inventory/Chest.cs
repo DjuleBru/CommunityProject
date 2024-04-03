@@ -33,7 +33,6 @@ public class Chest : MonoBehaviour
     public void OpenInventory() {
         InventoryUI_Interacted.Instance.SetInventory(chestInventory);
         InventoryUI_Interacted.Instance.gameObject.SetActive(true);
-        InventoryUI_Interacted.Instance.RefreshInventorySize();
     }
 
     public void CloseInventory() {

@@ -10,6 +10,8 @@ public class GameInput : MonoBehaviour
 
     public event EventHandler OnInteractAction;
     public event EventHandler OnAttackAction;
+    public event EventHandler OnPlaceBuilding;
+    public event EventHandler OnPlaceBuildingCancelled;
 
     private PlayerInputActions playerInputActions;
     private void Awake() {
@@ -22,6 +24,16 @@ public class GameInput : MonoBehaviour
 
         playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.Attack.performed += Attack_performed;
+        playerInputActions.Player.PlaceBuilding.performed += PlaceBuilding_performed;
+        playerInputActions.Player.CancelPlaceBuilding.performed += CancelPlaceBuilding_performed;
+    }
+
+    private void CancelPlaceBuilding_performed(InputAction.CallbackContext obj) {
+        OnPlaceBuildingCancelled?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void PlaceBuilding_performed(InputAction.CallbackContext obj) {
+        OnPlaceBuilding?.Invoke(this, EventArgs.Empty);
     }
 
     private void Attack_performed(InputAction.CallbackContext obj) {

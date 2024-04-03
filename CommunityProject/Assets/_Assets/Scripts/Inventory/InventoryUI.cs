@@ -14,10 +14,15 @@ public class InventoryUI : MonoBehaviour {
     [SerializeField] protected TransferItemsUI transferItemsUI;
 
     [SerializeField] protected GameObject inventoryPanel;
-    [SerializeField] protected bool ignoreInventoryPanel;
     protected bool opened;
 
+    protected Image interactionImage;
     protected GridLayout gridLayout;
+
+    protected virtual void Awake() {
+         interactionImage = GetComponent<Image>();
+         interactionImage.enabled = false;
+    }
 
     public virtual void SetInventory(Inventory inventory) {
         this.inventory = inventory;
@@ -25,13 +30,9 @@ public class InventoryUI : MonoBehaviour {
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
         RefreshInventoryUI();
 
-        if (inventory.HasLimitedSlots()) {
-            transferItemsUI.gameObject.SetActive(false);
-        }
+        transferItemsUI.gameObject.SetActive(false);
 
-        if(!ignoreInventoryPanel) {
-            inventoryPanel.SetActive(false);
-        }
+        inventoryPanel.SetActive(false);
     }
 
     protected void Inventory_OnItemListChanged(object sender, System.EventArgs e) {
@@ -54,7 +55,6 @@ public class InventoryUI : MonoBehaviour {
     protected void RefreshUnlimitedInventoryUI() {
         // Inventory is unlimited
         foreach (Item item in inventory.GetItemList()) {
-
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
             ItemSlot inventoryItemSlot = itemSlotRectTransform.GetComponent<ItemSlot>();
@@ -100,25 +100,26 @@ public class InventoryUI : MonoBehaviour {
         transferItemsUI.gameObject.SetActive(false);
     }
 
-    [Button]
-    public void RefreshInventorySize() {
-        float yPosition = 0;
-        int rowNumber = 0;
+    //[Button]
+    //public void RefreshInventorySize() {
+    //    float yPosition = 0;
+    //    int rowNumber = 0;
 
-        foreach(RectTransform slot in itemSlotContainer) {
-            if(slot.position.y != yPosition) {
-                rowNumber++;
-                yPosition = slot.position.y;
-            }
-        }
+    //    foreach(RectTransform slot in itemSlotContainer) {
+    //        if(slot.position.y != yPosition) {
+    //            rowNumber++;
+    //            yPosition = slot.position.y;
+    //        }
+    //    }
 
-        float height = (rowNumber +1) * itemSlotContainer.GetComponent<GridLayoutGroup>().cellSize.y;
+    //    float height = (rowNumber +1) * itemSlotContainer.GetComponent<GridLayoutGroup>().cellSize.y;
 
-        GetComponent<RectTransform>().sizeDelta = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, height);
-    }
+    //    GetComponent<RectTransform>().sizeDelta = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, height);
+    //}
 
     public void OpenCloseInventoryPanel() {
         inventoryPanel.SetActive(!opened);
+        interactionImage.enabled = !opened;
         opened = !opened;
     }
 }

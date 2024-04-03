@@ -11,8 +11,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private CinemachineVirtualCamera battleCamera;
 
     private Inventory playerInventory;
-
     [SerializeField] private InventoryUI playerInventoryUI;
+
     public static Player Instance { get; private set; }
 
     public event EventHandler OnPlayerDamaged;
@@ -64,6 +64,10 @@ public class Player : MonoBehaviour, IDamageable
 
     public int GetMaxHP() {
         return playerBaseHP;
+    }
+
+    public Inventory GetInventory() {
+        return playerInventory;
     }
 
     public void DisablePlayerActions() {

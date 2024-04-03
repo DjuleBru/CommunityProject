@@ -53,6 +53,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceBuilding"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed1e4467-56d6-4baa-8f7c-6787c8e3ea2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelPlaceBuilding"",
+                    ""type"": ""Button"",
+                    ""id"": ""5edceb48-58c9-4797-a02e-8370308cf716"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +150,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ad560ba-c130-4731-b007-af4a5d522f52"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""428afb90-d733-406c-a874-2b2c9630e49a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelPlaceBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +183,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_PlaceBuilding = m_Player.FindAction("PlaceBuilding", throwIfNotFound: true);
+        m_Player_CancelPlaceBuilding = m_Player.FindAction("CancelPlaceBuilding", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +249,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_PlaceBuilding;
+    private readonly InputAction m_Player_CancelPlaceBuilding;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -214,6 +258,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @PlaceBuilding => m_Wrapper.m_Player_PlaceBuilding;
+        public InputAction @CancelPlaceBuilding => m_Wrapper.m_Player_CancelPlaceBuilding;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +278,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @PlaceBuilding.started += instance.OnPlaceBuilding;
+            @PlaceBuilding.performed += instance.OnPlaceBuilding;
+            @PlaceBuilding.canceled += instance.OnPlaceBuilding;
+            @CancelPlaceBuilding.started += instance.OnCancelPlaceBuilding;
+            @CancelPlaceBuilding.performed += instance.OnCancelPlaceBuilding;
+            @CancelPlaceBuilding.canceled += instance.OnCancelPlaceBuilding;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -245,6 +297,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @PlaceBuilding.started -= instance.OnPlaceBuilding;
+            @PlaceBuilding.performed -= instance.OnPlaceBuilding;
+            @PlaceBuilding.canceled -= instance.OnPlaceBuilding;
+            @CancelPlaceBuilding.started -= instance.OnCancelPlaceBuilding;
+            @CancelPlaceBuilding.performed -= instance.OnCancelPlaceBuilding;
+            @CancelPlaceBuilding.canceled -= instance.OnCancelPlaceBuilding;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -267,5 +325,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnPlaceBuilding(InputAction.CallbackContext context);
+        void OnCancelPlaceBuilding(InputAction.CallbackContext context);
     }
 }
