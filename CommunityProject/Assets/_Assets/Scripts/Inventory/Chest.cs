@@ -7,7 +7,7 @@ public class Chest : MonoBehaviour
     [ES3Serializable]
     private Inventory chestInventory;
     [SerializeField] private List<Item> itemsInChest = new List<Item>();
-    [SerializeField] private InventoryUI_Interacted chestInventoryUI;
+    [SerializeField] private InventoryUI_Interactable chestInventoryUI;
 
     private bool chestHasBeenFilled;
 

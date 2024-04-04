@@ -44,11 +44,14 @@ public class ProductionBuildingUI : BuildingUI
         RefreshProductionBuildingUI();
     }
 
-    private void RefreshProductionBuildingUI() {
+    public void RefreshProductionBuildingUI() {
         nameText.text = productionBuilding.GetBuildingSO().name;
         RefreshRecipeList();
         RefreshRecipePanel();
-        RefreshInventoryPanels();
+
+        if(productionBuilding.GetSelectedRecipeSO() != null) {
+            RefreshInventoryPanels();
+        }
     }
 
 
@@ -113,7 +116,8 @@ public class ProductionBuildingUI : BuildingUI
     }
 
     private void RefreshInventoryPanels() {
-
+        inputInventoryContainer.GetComponent<InventoryUI_ProductionBuilding>().SetInventory(productionBuilding.GetInputInventory());
+        outputInventoryContainer.GetComponent<InventoryUI_ProductionBuilding>().SetInventory(productionBuilding.GetOutputInventory());
     }
 
 }

@@ -17,8 +17,7 @@ public class InventoryUI : MonoBehaviour {
     protected GridLayout gridLayout;
 
     protected virtual void Awake() {
-         interactionImage = GetComponent<Image>();
-         interactionImage.enabled = false;
+        interactionImage = GetComponent<Image>();
     }
 
     public virtual void SetInventory(Inventory inventory) {

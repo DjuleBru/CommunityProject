@@ -16,8 +16,7 @@ public class RecipeSlot_Selectable : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerDown(PointerEventData eventData) {
         linkedProductionBuilding.SetSelectedRecipeSO(recipeSO);
-        ProductionBuildingUI.Instance.RefreshRecipeList();
-        ProductionBuildingUI.Instance.RefreshRecipePanel();
+        ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
