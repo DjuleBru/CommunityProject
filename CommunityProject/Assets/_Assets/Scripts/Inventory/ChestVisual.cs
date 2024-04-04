@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestVisual : MonoBehaviour {
+public class ChestVisual : MonoBehaviour, IInteractable {
 
     private Chest chest;
     [SerializeField] private SpriteRenderer chestRenderer;
@@ -15,6 +15,8 @@ public class ChestVisual : MonoBehaviour {
 
     [SerializeField] private Sprite openedSpriteShadow;
     [SerializeField] private Sprite closedSpriteShadow;
+
+    [SerializeField] private Collider2D solidChestCollider;
 
     private bool chestOpen;
     private bool playerInTriggerArea;
@@ -46,10 +48,6 @@ public class ChestVisual : MonoBehaviour {
         }
     }
 
-    public void SetChestHovered(bool hovered) {
-        chestHoveredVisual.SetActive(hovered);
-    }
-
     public void OpenChestVisual() {
         chestRenderer.sprite = openedSprite;
         chestShadowRenderer.sprite = openedSpriteShadow;
@@ -60,25 +58,23 @@ public class ChestVisual : MonoBehaviour {
         chestShadowRenderer.sprite = closedSpriteShadow;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        Player player = collision.GetComponent<Player>();
+    public void SetPlayerInTriggerArea(bool playerInTriggerArea) {
+        this.playerInTriggerArea = playerInTriggerArea;
 
-        if (player != null) {
-            playerInTriggerArea = true;
-            SetChestHovered(true);
-        }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        Player player = collision.GetComponent<Player>();
-
-        if (player != null) {
-            playerInTriggerArea = false;
-            SetChestHovered(false);
-            CloseChestVisual();
-            chest.CloseInventory();
-            chestOpen = false;
-        }
+    public void SetHovered(bool hovered) {
+        chestHoveredVisual.SetActive(hovered);
     }
 
+    public void ClosePanel() {
+        CloseChestVisual();
+        chest.CloseInventory();
+        chestOpen = false;
+    }
+
+
+    public Collider2D GetSolidCollider() {
+        return solidChestCollider;
+    }
 }

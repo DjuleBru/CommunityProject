@@ -24,20 +24,23 @@ public class Building : MonoBehaviour
         brickyard
     }
 
-    [SerializeField] private BuildingSO buildingSO;
+    [SerializeField] protected BuildingSO buildingSO;
 
-    private Rigidbody2D rb;
-    private Collider2D buildingCollider;
-    private bool isValidBuildingPlacement;
-    private bool buildingPlaced;
-    private int collideCount;
+    protected Rigidbody2D rb;
+    protected Collider2D buildingCollider;
+    [SerializeField] protected Collider2D interactionCollider;
+    protected bool isValidBuildingPlacement;
+    protected bool buildingPlaced;
+    protected int collideCount;
 
     public event EventHandler OnBuildingIsValidPlacement;
     public event EventHandler OnBuildingIsUnvalidPlacement;
     public event EventHandler OnBuildingPlaced;
 
-    private void Awake() {
+    protected void Awake() {
         buildingCollider = GetComponent<Collider2D>();
+        interactionCollider.enabled = false;
+
         rb = GetComponent<Rigidbody2D>();
         buildingCollider.isTrigger = true;
         isValidBuildingPlacement = true;
@@ -45,16 +48,16 @@ public class Building : MonoBehaviour
         BuildingsManager.Instance.SetBuildingSpawned();
     }
 
-    private void Start() {
+    protected void Start() {
         GameInput.Instance.OnPlaceBuilding += GameInput_OnPlaceBuilding;
         GameInput.Instance.OnPlaceBuildingCancelled += GameInput_OnPlaceBuildingCancelled;
     }
 
-    private void GameInput_OnPlaceBuildingCancelled(object sender, EventArgs e) {
+    protected void GameInput_OnPlaceBuildingCancelled(object sender, EventArgs e) {
         CancelBuildingPlacement();
     }
 
-    private void GameInput_OnPlaceBuilding(object sender, System.EventArgs e) {
+    protected void GameInput_OnPlaceBuilding(object sender, System.EventArgs e) {
         if(!buildingPlaced) {
             if(TryPlaceBuilding()) {
                 PlaceBuilding();
@@ -62,47 +65,57 @@ public class Building : MonoBehaviour
         }
     }
 
-    private void Update() {
+    protected void Update() {
         if(!buildingPlaced) {
             HandleBuildingPlacement();
         }
     }
 
-    private void HandleBuildingPlacement() {
+    protected void HandleBuildingPlacement() {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
     }
 
-    private bool TryPlaceBuilding() {
+    protected bool TryPlaceBuilding() {
         if (isValidBuildingPlacement) return true;
         return false;
     }
 
-    private void PlaceBuilding() {
+    protected void PlaceBuilding() {
+        SpendBuildingMaterials();
         buildingPlaced = true;
         buildingCollider.isTrigger = false;
+        interactionCollider.enabled = true;
         rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
 
         OnBuildingPlaced?.Invoke(this, EventArgs.Empty);
         BuildingsManager.Instance.SetBuildingPlacedOrCancelled();
     }
 
-    private void CancelBuildingPlacement() {
+    protected void SpendBuildingMaterials() {
+        foreach(Item item in buildingSO.buildingCostItems) {
+            Player.Instance.GetInventory().RemoveItemAmount(item);
+        }
+    }
+
+    protected void CancelBuildingPlacement() {
         if (buildingPlaced) return;
         BuildingsManager.Instance.SetBuildingPlacedOrCancelled();
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
+    protected void OnTriggerEnter2D(Collider2D collision) {
         if (buildingPlaced) return;
+        if (collision.gameObject.GetComponent<IInteractable>() != null) return;
 
         OnBuildingIsUnvalidPlacement?.Invoke(this, EventArgs.Empty);
         collideCount++;
         isValidBuildingPlacement = false;
     }
-
-    private void OnTriggerExit2D(Collider2D collision) {
+    
+    protected void OnTriggerExit2D(Collider2D collision) {
         if (buildingPlaced) return;
+        if (collision.gameObject.GetComponent<IInteractable>() != null) return;
 
         collideCount--;
         if(collideCount == 0) {
@@ -111,9 +124,25 @@ public class Building : MonoBehaviour
         }
     }
 
-    private void OnDestroy() {
+    protected void OnDestroy() {
         GameInput.Instance.OnPlaceBuilding -= GameInput_OnPlaceBuilding;
         GameInput.Instance.OnPlaceBuildingCancelled -= GameInput_OnPlaceBuildingCancelled;
     }
 
+    public BuildingSO GetBuildingSO() {
+        return buildingSO;
+    }
+
+    public bool GetBuildingPlaced() {
+        return buildingPlaced;
+    }
+
+    public virtual void OpenBuildingUI() {
+
+    }
+
+    public virtual void CloseBuildingUI() {
+
+    }
+ 
 }

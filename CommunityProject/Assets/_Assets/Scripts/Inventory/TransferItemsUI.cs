@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TransferItemsUI : MonoBehaviour
 {
     [SerializeField] ItemSlot_Transfer itemSlotTransfer;
-    [SerializeField] InventoryUI parentInventoryUI;
+    InventoryUI_Interacted parentInventoryUI;
     [SerializeField] TextMeshProUGUI amountText;
     [SerializeField] Slider amountSlider;
 
@@ -15,6 +15,10 @@ public class TransferItemsUI : MonoBehaviour
     private Inventory itemOriginInventory;
     private int maxItemAmount;
     private int itemTransferAmount;
+
+    private void Awake() {
+        parentInventoryUI = GetComponentInParent<InventoryUI_Interacted>();
+    }
 
     public void SetItemToTransfer(Item item, Inventory itemOriginInventory) {
         this.item = item;

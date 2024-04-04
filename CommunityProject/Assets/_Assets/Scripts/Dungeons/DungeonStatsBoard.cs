@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungeonStatsBoard : MonoBehaviour
-{
+public class DungeonStatsBoard : MonoBehaviour, IInteractable {
 
     private DungeonEntrance dungeonEntrance;
 
@@ -20,6 +19,8 @@ public class DungeonStatsBoard : MonoBehaviour
 
     [SerializeField] private GameObject statsBoardHoveredVisual;
     [SerializeField] private GameObject statsBoardUIGameObject;
+
+    [SerializeField] private Collider2D solidStatsBoardCollider;
 
     private bool playerInTriggerArea;
     private bool statsBoardOpen;
@@ -90,23 +91,21 @@ public class DungeonStatsBoard : MonoBehaviour
         dungeonEntrance.SaveDungeon();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        Player player = collision.GetComponent<Player>();
-
-        if (player != null) {
-            statsBoardHoveredVisual.SetActive(true);
-            playerInTriggerArea = true;
-        }
+    public void SetPlayerInTriggerArea(bool playerInTriggerArea) {
+        this.playerInTriggerArea = playerInTriggerArea;
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        Player player = collision.GetComponent<Player>();
+    public void SetHovered(bool hovered) {
+        statsBoardHoveredVisual.SetActive(hovered);
+    }
 
-        if (player != null) {
-            statsBoardHoveredVisual.SetActive(false);
-            playerInTriggerArea = false;
-            statsBoardUIGameObject.gameObject.SetActive(false);
-            statsBoardOpen = false;
-        }
+    public void ClosePanel() {
+        statsBoardHoveredVisual.SetActive(false);
+        statsBoardUIGameObject.gameObject.SetActive(false);
+        statsBoardOpen = false;
+    }
+
+    public Collider2D GetSolidCollider() {
+        return solidStatsBoardCollider;
     }
 }

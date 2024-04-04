@@ -15,6 +15,7 @@ public class BuildUI : MonoBehaviour
     public void OpenCloseBuildHotbar() {
         buildHotBarOpen = !buildHotBarOpen;
         buildHotbar.SetActive(buildHotBarOpen);
+
     }
 
 }

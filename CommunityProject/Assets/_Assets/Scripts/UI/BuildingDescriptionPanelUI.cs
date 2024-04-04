@@ -20,6 +20,7 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
     [SerializeField] Transform itemCostTemplate;
     [SerializeField] Transform recipeContainer;
     [SerializeField] Transform recipeTemplate;
+    [SerializeField] private Animator unsufficientMaterialsAnimator;
 
     private BuildingSO buildingSO;
 
@@ -39,6 +40,7 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
         buildingWorksText.text = buildingSO.buildingWorksCategory.ToString();
 
         RefreshBuildingCost();
+        RefreshBuildingRecipes();
     }
 
     private void RefreshBuildingCost() {
@@ -55,6 +57,22 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
             itemCostTemplateRectTransform.GetComponentInChildren<TextMeshProUGUI>().text = item.amount.ToString();
 
         }
+    }
+    private void RefreshBuildingRecipes() {
+        foreach (Transform child in recipeContainer) {
+            if (child == recipeTemplate) continue;
+            Destroy(child.gameObject);
+        }
+
+        foreach (RecipeSO recipeSO in buildingSO.buildingRecipes) {
+            RectTransform recipeTemplateRectTransform = Instantiate(recipeTemplate, recipeContainer).GetComponent<RectTransform>();
+
+            recipeTemplateRectTransform.gameObject.SetActive(true);
+            recipeTemplateRectTransform.Find("RecipeIcon").GetComponent<Image>().sprite = recipeSO.recipeSprite;
+        }
+    }
+    public void ShowUnsufficientMaterialsVisual() {
+        unsufficientMaterialsAnimator.SetTrigger("UnsufficientMaterials");
     }
 
 }

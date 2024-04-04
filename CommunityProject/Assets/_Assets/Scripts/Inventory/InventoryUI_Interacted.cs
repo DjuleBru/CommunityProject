@@ -5,20 +5,26 @@ using UnityEngine.EventSystems;
 
 public class InventoryUI_Interacted : InventoryUI
 {
-
-    public static InventoryUI_Interacted Instance { get; private set; }
     [SerializeField] private Animator transferAllItemsAnimator;
+    [SerializeField] protected TransferItemsUI transferItemsUI;
+    [SerializeField] protected GameObject inventoryPanel;
+
+    [SerializeField] protected bool canReceiveItems;
 
     private bool transferAllItemsPanelOpen;
 
     protected override void Awake() {
-        Instance = this;
+        base.Awake();
         gameObject.SetActive(false);
 
         transferItemsUI.gameObject.SetActive(false);
     }
 
     private void Update() {
+        HandleTransferAllItemsPanel();
+    }
+    
+    private void HandleTransferAllItemsPanel() {
         if (inventory.GetItemList().Count == 0) return;
         // There are no items to transfer
 
@@ -30,19 +36,36 @@ public class InventoryUI_Interacted : InventoryUI
 
         if (raycastResults.Count > 0) {
             foreach (var go in raycastResults) {
-                if (go.gameObject.GetComponentInParent<InventoryUI_Interacted>()) {
-                    // Hovering this inventory
-                    if (transferAllItemsPanelOpen) return;
-                    transferAllItemsAnimator.gameObject.SetActive(true);
-                    transferAllItemsPanelOpen = true;
+                InventoryUI_Interacted interactableInventory = go.gameObject.GetComponentInParent<InventoryUI_Interacted>();
+                if (interactableInventory != null) {
+                    // Hovering an interactable inventory
+
+                    if (interactableInventory == this) {
+                        // Hovering this inventory
+
+                        if (transferAllItemsPanelOpen) return;
+                        transferAllItemsAnimator.gameObject.SetActive(true);
+                        transferAllItemsPanelOpen = true;
+                    }
+                    else {
+                        CloseTransferAllItemsPanel();
+                    }
+                }
+                else {
+                    CloseTransferAllItemsPanel();
                 }
             }
-        } else {
-            if (!transferAllItemsPanelOpen) return;
-            transferAllItemsPanelOpen = false;
-            transferAllItemsAnimator.gameObject.SetActive(false);
-            transferAllItemsPanelOpen = false;
         }
+        else {
+            CloseTransferAllItemsPanel();
+        }
+    }
+
+    private void CloseTransferAllItemsPanel() {
+        if (!transferAllItemsPanelOpen) return;
+        transferAllItemsPanelOpen = false;
+        transferAllItemsAnimator.gameObject.SetActive(false);
+        transferAllItemsPanelOpen = false;
     }
 
     public override void SetInventory(Inventory inventory) {
@@ -55,6 +78,29 @@ public class InventoryUI_Interacted : InventoryUI
             transferItemsUI.gameObject.SetActive(false);
         }
         inventoryPanel.SetActive(true);
+    }
+
+    public void OpenTransferItemsPanelGameObject() {
+        transferItemsUI.gameObject.SetActive(true);
+    }
+
+    public void CloseTransferItemsPanelGameObject() {
+        transferItemsUI.ResetItemToTransfer();
+        transferItemsUI.gameObject.SetActive(false);
+    }
+
+    public void OpenCloseInventoryPanel() {
+        gameObject.SetActive(!opened);
+        inventoryPanel.SetActive(!opened);
+        interactionImage.enabled = !opened;
+        opened = !opened;
+    }
+
+    public void CloseInventoryPanel() {
+        gameObject.SetActive(false);
+        inventoryPanel.SetActive(false);
+        interactionImage.enabled = false;
+        opened = false;
     }
 
     public void TransferAllItems() {
@@ -75,5 +121,9 @@ public class InventoryUI_Interacted : InventoryUI
         foreach(Item item in itemsToRemove) {
             inventory.RemoveItemStack(item);
         }
+    }
+
+    public bool GetCanReceiveItems() {
+        return canReceiveItems;
     }
 }

@@ -22,8 +22,11 @@ MonoBehaviour:
   - itemType: 1
     itemTier: 0
     amount: 10
+  buildingRecipes:
+  - {fileID: 11400000, guid: 78a08c77253ff2c46a4f8c04827bc6ee, type: 2}
+  - {fileID: 11400000, guid: 9e93db43854f6254b80e3968f05e448f, type: 2}
   buildingName: Stone cutter
   buildingIconSprite: {fileID: -2047189166, guid: c1d1d8c0f592ed24f9b0ec0626058fee, type: 3}
   buildingDescriptionPanelSprite: {fileID: 835923586, guid: c1d1d8c0f592ed24f9b0ec0626058fee, type: 3}
   buildingDescription: I like stone
-  buildingPrefab: {fileID: 3039747477055091862, guid: a6d76f53c6c11da4793e3b5af79641bf, type: 3}
+  buildingPrefab: {fileID: 1718341335737673364, guid: dcab5e7724c79d54380c5d3729983ca2, type: 3}

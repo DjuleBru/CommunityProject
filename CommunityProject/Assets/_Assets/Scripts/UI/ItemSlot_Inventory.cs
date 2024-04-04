@@ -42,9 +42,14 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
 
             if(!draggedOnInventory) {
                 // ItemSlot enters inventory UI
-                if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
-                    // Item is stackable : oepn transfer items panel
-                    inventoryUIDraggedOn.OpenTransferItemsPanelGameObject();
+
+                if (inventoryUIDraggedOn is InventoryUI_Interacted) {
+                    InventoryUI_Interacted interactableInventoryDraggedOn = inventoryUIDraggedOn as InventoryUI_Interacted;
+
+                    if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
+                        // Item is stackable : oepn transfer items panel
+                        interactableInventoryDraggedOn.OpenTransferItemsPanelGameObject();
+                    }
                 }
 
                 previousInventoryUIDraggedOn = inventoryUIDraggedOn;
@@ -57,8 +62,12 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
 
             if (draggedOnInventory) {
                 // ItemSlot exits inventory UI
-                previousInventoryUIDraggedOn.CloseTransferItemsPanelGameObject();
-                previousInventoryUIDraggedOn = null;
+                if (inventoryUIDraggedOn is InventoryUI_Interacted) {
+                    InventoryUI_Interacted interactableInventoryDraggedOn = inventoryUIDraggedOn as InventoryUI_Interacted;
+                    interactableInventoryDraggedOn.CloseTransferItemsPanelGameObject();
+                    previousInventoryUIDraggedOn = null;
+                }
+
             }
             draggedOnInventory = false;
         };
@@ -72,14 +81,15 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
 
         if(inventoryDraggedOn != null) {
             // Dragged on an inventory
-            if(inventoryDraggedOn != parentInventoryUI.GetInventory()) {
-                // Dragged on another inventory : Transfer item from inventory to another
-                TransferItemBetweenInventories(inventoryDraggedOn);
-                GetInventoryUIDraggedOn().CloseTransferItemsPanelGameObject();
+            if(inventoryDraggedOn != parentInventoryUI.GetInventory() && GetInventoryUI_InteractedDraggedOn() != null && GetInventoryUI_InteractedDraggedOn().GetCanReceiveItems()) {
+                // Dragged on another inventory, interactable inventory that can receive items
+                    TransferItemBetweenInventories(inventoryDraggedOn);
+                    SetParentInventoryUI(GetInventoryUI_InteractedDraggedOn());
+                    GetInventoryUI_InteractedDraggedOn().CloseTransferItemsPanelGameObject();
             } else {
-                // Dragged on this inventory : Reset position
                 rectTransform.anchoredPosition = initialPosition;
             }
+
         } else {
             // Dropped on something else than an inventory
             TransferItemsUI transferItemsUIPanel = GetTransferItemsUIDraggedOn();
@@ -103,7 +113,6 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         if (newInventory.HasSpaceForItem(transferedItem)) {
             parentInventoryUI.GetInventory().RemoveItemStack(item);
             newInventory.AddItem(transferedItem);
-
         }
         else {
             //Reset position
@@ -152,6 +161,27 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         return newInventoryUI;
     }
 
+    private InventoryUI_Interacted GetInventoryUI_InteractedDraggedOn() {
+        PointerEventData pointer = new PointerEventData(EventSystem.current);
+        pointer.position = Input.mousePosition;
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointer, raycastResults);
+
+        InventoryUI_Interacted newInventoryUI = null;
+
+        if (raycastResults.Count > 0) {
+            foreach (var go in raycastResults) {
+                if (go.gameObject.GetComponent<InventoryUI_Interacted>()) {
+                    // Dropped on any kind of inventory
+                    newInventoryUI = go.gameObject.GetComponent<InventoryUI_Interacted>();
+                }
+            }
+        }
+
+        return newInventoryUI;
+    }
+
     private TransferItemsUI GetTransferItemsUIDraggedOn() {
         PointerEventData pointer = new PointerEventData(EventSystem.current);
         pointer.position = Input.mousePosition;
@@ -171,6 +201,10 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         }
 
         return transferItemsUI;
+    }
+
+    private void SetParentInventoryUI(InventoryUI inventoryUI) {
+        parentInventoryUI = inventoryUI;
     }
 
     public void OnPointerDown(PointerEventData eventData) {

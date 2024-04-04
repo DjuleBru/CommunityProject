@@ -11,9 +11,6 @@ public class InventoryUI : MonoBehaviour {
 
     [SerializeField] protected Transform itemSlotContainer;
     [SerializeField] protected Transform itemSlotTemplate;
-    [SerializeField] protected TransferItemsUI transferItemsUI;
-
-    [SerializeField] protected GameObject inventoryPanel;
     protected bool opened;
 
     protected Image interactionImage;
@@ -29,10 +26,6 @@ public class InventoryUI : MonoBehaviour {
 
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
         RefreshInventoryUI();
-
-        transferItemsUI.gameObject.SetActive(false);
-
-        inventoryPanel.SetActive(false);
     }
 
     protected void Inventory_OnItemListChanged(object sender, System.EventArgs e) {
@@ -89,37 +82,4 @@ public class InventoryUI : MonoBehaviour {
         return inventory;
     }
 
-    public void OpenTransferItemsPanelGameObject() {
-        if (inventory.HasLimitedSlots()) {
-            transferItemsUI.gameObject.SetActive(true);
-        }
-    }
-
-    public void CloseTransferItemsPanelGameObject() {
-        transferItemsUI.ResetItemToTransfer();
-        transferItemsUI.gameObject.SetActive(false);
-    }
-
-    //[Button]
-    //public void RefreshInventorySize() {
-    //    float yPosition = 0;
-    //    int rowNumber = 0;
-
-    //    foreach(RectTransform slot in itemSlotContainer) {
-    //        if(slot.position.y != yPosition) {
-    //            rowNumber++;
-    //            yPosition = slot.position.y;
-    //        }
-    //    }
-
-    //    float height = (rowNumber +1) * itemSlotContainer.GetComponent<GridLayoutGroup>().cellSize.y;
-
-    //    GetComponent<RectTransform>().sizeDelta = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, height);
-    //}
-
-    public void OpenCloseInventoryPanel() {
-        inventoryPanel.SetActive(!opened);
-        interactionImage.enabled = !opened;
-        opened = !opened;
-    }
 }

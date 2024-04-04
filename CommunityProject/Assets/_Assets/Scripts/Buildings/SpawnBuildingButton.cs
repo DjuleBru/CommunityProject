@@ -24,9 +24,21 @@ public class SpawnBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointer
     }
 
     public void SpawnBuilding() {
-        // Check if there are enough resources in player
+        if(HasBuildingMaterials()) {
+            Instantiate(buildingSO.buildingPrefab);
+        } else {
+            BuildingDescriptionPanelUI.Instance.ShowUnsufficientMaterialsVisual();
+        }
+    }
 
-        Instantiate(buildingSO.buildingPrefab);
+    private bool HasBuildingMaterials() {
+        // Check if there are enough resources in player
+        foreach (Item item in buildingSO.buildingCostItems) {
+            if (!Player.Instance.GetInventory().HasItem(item)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

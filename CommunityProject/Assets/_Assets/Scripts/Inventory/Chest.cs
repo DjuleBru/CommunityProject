@@ -7,6 +7,7 @@ public class Chest : MonoBehaviour
     [ES3Serializable]
     private Inventory chestInventory;
     [SerializeField] private List<Item> itemsInChest = new List<Item>();
+    [SerializeField] private InventoryUI_Interacted chestInventoryUI;
 
     private bool chestHasBeenFilled;
 
@@ -31,12 +32,12 @@ public class Chest : MonoBehaviour
     }
 
     public void OpenInventory() {
-        InventoryUI_Interacted.Instance.SetInventory(chestInventory);
-        InventoryUI_Interacted.Instance.gameObject.SetActive(true);
+        chestInventoryUI.SetInventory(chestInventory); 
+        chestInventoryUI.OpenCloseInventoryPanel();
     }
 
     public void CloseInventory() {
-        InventoryUI_Interacted.Instance.gameObject.SetActive(false);
+        chestInventoryUI.CloseInventoryPanel();
     }
 
 }

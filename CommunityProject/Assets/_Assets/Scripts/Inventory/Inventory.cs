@@ -131,39 +131,45 @@ public class Inventory
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
     public void RemoveItemAmount(Item item) {
+
         if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
             // Item is stackable 
 
-            Item itemInInventory = null;
-            foreach (Item inventoryItem in itemList) {
+            List<Item> itemsToRemove = new List<Item>();
+            int itemAmountLeftToRemove = item.amount;
 
-                if (inventoryItem.itemType == item.itemType && inventoryItem.amount >= item.amount) {
+            foreach (Item inventoryItem in itemList) {
+                if (inventoryItem.itemType == item.itemType) {
                     // Item is stackable and already in inventory
 
                     int inventoryItemAmount = inventoryItem.amount;
-                    int newItemAmount = item.amount;
 
-                    if (inventoryItemAmount - newItemAmount >= 0) {
+                    if (inventoryItemAmount  > itemAmountLeftToRemove) {
                         // There is enough items in the stack to remove them
-                        inventoryItem.amount -= item.amount;
-                        itemInInventory = inventoryItem;
-
+                        inventoryItem.amount -= itemAmountLeftToRemove;
                         break;
+                    } else {
+                        // There is not enough items in the stack to remove them
+                        itemAmountLeftToRemove -= inventoryItemAmount;
+                        itemsToRemove.Add(inventoryItem);
                     }
                 }
             }
 
-            if (itemInInventory != null && itemInInventory.amount <= 0) {
-                // Item is stackable and there are no more counts
-                itemList.Remove(item);
+            // Remove empty item stacks
+            foreach(Item itemToRemove in itemsToRemove) {
+                itemList.Remove(itemToRemove);
             }
         }
+
         else {
             // Item is NOT stackable 
             itemList.Remove(item);
         }
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
+
     }
+
     public bool HasSpaceForItem(Item item) {
         if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
             // Item is stackable 
@@ -211,6 +217,24 @@ public class Inventory
         }
 
         return false;
+    }
+
+    public bool HasItem(Item askedItem) {
+        int itemStacks =0;
+
+        // Loop through each item and sum the stacks of the correct item type
+        foreach (Item inventoryItem in itemList) {
+            if (inventoryItem.itemType == askedItem.itemType) {
+                // Item type is in inventory
+                itemStacks += inventoryItem.amount;
+            }
+        }
+
+        if(itemStacks >= askedItem.amount) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public List<Item> GetItemList() {

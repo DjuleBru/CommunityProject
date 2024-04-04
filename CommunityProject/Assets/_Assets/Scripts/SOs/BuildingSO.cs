@@ -10,6 +10,8 @@ public class BuildingSO : ScriptableObject
     public Building.BuildingWorksCategory buildingWorksCategory;
     public List<Item> buildingCostItems;
 
+    public List<RecipeSO> buildingRecipes;
+
     public string buildingName;
     public Sprite buildingIconSprite;
     public Sprite buildingDescriptionPanelSprite;

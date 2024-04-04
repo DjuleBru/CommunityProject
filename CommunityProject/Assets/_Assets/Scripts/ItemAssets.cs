@@ -31,4 +31,8 @@ public class ItemAssets : MonoBehaviour {
             case Item.ItemTier.Tier3: return new Color(0, 0, 1);
         }
     }
+
+    public List<ItemSO> GetItemSOList() {
+        return itemSOList;
+    }
 }
