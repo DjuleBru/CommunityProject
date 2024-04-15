@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (!canMove) return;
+        if (!canMove || Player.Instance.GetPlayerWorking()) return;
 
         if (!PlayerAnimatorManager.Instance.CheckAttackingAnimationProgress(.5f)) {
             HandleMovementInput();

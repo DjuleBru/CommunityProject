@@ -13,7 +13,7 @@ public class DungeonStatsBoardUI : MonoBehaviour
     private bool inventoryHasBeenFilled;
 
     public void SetDungeonLootUI(List<Item> itemList) {
-        dungeonLootedItemsInventory = new Inventory(false, 3, 3);
+        dungeonLootedItemsInventory = new Inventory(false, 3, 3, false, null);
         dungeonLootItemList = itemList;
         inventoryHasBeenFilled = false;
     }

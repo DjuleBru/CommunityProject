@@ -33,6 +33,8 @@ public class Building : MonoBehaviour
     protected bool buildingPlaced;
     protected int collideCount;
 
+    protected bool interactingWithBuilding;
+
     public event EventHandler OnBuildingIsValidPlacement;
     public event EventHandler OnBuildingIsUnvalidPlacement;
     public event EventHandler OnBuildingPlaced;
@@ -81,7 +83,7 @@ public class Building : MonoBehaviour
         return false;
     }
 
-    protected void PlaceBuilding() {
+    protected virtual void PlaceBuilding() {
         SpendBuildingMaterials();
         buildingPlaced = true;
         buildingCollider.isTrigger = false;
@@ -141,8 +143,20 @@ public class Building : MonoBehaviour
 
     }
 
-    public virtual void CloseBuildingUI() {
+    public virtual void InteractWithBuilding() {
 
     }
- 
+
+    public virtual void StopInteractingWithBuilding() {
+
+    }
+
+    public virtual void ClosePanel() {
+
+    }
+
+    public bool GetInteractingWithBuilding() {
+        return interactingWithBuilding;
+    }
+
 }

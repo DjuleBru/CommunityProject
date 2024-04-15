@@ -8,20 +8,37 @@ public class Inventory
     public event EventHandler OnItemListChanged;
 
     private List<Item> itemList;
+    private List<Item> restrictedItemList;
     private bool hasLimitedSlots;
+    private bool restrictedInventory;
     private int slotNumberX;
     private int slotNumberY;
     private int totalSlotNumber;
 
-    public Inventory(bool hasLimitedSlots, int slotNumberX, int slotNumberY) {
+    public Inventory(bool hasLimitedSlots, int slotNumberX, int slotNumberY, bool restrictedInventory, List<Item> restrictedItemList) {
         itemList = new List<Item>();
+        this.restrictedItemList = restrictedItemList;
         this.hasLimitedSlots = hasLimitedSlots;
+        this.restrictedInventory = restrictedInventory;
         this.slotNumberX = slotNumberX;
         this.slotNumberY = slotNumberY;
         totalSlotNumber = slotNumberX * slotNumberY;
     }
 
+    public bool InventoryCanAcceptItem(Item item) {
+        if (!restrictedInventory) return true;
+
+        foreach(Item acceptedItem in restrictedItemList) {
+            if(item.itemType == acceptedItem.itemType) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void AddItem(Item item) {
+        if (!InventoryCanAcceptItem(item)) return;
+
         if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
             // Item is stackable 
             AddStackableItemToInventory(item);
@@ -102,7 +119,6 @@ public class Inventory
 
             Item itemInInventory = null;
             foreach (Item inventoryItem in itemList) {
-
                 if (inventoryItem.itemType == item.itemType && inventoryItem.amount == item.amount) {
                     // Item stack identified
 
@@ -113,7 +129,6 @@ public class Inventory
                         // There is enough items in the stack to remove them
                         inventoryItem.amount -= item.amount;
                         itemInInventory = inventoryItem;
-
                         break;
                     }
                 }
@@ -121,7 +136,7 @@ public class Inventory
 
             if (itemInInventory != null && itemInInventory.amount <= 0) {
                 // Item is stackable and there are no more counts
-                itemList.Remove(item);
+                itemList.Remove(itemInInventory);
             }
         }
         else {
@@ -130,8 +145,8 @@ public class Inventory
         }
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
-    public void RemoveItemAmount(Item item) {
 
+    public void RemoveItemAmount(Item item) {
         if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
             // Item is stackable 
 
@@ -170,53 +185,36 @@ public class Inventory
 
     }
 
-    public bool HasSpaceForItem(Item item) {
+    public int HasSpaceForItemStack(Item item) {
+
+        if (!InventoryCanAcceptItem(item)) return 0;
+
         if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
             // Item is stackable 
 
-            bool itemAlreadyInInventory = false;
+            int newItemAmount = item.amount;
+            int itemAmountInventoryCanCarry = 0;
+
+            if (itemList.Count < totalSlotNumber) {
+                // There are item slots available
+                return newItemAmount;
+            }
+
             foreach (Item inventoryItem in itemList) {
                 if (inventoryItem.itemType == item.itemType) {
                     // Item is stackable and already in inventory
-
                     int inventoryItemAmount = inventoryItem.amount;
-                    int newItemAmount = item.amount;
 
-                    if ((inventoryItemAmount + newItemAmount) <= ItemAssets.Instance.GetItemSO(item.itemType).maxStackableAmount) {
-                        return true;
-                    } else {
-                        if(itemList.Count < totalSlotNumber) {
-                            return true;
-                        } else {
-                            return false;
-                        }
+                    if ((inventoryItemAmount) < ItemAssets.Instance.GetItemSO(item.itemType).maxStackableAmount) {
+                        // Meeting an unfilled stack
+                        itemAmountInventoryCanCarry += (ItemAssets.Instance.GetItemSO(item.itemType).maxStackableAmount - inventoryItemAmount);
                     }
                 }
             }
 
-            if (!itemAlreadyInInventory) {
-                // Item is stackable not already in inventory
-                if (itemList.Count < totalSlotNumber) {
-                    return true;
-                }
-                else {
-                    // There is no space in inventory
-                    return false;
-                }
-            }
+            return itemAmountInventoryCanCarry;
         }
-        else {
-            // Item is NOT stackable 
-            if (itemList.Count < totalSlotNumber) {
-                return true;
-            }
-            else {
-                // There is no space in inventory
-                return false;
-            }
-        }
-
-        return false;
+        return 0;
     }
 
     public bool HasItem(Item askedItem) {
@@ -239,6 +237,10 @@ public class Inventory
 
     public List<Item> GetItemList() {
         return itemList;
+    }
+
+    public List<Item> GetRestrictedItemList() {
+        return restrictedItemList;
     }
 
     public void AddItemList(List<Item> itemList) {

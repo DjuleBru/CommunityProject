@@ -27,8 +27,8 @@ public class ProductionBuildingUI : BuildingUI
 
     [SerializeField] private Transform inputInventoryContainer;
     [SerializeField] private Transform outputInventoryContainer;
-    [SerializeField] private Transform inputInventorySlot;
-    [SerializeField] private Transform outputInventorySlot;
+    [SerializeField] private Transform inputInventoryTemplate;
+    [SerializeField] private Transform outputInventoryTemplate;
 
     [SerializeField] private Image progressionBarFill;
 
@@ -48,12 +48,9 @@ public class ProductionBuildingUI : BuildingUI
         nameText.text = productionBuilding.GetBuildingSO().name;
         RefreshRecipeList();
         RefreshRecipePanel();
-
-        if(productionBuilding.GetSelectedRecipeSO() != null) {
-            RefreshInventoryPanels();
-        }
+        RefreshInventoryPanels();
+        productionBuilding.CheckInputItems();
     }
-
 
     public void RefreshRecipeList() {
         foreach (Transform child in recipeContainer) {
@@ -116,8 +113,45 @@ public class ProductionBuildingUI : BuildingUI
     }
 
     private void RefreshInventoryPanels() {
-        inputInventoryContainer.GetComponent<InventoryUI_ProductionBuilding>().SetInventory(productionBuilding.GetInputInventory());
-        outputInventoryContainer.GetComponent<InventoryUI_ProductionBuilding>().SetInventory(productionBuilding.GetOutputInventory());
+
+        foreach (Transform child in inputInventoryContainer) {
+            if (child.GetComponent<InventoryUI_ProductionBuilding>() != null) {
+                if (child != inputInventoryTemplate) {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
+
+        foreach (Transform child in outputInventoryContainer) {
+            if (child.GetComponent<InventoryUI_ProductionBuilding>() != null) {
+
+                if (child != outputInventoryTemplate) {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
+
+        if (productionBuilding.GetSelectedRecipeSO() == null) return;
+
+        int itemCount = 0;
+        foreach (Item item in productionBuilding.GetSelectedRecipeSO().inputItems) {
+
+            RectTransform inputInventorySlotRectTransform = Instantiate(inputInventoryTemplate, inputInventoryContainer).GetComponent<RectTransform>();
+
+            inputInventorySlotRectTransform.GetComponent<InventoryUI_ProductionBuilding>().SetInventory(productionBuilding.GetInputInventoryList()[itemCount]);
+            inputInventorySlotRectTransform.gameObject.SetActive(true);
+            itemCount++;
+        }
+
+        itemCount = 0;
+        foreach (Item item in productionBuilding.GetSelectedRecipeSO().outputItems) {
+
+            RectTransform outputInventorySlotRectTransform = Instantiate(outputInventoryTemplate, outputInventoryContainer).GetComponent<RectTransform>();
+
+            outputInventorySlotRectTransform.GetComponent<InventoryUI_ProductionBuilding>().SetInventory(productionBuilding.GetOutputInventoryList()[itemCount]);
+            outputInventorySlotRectTransform.gameObject.SetActive(true);
+            itemCount++;
+        }
     }
 
 }

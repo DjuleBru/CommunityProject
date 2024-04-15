@@ -12,15 +12,13 @@ public class BuildingVisual : MonoBehaviour, IInteractable
 
     [SerializeField] private Collider2D solidBuildingCollider;
 
-    private Building building;
+    [SerializeField] private Building building;
     private bool playerInTriggerArea;
+    private bool interactingWithBuilding;
     private bool buildingPanelOpen;
-
-    private void Awake() {
-        building = GetComponentInParent<Building>();
-    }
     
     private void Start() {
+        Debug.Log(this + " " + building);
         building.OnBuildingIsUnvalidPlacement += Building_OnBuildingIsUnvalidPlacement;
         building.OnBuildingIsValidPlacement += Building_OnBuildingIsValidPlacement;
         building.OnBuildingPlaced += Building_OnBuildingPlaced;
@@ -33,15 +31,25 @@ public class BuildingVisual : MonoBehaviour, IInteractable
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
         if (playerInTriggerArea) {
+
             if (buildingPanelOpen) {
+
+                if (!building.GetInteractingWithBuilding()) {
+                    InteractWithBuilding();
+                }
+
                 ClosePanel();
                 buildingPanelOpen = false;
             }
             else {
+                if(building.GetInteractingWithBuilding()) {
+                    StopInteractingWithBuilding();
+                }
                 OpenPanel();
                 buildingPanelOpen = true;
             }
         }
+
     }
 
     private void Building_OnBuildingPlaced(object sender, System.EventArgs e) {
@@ -74,6 +82,10 @@ public class BuildingVisual : MonoBehaviour, IInteractable
     public void SetPlayerInTriggerArea(bool playerInTriggerArea) {
         if (!building.GetBuildingPlaced()) return;
         this.playerInTriggerArea = playerInTriggerArea;
+
+        if(buildingPanelOpen) {
+            OpenPanel();
+        }
     }
 
     public void SetHovered(bool hovered) {
@@ -81,9 +93,21 @@ public class BuildingVisual : MonoBehaviour, IInteractable
         buildingHoveredVisual.SetActive(hovered);
     }
 
-    public virtual void ClosePanel() {
+    public virtual void InteractWithBuilding() {
         //Pass through function
-        building.CloseBuildingUI();
+        building.InteractWithBuilding();
+        interactingWithBuilding = true;
+    }
+
+    public virtual void StopInteractingWithBuilding() {
+
+        //Pass through function
+        building.StopInteractingWithBuilding();
+        interactingWithBuilding = false;
+    }
+
+    public void ClosePanel() {
+        building.ClosePanel();
         buildingPanelOpen = false;
     }
 

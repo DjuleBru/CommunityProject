@@ -21,7 +21,7 @@ public class InventoryUI_Interactable : InventoryUI
     }
 
     protected virtual void Update() {
-        HandleTransferAllItemsPanel();
+        //HandleTransferAllItemsPanel();
     }
 
     protected void HandleTransferAllItemsPanel() {
@@ -44,7 +44,7 @@ public class InventoryUI_Interactable : InventoryUI
                         // Hovering this inventory
 
                         if (transferAllItemsPanelOpen) return;
-                        transferAllItemsAnimator.gameObject.SetActive(true);
+                        //transferAllItemsAnimator.gameObject.SetActive(true);
                         transferAllItemsPanelOpen = true;
                     }
                     else {
@@ -115,9 +115,13 @@ public class InventoryUI_Interactable : InventoryUI
             ItemSO itemToTransferSO = ItemAssets.Instance.GetItemSO(item.itemType);
             Item itemToTransfer = new Item { itemType = itemToTransferSO.itemType, amount = item.amount };
 
-            if(Player.Instance.GetInventory().HasSpaceForItem(itemToTransfer)) {
+            if(Player.Instance.GetInventory().HasSpaceForItemStack(itemToTransfer) > 0) {
+
+                int transferableAmount = Player.Instance.GetInventory().HasSpaceForItemStack(itemToTransfer);
+                itemToTransfer = new Item { itemType = item.itemType, amount = transferableAmount };
+
                 Player.Instance.GetInventory().AddItem(itemToTransfer);
-                itemsToRemove.Add(item);
+                itemsToRemove.Add(itemToTransfer);
             } else {
                 break;
             }

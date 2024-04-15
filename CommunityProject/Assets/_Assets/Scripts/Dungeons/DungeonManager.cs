@@ -31,7 +31,7 @@ public class DungeonManager : MonoBehaviour {
     }
 
     private void Start() {
-        dungeonInventory = new Inventory(false, 10, 3);
+        dungeonInventory = new Inventory(false, 10, 3, false, null);
         dungeonInventoryUI.SetInventory(dungeonInventory);
     }
 

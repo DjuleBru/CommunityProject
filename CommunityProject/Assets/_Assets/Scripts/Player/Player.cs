@@ -12,6 +12,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private Inventory playerInventory;
     [SerializeField] private InventoryUI playerInventoryUI;
+    [SerializeField] private GameObject playerVisual;
 
     public static Player Instance { get; private set; }
 
@@ -22,13 +23,15 @@ public class Player : MonoBehaviour, IDamageable
     private int playerHP;
     private int playerBaseDamage = 5;
 
+    private bool working;
+
     private List<IInteractable> interactablesInTriggerArea = new List<IInteractable>();
 
     private void Awake() {
         Instance = this;
         playerHP = playerBaseHP;
 
-        playerInventory = new Inventory(true, 3, 3);
+        playerInventory = new Inventory(true, 3, 3, false, null);
         playerInventoryUI.SetInventory(playerInventory);
     }
 
@@ -163,5 +166,13 @@ public class Player : MonoBehaviour, IDamageable
         interactable.ClosePanel();
     }
 
+    public void SetPlayerWorking(bool working) {
+        this.working = working;
+        playerVisual.SetActive(!working);
+    }
+
+    public bool GetPlayerWorking() {
+        return working;
+    }
 
 }

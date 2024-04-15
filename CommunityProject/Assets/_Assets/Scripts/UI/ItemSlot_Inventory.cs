@@ -20,10 +20,9 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         base.Awake();
         parentInventoryUI = GetComponentInParent<InventoryUI>();
 
-        if(disableInteraction) {
+        if (disableInteraction) {
             group.blocksRaycasts = false;
         }
-
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
@@ -79,14 +78,12 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
 
         Inventory inventoryDraggedOn = GetInventoryDraggedOn();
 
-        Debug.Log(inventoryDraggedOn);
         if (inventoryDraggedOn != null) {
             // Dragged on an inventory
 
-            if(inventoryDraggedOn != parentInventoryUI.GetInventory() && GetInventoryUI_InteractedDraggedOn() != null && GetInventoryUI_InteractedDraggedOn().GetCanReceiveItems()) {
+            if (inventoryDraggedOn != parentInventoryUI.GetInventory() && GetInventoryUI_InteractedDraggedOn() != null && GetInventoryUI_InteractedDraggedOn().GetCanReceiveItems()) {
                 // Dragged on another inventory, interactable inventory that can receive items
                     TransferItemBetweenInventories(inventoryDraggedOn);
-                    SetParentInventoryUI(GetInventoryUI_InteractedDraggedOn());
                     GetInventoryUI_InteractedDraggedOn().CloseTransferItemsPanelGameObject();
             } else {
                 rectTransform.anchoredPosition = initialPosition;
@@ -110,14 +107,23 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
     }
 
     private void TransferItemBetweenInventories(Inventory newInventory) {
-        Item transferedItem = new Item { itemType = item.itemType, amount = item.amount };
+        Item itemToTransfer = new Item { itemType = item.itemType, amount = item.amount };
 
-        if (newInventory.HasSpaceForItem(transferedItem)) {
-            parentInventoryUI.GetInventory().RemoveItemStack(item);
+        if (newInventory.HasSpaceForItemStack(itemToTransfer) > 0) {
+            int transferableAmount = newInventory.HasSpaceForItemStack(itemToTransfer);
+            Item transferedItem = new Item { itemType = item.itemType, amount = transferableAmount };
+
+            if(transferableAmount == itemToTransfer.amount) {
+                parentInventoryUI.GetInventory().RemoveItemStack(transferedItem);
+            } else {
+                parentInventoryUI.GetInventory().RemoveItemAmount(transferedItem);
+            }
+            
             newInventory.AddItem(transferedItem);
+            
         }
         else {
-            //Reset position
+            // Failed transfer : Reset position
             rectTransform.anchoredPosition = initialPosition;
         }
     }
@@ -205,8 +211,13 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         return transferItemsUI;
     }
 
-    private void SetParentInventoryUI(InventoryUI inventoryUI) {
-        parentInventoryUI = inventoryUI;
+
+    public void DropItem() {
+        if(item != null) {
+            Item droppedItem = new Item { itemType = item.itemType, amount = item.amount };
+            parentInventoryUI.GetInventory().RemoveItemStack(item);
+            ItemWorld.DropItem(Player.Instance.transform.position, droppedItem, true);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData) {

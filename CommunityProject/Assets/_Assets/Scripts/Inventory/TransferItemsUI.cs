@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TransferItemsUI : MonoBehaviour
 {
-    [SerializeField] ItemSlot_Transfer itemSlotTransfer;
+    [SerializeField] ItemSlot itemSlotTransfer;
     InventoryUI_Interactable parentInventoryUI;
     [SerializeField] TextMeshProUGUI amountText;
     [SerializeField] Slider amountSlider;

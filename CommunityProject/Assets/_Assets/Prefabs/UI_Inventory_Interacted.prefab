@@ -696,6 +696,7 @@ MonoBehaviour:
   transferAllItemsAnimator: {fileID: 4218890705158281137}
   transferItemsUI: {fileID: 5542651337744490369}
   inventoryPanel: {fileID: 2286178163082842703}
+  canReceiveItems: 0
 --- !u!1 &260728986904979751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,7 +1524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6793077479517114872}
-  - component: {fileID: 1614800203109943386}
+  - component: {fileID: 5374623640529069488}
   m_Layer: 5
   m_Name: ItemSlotTransfer
   m_TagString: Untagged
@@ -1554,7 +1555,7 @@ RectTransform:
   m_AnchoredPosition: {x: -39.099987, y: 8.800003}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1614800203109943386
+--- !u!114 &5374623640529069488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1563,7 +1564,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1665197771483438328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5643895d156ecf4eaa4032afc06bf18, type: 3}
+  m_Script: {fileID: 11500000, guid: c16e4467d820cf74795ca64b4539fe04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemSlotImage: {fileID: 1717057264090755994}
@@ -3637,8 +3638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7144c5c6cff40046b148bd0cfc5ae96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSlotTransfer: {fileID: 1614800203109943386}
-  parentInventoryUI: {fileID: 0}
+  itemSlotTransfer: {fileID: 5374623640529069488}
   amountText: {fileID: 5728253835239156286}
   amountSlider: {fileID: 7302560813655744715}
 --- !u!95 &4985468591014600803
@@ -3649,7 +3649,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6676596494958838609}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5305dd68ee763734484227fba2172f5c, type: 2}
   m_CullingMode: 0

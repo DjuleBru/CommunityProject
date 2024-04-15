@@ -12,7 +12,7 @@ public class Chest : MonoBehaviour
     private bool chestHasBeenFilled;
 
     private void Start() {
-        chestInventory = new Inventory(false, 3, 3);
+        chestInventory = new Inventory(false, 3, 3, false, null);
         chestHasBeenFilled = false;
     }
 

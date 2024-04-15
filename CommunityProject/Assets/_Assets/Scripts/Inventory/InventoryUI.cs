@@ -31,7 +31,7 @@ public class InventoryUI : MonoBehaviour {
         RefreshInventoryUI();
     }
 
-    protected void RefreshInventoryUI() {
+    protected virtual void RefreshInventoryUI() {
         foreach(Transform child in itemSlotContainer) {
             if (child == itemSlotTemplate) continue;
             Destroy(child.gameObject);
@@ -55,7 +55,7 @@ public class InventoryUI : MonoBehaviour {
         }
     }
 
-    protected void RefreshLimitedInventoryUI() {
+    protected virtual void RefreshLimitedInventoryUI() {
         int itemNumber = 0;
 
         for(int x = 0;  x < inventory.GetSlotNumberX(); x++) {
@@ -79,6 +79,10 @@ public class InventoryUI : MonoBehaviour {
 
     public Inventory GetInventory() {
         return inventory;
+    }
+
+    private void OnDestroy() {
+        inventory.OnItemListChanged -= Inventory_OnItemListChanged;
     }
 
 }
