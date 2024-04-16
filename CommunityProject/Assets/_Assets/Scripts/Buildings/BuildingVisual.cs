@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BuildingVisual : MonoBehaviour, IInteractable
@@ -15,8 +16,10 @@ public class BuildingVisual : MonoBehaviour, IInteractable
     [SerializeField] private Building building;
     private bool playerInTriggerArea;
     private bool interactingWithBuilding;
-    private bool buildingPanelOpen;
-    
+    private static bool buildingPanelOpen;
+
+    [SerializeField] private TextMeshProUGUI buildingScoreText;
+
     private void Start() {
         building.OnBuildingIsUnvalidPlacement += Building_OnBuildingIsUnvalidPlacement;
         building.OnBuildingIsValidPlacement += Building_OnBuildingIsValidPlacement;
@@ -106,5 +109,9 @@ public class BuildingVisual : MonoBehaviour, IInteractable
 
     public Collider2D GetSolidCollider() {
         return solidBuildingCollider;
+    }
+
+    public void SetBuildingScoreText(string score) {
+        buildingScoreText.text = score;
     }
 }

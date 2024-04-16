@@ -17,6 +17,7 @@ public class ProductionBuilding : Building
     private List<Inventory> outputInventoryList;
     private List<ItemWorld> itemWorldProducedList;
 
+    private Humanoid assignedHumanoid;
     private bool working;
     private bool inputItemsMissing;
 
@@ -33,13 +34,20 @@ public class ProductionBuilding : Building
 
         if (playerInteractingWithBuilding) {
             Work(Player.Instance.GetPlayerWorkingSpeed(), true);
+            return;
+        }
+
+        if(assignedHumanoid != null) {
+            if(working) {
+                Work(assignedHumanoid.GetWorkingSpeed(), false);
+            }
         }
     }
 
     protected void Work(float productionSpeed, bool isPlayerWorking) {
         productionTimer += Time.deltaTime * productionSpeed;
 
-        if(productionTimer >= selectedRecipeSO.standardProductionTime) {
+        if (productionTimer >= selectedRecipeSO.standardProductionTime) {
             ProduceSelectedRecipe(isPlayerWorking);
             productionTimer = 0f;
         }
@@ -108,7 +116,7 @@ public class ProductionBuilding : Building
 
             playerInteractingWithBuilding = true;
             Player.Instance.SetPlayerWorking(true);
-            productionBuildingvisual.SetWorking(true);
+            productionBuildingvisual.SetWorking(true, HumanoidSO.HumanoidType.Human);
 
             working = true;
             OnWorkerStartedWorking?.Invoke(this, EventArgs.Empty);
@@ -120,7 +128,7 @@ public class ProductionBuilding : Building
         // Player is Working
         playerInteractingWithBuilding = false;
         Player.Instance.SetPlayerWorking(false);
-        productionBuildingvisual.SetWorking(false);
+        productionBuildingvisual.SetWorking(false, HumanoidSO.HumanoidType.Human);
 
         working = false;
 
@@ -132,6 +140,13 @@ public class ProductionBuilding : Building
         }
         OnWorkerFinishedWorking?.Invoke(this, EventArgs.Empty);
     }
+
+    public void SetHumanoidWorking(bool working, HumanoidSO.HumanoidType humanoidType) {
+        this.working = working;
+        productionBuildingUIWorld.SetWorking(working);
+        productionBuildingvisual.SetWorking(working, humanoidType);
+    }
+
 
     protected override void PlaceBuilding() {
         base.PlaceBuilding();
@@ -258,14 +273,34 @@ public class ProductionBuilding : Building
             }
             else {
                 inputItemsMissing = true;
+                working = false;
             }
         }
 
         RefreshProductionBuildingUIWorld();
     }
 
+    public void AssignHumanoid(Humanoid humanoid) {
+        this.assignedHumanoid = humanoid;
+        productionBuildingUIWorld.SetWorkerMissing(false);
+    }
+
+    public void RemoveAssignedHumanoid() {
+        this.assignedHumanoid = null;
+        productionBuildingUIWorld.SetWorkerMissing(true);
+    }
+
+    public Humanoid GetAssignedHumanoid() {
+        return assignedHumanoid;
+    }
+
     public void RefreshProductionBuildingUIWorld() {
         productionBuildingUIWorld.SetItemsMissing(inputItemsMissing);
     }
+
+    public bool GetInputItemsMissing() {
+        return inputItemsMissing;
+    }
+
 
 }

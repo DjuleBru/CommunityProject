@@ -42,7 +42,9 @@ public class HumanoidMovement : MonoBehaviour
         humanoid = GetComponent<Humanoid>();
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = humanoid.GetHumanoidSO().moveSpeed;
+        roamCalculationTimer = 0;
     }
+
     protected virtual void Start() {
         seeker = GetComponent<Seeker>();
         pathCalculationTimer = pathCalculationRate;
@@ -54,11 +56,20 @@ public class HumanoidMovement : MonoBehaviour
             FollowPath(path);
         }
     }
+
     protected virtual void FixedUpdate() {
         pathCalculationTimer -= Time.fixedDeltaTime;
         roamCalculationTimer -= Time.fixedDeltaTime;
         if (path != null) {
             Move(velocity);
+        }
+    }
+
+    public void Roam(Vector3 roamCenter) {
+        if(roamCalculationTimer < 0) {
+            roamCalculationTimer = roamCalculationRate;
+            Vector3 roamDestination = Utils.Randomize2DPoint(roamCenter, roamPointRadius);
+            CalculatePath(transform.position, roamDestination);
         }
     }
 
@@ -113,9 +124,9 @@ public class HumanoidMovement : MonoBehaviour
         return moveDirNormalized;
     }
     public bool GetReachedEndOfPath() {
+        if (path == null) return true;
         return reachedEndOfPath;
     }
-
     public void StopMoving() {
         dead = true;
         rb.velocity = Vector3.zero;

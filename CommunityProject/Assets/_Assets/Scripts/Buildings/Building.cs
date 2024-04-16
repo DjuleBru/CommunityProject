@@ -98,6 +98,7 @@ public class Building : MonoBehaviour
 
         OnBuildingPlaced?.Invoke(this, EventArgs.Empty);
         BuildingsManager.Instance.SetBuildingPlacedOrCancelled();
+        BuildingsManager.Instance.AddBuilding(this);
     }
 
     protected void SpendBuildingMaterials() {
@@ -165,6 +166,10 @@ public class Building : MonoBehaviour
 
     public bool GetInteractingWithBuilding() {
         return playerInteractingWithBuilding;
+    }
+
+    public void SetBuildingVisualDebugScore(string score) {
+        GetComponentInChildren<BuildingVisual>().SetBuildingScoreText(score);
     }
 
 }

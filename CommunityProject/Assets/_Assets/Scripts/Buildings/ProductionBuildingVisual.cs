@@ -14,10 +14,20 @@ public class ProductionBuildingVisual : BuildingVisual
         characterAnimator.gameObject.SetActive(false);
     }
 
-    public void SetWorking(bool working) {
+    public void SetWorking(bool working, HumanoidSO.HumanoidType humanoidType) {
         propVisual.SetActive(!working);
+
         buildingAnimator.gameObject.SetActive(working);
         characterAnimator.gameObject.SetActive(working);
+
+        characterAnimator.SetBool("Human", false);
+        characterAnimator.SetBool("Elf", false);
+        characterAnimator.SetBool("Orc", false);
+        characterAnimator.SetBool("Goblin", false);
+        characterAnimator.SetBool("Halfling", false);
+        characterAnimator.SetBool("Dwarf", false);
+
+        characterAnimator.SetBool(humanoidType.ToString(), true);
     }
 
 }
