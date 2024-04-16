@@ -17,10 +17,13 @@ MonoBehaviour:
   mobIconSprite: {fileID: 2034544169, guid: 64b8d7d3023fa454e886679aea95cfbd, type: 3}
   foundInDungeonTypes: 01000000
   mobHP: 0
-  mobMoveSpeed: 3
+  mobMoveSpeed: 100
   attackType: 0
   attackDmg: 0
   mobAttackRate: 0
   mobAttackDelay: 0
   mobAttackRange: 0
   mobAggroRange: 1
+  dropProbability: 0
+  maxItemDrops: 0
+  itemDropRateList: []

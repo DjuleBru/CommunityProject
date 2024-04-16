@@ -123,7 +123,7 @@ public class Mob : MonoBehaviour, IDamageable
 
     public void SpawnItem(ItemSO itemSO, int dropAmount) {
         Item droppedItem = new Item { itemType = itemSO.itemType, amount = dropAmount };
-        ItemWorld.DropItem(transform.position, droppedItem, false);
+        ItemWorld.DropItem(transform.position, droppedItem, 5f, false);
     }
 
 }

@@ -37,8 +37,9 @@ public class Inventory
     }
 
     public void AddItem(Item item) {
+        if (item == null) return;
         if (!InventoryCanAcceptItem(item)) return;
-
+        
         if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {
             // Item is stackable 
             AddStackableItemToInventory(item);
@@ -51,7 +52,6 @@ public class Inventory
     }
 
     private void AddStackableItemToInventory(Item item) {
-
         bool itemAlreadyInInventory = false;
         bool stackIsFull = false;
 
@@ -185,7 +185,7 @@ public class Inventory
 
     }
 
-    public int HasSpaceForItemStack(Item item) {
+    public int AmountInventoryCanReceiveOfType(Item item) {
 
         if (!InventoryCanAcceptItem(item)) return 0;
 

@@ -82,7 +82,9 @@ public class InventoryUI : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        inventory.OnItemListChanged -= Inventory_OnItemListChanged;
+        if(inventory != null) {
+            inventory.OnItemListChanged -= Inventory_OnItemListChanged;
+        }
     }
 
 }

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ public class Building : MonoBehaviour
 
     [SerializeField] protected BuildingSO buildingSO;
 
+    [SerializeField] private CinemachineVirtualCamera buildingCamera;
+
     protected Rigidbody2D rb;
     protected Collider2D buildingCollider;
     [SerializeField] protected Collider2D interactionCollider;
@@ -33,14 +36,17 @@ public class Building : MonoBehaviour
     protected bool buildingPlaced;
     protected int collideCount;
 
-    protected bool interactingWithBuilding;
+    protected bool playerInteractingWithBuilding;
+    protected bool workerInteractingWithBuilding;
 
     public event EventHandler OnBuildingIsValidPlacement;
     public event EventHandler OnBuildingIsUnvalidPlacement;
     public event EventHandler OnBuildingPlaced;
 
-    protected void Awake() {
+    protected virtual void Awake() {
         buildingCollider = GetComponent<Collider2D>();
+        buildingCamera.enabled = false;
+
         interactionCollider.enabled = false;
 
         rb = GetComponent<Rigidbody2D>();
@@ -54,6 +60,12 @@ public class Building : MonoBehaviour
         GameInput.Instance.OnPlaceBuilding += GameInput_OnPlaceBuilding;
         GameInput.Instance.OnPlaceBuildingCancelled += GameInput_OnPlaceBuildingCancelled;
     }
+    protected virtual void Update() {
+        if (!buildingPlaced) {
+            HandleBuildingPlacement();
+            return;
+        }
+    }
 
     protected void GameInput_OnPlaceBuildingCancelled(object sender, EventArgs e) {
         CancelBuildingPlacement();
@@ -64,12 +76,6 @@ public class Building : MonoBehaviour
             if(TryPlaceBuilding()) {
                 PlaceBuilding();
             };
-        }
-    }
-
-    protected void Update() {
-        if(!buildingPlaced) {
-            HandleBuildingPlacement();
         }
     }
 
@@ -144,11 +150,13 @@ public class Building : MonoBehaviour
     }
 
     public virtual void InteractWithBuilding() {
-
+        buildingCamera.enabled = true;
+        OverworldCamera.Instance.DeActivatePlayerCamera();
     }
 
     public virtual void StopInteractingWithBuilding() {
-
+        buildingCamera.enabled = false;
+        OverworldCamera.Instance.ActivatePlayerCamera();
     }
 
     public virtual void ClosePanel() {
@@ -156,7 +164,7 @@ public class Building : MonoBehaviour
     }
 
     public bool GetInteractingWithBuilding() {
-        return interactingWithBuilding;
+        return playerInteractingWithBuilding;
     }
 
 }

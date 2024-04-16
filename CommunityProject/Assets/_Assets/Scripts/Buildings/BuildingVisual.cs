@@ -18,7 +18,6 @@ public class BuildingVisual : MonoBehaviour, IInteractable
     private bool buildingPanelOpen;
     
     private void Start() {
-        Debug.Log(this + " " + building);
         building.OnBuildingIsUnvalidPlacement += Building_OnBuildingIsUnvalidPlacement;
         building.OnBuildingIsValidPlacement += Building_OnBuildingIsValidPlacement;
         building.OnBuildingPlaced += Building_OnBuildingPlaced;
@@ -32,24 +31,13 @@ public class BuildingVisual : MonoBehaviour, IInteractable
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
         if (playerInTriggerArea) {
 
-            if (buildingPanelOpen) {
-
-                if (!building.GetInteractingWithBuilding()) {
-                    InteractWithBuilding();
-                }
-
-                ClosePanel();
-                buildingPanelOpen = false;
+            if (!building.GetInteractingWithBuilding()) {
+                InteractWithBuilding();
             }
             else {
-                if(building.GetInteractingWithBuilding()) {
-                    StopInteractingWithBuilding();
-                }
-                OpenPanel();
-                buildingPanelOpen = true;
+                StopInteractingWithBuilding();
             }
         }
-
     }
 
     private void Building_OnBuildingPlaced(object sender, System.EventArgs e) {
@@ -83,8 +71,9 @@ public class BuildingVisual : MonoBehaviour, IInteractable
         if (!building.GetBuildingPlaced()) return;
         this.playerInTriggerArea = playerInTriggerArea;
 
-        if(buildingPanelOpen) {
+        if(!buildingPanelOpen) {
             OpenPanel();
+            buildingPanelOpen = true;
         }
     }
 
@@ -100,7 +89,6 @@ public class BuildingVisual : MonoBehaviour, IInteractable
     }
 
     public virtual void StopInteractingWithBuilding() {
-
         //Pass through function
         building.StopInteractingWithBuilding();
         interactingWithBuilding = false;

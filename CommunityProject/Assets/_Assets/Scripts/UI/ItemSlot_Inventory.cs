@@ -101,7 +101,7 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
                 // Dropped on floor
                 Item droppedItem = new Item { itemType = item.itemType, amount = item.amount };
                 parentInventoryUI.GetInventory().RemoveItemStack(item);
-                ItemWorld.DropItem(Player.Instance.transform.position, droppedItem, true);
+                ItemWorld.DropItem(Player.Instance.transform.position, droppedItem, 5f, true);
             }
         }
     }
@@ -109,11 +109,20 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
     private void TransferItemBetweenInventories(Inventory newInventory) {
         Item itemToTransfer = new Item { itemType = item.itemType, amount = item.amount };
 
-        if (newInventory.HasSpaceForItemStack(itemToTransfer) > 0) {
-            int transferableAmount = newInventory.HasSpaceForItemStack(itemToTransfer);
-            Item transferedItem = new Item { itemType = item.itemType, amount = transferableAmount };
+        if (newInventory.AmountInventoryCanReceiveOfType(itemToTransfer) > 0) {
 
-            if(transferableAmount == itemToTransfer.amount) {
+            int transferableAmount = newInventory.AmountInventoryCanReceiveOfType(itemToTransfer);
+            int transferredAmount = 0;
+
+            if(transferableAmount > item.amount) {
+                transferredAmount = item.amount;
+            } else {
+                transferredAmount = transferableAmount;
+            }
+
+            Item transferedItem = new Item { itemType = item.itemType, amount = transferredAmount };
+
+            if(transferredAmount == itemToTransfer.amount) {
                 parentInventoryUI.GetInventory().RemoveItemStack(transferedItem);
             } else {
                 parentInventoryUI.GetInventory().RemoveItemAmount(transferedItem);
@@ -216,7 +225,7 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         if(item != null) {
             Item droppedItem = new Item { itemType = item.itemType, amount = item.amount };
             parentInventoryUI.GetInventory().RemoveItemStack(item);
-            ItemWorld.DropItem(Player.Instance.transform.position, droppedItem, true);
+            ItemWorld.DropItem(Player.Instance.transform.position, droppedItem, 5f, true);
         }
     }
 

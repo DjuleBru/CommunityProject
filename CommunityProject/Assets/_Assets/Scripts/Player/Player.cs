@@ -23,6 +23,7 @@ public class Player : MonoBehaviour, IDamageable
     private int playerHP;
     private int playerBaseDamage = 5;
 
+    [SerializeField] private float workingSpeed;
     private bool working;
 
     private List<IInteractable> interactablesInTriggerArea = new List<IInteractable>();
@@ -46,6 +47,14 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collider) {
+        HandleItemTriggerEnter(collider);
+        HandleInteractableTriggerEnter(collider);
+    }
+    private void OnTriggerExit2D(Collider2D collider) {
+        HandleInteractableTriggerExit(collider);
+    }
+
     public void SetBattleCameraAsPriority() {
         battleCamera.m_Priority = 12;
     }
@@ -66,22 +75,6 @@ public class Player : MonoBehaviour, IDamageable
         return playerBaseDamage;
     }
 
-    public void SetDead() {
-
-    }
-
-    public int GetHP() {
-        return playerHP;
-    }
-
-    public int GetMaxHP() {
-        return playerBaseHP;
-    }
-
-    public Inventory GetInventory() {
-        return playerInventory;
-    }
-
     public void DisablePlayerActions() {
         PlayerMovement.Instance.DisableMovement();
         PlayerAttack.Instance.DisableAttacks();
@@ -92,24 +85,42 @@ public class Player : MonoBehaviour, IDamageable
         PlayerAttack.Instance.EnableAttacks();
     }
 
-    private void OnTriggerEnter2D(Collider2D collider) {
-        HandleItemTriggerEnter(collider);
-        HandleInteractableTriggerEnter(collider);
-    }
-    private void OnTriggerExit2D(Collider2D collider) {
-        HandleInteractableTriggerExit(collider);
-    }
-
     private void HandleItemTriggerEnter(Collider2D collider) {
+        if (working) return;
 
         ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
 
         if (itemWorld != null) {
+            int itemAmountPlayerInventoryCanAdd = playerInventory.AmountInventoryCanReceiveOfType(itemWorld.GetItem());
+            Item itemToAdd = null;
+
+            if (itemAmountPlayerInventoryCanAdd > 0) {
+                // Player has enough space in inventory to add item
+
+                if(itemAmountPlayerInventoryCanAdd >= itemWorld.GetItem().amount) {
+                    //Player can accept all items in stack
+                    itemToAdd = itemWorld.GetItem();
+
+                } else {
+                    //Player can only accept limited amount of items
+                    int amountToDrop = itemWorld.GetItem().amount - itemAmountPlayerInventoryCanAdd;
+                    int amountToAdd = itemWorld.GetItem().amount - amountToDrop;
+
+                    itemToAdd = new Item { itemType = itemWorld.GetItem().itemType, amount = amountToAdd };
+                    Item itemToDrop = new Item { itemType = itemWorld.GetItem().itemType, amount = amountToDrop };
+
+                    ItemWorld.DropItem(transform.position, itemToDrop, 5f, true);
+                }
+            } else {
+                // Player has no space in inventory to add item
+                ItemWorld.DropItem(transform.position, itemWorld.GetItem(), 5f, true);
+            }
+
             if (SavingSystem.Instance.GetSceneIsOverworld()) {
-                playerInventory.AddItem(itemWorld.GetItem());
+                playerInventory.AddItem(itemToAdd);
             }
             if (SavingSystem.Instance.GetSceneIsDungeon()) {
-                DungeonManager.Instance.GetDungeonInventory().AddItem(itemWorld.GetItem());
+                DungeonManager.Instance.GetDungeonInventory().AddItem(itemToAdd);
             }
 
             itemWorld.DestroySelf();
@@ -166,13 +177,38 @@ public class Player : MonoBehaviour, IDamageable
         interactable.ClosePanel();
     }
 
+    #region SET PARAMETERS
+
+    public void SetDead() {
+
+    }
     public void SetPlayerWorking(bool working) {
         this.working = working;
         playerVisual.SetActive(!working);
+    }
+
+    #endregion
+
+    #region GET PARAMETERS
+
+    public int GetHP() {
+        return playerHP;
+    }
+
+    public int GetMaxHP() {
+        return playerBaseHP;
+    }
+    public Inventory GetInventory() {
+        return playerInventory;
     }
 
     public bool GetPlayerWorking() {
         return working;
     }
 
+    public float GetPlayerWorkingSpeed() {
+        return workingSpeed;
+    }
+
+    #endregion
 }

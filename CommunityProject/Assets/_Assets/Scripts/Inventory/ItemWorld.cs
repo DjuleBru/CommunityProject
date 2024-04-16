@@ -15,9 +15,9 @@ public class ItemWorld : MonoBehaviour
         return itemWorld;
     }
 
-    public static ItemWorld DropItem(Vector3 dropPosition, Item item, bool droppedByPlayer) {
+    public static ItemWorld DropItem(Vector3 dropPosition, Item item, float dropForce, bool droppedByPlayer) {
         Vector3 randomDir = new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), 0).normalized;
-        float dropForce = 5f;
+        dropForce = Random.Range(dropForce - dropForce/4, dropForce + dropForce/4);
         float dropDistance = .5f;
 
         ItemWorld itemWorld = SpawnItemWorld(dropPosition + randomDir * dropDistance, item);
@@ -32,6 +32,8 @@ public class ItemWorld : MonoBehaviour
     private TextMeshPro textMeshPro;
 
     private bool droppedByPlayer;
+    private bool attractedToPlayer;
+    private float itemSpeed = 5f;
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -48,6 +50,13 @@ public class ItemWorld : MonoBehaviour
         }
 
         StartCoroutine(MakeColliderActiveAfterDelay(.5f));
+    }
+
+    private void Update() {
+        if(attractedToPlayer) {
+            Vector3 moveDirNormalized = Player.Instance.transform.position - transform.position;
+            transform.position += moveDirNormalized * itemSpeed * Time.deltaTime;
+        }
     }
 
     public void SetItem(Item item) {
@@ -82,5 +91,9 @@ public class ItemWorld : MonoBehaviour
 
     public void DestroySelf() {
         Destroy(gameObject);
+    }
+
+    public void SetAttractedToPlayer() {
+        attractedToPlayer = true;
     }
 }

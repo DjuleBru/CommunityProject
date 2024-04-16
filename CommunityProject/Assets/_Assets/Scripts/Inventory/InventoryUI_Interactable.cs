@@ -115,9 +115,9 @@ public class InventoryUI_Interactable : InventoryUI
             ItemSO itemToTransferSO = ItemAssets.Instance.GetItemSO(item.itemType);
             Item itemToTransfer = new Item { itemType = itemToTransferSO.itemType, amount = item.amount };
 
-            if(Player.Instance.GetInventory().HasSpaceForItemStack(itemToTransfer) > 0) {
+            if(Player.Instance.GetInventory().AmountInventoryCanReceiveOfType(itemToTransfer) > 0) {
 
-                int transferableAmount = Player.Instance.GetInventory().HasSpaceForItemStack(itemToTransfer);
+                int transferableAmount = Player.Instance.GetInventory().AmountInventoryCanReceiveOfType(itemToTransfer);
                 itemToTransfer = new Item { itemType = item.itemType, amount = transferableAmount };
 
                 Player.Instance.GetInventory().AddItem(itemToTransfer);

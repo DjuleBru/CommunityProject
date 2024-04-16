@@ -32,6 +32,7 @@ public class ProductionBuildingUI : BuildingUI
 
     [SerializeField] private Image progressionBarFill;
 
+    private bool panelOpen;
     private ProductionBuilding productionBuilding;
 
     private void Awake() {
@@ -39,8 +40,20 @@ public class ProductionBuildingUI : BuildingUI
         gameObject.SetActive(false);
     }
 
+    private void Update() {
+        if(productionBuilding != null) {
+            if(productionBuilding.GetWorking()) {
+                RefreshRecipeTimer();
+            }
+        }
+    }
+
     public void SetProductionBuilding(ProductionBuilding productionBuilding) {
         this.productionBuilding = productionBuilding;
+        RefreshProductionBuildingUI();
+    }
+
+    private void Inventory_OnItemListChanged(object sender, System.EventArgs e) {
         RefreshProductionBuildingUI();
     }
 
@@ -49,7 +62,15 @@ public class ProductionBuildingUI : BuildingUI
         RefreshRecipeList();
         RefreshRecipePanel();
         RefreshInventoryPanels();
+
         productionBuilding.CheckInputItems();
+        if(productionBuilding.GetSelectedRecipeSO() != null) {
+            RefreshRecipeTimer();
+        }
+    }
+
+    public void RefreshRecipeTimer() {
+        progressionBarFill.fillAmount = productionBuilding.GetProductionTimerNormalized();
     }
 
     public void RefreshRecipeList() {
@@ -112,7 +133,7 @@ public class ProductionBuildingUI : BuildingUI
 
     }
 
-    private void RefreshInventoryPanels() {
+    public void RefreshInventoryPanels() {
 
         foreach (Transform child in inputInventoryContainer) {
             if (child.GetComponent<InventoryUI_ProductionBuilding>() != null) {
