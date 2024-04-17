@@ -27,6 +27,10 @@ public class ProductionBuilding : Building
     protected override void Awake() {
         base.Awake();
         itemWorldProducedList = new List<ItemWorld>();
+
+
+        inputInventoryList = new List<Inventory>();
+        outputInventoryList = new List<Inventory>();
     }
 
     protected override void Update() {
@@ -145,8 +149,9 @@ public class ProductionBuilding : Building
         this.working = working;
         productionBuildingUIWorld.SetWorking(working);
         productionBuildingvisual.SetWorking(working, humanoidType);
-    }
 
+        ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
+    }
 
     protected override void PlaceBuilding() {
         base.PlaceBuilding();
@@ -283,11 +288,15 @@ public class ProductionBuilding : Building
     public void AssignHumanoid(Humanoid humanoid) {
         this.assignedHumanoid = humanoid;
         productionBuildingUIWorld.SetWorkerMissing(false);
+
+        ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
     }
 
     public void RemoveAssignedHumanoid() {
         this.assignedHumanoid = null;
         productionBuildingUIWorld.SetWorkerMissing(true);
+
+        ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
     }
 
     public Humanoid GetAssignedHumanoid() {

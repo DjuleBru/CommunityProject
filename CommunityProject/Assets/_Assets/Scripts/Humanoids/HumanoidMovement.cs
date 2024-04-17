@@ -32,14 +32,17 @@ public class HumanoidMovement : MonoBehaviour
     #endregion
 
     private Humanoid humanoid;
+    private HumanoidVisual humanoidVisual;
     private float moveSpeed;
     private bool dead;
+    private bool roaming;
 
     protected Vector3 moveDirNormalized;
     protected Vector2 moveDir2DNormalized;
 
     private void Awake() {
         humanoid = GetComponent<Humanoid>();
+        humanoidVisual = GetComponentInChildren<HumanoidVisual>();
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = humanoid.GetHumanoidSO().moveSpeed;
         roamCalculationTimer = 0;
@@ -65,12 +68,26 @@ public class HumanoidMovement : MonoBehaviour
         }
     }
 
-    public void Roam(Vector3 roamCenter) {
+    public void Roam(Vector3 roamCenter, float roamPointRadius) {
+        if(!roaming) {
+            roaming = true;
+            humanoidVisual.SetQuestionMarkActive(true);
+            humanoid.SetHumanoidActionDescription("Worker is idle");
+        }
+
         if(roamCalculationTimer < 0) {
             roamCalculationTimer = roamCalculationRate;
             Vector3 roamDestination = Utils.Randomize2DPoint(roamCenter, roamPointRadius);
             CalculatePath(transform.position, roamDestination);
         }
+    }
+
+    public void MoveToDestination(Vector3 destination) {
+        if (roaming) {
+            roaming = false;
+            humanoidVisual.SetQuestionMarkActive(false);
+        }
+        CalculatePath(transform.position, destination);
     }
 
     protected void FollowPath(Path path) {

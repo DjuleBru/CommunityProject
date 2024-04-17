@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23f08d2ae4cba14087c1ed36193d82b, type: 3}
+  m_Name: Worker
+  m_EditorClassIdentifier: 
+  mBehaviorSource:
+    behaviorName: Worker
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(361.5,-22.56408)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(14.1850948,171.139587)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(4.371888,189.411743)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-80,180)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"HasJobAssigned","NodeData":{"Offset":"(-127.930923,154.827728)"},"ID":4,"Name":"Has
+        Job Assigned","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(107.931366,154.827728)"},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsWorker","NodeData":{"Offset":"(-67.5386047,88.07506)"},"ID":6,"Name":"Is
+        Worker","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(0.765192032,196.904022)"},"ID":7,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"HasBuildingAssigned","NodeData":{"Offset":"(-93.1770554,164.258118)"},"ID":8,"Name":"Has
+        Building Assigned","Instant":true},{"Type":"AssignBestBuilding","NodeData":{"Offset":"(82.97298,157.567535)"},"ID":9,"Name":"Assign
+        Best Building","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(375.9829,211.126587)"},"ID":10,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-150.297913,170.899292)"},"ID":11,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsAroundAssignedBuilding","NodeData":{"Offset":"(-160,140)"},"ID":12,"Name":"Is
+        Around Assigned Building","Instant":true},{"Type":"WorkInAssignedBuilding","NodeData":{"Offset":"(20,140)"},"ID":13,"Name":"Work
+        In Assigned Building","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(97.7947,157.455887)"},"ID":14,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-33.21164,144.630127)"},"ID":15,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsAroundAssignedBuilding","NodeData":{"Offset":"(-116.560242,134.453247)"},"ID":16,"Name":"Is
+        Around Assigned Building","Instant":true},{"Type":"RoamAroundAssignedBuilding","NodeData":{"Offset":"(74.6506653,129.767578)"},"ID":17,"Name":"Roam
+        Around Assigned Building","Instant":true}]},{"Type":"MoveToAssignedBuilding","NodeData":{"Offset":"(137.009338,137.8474)"},"ID":18,"Name":"Move
+        To Assigned Building","Instant":true}]}]}]}]},{"Type":"Roam","NodeData":{"Offset":"(100,150)"},"ID":19,"Name":"Roam","Instant":true}]}]}}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects: []
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.8

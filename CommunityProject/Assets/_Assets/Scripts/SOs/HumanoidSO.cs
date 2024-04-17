@@ -14,7 +14,8 @@ public class HumanoidSO : ScriptableObject
         Halfling
     }
 
-    public HumanoidType HumanType;
+    public HumanoidType humanoidType;
+    public Sprite humanoidSprite;
     public float moveSpeed;
     public float workingSpeed;
 

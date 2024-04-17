@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : MonoBehaviour
+public class Chest : Building
 {
     [ES3Serializable]
     private Inventory chestInventory;
@@ -11,9 +11,12 @@ public class Chest : MonoBehaviour
 
     private bool chestHasBeenFilled;
 
-    private void Start() {
+    protected override void Start() {
+        base.Start();
         chestInventory = new Inventory(false, 3, 3, false, null);
         chestHasBeenFilled = false;
+
+        BuildingsManager.Instance.AddBuilding(this);
     }
 
     public void AddItemsToChest(List<Item> itemList) {
@@ -22,7 +25,8 @@ public class Chest : MonoBehaviour
         }
     }
 
-    private void Update() {
+    protected override void Update() {
+        base.Update();
         if(!chestHasBeenFilled) {
             if (chestInventory != null) {
                 chestInventory.AddItemList(itemsInChest);
@@ -38,6 +42,10 @@ public class Chest : MonoBehaviour
 
     public void CloseInventory() {
         chestInventoryUI.CloseInventoryPanel();
+    }
+
+    public Inventory GetChestInventory() {
+        return chestInventory;
     }
 
 }

@@ -2,25 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestVisual : MonoBehaviour, IInteractable {
+public class ChestVisual : BuildingVisual, IInteractable {
 
-    private Chest chest;
-    [SerializeField] private SpriteRenderer chestRenderer;
-    [SerializeField] private SpriteRenderer chestShadowRenderer;
+    protected Chest chest;
+    [SerializeField] protected SpriteRenderer chestRenderer;
+    [SerializeField] protected SpriteRenderer chestShadowRenderer;
 
-    [SerializeField] private GameObject chestHoveredVisual;
+    [SerializeField] protected GameObject chestHoveredVisual;
 
-    [SerializeField] private Sprite openedSprite;
-    [SerializeField] private Sprite closedSprite;
+    [SerializeField] protected Sprite openedSprite;
+    [SerializeField] protected Sprite closedSprite;
 
-    [SerializeField] private Sprite openedSpriteShadow;
-    [SerializeField] private Sprite closedSpriteShadow;
+    [SerializeField] protected Sprite openedSpriteShadow;
+    [SerializeField] protected Sprite closedSpriteShadow;
 
-    [SerializeField] private Collider2D solidChestCollider;
+    [SerializeField] protected Collider2D solidChestCollider;
 
-    private bool chestOpen;
-    private bool playerInTriggerArea;
-    private void Awake() {
+    protected bool chestOpen;
+    protected void Awake() {
         chest = GetComponentInParent<Chest>();
 
         chestHoveredVisual.SetActive(false);
@@ -30,11 +29,11 @@ public class ChestVisual : MonoBehaviour, IInteractable {
         chestShadowRenderer.sprite = closedSpriteShadow;
     }
 
-    private void Start() {
+    protected override void Start() {
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
     }
 
-    private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
+    protected override void GameInput_OnInteractAction(object sender, System.EventArgs e) {
         if (playerInTriggerArea) {
             if (chestOpen) {
                 chest.CloseInventory();
@@ -58,23 +57,9 @@ public class ChestVisual : MonoBehaviour, IInteractable {
         chestShadowRenderer.sprite = closedSpriteShadow;
     }
 
-    public void SetPlayerInTriggerArea(bool playerInTriggerArea) {
-        this.playerInTriggerArea = playerInTriggerArea;
-
-    }
-
-    public void SetHovered(bool hovered) {
-        chestHoveredVisual.SetActive(hovered);
-    }
-
-    public void ClosePanel() {
+    public override void ClosePanel() {
         CloseChestVisual();
         chest.CloseInventory();
         chestOpen = false;
-    }
-
-
-    public Collider2D GetSolidCollider() {
-        return solidChestCollider;
     }
 }

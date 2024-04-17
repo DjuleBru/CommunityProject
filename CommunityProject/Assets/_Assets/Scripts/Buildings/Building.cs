@@ -11,18 +11,20 @@ public class Building : MonoBehaviour
         Workstation,
         AssemblyStation,
         FoodProduction,
+        Storage
     }
 
     public enum BuildingWorksCategory {
         WoodWork,
         MetalWork,
-
+        Storage
     }
 
     public enum BuildingType {
         lumberMill,
         stonecutter,
-        brickyard
+        brickyard,
+        woodenchest,
     }
 
     [SerializeField] protected BuildingSO buildingSO;
@@ -53,13 +55,14 @@ public class Building : MonoBehaviour
         buildingCollider.isTrigger = true;
         isValidBuildingPlacement = true;
 
+    }
+
+    protected virtual void Start() {
+        GameInput.Instance.OnPlaceBuilding += GameInput_OnPlaceBuilding;
+        GameInput.Instance.OnPlaceBuildingCancelled += GameInput_OnPlaceBuildingCancelled;
         BuildingsManager.Instance.SetBuildingSpawned();
     }
 
-    protected void Start() {
-        GameInput.Instance.OnPlaceBuilding += GameInput_OnPlaceBuilding;
-        GameInput.Instance.OnPlaceBuildingCancelled += GameInput_OnPlaceBuildingCancelled;
-    }
     protected virtual void Update() {
         if (!buildingPlaced) {
             HandleBuildingPlacement();
@@ -99,6 +102,7 @@ public class Building : MonoBehaviour
         OnBuildingPlaced?.Invoke(this, EventArgs.Empty);
         BuildingsManager.Instance.SetBuildingPlacedOrCancelled();
         BuildingsManager.Instance.AddBuilding(this);
+        AstarPath.active.UpdateGraphs(buildingCollider.bounds);
     }
 
     protected void SpendBuildingMaterials() {

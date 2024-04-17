@@ -62,6 +62,7 @@ public class ProductionBuildingUI : BuildingUI
         RefreshRecipeList();
         RefreshRecipePanel();
         RefreshInventoryPanels();
+        RefreshWorkerPanel();
 
         productionBuilding.CheckInputItems();
         if(productionBuilding.GetSelectedRecipeSO() != null) {
@@ -172,6 +173,25 @@ public class ProductionBuildingUI : BuildingUI
             outputInventorySlotRectTransform.GetComponent<InventoryUI_ProductionBuilding>().SetInventory(productionBuilding.GetOutputInventoryList()[itemCount]);
             outputInventorySlotRectTransform.gameObject.SetActive(true);
             itemCount++;
+        }
+    }
+
+    public void RefreshWorkerPanel() {
+        if (productionBuilding == null) return;
+        if(productionBuilding.GetAssignedHumanoid() != null) {
+            Humanoid assignedHumanoid = productionBuilding.GetAssignedHumanoid();
+            workerImage.enabled = true;
+
+            workerImage.sprite = assignedHumanoid.GetHumanoidSO().humanoidSprite;
+            workerNameText.text = assignedHumanoid.GetHumanoidName();
+
+            workerDescriptionText.text = assignedHumanoid.GetHumanoidActionDescription();
+        } else {
+
+            workerImage.enabled = false;
+            workerNameText.text = "";
+            workerDescriptionText.text = "No humanoid assigned to this building";
+
         }
     }
 

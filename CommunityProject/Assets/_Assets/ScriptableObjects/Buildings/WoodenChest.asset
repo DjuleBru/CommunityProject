@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
+  m_Name: WoodenChest
+  m_EditorClassIdentifier: 
+  buildingCategory: 3
+  buildingType: 3
+  buildingWorksCategory: 2
+  buildingCostItems:
+  - itemType: 0
+    itemTier: 0
+    amount: 20
+  buildingRecipes: []
+  buildingName: Wooden Chest
+  buildingIconSprite: {fileID: 1710505256, guid: 0a6973059568138488c5adcd99af4344, type: 3}
+  buildingDescriptionPanelSprite: {fileID: 1710505256, guid: 0a6973059568138488c5adcd99af4344, type: 3}
+  buildingDescription: Store a small amount of items
+  buildingPrefab: {fileID: 6541860286389352636, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}

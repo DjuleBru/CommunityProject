@@ -12,6 +12,8 @@ public class HumanoidWork : MonoBehaviour
     public event EventHandler OnHumanoidWorkStarted;
     public event EventHandler OnHumanoidWorkStopped;
 
+    [SerializeField] private float roamDistanceToBuilding;
+
     private void Awake() {
         humanoid = GetComponent<Humanoid>();
     }
@@ -23,13 +25,16 @@ public class HumanoidWork : MonoBehaviour
     public void Work() {
 
         if(assignedBuilding.GetSelectedRecipeSO() == null || assignedBuilding.GetInputItemsMissing()) {
-            working = false;
-            assignedBuilding.SetHumanoidWorking(false, humanoid.GetHumanoidSO().HumanType);
-            OnHumanoidWorkStopped?.Invoke(this, EventArgs.Empty);
+            if(working) {
+                working = false;
+                assignedBuilding.SetHumanoidWorking(false, humanoid.GetHumanoidSO().humanoidType);
+                OnHumanoidWorkStopped?.Invoke(this, EventArgs.Empty);
+            }
+
         } else {
             if(!working) {
                 working = true;
-                assignedBuilding.SetHumanoidWorking(true, humanoid.GetHumanoidSO().HumanType);
+                assignedBuilding.SetHumanoidWorking(true, humanoid.GetHumanoidSO().humanoidType);
                 OnHumanoidWorkStarted?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -44,7 +49,7 @@ public class HumanoidWork : MonoBehaviour
 
         foreach (ProductionBuilding building in productionBuildingsList) {
             float score = CalculateBuildingScore(building);
-            building.SetBuildingVisualDebugScore(score.ToString());
+            //building.SetBuildingVisualDebugScore(score.ToString());
 
             if(score > bestBuildingScore) {
                 bestBuildingScore = score;
@@ -69,5 +74,9 @@ public class HumanoidWork : MonoBehaviour
 
     public ProductionBuilding GetAssignedBuilding() {
         return assignedBuilding;
+    }
+
+    public float GetRoamDistanceToBuilding() {
+        return roamDistanceToBuilding;
     }
 }

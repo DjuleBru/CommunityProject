@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class BuildingVisual : MonoBehaviour, IInteractable
 {
-    [SerializeField] private SpriteRenderer placingBuildingBackgroundSprite;
-    [SerializeField] private GameObject buildingHoveredVisual;
+    [SerializeField] protected SpriteRenderer placingBuildingBackgroundSprite;
+    [SerializeField] protected GameObject buildingHoveredVisual;
 
-    [SerializeField] private Color validPlacementColor;
-    [SerializeField] private Color unValidPlacementColor;
+    [SerializeField] protected Color validPlacementColor;
+    [SerializeField] protected Color unValidPlacementColor;
 
-    [SerializeField] private Collider2D solidBuildingCollider;
+    [SerializeField] protected Collider2D solidBuildingCollider;
 
-    [SerializeField] private Building building;
-    private bool playerInTriggerArea;
-    private bool interactingWithBuilding;
-    private static bool buildingPanelOpen;
+    [SerializeField] protected Building building;
+    protected bool playerInTriggerArea;
+    protected bool interactingWithBuilding;
+    protected static bool buildingPanelOpen;
 
-    [SerializeField] private TextMeshProUGUI buildingScoreText;
+    [SerializeField] protected TextMeshProUGUI buildingScoreText;
 
-    private void Start() {
+    protected virtual void Start() {
         building.OnBuildingIsUnvalidPlacement += Building_OnBuildingIsUnvalidPlacement;
         building.OnBuildingIsValidPlacement += Building_OnBuildingIsValidPlacement;
         building.OnBuildingPlaced += Building_OnBuildingPlaced;
@@ -31,7 +31,7 @@ public class BuildingVisual : MonoBehaviour, IInteractable
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
     }
 
-    private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
+    protected virtual void GameInput_OnInteractAction(object sender, System.EventArgs e) {
         if (playerInTriggerArea) {
 
             if (!building.GetInteractingWithBuilding()) {
@@ -43,34 +43,34 @@ public class BuildingVisual : MonoBehaviour, IInteractable
         }
     }
 
-    private void Building_OnBuildingPlaced(object sender, System.EventArgs e) {
+    protected virtual void Building_OnBuildingPlaced(object sender, System.EventArgs e) {
         placingBuildingBackgroundSprite.enabled = false;
     }
 
-    private void Building_OnBuildingIsValidPlacement(object sender, System.EventArgs e) {
+    protected virtual void Building_OnBuildingIsValidPlacement(object sender, System.EventArgs e) {
         placingBuildingBackgroundSprite.color = validPlacementColor;
     }
 
-    private void Building_OnBuildingIsUnvalidPlacement(object sender, System.EventArgs e) {
+    protected virtual void Building_OnBuildingIsUnvalidPlacement(object sender, System.EventArgs e) {
         placingBuildingBackgroundSprite.color = unValidPlacementColor;
     }
 
-    private void BuildingsManager_OnAnyBuildingSpawned(object sender, System.EventArgs e) {
+    protected virtual void BuildingsManager_OnAnyBuildingSpawned(object sender, System.EventArgs e) {
         placingBuildingBackgroundSprite.enabled = true;
 
     }
 
-    private void BuildingsManager_OnAnyBuildingPlacedOrCancelled(object sender, System.EventArgs e) {
+    protected virtual void BuildingsManager_OnAnyBuildingPlacedOrCancelled(object sender, System.EventArgs e) {
         placingBuildingBackgroundSprite.enabled = false;
     }
 
-    private void OnDestroy() {
+    protected virtual void OnDestroy() {
         BuildingsManager.Instance.OnAnyBuildingPlacedOrCancelled -= BuildingsManager_OnAnyBuildingPlacedOrCancelled;
         BuildingsManager.Instance.OnAnyBuildingSpawned -= BuildingsManager_OnAnyBuildingSpawned;
     }
 
 
-    public void SetPlayerInTriggerArea(bool playerInTriggerArea) {
+    public virtual void SetPlayerInTriggerArea(bool playerInTriggerArea) {
         if (!building.GetBuildingPlaced()) return;
         this.playerInTriggerArea = playerInTriggerArea;
 
@@ -80,7 +80,7 @@ public class BuildingVisual : MonoBehaviour, IInteractable
         }
     }
 
-    public void SetHovered(bool hovered) {
+    public virtual void SetHovered(bool hovered) {
         if (!building.GetBuildingPlaced()) return;
         buildingHoveredVisual.SetActive(hovered);
     }
@@ -97,12 +97,12 @@ public class BuildingVisual : MonoBehaviour, IInteractable
         interactingWithBuilding = false;
     }
 
-    public void ClosePanel() {
+    public virtual void ClosePanel() {
         building.ClosePanel();
         buildingPanelOpen = false;
     }
 
-    public void OpenPanel() {
+    public virtual void OpenPanel() {
         //Pass through function
         building.OpenBuildingUI();
     }
