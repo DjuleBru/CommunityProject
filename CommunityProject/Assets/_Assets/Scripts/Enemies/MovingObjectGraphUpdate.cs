@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobGraphUpdate : MonoBehaviour
+public class MovingObjectGraphUpdate : MonoBehaviour
 {
     private Collider2D collider;
 

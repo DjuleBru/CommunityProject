@@ -12,9 +12,25 @@ public class Chest : Building
 
     private bool chestHasBeenFilled;
 
+    protected override void Awake() {
+        rb = GetComponent<Rigidbody2D>();
+        buildingCollider = GetComponent<Collider2D>();
+
+        if (!isDungeonChest) {
+            interactionCollider.enabled = false;
+            buildingCollider.isTrigger = true;
+            isValidBuildingPlacement = true;
+        }
+
+        buildingCamera.enabled = false;
+    }
+
     protected override void Start() {
         if(!isDungeonChest) {
             base.Start();
+        } else {
+            buildingPlaced = true;
+            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
         }
 
         chestInventory = new Inventory(false, 3, 3, false, null);

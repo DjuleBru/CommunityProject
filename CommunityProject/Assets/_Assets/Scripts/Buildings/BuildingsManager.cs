@@ -57,6 +57,7 @@ public class BuildingsManager : MonoBehaviour
         List<Building> destinationBuildingList = new List<Building>();  
 
         foreach (Building building in buildingsSpawned) {
+
             if(building is ProductionBuilding) {
                 ProductionBuilding productionBuilding = building as ProductionBuilding;
 
@@ -68,6 +69,27 @@ public class BuildingsManager : MonoBehaviour
                     }
                 };
             }
+
+        }
+        return destinationBuildingList;
+    }
+
+    public List<Building> GetDestinationBuildingsList(int carryCapacity, Item item) {
+        List<Building> destinationBuildingList = new List<Building>();
+
+        foreach (Building building in buildingsSpawned) {
+
+            if (building is ProductionBuilding) {
+                ProductionBuilding productionBuilding = building as ProductionBuilding;
+
+                foreach (Inventory inputInventory in productionBuilding.GetInputInventoryList()) {
+
+                    if (inputInventory.InventoryCanAcceptItem(item) && inputInventory.AmountInventoryCanReceiveOfType(item) > carryCapacity) {
+                        destinationBuildingList.Add(productionBuilding);
+                    }
+                };
+            }
+
         }
         return destinationBuildingList;
     }
@@ -79,7 +101,6 @@ public class BuildingsManager : MonoBehaviour
 
             if (building is ProductionBuilding) {
                 ProductionBuilding productionBuilding = building as ProductionBuilding;
-
                 foreach (Inventory outputInventory in productionBuilding.GetOutputInventoryList()) {
 
                     if (outputInventory.AmountInventoryHasOfType(sourceItem) > carryCapacity) {

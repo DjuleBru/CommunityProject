@@ -10,22 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fbae1f91d76d554ca4d3b7c41e640b2, type: 3}
-  m_Name: TestRecipe2
+  m_Name: CutStone1
   m_EditorClassIdentifier: 
-  recipeName: Testing 2
-  recipeSprite: {fileID: 390194483, guid: dfa83d8eb7c785a4d99a699af38ad26d, type: 3}
+  recipeName: CutStone
+  recipeSprite: {fileID: 1182162863, guid: a24c2c54349e96b46abce4d3a321ceb2, type: 3}
   inputItems:
-  - itemType: 0
-    itemTier: 0
-    amount: 2
-  - itemType: 1
+  - itemType: 2
     itemTier: 0
     amount: 2
   outputItems:
-  - itemType: 1
-    itemTier: 0
-    amount: 1
-  - itemType: 0
+  - itemType: 3
     itemTier: 0
     amount: 1
   standardProductionTime: 10

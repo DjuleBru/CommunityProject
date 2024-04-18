@@ -8,8 +8,13 @@ public class Item
 {
     public enum ItemType {
         Wood,
+        WoodPlanks,
         Stone,
-        HealthPotion
+        CutStone,
+        Clay,
+        Brick,
+        WoodenShield,
+        HealthPotion,
     }
 
     public enum ItemCategory {

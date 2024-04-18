@@ -24,14 +24,15 @@ public class Building : MonoBehaviour
         lumberMill,
         stonecutter,
         brickyard,
+        woodworkBench,
         woodenchest,
     }
 
     [SerializeField] protected BuildingSO buildingSO;
-    [SerializeField] private int buildingSizeX;
+    [SerializeField] protected int buildingSizeX;
     [SerializeField] protected int buildingSizeY;
 
-    [SerializeField] private CinemachineVirtualCamera buildingCamera;
+    [SerializeField] protected CinemachineVirtualCamera buildingCamera;
 
     protected Rigidbody2D rb;
     protected Collider2D buildingCollider;
@@ -58,7 +59,6 @@ public class Building : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         buildingCollider.isTrigger = true;
         isValidBuildingPlacement = true;
-
     }
 
     protected virtual void Start() {

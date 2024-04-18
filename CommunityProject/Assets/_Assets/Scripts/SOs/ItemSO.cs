@@ -9,7 +9,7 @@ public class ItemSO : ScriptableObject
     [BoxGroup("Basic Info")]
     public Item.ItemType itemType;
     [BoxGroup("Basic Info")]
-    public Item.ItemType itemCategory;
+    public Item.ItemCategory itemCategory;
     [BoxGroup("Basic Info")]
     public Item.ItemTier itemTier;
     [BoxGroup("Basic Info")]

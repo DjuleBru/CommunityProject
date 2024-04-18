@@ -26,38 +26,52 @@ public class HumanoidCarry : MonoBehaviour
         humanoid = GetComponent<Humanoid>();
     }
 
-    [Button]
     public Building IdentifyBestDestinationBuilding() {
-
-        List<Building> destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(maxCarryAmount);
+        List<Building> destinationBuildingsList = new List<Building>();
+        if (itemCarrying == null) {
+            destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(maxCarryAmount);
+        } else {
+            destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(maxCarryAmount, itemCarrying);
+        }
 
         float bestBuildingScore = 0f;
         Building bestBuilding = null;
 
         foreach (Building building in destinationBuildingsList) {
             float score = CalculateDestinationInventoryScore(building);
-            building.SetBuildingVisualDebugScore(score.ToString());
+            //building.SetBuildingVisualDebugScore(score.ToString());
 
             if (score > bestBuildingScore) {
-                bestBuildingScore = score;
-                bestBuilding = building;
+                if(destinationBuilding is ProductionBuilding) {
+
+                    //Check if there are source buildings for that destination building
+                    Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding);
+                    Item itemAskedForDestinationBuilding = destinationBuildingInventory.GetRestrictedItemList()[0];
+
+                    if (IdentifyBestSourceBuilding(itemAskedForDestinationBuilding) != null) {
+                        bestBuildingScore = score;
+                        bestBuilding = building;
+                    }
+                } else {
+                    bestBuildingScore = score;
+                    bestBuilding = building;
+                }
             }
         }
 
         destinationBuilding = bestBuilding;
 
         if(destinationBuilding != null) {
-
-            Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding as ProductionBuilding);
+            Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding);
             itemToCarry = destinationBuildingInventory.GetRestrictedItemList()[0];
             humanoid.AssignBuilding(destinationBuilding);
+
         }
 
         return destinationBuilding;
     }
 
-    [Button]
-    public Building IdentifyBestSourceBuilding() {
+    public Building IdentifyBestSourceBuilding(Item itemToCarry) {
 
         List<Building> sourceBuildingsList = BuildingsManager.Instance.GetSourceBuildingsList(maxCarryAmount, itemToCarry);
 
@@ -66,7 +80,7 @@ public class HumanoidCarry : MonoBehaviour
 
         foreach (Building building in sourceBuildingsList) {
             float score = CalculateSourceInventoryScore(building);
-            building.SetBuildingVisualDebugScore(score.ToString());
+            //building.SetBuildingVisualDebugScore(score.ToString());
 
             if (score > bestBuildingScore) {
                 bestBuildingScore = score;
@@ -96,11 +110,13 @@ public class HumanoidCarry : MonoBehaviour
 
         return 1 / distanceToBuilding;
     }
-    public Inventory FindHighestPriorityInventoryInBuilding(ProductionBuilding building) {
-            float highestInventoryPriority = 0f;
-            Inventory highestPriorityInventory = null;
+    public Inventory FindHighestPriorityInventoryInBuilding(Building building) {
+        float highestInventoryPriority = 0f;
+        Inventory highestPriorityInventory = null;
 
-            foreach (Inventory inventory in building.GetInputInventoryList()) {
+       if(building is ProductionBuilding) {
+            ProductionBuilding producerBuilding = (ProductionBuilding)building;
+            foreach (Inventory inventory in producerBuilding.GetInputInventoryList()) {
                 Item inputInventoryItem = inventory.GetRestrictedItemList()[0];
 
                 // inventory priority [0,1] - 0 when full, 1 when empty
@@ -110,6 +126,7 @@ public class HumanoidCarry : MonoBehaviour
                     highestPriorityInventory = inventory;
                 }
             }
+        }
 
         return highestPriorityInventory;
     }
@@ -141,7 +158,7 @@ public class HumanoidCarry : MonoBehaviour
 
             foreach (Inventory outputInventory in productionBuilding.GetOutputInventoryList()) {
 
-                if (outputInventory.GetRestrictedItemList().Contains(itemToFetch) && outputInventory.HasItem(itemToFetch)) {
+                if (outputInventory.InventoryCanAcceptItem(itemToFetch) && outputInventory.HasItem(itemToFetch)) {
 
                     outputInventory.RemoveItemAmount(itemToFetch);
                     itemCarrying = itemToFetch;
@@ -157,10 +174,9 @@ public class HumanoidCarry : MonoBehaviour
     }
 
     public bool DropItemsInDestinationBuilding() {
-
         if (destinationBuilding is Chest) {
             Chest chest = destinationBuilding as Chest;
-            if (chest.GetChestInventory().InventoryCanAcceptItem(itemToCarry) && chest.GetChestInventory().AmountInventoryCanReceiveOfType(itemToCarry) >= itemCarrying.amount) {
+            if (chest.GetChestInventory().InventoryCanAcceptItem(itemCarrying) && chest.GetChestInventory().AmountInventoryCanReceiveOfType(itemCarrying) >= itemCarrying.amount) {
                 chest.GetChestInventory().AddItem(itemCarrying);
                 itemCarrying = null;
                 OnCarryCompleted?.Invoke(this, EventArgs.Empty);
@@ -175,7 +191,7 @@ public class HumanoidCarry : MonoBehaviour
 
             foreach (Inventory intputInventory in productionBuilding.GetInputInventoryList()) {
 
-                if (intputInventory.InventoryCanAcceptItem(itemToCarry) && intputInventory.AmountInventoryCanReceiveOfType(itemToCarry) >= itemCarrying.amount) {
+                if (intputInventory.InventoryCanAcceptItem(itemCarrying) && intputInventory.AmountInventoryCanReceiveOfType(itemCarrying) >= itemCarrying.amount) {
                     intputInventory.AddItem(itemCarrying);
                     itemCarrying = null;
                     OnCarryCompleted?.Invoke(this, EventArgs.Empty);
@@ -212,4 +228,61 @@ public class HumanoidCarry : MonoBehaviour
         return itemCarrying;
     }
 
+    public Item GetItemToCarry() { 
+        return itemToCarry; 
+    }
+
+    #region DEBUG
+    [Button]
+    public Building IdentifyBestDestinationBuildingDebug() {
+
+        List<Building> destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(maxCarryAmount);
+
+        float bestBuildingScore = 0f;
+        Building bestBuilding = null;
+
+        foreach (Building building in destinationBuildingsList) {
+            float score = CalculateDestinationInventoryScore(building);
+            building.SetBuildingVisualDebugScore(score.ToString());
+
+            if (score > bestBuildingScore) {
+                bestBuildingScore = score;
+                bestBuilding = building;
+            }
+        }
+
+        destinationBuilding = bestBuilding;
+
+        if (destinationBuilding != null) {
+
+            Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding as ProductionBuilding);
+            itemToCarry = destinationBuildingInventory.GetRestrictedItemList()[0];
+            humanoid.AssignBuilding(destinationBuilding);
+        }
+
+        return destinationBuilding;
+    }
+
+    [Button]
+    public Building IdentifyBestSourceBuildingDebug() {
+
+        List<Building> sourceBuildingsList = BuildingsManager.Instance.GetSourceBuildingsList(maxCarryAmount, itemToCarry);
+
+        float bestBuildingScore = 0f;
+        Building bestBuilding = null;
+
+        foreach (Building building in sourceBuildingsList) {
+            float score = CalculateSourceInventoryScore(building);
+            building.SetBuildingVisualDebugScore(score.ToString());
+
+            if (score > bestBuildingScore) {
+                bestBuildingScore = score;
+                bestBuilding = building;
+            }
+        }
+
+        sourceBuilding = bestBuilding;
+        return sourceBuilding;
+    }
+    #endregion
 }

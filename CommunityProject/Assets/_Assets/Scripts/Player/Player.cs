@@ -165,7 +165,6 @@ public class Player : MonoBehaviour, IDamageable
         // Remove other interactables interaction
         foreach(IInteractable interactable in interactablesInTriggerArea) {
             if(interactable != closestInteractable) {
-                Debug.Log("cac");
                 RemoveInteractionWithInteractable(interactable);
             }
         }
@@ -179,6 +178,8 @@ public class Player : MonoBehaviour, IDamageable
 
         // Find closest interactable
         foreach (IInteractable interactable in interactablesInTriggerArea) {
+            if (interactable is HumanoidInteraction) continue;
+
             Collider2D interactableCollider = interactable.GetSolidCollider();
 
             ColliderDistance2D colliderDistance2DToInteractableSolidCollider = interactableCollider.Distance(GetComponent<Collider2D>());
@@ -197,8 +198,6 @@ public class Player : MonoBehaviour, IDamageable
     private void RemoveInteractionWithInteractable(IInteractable interactable) {
         interactable.SetPlayerInTriggerArea(false);
         interactable.SetHovered(false);
-
-        Debug.Log("removed hovered");
 
         if(interactable is ProductionBuildingVisual) {
             if(interactablesInTriggerArea.Count == 0) {

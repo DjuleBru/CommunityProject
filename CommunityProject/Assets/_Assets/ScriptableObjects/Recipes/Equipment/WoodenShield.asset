@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fbae1f91d76d554ca4d3b7c41e640b2, type: 3}
-  m_Name: TestRecipe1
+  m_Name: WoodenShield
   m_EditorClassIdentifier: 
-  recipeName: Testing 1
-  recipeSprite: {fileID: -1681146011, guid: dfa83d8eb7c785a4d99a699af38ad26d, type: 3}
+  recipeName: Wooden Shield
+  recipeSprite: {fileID: -930637474, guid: 15e365539ea8b564a96391f0aa4c8afc, type: 3}
   inputItems:
-  - itemType: 0
-    itemTier: 0
-    amount: 2
-  outputItems:
   - itemType: 1
     itemTier: 0
+    amount: 5
+  outputItems:
+  - itemType: 6
+    itemTier: 0
     amount: 1
-  standardProductionTime: 5
+  standardProductionTime: 15

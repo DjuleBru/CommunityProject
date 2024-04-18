@@ -15,7 +15,7 @@ public class AssignSourceBuilding : Action {
 
     public override TaskStatus OnUpdate() {
 
-        if (humanoidCarry.IdentifyBestSourceBuilding() != null) {
+        if (humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry()) != null) {
             return TaskStatus.Success;
         }
         return TaskStatus.Failure;
