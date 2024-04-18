@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,6 +8,8 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class HumanoidCarry : MonoBehaviour
 {
+    private Humanoid humanoid;
+
     private Inventory humanoidCarryInventory;
     private int maxCarryAmount = 5;
 
@@ -15,8 +18,12 @@ public class HumanoidCarry : MonoBehaviour
     private Item itemToCarry;
     private Item itemCarrying = null;
 
+    public event EventHandler OnCarryStarted;
+    public event EventHandler OnCarryCompleted;
+
     private void Awake() {
         humanoidCarryInventory = new Inventory(true, 1, 1, maxCarryAmount);
+        humanoid = GetComponent<Humanoid>();
     }
 
     [Button]
@@ -43,7 +50,7 @@ public class HumanoidCarry : MonoBehaviour
 
             Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding as ProductionBuilding);
             itemToCarry = destinationBuildingInventory.GetRestrictedItemList()[0];
-
+            humanoid.AssignBuilding(destinationBuilding);
         }
 
         return destinationBuilding;
@@ -114,15 +121,19 @@ public class HumanoidCarry : MonoBehaviour
         return inventoryPriority;
     }
 
-    public void FetchItemsInSourceBuilding() {
+    public bool FetchItemsInSourceBuilding() {
         Item itemToFetch = new Item { itemType = itemToCarry.itemType, amount = maxCarryAmount };
 
         if(sourceBuilding is Chest) {
             Chest chest = sourceBuilding as Chest;
-            chest.GetChestInventory().RemoveItemAmount(itemToFetch);
-            itemCarrying = itemToFetch;
-            Debug.Log("carrying " + itemCarrying.amount);
-            return;
+            if(chest.GetChestInventory().HasItem(itemToFetch)) {
+                chest.GetChestInventory().RemoveItemAmount(itemToFetch);
+                itemCarrying = itemToFetch;
+                OnCarryStarted?.Invoke(this, EventArgs.Empty);
+                return true;
+            } else {
+                return false;
+            }
         }
 
         if(sourceBuilding is ProductionBuilding) {
@@ -130,23 +141,33 @@ public class HumanoidCarry : MonoBehaviour
 
             foreach (Inventory outputInventory in productionBuilding.GetOutputInventoryList()) {
 
-                if (outputInventory.GetRestrictedItemList().Contains(itemToFetch)) {
+                if (outputInventory.GetRestrictedItemList().Contains(itemToFetch) && outputInventory.HasItem(itemToFetch)) {
+
                     outputInventory.RemoveItemAmount(itemToFetch);
                     itemCarrying = itemToFetch;
-                    Debug.Log("carrying " + itemCarrying.amount);
-                    return;
+                    OnCarryStarted?.Invoke(this, EventArgs.Empty);
+                    return true;
+
+                } else {
+                    return false;
                 }
             };
         }
-
+        return false;
     }
 
-    public void DropItemsInDestinationBuilding() {
+    public bool DropItemsInDestinationBuilding() {
+
         if (destinationBuilding is Chest) {
             Chest chest = destinationBuilding as Chest;
-            chest.GetChestInventory().AddItem(itemCarrying);
-            itemCarrying = null;
-            return;
+            if (chest.GetChestInventory().InventoryCanAcceptItem(itemToCarry) && chest.GetChestInventory().AmountInventoryCanReceiveOfType(itemToCarry) >= itemCarrying.amount) {
+                chest.GetChestInventory().AddItem(itemCarrying);
+                itemCarrying = null;
+                OnCarryCompleted?.Invoke(this, EventArgs.Empty);
+                return true;
+            } else {
+                return false;
+            }
         }
 
         if (destinationBuilding is ProductionBuilding) {
@@ -154,13 +175,18 @@ public class HumanoidCarry : MonoBehaviour
 
             foreach (Inventory intputInventory in productionBuilding.GetInputInventoryList()) {
 
-                if (intputInventory.InventoryCanAcceptItem(itemToCarry)) {
+                if (intputInventory.InventoryCanAcceptItem(itemToCarry) && intputInventory.AmountInventoryCanReceiveOfType(itemToCarry) >= itemCarrying.amount) {
                     intputInventory.AddItem(itemCarrying);
                     itemCarrying = null;
-                    return;
+                    OnCarryCompleted?.Invoke(this, EventArgs.Empty);
+                    return true;
+                } else {
+                    return false;
                 }
             };
         }
+
+        return false;
     }
     public Inventory GetHumanoidCarryInventory() {
         return humanoidCarryInventory;

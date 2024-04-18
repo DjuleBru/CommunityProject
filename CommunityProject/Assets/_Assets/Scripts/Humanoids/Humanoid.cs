@@ -14,6 +14,9 @@ public class Humanoid : MonoBehaviour
         Shipper
     }
 
+    protected Building assignedBuilding;
+    [SerializeField] private float roamDistanceToBuilding;
+
     [SerializeField] private HumanoidSO humanoidSO;
     [SerializeField] private Job job;
     [SerializeField] private bool debugJob;
@@ -91,6 +94,18 @@ public class Humanoid : MonoBehaviour
             behaviorTree.ExternalBehavior = haulierBehaviorTree;
             return;
         }
+    }
+
+    public void AssignBuilding(Building building) {
+        assignedBuilding = building;
+    }
+
+    public Building GetAssignedBuilding() {
+        return assignedBuilding;
+    }
+
+    public float GetRoamDistanceToBuilding() {
+        return roamDistanceToBuilding;
     }
 
     public bool IsDungeoneer() {

@@ -8,6 +8,8 @@ public class HumanoidInteraction : MonoBehaviour, IInteractable {
     [SerializeField] private GameObject hoveredGameObject;
     [SerializeField] private Collider2D solidCollider;
 
+    private bool playerInTriggerArea;
+
     private void Awake() {
         solidCollider = GetComponent<Collider2D>();
         hoveredGameObject.SetActive(false);
@@ -26,5 +28,9 @@ public class HumanoidInteraction : MonoBehaviour, IInteractable {
 
     public void SetPlayerInTriggerArea(bool playerInTriggerArea) {
 
+    }
+
+    public bool GetPlayerInTriggerArea() {
+        return playerInTriggerArea;
     }
 }

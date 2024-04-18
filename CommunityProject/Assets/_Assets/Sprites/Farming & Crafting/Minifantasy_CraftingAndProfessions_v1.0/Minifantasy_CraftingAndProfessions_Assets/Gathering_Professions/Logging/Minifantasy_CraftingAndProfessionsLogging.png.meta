@@ -20,7 +20,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,7 +115,532 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 73
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7d7b32dd9235b44585943a68b15b557
+      internalID: -495942449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_1
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 73
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6f74c0f3c44e3a4a94c3530ce471333
+      internalID: -1591943842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_2
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 73
+        width: 22
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8d146de16dc66c4b81a645d28993099
+      internalID: -1730331038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 73
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1262f9bc491992a4aa03cd637dcacdef
+      internalID: -1277096876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_4
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 73
+        width: 30
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebf110e6c94eedd4f9c2ed788c4c4cc7
+      internalID: 812714945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_5
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 57
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 939853e886fb67346980f6d290b5d4b2
+      internalID: -1311220422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_6
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 57
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d5b45b01249063459ac4613e097336e
+      internalID: 527842246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_7
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 57
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47c8c9069dd83fb4baf13aecf2bfdade
+      internalID: 1358148517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_8
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 57
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6a39ad7d30cefc4ebda7dbe32d6c7e2
+      internalID: 403912443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_9
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 57
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caf89833022ccf444819c5bf8dc69aed
+      internalID: 1741876880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_10
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3746e91f966d6c44295168a3b81285bb
+      internalID: 1094474159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_11
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1e053299d1440b43b8ea7edf1d0f82d
+      internalID: -757342104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70ea437ab96f8b24d9986b1bffbf295b
+      internalID: -551008954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_13
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d872550409a608d4592631f30359d8be
+      internalID: -2051089408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_14
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 41
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5f238263a3243041a7ad749770b19c8
+      internalID: 2021845674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_15
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb5a5aa0fabf6724bb038173817d32a1
+      internalID: 2003835630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_16
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2e8214019f6c6649b9cd24d58fd8e5f
+      internalID: -561974328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_17
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4b578673f6e1264795bcf0e1a446679
+      internalID: -1002958210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_18
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbd9557980a617e41a125c191df17d2a
+      internalID: -1285241315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_19
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d9de7b2237c64a48989e28f6e5bde9f
+      internalID: -1203177402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_20
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dceaf9d7ebf683c439a9e783cb6cb398
+      internalID: -61365084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_21
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50f81313cd7021f42b30712efa1b0040
+      internalID: 1851728864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_22
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cadc579f186bb647bc44f00a70cfbe1
+      internalID: -1996851326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_23
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aa898fec80787a43b148dfb2cef7270
+      internalID: -2062385535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minifantasy_CraftingAndProfessionsLogging_24
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 8
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aca4fd538b358c6489a1e773a63a166f
+      internalID: -720028344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +651,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Minifantasy_CraftingAndProfessionsLogging_0: -495942449
+      Minifantasy_CraftingAndProfessionsLogging_1: -1591943842
+      Minifantasy_CraftingAndProfessionsLogging_10: 1094474159
+      Minifantasy_CraftingAndProfessionsLogging_11: -757342104
+      Minifantasy_CraftingAndProfessionsLogging_12: -551008954
+      Minifantasy_CraftingAndProfessionsLogging_13: -2051089408
+      Minifantasy_CraftingAndProfessionsLogging_14: 2021845674
+      Minifantasy_CraftingAndProfessionsLogging_15: 2003835630
+      Minifantasy_CraftingAndProfessionsLogging_16: -561974328
+      Minifantasy_CraftingAndProfessionsLogging_17: -1002958210
+      Minifantasy_CraftingAndProfessionsLogging_18: -1285241315
+      Minifantasy_CraftingAndProfessionsLogging_19: -1203177402
+      Minifantasy_CraftingAndProfessionsLogging_2: -1730331038
+      Minifantasy_CraftingAndProfessionsLogging_20: -61365084
+      Minifantasy_CraftingAndProfessionsLogging_21: 1851728864
+      Minifantasy_CraftingAndProfessionsLogging_22: -1996851326
+      Minifantasy_CraftingAndProfessionsLogging_23: -2062385535
+      Minifantasy_CraftingAndProfessionsLogging_24: -720028344
+      Minifantasy_CraftingAndProfessionsLogging_3: -1277096876
+      Minifantasy_CraftingAndProfessionsLogging_4: 812714945
+      Minifantasy_CraftingAndProfessionsLogging_5: -1311220422
+      Minifantasy_CraftingAndProfessionsLogging_6: 527842246
+      Minifantasy_CraftingAndProfessionsLogging_7: 1358148517
+      Minifantasy_CraftingAndProfessionsLogging_8: 403912443
+      Minifantasy_CraftingAndProfessionsLogging_9: 1741876880
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

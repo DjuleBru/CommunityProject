@@ -7,24 +7,18 @@ using UnityEngine;
 public class HumanoidWork : MonoBehaviour
 {
     private Humanoid humanoid;
-    private ProductionBuilding assignedBuilding;
     private bool working;
     public event EventHandler OnHumanoidWorkStarted;
     public event EventHandler OnHumanoidWorkStopped;
 
-    [SerializeField] private float roamDistanceToBuilding;
 
     private void Awake() {
         humanoid = GetComponent<Humanoid>();
     }
 
-    public void AssignBuilding(ProductionBuilding building) {
-        assignedBuilding = building;
-    }
-
     public void Work() {
-
-        if(assignedBuilding.GetSelectedRecipeSO() == null || assignedBuilding.GetInputItemsMissing()) {
+        ProductionBuilding assignedBuilding = humanoid.GetAssignedBuilding() as ProductionBuilding;
+        if (assignedBuilding.GetSelectedRecipeSO() == null || assignedBuilding.GetInputItemsMissing() || assignedBuilding.GetOutputInventoryFull() || assignedBuilding.GetPlayerInteractingWithBuilding()) {
             if(working) {
                 working = false;
                 assignedBuilding.SetHumanoidWorking(false, humanoid.GetHumanoidSO().humanoidType);
@@ -70,13 +64,5 @@ public class HumanoidWork : MonoBehaviour
 
     public bool GetWorking() {
         return working;
-    }
-
-    public ProductionBuilding GetAssignedBuilding() {
-        return assignedBuilding;
-    }
-
-    public float GetRoamDistanceToBuilding() {
-        return roamDistanceToBuilding;
     }
 }

@@ -35,6 +35,8 @@ public class InventoryUI_ProductionBuilding : InventoryUI_Interactable
     }
 
     protected override void RefreshInventoryUI() {
+        if (itemSlotContainer == null) return;
+
         foreach (Transform child in itemSlotContainer) {
             if (child == null) continue;
             if (child.GetComponent<ItemSlot_Inventory>() != null) {

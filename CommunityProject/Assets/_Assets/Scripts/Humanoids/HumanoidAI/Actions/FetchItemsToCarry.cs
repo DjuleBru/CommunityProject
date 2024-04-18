@@ -25,11 +25,16 @@ public class FetchItemsToCarry : Action {
         humanoidMovement.MoveToDestination(colliderDistance2DToBuildingCollider.pointA);
         humanoid.SetHumanoidActionDescription("Fetching items");
 
-        if (colliderDistance2DToBuildingCollider.distance > 1.5f) {
+        if (colliderDistance2DToBuildingCollider.distance > .5f) {
             return TaskStatus.Running;
         } else {
-            humanoidCarry.FetchItemsInSourceBuilding();
-            return TaskStatus.Success;
+            if (humanoidCarry.FetchItemsInSourceBuilding()) {
+                humanoidCarry.IdentifyBestDestinationBuilding();
+                humanoidCarry.IdentifyBestSourceBuilding();
+                return TaskStatus.Success;
+            } else {
+                return TaskStatus.Failure;
+            }
         }
 
     }

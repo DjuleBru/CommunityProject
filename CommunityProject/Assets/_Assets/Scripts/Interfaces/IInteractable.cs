@@ -7,6 +7,8 @@ public interface IInteractable
 
     public void SetPlayerInTriggerArea(bool playerInTriggerArea);
 
+    public bool GetPlayerInTriggerArea();
+
     public void SetHovered(bool hovered);
 
     public void ClosePanel();

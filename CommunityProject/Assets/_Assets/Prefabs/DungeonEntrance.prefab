@@ -8237,11 +8237,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3138946080823291606, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3138946080823291606, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3138946080823291606, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8282,6 +8282,10 @@ PrefabInstance:
     - target: {fileID: 6541860286389352636, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001067186285909428, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
+      propertyPath: isDungeonChest
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}

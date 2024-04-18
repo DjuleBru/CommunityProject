@@ -27,6 +27,8 @@ public class Player : MonoBehaviour, IDamageable
     private bool working;
 
     private List<IInteractable> interactablesInTriggerArea = new List<IInteractable>();
+    private IInteractable closestInteractable = null;
+    private float closestInteractableDistance = Mathf.Infinity;
 
     private void Awake() {
         Instance = this;
@@ -41,9 +43,10 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     private void Update() {
-        if(interactablesInTriggerArea.Count > 0) {
+
+        if (interactablesInTriggerArea.Count > 0) {
             //There are interactables in trigger area
-            HandleInteractablesInTriggerArea();
+            HandleClosestInteractableChange();
         }
     }
 
@@ -133,40 +136,60 @@ public class Player : MonoBehaviour, IDamageable
         if(interactable != null) {
             interactablesInTriggerArea.Add(interactable);
         }
+
+        HandleClosestInteractableChange();
+        HandleInteractablesInTriggerArea();
     }
 
     private void HandleInteractableTriggerExit(Collider2D collider) {
         IInteractable interactable = collider.GetComponent<IInteractable>();
 
         if (interactable != null) {
-            RemoveInteractionWithInteractable(interactable);
             interactablesInTriggerArea.Remove(interactable);
+            RemoveInteractionWithInteractable(interactable);
         }
+
+        HandleClosestInteractableChange();
+        HandleInteractablesInTriggerArea();
     }
 
     private void HandleInteractablesInTriggerArea() {
-        float distanceToClosestInteractable = Mathf.Infinity;
-        IInteractable closestInteractable = null;
 
-        // Find closest interactable
-        foreach(IInteractable interactable in interactablesInTriggerArea) {
-            Collider2D interactableCollider = interactable.GetSolidCollider();
-
-            ColliderDistance2D colliderDistance2DToInteractableSolidCollider = interactableCollider.Distance(GetComponent<Collider2D>());
-
-            if(colliderDistance2DToInteractableSolidCollider.distance <= distanceToClosestInteractable) {
-                distanceToClosestInteractable = colliderDistance2DToInteractableSolidCollider.distance;
-                closestInteractable = interactable;
+        if(closestInteractable != null) {
+            if (!closestInteractable.GetPlayerInTriggerArea()) {
+                closestInteractable.SetPlayerInTriggerArea(true);
+                closestInteractable.SetHovered(true);
             }
         }
-
-        closestInteractable.SetPlayerInTriggerArea(true);
-        closestInteractable.SetHovered(true);
 
         // Remove other interactables interaction
         foreach(IInteractable interactable in interactablesInTriggerArea) {
             if(interactable != closestInteractable) {
+                Debug.Log("cac");
                 RemoveInteractionWithInteractable(interactable);
+            }
+        }
+    }
+
+    private void HandleClosestInteractableChange() {
+        if(interactablesInTriggerArea.Count == 0) {
+            closestInteractable = null;
+            closestInteractableDistance = Mathf.Infinity;
+        }
+
+        // Find closest interactable
+        foreach (IInteractable interactable in interactablesInTriggerArea) {
+            Collider2D interactableCollider = interactable.GetSolidCollider();
+
+            ColliderDistance2D colliderDistance2DToInteractableSolidCollider = interactableCollider.Distance(GetComponent<Collider2D>());
+
+            if (colliderDistance2DToInteractableSolidCollider.distance <= closestInteractableDistance) {
+                closestInteractableDistance = colliderDistance2DToInteractableSolidCollider.distance;
+
+                if(interactable != closestInteractable) {
+                    closestInteractable = interactable;
+                    HandleInteractablesInTriggerArea();
+                }
             }
         }
     }
@@ -174,7 +197,18 @@ public class Player : MonoBehaviour, IDamageable
     private void RemoveInteractionWithInteractable(IInteractable interactable) {
         interactable.SetPlayerInTriggerArea(false);
         interactable.SetHovered(false);
-        interactable.ClosePanel();
+
+        Debug.Log("removed hovered");
+
+        if(interactable is ProductionBuildingVisual) {
+            if(interactablesInTriggerArea.Count == 0) {
+                interactable.ClosePanel();
+            } else {
+                ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
+            }
+        } else {
+            interactable.ClosePanel();
+        }
     }
 
     #region SET PARAMETERS
@@ -208,6 +242,14 @@ public class Player : MonoBehaviour, IDamageable
 
     public float GetPlayerWorkingSpeed() {
         return workingSpeed;
+    }
+
+    public List<IInteractable> GetInteractablesInTriggerArea() {
+        return interactablesInTriggerArea;
+    }
+
+    public IInteractable GetClosestInteractable() {
+        return closestInteractable;
     }
 
     #endregion

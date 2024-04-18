@@ -95,6 +95,10 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
         this.playerInTriggerArea = playerInTriggerArea;
     }
 
+    public bool GetPlayerInTriggerArea() {
+        return playerInTriggerArea;
+    }
+
     public void SetHovered(bool hovered) {
         statsBoardHoveredVisual.SetActive(hovered);
     }

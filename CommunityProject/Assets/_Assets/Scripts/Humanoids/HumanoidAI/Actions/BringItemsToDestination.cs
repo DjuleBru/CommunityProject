@@ -25,12 +25,19 @@ public class BringItemsToDestination : Action {
         humanoidMovement.MoveToDestination(colliderDistance2DToBuildingCollider.pointA);
         humanoid.SetHumanoidActionDescription("Carrying items");
 
-        if (colliderDistance2DToBuildingCollider.distance > 1.5f) {
+        if (colliderDistance2DToBuildingCollider.distance > .5f) {
             return TaskStatus.Running;
         }
         else {
-            humanoidCarry.DropItemsInDestinationBuilding();
-            return TaskStatus.Success;
+
+            if(humanoidCarry.DropItemsInDestinationBuilding()) {
+                humanoidCarry.IdentifyBestDestinationBuilding();
+                humanoidCarry.IdentifyBestSourceBuilding();
+                return TaskStatus.Success;
+            } else {
+                return TaskStatus.Failure;
+            };
+
         }
 
     }

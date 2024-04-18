@@ -196,25 +196,29 @@ public class DungeonRoom : MonoBehaviour
 
         float delayBetweenMobActivation = .2f;
 
-        foreach(Mob mob in mobsInRoom) {
-            mob.gameObject.SetActive(true);
-            yield return new WaitForSeconds(delayBetweenMobActivation);
+        if (mobsInRoom.Count > 0) {
+            foreach (Mob mob in mobsInRoom) {
+                mob.gameObject.SetActive(true);
+                yield return new WaitForSeconds(delayBetweenMobActivation);
+            }
+
+            foreach (Mob mob in mobsInRoom) {
+                mob.SetAllMobsSpawned();
+            }
+
+            Player.Instance.EnablePlayerActions();
+
+            float delayAfterMobActivationToReturnToBattleCamera = 1f;
+            yield return new WaitForSeconds(delayAfterMobActivationToReturnToBattleCamera);
+
+            // Recalculate pathfinding Graph
+            AstarPath.active.Scan();
+
+            //Enable player actions
+            SetBattleCamera();
+        } else {
+            CompleteRoom();
         }
-
-        foreach (Mob mob in mobsInRoom) {
-            mob.SetAllMobsSpawned();
-        }
-
-        Player.Instance.EnablePlayerActions();
-
-        float delayAfterMobActivationToReturnToBattleCamera = 1f;
-        yield return new WaitForSeconds(delayAfterMobActivationToReturnToBattleCamera);
-
-        // Recalculate pathfinding Graph
-        AstarPath.active.Scan();
-
-        //Enable player actions
-        SetBattleCamera();
     }
 
     private void SetBattleCamera() {

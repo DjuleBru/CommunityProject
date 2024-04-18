@@ -15,6 +15,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -2017985166, guid: 12dbddd4b44d490458751713b45cf820, type: 3}
+    - target: {fileID: 2588420575553572980, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588420575553572980, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
+      propertyPath: m_Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588420575553572980, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3275420738517804746, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
       propertyPath: humanoidSO
       value: 
@@ -70,6 +82,18 @@ PrefabInstance:
     - target: {fileID: 4665366396381886453, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
       propertyPath: m_Name
       value: Dwarf
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334358644164288421, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334358644164288421, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168565685924684991, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.625
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}

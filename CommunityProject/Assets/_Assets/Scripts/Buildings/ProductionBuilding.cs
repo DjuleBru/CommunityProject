@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Rendering.CameraUI;
 
 public class ProductionBuilding : Building
 {
@@ -17,9 +16,9 @@ public class ProductionBuilding : Building
     private List<Inventory> outputInventoryList;
     private List<ItemWorld> itemWorldProducedList;
 
-    private Humanoid assignedHumanoid;
     private bool working;
     private bool inputItemsMissing;
+    private bool outputInventoryFull;
 
     [SerializeField] private ProductionBuildingUI_World productionBuildingUIWorld;
     [SerializeField] private ProductionBuildingVisual productionBuildingvisual;
@@ -52,15 +51,16 @@ public class ProductionBuilding : Building
         productionTimer += Time.deltaTime * productionSpeed;
 
         if (productionTimer >= selectedRecipeSO.standardProductionTime) {
-            ProduceSelectedRecipe(isPlayerWorking);
-            productionTimer = 0f;
+            if(ProduceSelectedRecipe(isPlayerWorking)) {
+                productionTimer = 0f;
+            };
         }
     }
 
-    protected void ProduceSelectedRecipe(bool isPlayerWorking) {
+    protected bool ProduceSelectedRecipe(bool isPlayerWorking) {
         // Check input items missing
         CheckInputItems();
-        if(inputItemsMissing) { return; }
+        if(inputItemsMissing) { return false; }
 
         //Produce Output Items in output inventories
         foreach (Inventory outputInventory in outputInventoryList) {
@@ -85,7 +85,8 @@ public class ProductionBuilding : Building
                             // Inventory has not enough space for output item
                             Debug.Log("no space in output inventory");
                             productionBuildingUIWorld.SetOutputInventoryFull(true);
-                            return;
+                            outputInventoryFull = true;
+                            return false;
                         }
                     }
                 }
@@ -102,6 +103,8 @@ public class ProductionBuilding : Building
                 }
             }
         }
+
+        return true;
     }
 
     public override void OpenBuildingUI() {
@@ -115,7 +118,7 @@ public class ProductionBuilding : Building
     }
 
     public override void InteractWithBuilding() {
-        if (!inputItemsMissing && selectedRecipeSO != null) {
+        if (!inputItemsMissing && selectedRecipeSO != null && !outputInventoryFull) {
             base.InteractWithBuilding();
 
             playerInteractingWithBuilding = true;
@@ -124,6 +127,8 @@ public class ProductionBuilding : Building
 
             working = true;
             OnWorkerStartedWorking?.Invoke(this, EventArgs.Empty);
+
+            ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
         }
     }
 
@@ -146,10 +151,11 @@ public class ProductionBuilding : Building
     }
 
     public void SetHumanoidWorking(bool working, HumanoidSO.HumanoidType humanoidType) {
-        this.working = working;
-        productionBuildingUIWorld.SetWorking(working);
-        productionBuildingvisual.SetWorking(working, humanoidType);
-
+        if(!playerInteractingWithBuilding) {
+            this.working = working;
+            productionBuildingUIWorld.SetWorking(working);
+            productionBuildingvisual.SetWorking(working, humanoidType);
+        }
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
     }
 
@@ -210,6 +216,7 @@ public class ProductionBuilding : Building
 
     private void NewInventory_OnItemListChanged(object sender, EventArgs e) {
         CheckInputItems();
+        CheckOutputItems();
     }
 
     private void DropInventoryItems() {
@@ -285,7 +292,24 @@ public class ProductionBuilding : Building
         RefreshProductionBuildingUIWorld();
     }
 
-    public void AssignHumanoid(Humanoid humanoid) {
+    public void CheckOutputItems() {
+        bool atLeastOneOutputInventoryFull = false;
+
+        if (selectedRecipeSO != null) {
+            foreach (Inventory inventory in outputInventoryList) {
+                foreach(Item item in selectedRecipeSO.outputItems) {
+                    if (!inventory.InventoryCanAcceptItem(item)) {
+                        atLeastOneOutputInventoryFull = true;
+                    }
+                }
+            }
+        }
+
+        outputInventoryFull = atLeastOneOutputInventoryFull;
+        RefreshProductionBuildingUIWorld();
+    }
+
+    public override void AssignHumanoid(Humanoid humanoid) {
         this.assignedHumanoid = humanoid;
         productionBuildingUIWorld.SetWorkerMissing(false);
 
@@ -305,10 +329,19 @@ public class ProductionBuilding : Building
 
     public void RefreshProductionBuildingUIWorld() {
         productionBuildingUIWorld.SetItemsMissing(inputItemsMissing);
+        productionBuildingUIWorld.SetOutputInventoryFull(outputInventoryFull);
     }
 
     public bool GetInputItemsMissing() {
         return inputItemsMissing;
+    }
+
+    public bool GetOutputInventoryFull() {
+        return outputInventoryFull;
+    }
+
+    public bool GetPlayerInteractingWithBuilding() {
+        return playerInteractingWithBuilding;
     }
 
 

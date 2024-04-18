@@ -74,10 +74,15 @@ public class BuildingVisual : MonoBehaviour, IInteractable
         if (!building.GetBuildingPlaced()) return;
         this.playerInTriggerArea = playerInTriggerArea;
 
-        if(!buildingPanelOpen) {
+        if (Player.Instance.GetClosestInteractable() == (this as IInteractable)) {
             OpenPanel();
             buildingPanelOpen = true;
         }
+
+    }
+
+    public bool GetPlayerInTriggerArea() {
+        return playerInTriggerArea;
     }
 
     public virtual void SetHovered(bool hovered) {

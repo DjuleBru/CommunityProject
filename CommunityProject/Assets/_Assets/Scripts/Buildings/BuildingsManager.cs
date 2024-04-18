@@ -8,6 +8,8 @@ public class BuildingsManager : MonoBehaviour
 
     public static BuildingsManager Instance { get; private set; }
 
+    [SerializeField] private GameObject overworldGridVisual;
+
     private List<Building> buildingsSpawned;
     private List<ProductionBuilding> productionBuildingsSpawned;
 
@@ -18,13 +20,16 @@ public class BuildingsManager : MonoBehaviour
         Instance = this;
         buildingsSpawned = new List<Building>();
         productionBuildingsSpawned = new List<ProductionBuilding>();
+        overworldGridVisual.SetActive(false);
     }
 
     public void SetBuildingSpawned() {
+        overworldGridVisual.SetActive(true);
         OnAnyBuildingSpawned?.Invoke(this, EventArgs.Empty);
     }
 
     public void SetBuildingPlacedOrCancelled() {
+        overworldGridVisual.SetActive(false);
         OnAnyBuildingPlacedOrCancelled?.Invoke(this, EventArgs.Empty);
     }
 

@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class HasBuildingAssigned : Conditional {
 
-    public HumanoidWork humanoidWork;
+    public Humanoid humanoid;
 
     public override void OnAwake() {
-        humanoidWork = GetComponent<HumanoidWork>();
+        humanoid = GetComponent<Humanoid>();
     }
 
     public override TaskStatus OnUpdate() {
-        if (humanoidWork.GetAssignedBuilding() != null) {
+        if (humanoid.GetAssignedBuilding() != null) {
             return TaskStatus.Success;
         }
         return TaskStatus.Failure;

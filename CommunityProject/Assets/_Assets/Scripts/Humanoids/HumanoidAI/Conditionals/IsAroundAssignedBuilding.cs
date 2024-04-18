@@ -5,21 +5,21 @@ using UnityEngine;
 
 public class IsAroundAssignedBuilding : Conditional {
 
-    public HumanoidWork humanoidWork;
+    public Humanoid humanoid;
     public HumanoidMovement humanoidMovement;
 
     public Collider2D humanoidCollider;
     public override void OnAwake() {
-        humanoidWork = GetComponent<HumanoidWork>();
+        humanoid = GetComponent<Humanoid>();
         humanoidMovement = GetComponent<HumanoidMovement>();
         humanoidCollider = GetComponent<Collider2D>();
     }
 
     public override TaskStatus OnUpdate() {
 
-        ColliderDistance2D colliderDistance2DToBuildingCollider = humanoidWork.GetAssignedBuilding().GetComponent<Collider2D>().Distance(humanoidCollider);
+        ColliderDistance2D colliderDistance2DToBuildingCollider = humanoid.GetAssignedBuilding().GetComponent<Collider2D>().Distance(humanoidCollider);
 
-        if (colliderDistance2DToBuildingCollider.distance < humanoidWork.GetRoamDistanceToBuilding()) {
+        if (colliderDistance2DToBuildingCollider.distance < humanoid.GetRoamDistanceToBuilding()) {
             return TaskStatus.Success;
         }
         else {

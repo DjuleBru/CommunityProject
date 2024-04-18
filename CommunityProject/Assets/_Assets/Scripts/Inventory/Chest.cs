@@ -8,11 +8,15 @@ public class Chest : Building
     private Inventory chestInventory;
     [SerializeField] private List<Item> itemsInChest = new List<Item>();
     [SerializeField] private InventoryUI_Interactable chestInventoryUI;
+    [SerializeField] bool isDungeonChest;
 
     private bool chestHasBeenFilled;
 
     protected override void Start() {
-        base.Start();
+        if(!isDungeonChest) {
+            base.Start();
+        }
+
         chestInventory = new Inventory(false, 3, 3, false, null);
         chestHasBeenFilled = false;
 
@@ -26,7 +30,10 @@ public class Chest : Building
     }
 
     protected override void Update() {
-        base.Update();
+        if(!isDungeonChest) {
+            base.Update();
+        }
+        
         if(!chestHasBeenFilled) {
             if (chestInventory != null) {
                 chestInventory.AddItemList(itemsInChest);

@@ -11,7 +11,6 @@ public class Roam : Action
     }
 
     public override TaskStatus OnUpdate() {
-        Debug.Log(humanoidMovement + " roam beh.tree");
         humanoidMovement.Roam(transform.position, 4f);
         return TaskStatus.Success;
     }

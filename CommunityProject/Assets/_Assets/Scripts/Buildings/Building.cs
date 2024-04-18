@@ -28,6 +28,8 @@ public class Building : MonoBehaviour
     }
 
     [SerializeField] protected BuildingSO buildingSO;
+    [SerializeField] private int buildingSizeX;
+    [SerializeField] protected int buildingSizeY;
 
     [SerializeField] private CinemachineVirtualCamera buildingCamera;
 
@@ -37,6 +39,8 @@ public class Building : MonoBehaviour
     protected bool isValidBuildingPlacement;
     protected bool buildingPlaced;
     protected int collideCount;
+
+    protected Humanoid assignedHumanoid;
 
     protected bool playerInteractingWithBuilding;
     protected bool workerInteractingWithBuilding;
@@ -84,7 +88,16 @@ public class Building : MonoBehaviour
 
     protected void HandleBuildingPlacement() {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+        mousePosition.z = 0;
+
+        GridPosition buildingGridPosition = OverworldGrid.Instance.GetGridPosition(mousePosition);
+        if (buildingSizeX % 2 == 0) {
+            // Size X is even
+            transform.position = OverworldGrid.Instance.GetWorldPosition(buildingGridPosition) - new Vector3(.5f, .5f, 0);
+        } else {
+            //Size X is odd
+            transform.position = OverworldGrid.Instance.GetWorldPosition(buildingGridPosition);
+        }
     }
 
     protected bool TryPlaceBuilding() {
@@ -140,6 +153,10 @@ public class Building : MonoBehaviour
     protected void OnDestroy() {
         GameInput.Instance.OnPlaceBuilding -= GameInput_OnPlaceBuilding;
         GameInput.Instance.OnPlaceBuildingCancelled -= GameInput_OnPlaceBuildingCancelled;
+    }
+
+    public virtual void AssignHumanoid(Humanoid humanoid) {
+        this.assignedHumanoid = humanoid;
     }
 
     public BuildingSO GetBuildingSO() {
