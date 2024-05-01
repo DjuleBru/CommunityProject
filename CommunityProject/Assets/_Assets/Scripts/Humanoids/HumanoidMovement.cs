@@ -72,7 +72,7 @@ public class HumanoidMovement : MonoBehaviour
         if(!roaming) {
             roaming = true;
             humanoidVisual.SetQuestionMarkActive(true);
-            humanoid.SetHumanoidActionDescription("Worker is idle");
+            humanoid.SetHumanoidActionDescription("Idle");
         }
 
         if(roamCalculationTimer < 0) {

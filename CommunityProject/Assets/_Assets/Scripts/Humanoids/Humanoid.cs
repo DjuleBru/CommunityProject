@@ -32,6 +32,7 @@ public class Humanoid : MonoBehaviour
     private float workingSpeed;
 
     private Job jobAssigned;
+    private bool autoAssign = true;
 
     [SerializeField] private BehaviorDesigner.Runtime.BehaviorTree behaviorTree;
     [SerializeField] ExternalBehaviorTree workerBehaviorTree;
@@ -54,6 +55,8 @@ public class Humanoid : MonoBehaviour
     private void Start() {
         humanoidWork.OnHumanoidWorkStarted += HumanoidWork_OnHumanoidWorkStarted;
         humanoidWork.OnHumanoidWorkStopped += HumanoidWork_OnHumanoidWorkStopped;
+
+        HumanoidsManager.Instance.AddHumanoidSaved(this);
     }
 
     private void HumanoidWork_OnHumanoidWorkStopped(object sender, System.EventArgs e) {
@@ -84,13 +87,27 @@ public class Humanoid : MonoBehaviour
         return jobAssigned;
     }
 
-    public void AssignBehaviorTree() {
+    public void SetJob(Job job) {
+        if (jobAssigned == job) return;
+
         if(jobAssigned == Job.Worker) {
+            if(humanoidWork.GetWorking()) {
+                humanoidWork.StopWorking();
+            }
+        }
+
+        this.jobAssigned = job;
+        AssignBehaviorTree();
+    }
+
+
+    public void AssignBehaviorTree() {
+        if (jobAssigned == Job.Worker) {
             behaviorTree.ExternalBehavior = workerBehaviorTree;
             return;
         }
 
-        if(jobAssigned == Job.Haulier) {
+        if (jobAssigned == Job.Haulier) {
             behaviorTree.ExternalBehavior = haulierBehaviorTree;
             return;
         }
@@ -134,6 +151,14 @@ public class Humanoid : MonoBehaviour
 
     public string GetHumanoidActionDescription() {
         return humanoidActionDesriprion;
+    }
+
+    public bool GetAutoAssign() {
+        return autoAssign;
+    }
+
+    public void SetAutoAssign(bool autoAssignActive) {
+        autoAssign = autoAssignActive;
     }
 
     public void SetHumanoidActionDescription(string description) {

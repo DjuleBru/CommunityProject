@@ -18,7 +18,7 @@ public class RoamAroundAssignedBuilding : Action
     public override TaskStatus OnUpdate() {
 
         ColliderDistance2D colliderDistance2DToBuildingCollider = humanoid.GetAssignedBuilding().GetComponent<Collider2D>().Distance(humanoidCollider);
-
+        
         humanoidMovement.Roam(colliderDistance2DToBuildingCollider.pointA, 4f);
         return TaskStatus.Success;
 

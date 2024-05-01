@@ -44,7 +44,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Update() {
 
-        if (interactablesInTriggerArea.Count > 0) {
+        if (interactablesInTriggerArea.Count > 1) {
             //There are interactables in trigger area
             HandleClosestInteractableChange();
         }
@@ -133,12 +133,28 @@ public class Player : MonoBehaviour, IDamageable
     private void HandleInteractableTriggerEnter(Collider2D collider) {
         IInteractable interactable = collider.GetComponent<IInteractable>();
 
-        if(interactable != null) {
-            interactablesInTriggerArea.Add(interactable);
-        }
+        if (interactable != null) {
+            // Add worker only if there are only workers in interactable range
 
-        HandleClosestInteractableChange();
-        HandleInteractablesInTriggerArea();
+            bool onlyHumanoidsSurrounding = true;
+            if(interactablesInTriggerArea.Count > 0) {
+                foreach(IInteractable interactable1 in interactablesInTriggerArea) {
+                    if(!(interactable1 is HumanoidInteraction | interactable1 is Humanoid)) {
+                        //Interactable is not a humanoid
+                        onlyHumanoidsSurrounding = false;
+                    }
+                }
+            }
+
+            if(interactable is HumanoidInteraction | interactable is Humanoid) {
+                if(!onlyHumanoidsSurrounding) {
+                    return;
+                }
+            }
+
+            interactablesInTriggerArea.Add(interactable);
+            HandleClosestInteractableChange();
+        }
     }
 
     private void HandleInteractableTriggerExit(Collider2D collider) {
@@ -148,50 +164,47 @@ public class Player : MonoBehaviour, IDamageable
             interactablesInTriggerArea.Remove(interactable);
             RemoveInteractionWithInteractable(interactable);
         }
-
         HandleClosestInteractableChange();
-        HandleInteractablesInTriggerArea();
-    }
-
-    private void HandleInteractablesInTriggerArea() {
-
-        if(closestInteractable != null) {
-            if (!closestInteractable.GetPlayerInTriggerArea()) {
-                closestInteractable.SetPlayerInTriggerArea(true);
-                closestInteractable.SetHovered(true);
-            }
-        }
-
-        // Remove other interactables interaction
-        foreach(IInteractable interactable in interactablesInTriggerArea) {
-            if(interactable != closestInteractable) {
-                RemoveInteractionWithInteractable(interactable);
-            }
-        }
     }
 
     private void HandleClosestInteractableChange() {
-        if(interactablesInTriggerArea.Count == 0) {
+
+        if (interactablesInTriggerArea.Count == 0) {
             closestInteractable = null;
             closestInteractableDistance = Mathf.Infinity;
+            return;
+        }
+
+        if(interactablesInTriggerArea.Count == 1) {
+            closestInteractable = interactablesInTriggerArea[0];
+            closestInteractable.SetPlayerInTriggerArea(true);
+            closestInteractable.SetHovered(true);
+            return;
         }
 
         // Find closest interactable
         foreach (IInteractable interactable in interactablesInTriggerArea) {
-            if (interactable is HumanoidInteraction) continue;
 
             Collider2D interactableCollider = interactable.GetSolidCollider();
 
             ColliderDistance2D colliderDistance2DToInteractableSolidCollider = interactableCollider.Distance(GetComponent<Collider2D>());
+            float distanceToInteractableCollider = colliderDistance2DToInteractableSolidCollider.distance;
 
-            if (colliderDistance2DToInteractableSolidCollider.distance <= closestInteractableDistance) {
-                closestInteractableDistance = colliderDistance2DToInteractableSolidCollider.distance;
-
-                if(interactable != closestInteractable) {
-                    closestInteractable = interactable;
-                    HandleInteractablesInTriggerArea();
-                }
+            if(distanceToInteractableCollider < 0.1f) {
+                distanceToInteractableCollider = 0.1f;
             }
+
+            if (distanceToInteractableCollider <= closestInteractableDistance) {
+                if(closestInteractable != null) {
+                    RemoveInteractionWithInteractable(closestInteractable);
+                }
+
+                closestInteractable = interactable;
+                closestInteractable.SetPlayerInTriggerArea(true);
+                closestInteractable.SetHovered(true);
+                closestInteractableDistance = distanceToInteractableCollider;
+            }
+            
         }
     }
 
@@ -200,7 +213,15 @@ public class Player : MonoBehaviour, IDamageable
         interactable.SetHovered(false);
 
         if(interactable is ProductionBuildingVisual) {
-            if(interactablesInTriggerArea.Count == 0) {
+            int productionBuildingsInTriggerArea = 0;
+
+            foreach(IInteractable interactable1 in interactablesInTriggerArea) {
+                if(interactable1 is ProductionBuildingVisual) {
+                    productionBuildingsInTriggerArea++;
+                }
+            }
+
+            if(productionBuildingsInTriggerArea == 0) {
                 interactable.ClosePanel();
             } else {
                 ProductionBuildingUI.Instance.RefreshProductionBuildingUI();

@@ -30,6 +30,7 @@ public class HumanoidWork : MonoBehaviour
                 working = true;
                 assignedBuilding.SetHumanoidWorking(true, humanoid.GetHumanoidSO().humanoidType);
                 OnHumanoidWorkStarted?.Invoke(this, EventArgs.Empty);
+                humanoid.SetHumanoidActionDescription("Working");
             }
         }
     }
@@ -64,5 +65,12 @@ public class HumanoidWork : MonoBehaviour
 
     public bool GetWorking() {
         return working;
+    }
+
+    public void StopWorking() {
+        ProductionBuilding assignedBuilding = humanoid.GetAssignedBuilding() as ProductionBuilding;
+        working = false;
+        assignedBuilding.SetHumanoidWorking(false, humanoid.GetHumanoidSO().humanoidType);
+        OnHumanoidWorkStopped?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -30,7 +30,7 @@ public class BringItemsToDestination : Action {
         }
         else {
             if(humanoidCarry.DropItemsInDestinationBuilding()) {
-                humanoidCarry.IdentifyBestDestinationBuilding();
+                humanoidCarry.TryAssignBestDestinationBuilding();
                 humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
                 return TaskStatus.Success;
             } else {

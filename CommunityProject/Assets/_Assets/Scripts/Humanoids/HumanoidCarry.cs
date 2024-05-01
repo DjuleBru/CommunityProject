@@ -26,8 +26,14 @@ public class HumanoidCarry : MonoBehaviour
         humanoid = GetComponent<Humanoid>();
     }
 
-    public Building IdentifyBestDestinationBuilding() {
+    public Building TryAssignBestDestinationBuilding() {
+        //DeAssign from previous destination building
+        if(destinationBuilding != null) {
+            destinationBuilding.DeAssignHaulier(humanoid);
+        }
+
         List<Building> destinationBuildingsList = new List<Building>();
+
         if (itemCarrying == null) {
             destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(maxCarryAmount);
         } else {
@@ -38,7 +44,14 @@ public class HumanoidCarry : MonoBehaviour
         Building bestBuilding = null;
 
         foreach (Building building in destinationBuildingsList) {
-            float score = CalculateDestinationInventoryScore(building);
+            float inventoryScore = CalculateDestinationInventoryScore(building);
+            float assignedHauliersScore = 1;
+            if (building.GetAssignedHauliersList() != null) {
+                assignedHauliersScore = building.GetAssignedHauliersList().Count + 1;
+            }
+            assignedHauliersScore += 1f;
+
+            float score = inventoryScore / assignedHauliersScore;
             //building.SetBuildingVisualDebugScore(score.ToString());
 
             if (score > bestBuildingScore) {
@@ -65,7 +78,7 @@ public class HumanoidCarry : MonoBehaviour
             Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding);
             itemToCarry = destinationBuildingInventory.GetRestrictedItemList()[0];
             humanoid.AssignBuilding(destinationBuilding);
-
+            destinationBuilding.AssignHaulier(humanoid);
         }
 
         return destinationBuilding;
@@ -103,7 +116,7 @@ public class HumanoidCarry : MonoBehaviour
             inventoryPriority = CalculateDestinationInventoryPriorityScore(highestPriorityBuildingInventory);
         }
 
-        return inventoryPriority * 3 / distanceToBuilding;
+        return inventoryPriority * 5 / distanceToBuilding;
     }
     private float CalculateSourceInventoryScore(Building building) {
         float distanceToBuilding = Vector3.Distance(transform.position, building.transform.position);

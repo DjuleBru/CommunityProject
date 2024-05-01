@@ -42,6 +42,7 @@ public class Building : MonoBehaviour
     protected int collideCount;
 
     protected Humanoid assignedHumanoid;
+    protected List<Humanoid> assignedHauliers = new List<Humanoid>();
 
     protected bool playerInteractingWithBuilding;
     protected bool workerInteractingWithBuilding;
@@ -133,6 +134,7 @@ public class Building : MonoBehaviour
     protected void OnTriggerEnter2D(Collider2D collision) {
         if (buildingPlaced) return;
         if (collision.gameObject.GetComponent<IInteractable>() != null) return;
+        if (collision.gameObject.GetComponentInChildren<HumanoidInteraction>()) return;
 
         OnBuildingIsUnvalidPlacement?.Invoke(this, EventArgs.Empty);
         collideCount++;
@@ -142,6 +144,7 @@ public class Building : MonoBehaviour
     protected void OnTriggerExit2D(Collider2D collision) {
         if (buildingPlaced) return;
         if (collision.gameObject.GetComponent<IInteractable>() != null) return;
+        if (collision.gameObject.GetComponentInChildren<HumanoidInteraction>()) return;
 
         collideCount--;
         if(collideCount == 0) {
@@ -161,6 +164,18 @@ public class Building : MonoBehaviour
 
     public BuildingSO GetBuildingSO() {
         return buildingSO;
+    }
+
+    public List<Humanoid> GetAssignedHauliersList() {
+        return assignedHauliers;
+    }
+
+    public void AssignHaulier(Humanoid humanoid) {
+        assignedHauliers.Add(humanoid);
+    }
+
+    public void DeAssignHaulier(Humanoid humanoid) {
+        assignedHauliers.Remove(humanoid);
     }
 
     public bool GetBuildingPlaced() {

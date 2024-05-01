@@ -29,11 +29,11 @@ public class FetchItemsToCarry : Action {
             return TaskStatus.Running;
         } else {
             if (humanoidCarry.FetchItemsInSourceBuilding()) {
-                humanoidCarry.IdentifyBestDestinationBuilding();
+                humanoidCarry.TryAssignBestDestinationBuilding();
                 humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
                 return TaskStatus.Success;
             } else {
-                humanoidCarry.IdentifyBestDestinationBuilding();
+                humanoidCarry.TryAssignBestDestinationBuilding();
                 humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
                 return TaskStatus.Failure;
             }
