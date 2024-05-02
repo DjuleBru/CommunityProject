@@ -120,4 +120,10 @@ public class BuildingsManager : MonoBehaviour
         }
         return sourceBuildingList;
     }
+
+    public void SetAllVisualCollidersActive(bool active) {
+        foreach(Building building in buildingsSpawned) {
+            building.GetBuildingVisual().SetColliderActive(active);
+        }
+    }
 }

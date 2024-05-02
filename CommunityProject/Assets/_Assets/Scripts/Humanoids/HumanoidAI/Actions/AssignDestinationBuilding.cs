@@ -15,9 +15,19 @@ public class AssignDestinationBuilding : Action {
 
     public override TaskStatus OnUpdate() {
         
-        if(humanoidCarry.TryAssignBestDestinationBuilding() != null) {
-            return TaskStatus.Success;
+        if(humanoid.GetAutoAssign()) {
+            if (humanoidCarry.TryAssignBestDestinationBuilding() != null) {
+                return TaskStatus.Success;
+            }
+        } else {
+            if (humanoidCarry.GetDestinationBuilding() != null) {
+                return TaskStatus.Success;
+            }
+            else {
+                return TaskStatus.Running;
+            }
         }
+        
         return TaskStatus.Failure;
     }
 

@@ -17,6 +17,10 @@ public class IsAroundAssignedBuilding : Conditional {
 
     public override TaskStatus OnUpdate() {
 
+        if (humanoid.GetAssignedBuilding() == null) {
+            return TaskStatus.Failure;
+        }
+
         ColliderDistance2D colliderDistance2DToBuildingCollider = humanoid.GetAssignedBuilding().GetComponent<Collider2D>().Distance(humanoidCollider);
 
         if (colliderDistance2DToBuildingCollider.distance < humanoid.GetRoamDistanceToBuilding()) {

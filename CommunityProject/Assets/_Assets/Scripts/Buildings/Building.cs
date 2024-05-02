@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,6 +35,7 @@ public class Building : MonoBehaviour
 
     [SerializeField] protected CinemachineVirtualCamera buildingCamera;
 
+    [SerializeField] protected BuildingVisual buildingVisual;
     protected Rigidbody2D rb;
     protected Collider2D buildingCollider;
     [SerializeField] protected Collider2D interactionCollider;
@@ -42,7 +44,8 @@ public class Building : MonoBehaviour
     protected int collideCount;
 
     protected Humanoid assignedHumanoid;
-    protected List<Humanoid> assignedHauliers = new List<Humanoid>();
+    protected List<Humanoid> assignedInputHauliers = new List<Humanoid>();
+    protected List<Humanoid> assignedOutputHauliers = new List<Humanoid>();
 
     protected bool playerInteractingWithBuilding;
     protected bool workerInteractingWithBuilding;
@@ -53,6 +56,7 @@ public class Building : MonoBehaviour
 
     protected virtual void Awake() {
         buildingCollider = GetComponent<Collider2D>();
+        buildingVisual = GetComponentInChildren<BuildingVisual>();
         buildingCamera.enabled = false;
 
         interactionCollider.enabled = false;
@@ -90,7 +94,7 @@ public class Building : MonoBehaviour
     protected void HandleBuildingPlacement() {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         mousePosition.z = 0;
-
+        
         GridPosition buildingGridPosition = OverworldGrid.Instance.GetGridPosition(mousePosition);
         if (buildingSizeX % 2 == 0) {
             // Size X is even
@@ -134,7 +138,8 @@ public class Building : MonoBehaviour
     protected void OnTriggerEnter2D(Collider2D collision) {
         if (buildingPlaced) return;
         if (collision.gameObject.GetComponent<IInteractable>() != null) return;
-        if (collision.gameObject.GetComponentInChildren<HumanoidInteraction>()) return;
+        if (collision.gameObject.GetComponentInChildren<HumanoidInteraction>() != null) return;
+        if (collision.gameObject.GetComponent<FreeCameraViewMouseTransform>() != null) return;
 
         OnBuildingIsUnvalidPlacement?.Invoke(this, EventArgs.Empty);
         collideCount++;
@@ -144,7 +149,8 @@ public class Building : MonoBehaviour
     protected void OnTriggerExit2D(Collider2D collision) {
         if (buildingPlaced) return;
         if (collision.gameObject.GetComponent<IInteractable>() != null) return;
-        if (collision.gameObject.GetComponentInChildren<HumanoidInteraction>()) return;
+        if (collision.gameObject.GetComponentInChildren<HumanoidInteraction>() != null) return;
+        if (collision.gameObject.GetComponent<FreeCameraViewMouseTransform>() != null) return;
 
         collideCount--;
         if(collideCount == 0) {
@@ -162,20 +168,48 @@ public class Building : MonoBehaviour
         this.assignedHumanoid = humanoid;
     }
 
+    public virtual void ReplaceAssignedHumanoid(Humanoid humanoid) {
+        if(assignedHumanoid != null) {
+            assignedHumanoid.RemoveAssignedBuilding();
+        }
+        assignedHumanoid = humanoid;
+
+    }
+
+    public virtual void RemoveAssignedHumanoid() {
+        this.assignedHumanoid = null;
+    }
+
     public BuildingSO GetBuildingSO() {
         return buildingSO;
     }
 
-    public List<Humanoid> GetAssignedHauliersList() {
-        return assignedHauliers;
+    public List<Humanoid> GetAssignedInputHauliersList() {
+        return assignedInputHauliers;
     }
 
-    public void AssignHaulier(Humanoid humanoid) {
-        assignedHauliers.Add(humanoid);
+    public List<Humanoid> GetAssignedOutputHauliersList() {
+        return assignedOutputHauliers;
     }
 
-    public void DeAssignHaulier(Humanoid humanoid) {
-        assignedHauliers.Remove(humanoid);
+    public void AssignInputHaulier(Humanoid humanoid) {
+        if(!assignedInputHauliers.Contains(humanoid)) {
+            assignedInputHauliers.Add(humanoid);
+        }
+    }
+
+    public void DeAssignInputHaulier(Humanoid humanoid) {
+        assignedInputHauliers.Remove(humanoid);
+    }
+
+    public void AssignOutputHaulier(Humanoid humanoid) {
+        if (!assignedOutputHauliers.Contains(humanoid)) {
+            assignedOutputHauliers.Add(humanoid);
+        }
+    }
+
+    public void DeAssignOutputHaulier(Humanoid humanoid) {
+        assignedOutputHauliers.Remove(humanoid);
     }
 
     public bool GetBuildingPlaced() {
@@ -208,4 +242,7 @@ public class Building : MonoBehaviour
         GetComponentInChildren<BuildingVisual>().SetBuildingScoreText(score);
     }
 
+    public virtual BuildingVisual GetBuildingVisual() {
+        return buildingVisual;
+    }
 }

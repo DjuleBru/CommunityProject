@@ -15,6 +15,9 @@ public class ProductionBuildingUI : BuildingUI
     [SerializeField] private TextMeshProUGUI recipeTimeText;
 
     [SerializeField] private Image workerImage;
+    [SerializeField] private Image workerReplacementImage;
+    [SerializeField] private TextMeshProUGUI workerReplacementNameText;
+    [SerializeField] private GameObject workerReplacementGameObject;
 
     [SerializeField] private Transform recipeContainer;
     [SerializeField] private Transform recipeTemplate;
@@ -37,6 +40,7 @@ public class ProductionBuildingUI : BuildingUI
 
     private void Awake() {
         Instance = this;
+        workerReplacementGameObject.SetActive(false);
         gameObject.SetActive(false);
     }
 
@@ -193,6 +197,16 @@ public class ProductionBuildingUI : BuildingUI
             workerDescriptionText.text = "No humanoid assigned to this building";
 
         }
+    }
+
+    public void SetWorkerReplacement(Humanoid humanoid) {
+        workerReplacementGameObject.SetActive(true);
+        workerReplacementImage.sprite = humanoid.GetHumanoidSO().humanoidSprite;
+        workerReplacementNameText.text = humanoid.GetHumanoidName();
+    }
+
+    public void StopSettingWorkerReplacement() {
+        workerReplacementGameObject.SetActive(false);
     }
 
 }

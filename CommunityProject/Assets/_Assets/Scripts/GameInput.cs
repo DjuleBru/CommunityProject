@@ -28,6 +28,12 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.CancelPlaceBuilding.performed += CancelPlaceBuilding_performed;
     }
 
+    public Vector2 GetZoomVector() {
+        Vector2 zoomInput = playerInputActions.Player.Zoom.ReadValue<Vector2>();
+
+        return zoomInput;
+    }
+
     private void CancelPlaceBuilding_performed(InputAction.CallbackContext obj) {
         OnPlaceBuildingCancelled?.Invoke(this, EventArgs.Empty);
     }
@@ -56,7 +62,6 @@ public class GameInput : MonoBehaviour
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
 
         inputVector = inputVector.normalized;
-
         return inputVector;
     }
 

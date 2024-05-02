@@ -11,13 +11,22 @@ public class HumanoidWork : MonoBehaviour
     public event EventHandler OnHumanoidWorkStarted;
     public event EventHandler OnHumanoidWorkStopped;
 
+    private float assignBuildingTimer;
+    private float assignBuildingRate = 2f;
 
     private void Awake() {
         humanoid = GetComponent<Humanoid>();
     }
 
+    private void Update() {
+        assignBuildingTimer -= Time.deltaTime;
+    }
+
     public void Work() {
+        if (humanoid.GetAssignedBuilding() == null) return;
+
         ProductionBuilding assignedBuilding = humanoid.GetAssignedBuilding() as ProductionBuilding;
+
         if (assignedBuilding.GetSelectedRecipeSO() == null || assignedBuilding.GetInputItemsMissing() || assignedBuilding.GetOutputInventoryFull() || assignedBuilding.GetPlayerInteractingWithBuilding()) {
             if(working) {
                 working = false;
@@ -37,22 +46,28 @@ public class HumanoidWork : MonoBehaviour
 
     [Button]
     public ProductionBuilding FindBestWorkingBuilding() {
-        List<ProductionBuilding> productionBuildingsList = BuildingsManager.Instance.GetProductionBuildings();
+        if (assignBuildingTimer > 0) {
+            return null;
+        } else {
+            assignBuildingTimer = assignBuildingRate;
 
-        float bestBuildingScore = 0f;
-        ProductionBuilding bestBuilding = null;
+            List<ProductionBuilding> productionBuildingsList = BuildingsManager.Instance.GetProductionBuildings();
 
-        foreach (ProductionBuilding building in productionBuildingsList) {
-            float score = CalculateBuildingScore(building);
-            //building.SetBuildingVisualDebugScore(score.ToString());
+            float bestBuildingScore = 0f;
+            ProductionBuilding bestBuilding = null;
 
-            if(score > bestBuildingScore) {
-                bestBuildingScore = score;
-                bestBuilding = building;
+            foreach (ProductionBuilding building in productionBuildingsList) {
+                float score = CalculateBuildingScore(building);
+                //building.SetBuildingVisualDebugScore(score.ToString());
+
+                if (score > bestBuildingScore) {
+                    bestBuildingScore = score;
+                    bestBuilding = building;
+                }
             }
-        }
 
-        return bestBuilding;
+            return bestBuilding;
+        }
     }
 
     private float CalculateBuildingScore(ProductionBuilding building) {
@@ -68,9 +83,14 @@ public class HumanoidWork : MonoBehaviour
     }
 
     public void StopWorking() {
-        ProductionBuilding assignedBuilding = humanoid.GetAssignedBuilding() as ProductionBuilding;
         working = false;
-        assignedBuilding.SetHumanoidWorking(false, humanoid.GetHumanoidSO().humanoidType);
         OnHumanoidWorkStopped?.Invoke(this, EventArgs.Empty);
+
+        ProductionBuilding assignedBuilding = humanoid.GetAssignedBuilding() as ProductionBuilding;
+        if (assignedBuilding == null) return;
+
+        assignedBuilding.RemoveAssignedHumanoid();
+        assignedBuilding.SetHumanoidWorking(false, humanoid.GetHumanoidSO().humanoidType);
+        humanoid.RemoveAssignedBuilding();
     }
 }

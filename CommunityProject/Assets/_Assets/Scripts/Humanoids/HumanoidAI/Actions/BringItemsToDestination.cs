@@ -20,6 +20,10 @@ public class BringItemsToDestination : Action {
 
     public override TaskStatus OnUpdate() {
 
+        if (humanoidCarry.GetDestinationBuilding() == null || humanoidCarry.GetSourceBuilding() == null) {
+            return TaskStatus.Failure;
+        }
+
         ColliderDistance2D colliderDistance2DToBuildingCollider = humanoidCarry.GetDestinationBuilding().GetComponent<Collider2D>().Distance(humanoidCollider);
 
         humanoidMovement.MoveToDestination(colliderDistance2DToBuildingCollider.pointA);

@@ -316,11 +316,19 @@ public class ProductionBuilding : Building
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
     }
 
-    public void RemoveAssignedHumanoid() {
-        this.assignedHumanoid = null;
-        productionBuildingUIWorld.SetWorkerMissing(true);
-
+    public override void ReplaceAssignedHumanoid(Humanoid humanoid) {
+        if(assignedHumanoid != null) {
+            assignedHumanoid.RemoveAssignedBuilding();
+        }
+        assignedHumanoid = humanoid;
+        assignedHumanoid.AssignBuilding(this);
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
+    }
+
+    public override void RemoveAssignedHumanoid() {
+        this.assignedHumanoid = null;
+        ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
+        productionBuildingUIWorld.SetWorkerMissing(true);
     }
 
     public Humanoid GetAssignedHumanoid() {
@@ -330,6 +338,10 @@ public class ProductionBuilding : Building
     public void RefreshProductionBuildingUIWorld() {
         productionBuildingUIWorld.SetItemsMissing(inputItemsMissing);
         productionBuildingUIWorld.SetOutputInventoryFull(outputInventoryFull);
+    }
+
+    public ProductionBuildingUI_World GetProductionBuildingUIWorld() {
+        return productionBuildingUIWorld;
     }
 
     public bool GetInputItemsMissing() {

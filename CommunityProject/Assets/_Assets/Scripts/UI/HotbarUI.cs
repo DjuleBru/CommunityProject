@@ -4,7 +4,25 @@ using UnityEngine;
 
 public class HotbarUI : MonoBehaviour
 {
-    [SerializeField] private GameObject buildingMenu;
-    [SerializeField] private GameObject workersMenu;
-    [SerializeField] private GameObject dungeonsMenu;
+
+    public static HotbarUI Instance { get; private set; }
+
+    [SerializeField] private GameObject hotBarUIGameObject;
+
+    private bool hotBarOpen;
+
+    private void Awake() {
+        Instance = this;
+    }
+
+    public void SetHotbarActive(bool hotBarActive) {
+        hotBarOpen = hotBarActive;
+
+        if (!hotBarOpen) {
+            hotBarUIGameObject.SetActive(false);
+        } else {
+            hotBarUIGameObject.SetActive(true);
+        }
+    }
+
 }

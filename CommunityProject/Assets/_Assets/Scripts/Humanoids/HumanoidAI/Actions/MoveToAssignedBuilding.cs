@@ -19,6 +19,10 @@ public class MoveToAssignedBuilding : Action {
 
     public override TaskStatus OnUpdate() {
 
+        if (humanoid.GetAssignedBuilding() == null) {
+            return TaskStatus.Failure;
+        }
+
         ColliderDistance2D colliderDistance2DToBuildingCollider = humanoid.GetAssignedBuilding().GetComponent<Collider2D>().Distance(humanoidCollider);
 
         humanoidMovement.MoveToDestination(colliderDistance2DToBuildingCollider.pointA);

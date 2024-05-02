@@ -12,6 +12,7 @@ public class BuildingVisual : MonoBehaviour, IInteractable
     [SerializeField] protected Color unValidPlacementColor;
 
     [SerializeField] protected Collider2D solidBuildingCollider;
+    [SerializeField] protected Collider2D interactionBuildingCollider;
 
     [SerializeField] protected Building building;
     protected bool playerInTriggerArea;
@@ -118,5 +119,9 @@ public class BuildingVisual : MonoBehaviour, IInteractable
 
     public void SetBuildingScoreText(string score) {
         buildingScoreText.text = score;
+    }
+
+    public void SetColliderActive(bool active) {
+        interactionBuildingCollider.enabled = active;
     }
 }

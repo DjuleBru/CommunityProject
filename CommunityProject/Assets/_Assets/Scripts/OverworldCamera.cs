@@ -16,10 +16,10 @@ public class OverworldCamera : MonoBehaviour
     }
 
     public void DeActivatePlayerCamera() {
-        v_camera.enabled = false;
+        v_camera.gameObject.SetActive(false);
     }
 
     public void ActivatePlayerCamera() {
-        v_camera.enabled = true;
+        v_camera.gameObject.SetActive(true);
     }
 }

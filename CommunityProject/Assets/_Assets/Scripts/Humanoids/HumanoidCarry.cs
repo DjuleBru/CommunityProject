@@ -29,7 +29,7 @@ public class HumanoidCarry : MonoBehaviour
     public Building TryAssignBestDestinationBuilding() {
         //DeAssign from previous destination building
         if(destinationBuilding != null) {
-            destinationBuilding.DeAssignHaulier(humanoid);
+            destinationBuilding.DeAssignInputHaulier(humanoid);
         }
 
         List<Building> destinationBuildingsList = new List<Building>();
@@ -46,8 +46,8 @@ public class HumanoidCarry : MonoBehaviour
         foreach (Building building in destinationBuildingsList) {
             float inventoryScore = CalculateDestinationInventoryScore(building);
             float assignedHauliersScore = 1;
-            if (building.GetAssignedHauliersList() != null) {
-                assignedHauliersScore = building.GetAssignedHauliersList().Count + 1;
+            if (building.GetAssignedInputHauliersList() != null) {
+                assignedHauliersScore = building.GetAssignedInputHauliersList().Count + 1;
             }
             assignedHauliersScore += 1f;
 
@@ -78,7 +78,7 @@ public class HumanoidCarry : MonoBehaviour
             Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding);
             itemToCarry = destinationBuildingInventory.GetRestrictedItemList()[0];
             humanoid.AssignBuilding(destinationBuilding);
-            destinationBuilding.AssignHaulier(humanoid);
+            destinationBuilding.AssignInputHaulier(humanoid);
         }
 
         return destinationBuilding;
@@ -102,6 +102,9 @@ public class HumanoidCarry : MonoBehaviour
         }
 
         sourceBuilding = bestBuilding;
+        if(sourceBuilding != null) {
+            sourceBuilding.AssignOutputHaulier(humanoid);
+        }
         return sourceBuilding;
     }
     private float CalculateDestinationInventoryScore(Building building) {
@@ -217,6 +220,26 @@ public class HumanoidCarry : MonoBehaviour
 
         return false;
     }
+
+    public void ReplaceDestinationBuildingAssigned(Building newDestinationBuilding) {
+        if(destinationBuilding != null) {
+            destinationBuilding.DeAssignInputHaulier(humanoid);
+        }
+
+        humanoid.AssignBuilding(newDestinationBuilding);
+        destinationBuilding = newDestinationBuilding;
+        newDestinationBuilding.AssignInputHaulier(humanoid);
+    }
+
+    public void ReplaceSourceBuildingAssigned(Building newSourceBuilding) {
+        if (sourceBuilding != null) {
+            sourceBuilding.DeAssignOutputHaulier(humanoid);
+        }
+
+        sourceBuilding = newSourceBuilding;
+        newSourceBuilding.AssignOutputHaulier(humanoid);
+    }
+
     public Inventory GetHumanoidCarryInventory() {
         return humanoidCarryInventory;
     }
@@ -243,6 +266,21 @@ public class HumanoidCarry : MonoBehaviour
 
     public Item GetItemToCarry() { 
         return itemToCarry; 
+    }
+
+    public void StopCarrying() {
+        if(destinationBuilding != null) {
+            destinationBuilding.DeAssignInputHaulier(humanoid);
+        }
+
+        if(sourceBuilding != null) {
+            sourceBuilding.DeAssignOutputHaulier(humanoid);
+        }
+
+        destinationBuilding = null;
+        sourceBuilding = null;
+        itemCarrying = null;
+        itemToCarry = null;
     }
 
     #region DEBUG

@@ -14,11 +14,24 @@ public class AssignBestBuilding : Action
     }
 
     public override TaskStatus OnUpdate() {
-        humanoid.AssignBuilding(humanoidWork.FindBestWorkingBuilding());
-        if(humanoid.GetAssignedBuilding() != null) {
-            humanoid.GetAssignedBuilding().AssignHumanoid(humanoid);
-            return TaskStatus.Success;
+
+        if (humanoid.GetAutoAssign()) {
+            humanoid.AssignBuilding(humanoidWork.FindBestWorkingBuilding());
+            if (humanoid.GetAssignedBuilding() != null) {
+                humanoid.GetAssignedBuilding().AssignHumanoid(humanoid);
+                return TaskStatus.Success;
+            }
+
         }
+        else {
+            if (humanoid.GetAssignedBuilding() != null) {
+                return TaskStatus.Success;
+            } else {
+                return TaskStatus.Running;
+            }
+        }
+
+
         return TaskStatus.Failure;
     }
 }

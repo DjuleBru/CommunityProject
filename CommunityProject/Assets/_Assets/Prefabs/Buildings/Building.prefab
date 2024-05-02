@@ -547,6 +547,7 @@ MonoBehaviour:
   buildingSizeX: 0
   buildingSizeY: 0
   buildingCamera: {fileID: 4325000353837109415}
+  buildingVisual: {fileID: 2658364075117245303}
   interactionCollider: {fileID: 466622794097811150}
 --- !u!61 &4925755126839693160
 BoxCollider2D:
@@ -1079,6 +1080,7 @@ MonoBehaviour:
   validPlacementColor: {r: 1, g: 1, b: 1, a: 0.15686275}
   unValidPlacementColor: {r: 0.764151, g: 0, b: 0.18794711, a: 0.3137255}
   solidBuildingCollider: {fileID: 4925755126839693160}
+  interactionBuildingCollider: {fileID: 466622794097811150}
   building: {fileID: 704791291414924258}
   buildingScoreText: {fileID: 558257639735520691}
 --- !u!61 &466622794097811150

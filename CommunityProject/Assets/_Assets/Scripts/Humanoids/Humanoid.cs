@@ -22,6 +22,7 @@ public class Humanoid : MonoBehaviour
     [SerializeField] private bool debugJob;
 
     private HumanoidWork humanoidWork;
+    private HumanoidCarry humanoidCarry;
     [SerializeField] private HumanoidVisual humanoidVisual;
     [SerializeField] private HumanoidInteraction humanoidInteraction;
     private Collider2D collider2D;
@@ -41,6 +42,7 @@ public class Humanoid : MonoBehaviour
     private void Awake() {
         behaviorTree = GetComponent<BehaviorDesigner.Runtime.BehaviorTree>();
         humanoidWork = GetComponent<HumanoidWork>();
+        humanoidCarry = GetComponent<HumanoidCarry>();
         collider2D = GetComponent<Collider2D>();
 
         if (debugJob) {
@@ -117,6 +119,10 @@ public class Humanoid : MonoBehaviour
         assignedBuilding = building;
     }
 
+    public void RemoveAssignedBuilding() {
+        assignedBuilding = null;
+    }
+
     public Building GetAssignedBuilding() {
         return assignedBuilding;
     }
@@ -159,6 +165,18 @@ public class Humanoid : MonoBehaviour
 
     public void SetAutoAssign(bool autoAssignActive) {
         autoAssign = autoAssignActive;
+
+        if(!autoAssign) {
+            if (IsHaulier()) {
+                humanoidCarry.StopCarrying();
+            }
+
+            if (IsWorker()) {
+                humanoidWork.StopWorking();
+            }
+
+            assignedBuilding = null;
+        }
     }
 
     public void SetHumanoidActionDescription(string description) {
