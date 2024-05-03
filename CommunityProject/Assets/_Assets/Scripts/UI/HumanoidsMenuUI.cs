@@ -141,6 +141,14 @@ public class HumanoidsMenuUI : MonoBehaviour
         humanoidMenuPanel.SetActive(menuOpen);
         if(menuOpen) {
             RefreshHumanoidsUI();
+
+            BuildUI.Instance.CloseBuildHotbar();
+            (Player.Instance.GetPlayerInventoryUI() as InventoryUI_Interactable).CloseInventoryPanel();
         }
+    }
+
+    public void CloseHumanoidsMenu() {
+        menuOpen = false;
+        humanoidMenuPanel.SetActive(menuOpen);
     }
 }

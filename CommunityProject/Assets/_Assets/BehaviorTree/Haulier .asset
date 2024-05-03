@@ -26,13 +26,14 @@ MonoBehaviour:
         Destination Building Assigned","Instant":true},{"Type":"AssignDestinationBuilding","NodeData":{"Offset":"(120,130)"},"ID":9,"Name":"Assign
         Destination Building","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(294.70575,315.357117)"},"ID":10,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"HasSourceBuildingAssigned","NodeData":{"Offset":"(-70,110)"},"ID":11,"Name":"Has
         Source Building Assigned","Instant":true},{"Type":"AssignSourceBuilding","NodeData":{"Offset":"(130,105.714287)"},"ID":12,"Name":"Assign
-        Source Building","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(821.5115,149.592529)"},"ID":13,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-139.816742,143.629929)"},"ID":14,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsCarryingItems","NodeData":{"Offset":"(-85.78945,141.579056)"},"ID":15,"Name":"Is
-        Carrying Items","Instant":true},{"Type":"BringItemsToDestination","NodeData":{"Offset":"(79.5113144,136.8798)"},"ID":16,"Name":"Bring
-        Items To Destination","Instant":true},{"Type":"RoamAroundAssignedBuilding","NodeData":{"Offset":"(285.713379,142.142822)"},"ID":17,"Name":"Roam
-        Around Assigned Building","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(452.16214,145.13501)"},"ID":18,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsCarryingItems","NodeData":{"Offset":"(-70,140)"},"ID":19,"Name":"Is
-        Carrying Items","Instant":true},{"Type":"FetchItemsToCarry","NodeData":{"Offset":"(70,140)"},"ID":20,"Name":"Fetch
-        Items To Carry","Instant":true},{"Type":"RoamAroundAssignedBuilding","NodeData":{"Offset":"(247.509064,140.661743)"},"ID":21,"Name":"Roam
-        Around Assigned Building","Instant":true}]}]}]}]},{"Type":"Roam","NodeData":{"Offset":"(193.402954,238.5531)"},"ID":22,"Name":"Roam","Instant":true}]}]}}'
+        Source Building","Instant":true}]},{"Type":"HasSetItemToCarry","NodeData":{"Offset":"(603.847168,432.31665)"},"ID":13,"Name":"Has
+        Set Item To Carry","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(1004.84436,149.592529)"},"ID":14,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-139.816742,143.629929)"},"ID":15,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsCarryingItems","NodeData":{"Offset":"(-85.78945,141.579056)"},"ID":16,"Name":"Is
+        Carrying Items","Instant":true},{"Type":"BringItemsToDestination","NodeData":{"Offset":"(79.5113144,136.8798)"},"ID":17,"Name":"Bring
+        Items To Destination","Instant":true},{"Type":"RoamAroundAssignedBuilding","NodeData":{"Offset":"(285.713379,142.142822)"},"ID":18,"Name":"Roam
+        Around Assigned Building","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(452.16214,145.13501)"},"ID":19,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsCarryingItems","NodeData":{"Offset":"(-70,140)"},"ID":20,"Name":"Is
+        Carrying Items","Instant":true},{"Type":"FetchItemsToCarry","NodeData":{"Offset":"(70,140)"},"ID":21,"Name":"Fetch
+        Items To Carry","Instant":true},{"Type":"RoamAroundAssignedBuilding","NodeData":{"Offset":"(247.509064,140.661743)"},"ID":22,"Name":"Roam
+        Around Assigned Building","Instant":true}]}]}]}]},{"Type":"Roam","NodeData":{"Offset":"(193.402954,238.5531)"},"ID":23,"Name":"Roam","Instant":true}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 

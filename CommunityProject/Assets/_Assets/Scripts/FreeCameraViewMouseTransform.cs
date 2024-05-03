@@ -6,6 +6,8 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
 {
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        if (HumanoidManualAssignManager.Instance.IsAssigningBuildingToHumanoid()) return;
+
         Building building = collision.GetComponent<Building>();
 
         if (building != null) {
@@ -16,7 +18,7 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
                 productionBuilding.GetBuildingVisual().SetHovered(true);
                 ProductionBuildingUI.Instance.gameObject.SetActive(true);
                 ProductionBuildingUI.Instance.SetProductionBuilding(productionBuilding);
-                productionBuilding.GetProductionBuildingUIWorld().ShowAssignedHaulers(true);
+                productionBuilding.GetBuildingHaulersUI_World().ShowAssignedHaulers(true);
 
             }
 
@@ -25,7 +27,7 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
 
                 chest.GetChestVisual().OpenChestVisual();
                 chest.GetChestVisual().SetHovered(true);
-                chest.GetChestUIWorld().ShowAssignedHaulers(true);
+                chest.GetBuildingHaulersUI_World().ShowAssignedHaulers(true);
                 chest.OpenInventory();
             }
         }
@@ -40,7 +42,7 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
             if (building is ProductionBuilding) {
                 ProductionBuilding productionBuilding = (ProductionBuilding)building;
                 ProductionBuildingUI.Instance.gameObject.SetActive(false);
-                productionBuilding.GetProductionBuildingUIWorld().ShowAssignedHaulers(false);
+                productionBuilding.GetBuildingHaulersUI_World().ShowAssignedHaulers(false);
             }
 
             if(building is Chest) {
@@ -48,7 +50,7 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
 
                 chest.GetChestVisual().CloseChestVisual();
                 chest.GetChestVisual().SetHovered(false);
-                chest.GetChestUIWorld().ShowAssignedHaulers(false);
+                chest.GetBuildingHaulersUI_World().ShowAssignedHaulers(false);
                 chest.CloseInventory();
             }
         }

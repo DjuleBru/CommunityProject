@@ -971,6 +971,7 @@ GameObject:
   - component: {fileID: 243389869892477577}
   - component: {fileID: 8809502949808752718}
   - component: {fileID: 5063454199584720349}
+  - component: {fileID: 8493336833026067711}
   m_Layer: 0
   m_Name: ProductionBuildingWorldUI
   m_TagString: Untagged
@@ -1084,6 +1085,20 @@ MonoBehaviour:
   productionBuilding: {fileID: 508347847299422550}
   progressionBarGameObject: {fileID: 8801423435777781787}
   progressionBarFill: {fileID: 7321722727180597704}
+--- !u!114 &8493336833026067711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3704395286546136158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31565c4393a8c4245be2cd453954af6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outputInventoryFull: {fileID: 5935623112606137029}
+  building: {fileID: 508347847299422550}
   assignedInputHaulersTemplate: {fileID: 7632766660382124229}
   assignedInputHaulersContainer: {fileID: 2748649978428995894}
   assignedOutputHaulersTemplate: {fileID: 9188090488437677616}
@@ -2679,6 +2694,7 @@ MonoBehaviour:
   buildingVisual: {fileID: 6438190855074955490}
   interactionCollider: {fileID: 1645803220151359981}
   productionBuildingUIWorld: {fileID: 5063454199584720349}
+  buildingHaulersUI_World: {fileID: 8493336833026067711}
   productionBuildingvisual: {fileID: 6438190855074955490}
 --- !u!114 &3218854728485721988 stripped
 MonoBehaviour:

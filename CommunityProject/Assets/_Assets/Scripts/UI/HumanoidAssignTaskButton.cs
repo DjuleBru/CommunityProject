@@ -4,9 +4,25 @@ using UnityEngine;
 
 public class HumanoidAssignTaskButton : MonoBehaviour
 {
+    [SerializeField] private HumanoidAutoAssignButton autoAssignButton;
+    [SerializeField] private bool isDestionationBuilding;
+
     public void AssignTask() {
+
         Humanoid humanoid = GetComponentInParent<HumanoidTemplateUI>().GetHumanoid();
-        HumanoidManualAssignManager.Instance.SetAssigningBuildingToHumanoid(true, humanoid);
+
+        if (humanoid.GetAutoAssign()) {
+            autoAssignButton.ToggleAutoAssign();
+        }
+
+        if (humanoid.GetJob() == Humanoid.Job.Worker) {
+            HumanoidManualAssignManager.Instance.SetAssigningBuildingToHumanoid(true, humanoid, false);
+        }
+
+        if (humanoid.GetJob() == Humanoid.Job.Haulier) {
+            HumanoidManualAssignManager.Instance.SetAssigningBuildingToHumanoid(true, humanoid, isDestionationBuilding);
+        }
+
     }
 
 }

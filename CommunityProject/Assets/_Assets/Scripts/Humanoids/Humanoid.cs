@@ -38,6 +38,7 @@ public class Humanoid : MonoBehaviour
     [SerializeField] private BehaviorDesigner.Runtime.BehaviorTree behaviorTree;
     [SerializeField] ExternalBehaviorTree workerBehaviorTree;
     [SerializeField] ExternalBehaviorTree haulierBehaviorTree;
+    [SerializeField] ExternalBehaviorTree dungeoneerBehaviorTree;
 
     private void Awake() {
         behaviorTree = GetComponent<BehaviorDesigner.Runtime.BehaviorTree>();
@@ -98,6 +99,10 @@ public class Humanoid : MonoBehaviour
             }
         }
 
+        if(jobAssigned == Job.Haulier) {
+            humanoidCarry.StopCarrying();
+        }
+
         this.jobAssigned = job;
         AssignBehaviorTree();
     }
@@ -111,6 +116,11 @@ public class Humanoid : MonoBehaviour
 
         if (jobAssigned == Job.Haulier) {
             behaviorTree.ExternalBehavior = haulierBehaviorTree;
+            return;
+        }
+
+        if (jobAssigned == Job.Dungeoneer) {
+            behaviorTree.ExternalBehavior = dungeoneerBehaviorTree;
             return;
         }
     }
@@ -164,19 +174,17 @@ public class Humanoid : MonoBehaviour
     }
 
     public void SetAutoAssign(bool autoAssignActive) {
+        if (!autoAssignActive && !autoAssign) return;
         autoAssign = autoAssignActive;
-
-        if(!autoAssign) {
-            if (IsHaulier()) {
-                humanoidCarry.StopCarrying();
-            }
-
-            if (IsWorker()) {
-                humanoidWork.StopWorking();
-            }
-
-            assignedBuilding = null;
+        if (IsHaulier()) {
+            humanoidCarry.StopCarrying();
         }
+
+        if (IsWorker()) {
+            humanoidWork.StopWorking();
+        }
+
+        assignedBuilding = null;
     }
 
     public void SetHumanoidActionDescription(string description) {

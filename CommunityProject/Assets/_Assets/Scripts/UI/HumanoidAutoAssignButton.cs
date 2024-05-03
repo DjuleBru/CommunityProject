@@ -7,6 +7,7 @@ public class HumanoidAutoAssignButton : MonoBehaviour
 {
     [SerializeField] private Image autoAssignSprite;
     [SerializeField] private Sprite manualAssignSprite;
+    [SerializeField] private HumanoidTemplateUI humanoidTemplateUI;
 
     private Sprite enabledSprite;
 
@@ -37,7 +38,8 @@ public class HumanoidAutoAssignButton : MonoBehaviour
             autoAssignSprite.sprite = enabledSprite;
         }
 
-        GetComponentInParent<HumanoidTemplateUI>().ToggleAutoAssign(autoAssignActive);
+        humanoidTemplateUI.ToggleAutoAssign(autoAssignActive);
+        GetComponentInParent<HumanoidTemplateUI>().RefreshHumanoidTemplateUI();
     }
 
 

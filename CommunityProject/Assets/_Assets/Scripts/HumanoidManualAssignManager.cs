@@ -15,7 +15,7 @@ public class HumanoidManualAssignManager : MonoBehaviour
     private ProductionBuilding productionBuildingHovered;
     private Chest chestHovered;
 
-    private bool haulerOutputBuildingAssigned;
+    private bool assigningDestionationBuilding;
 
     private void Awake() {
         Instance = this;
@@ -27,7 +27,7 @@ public class HumanoidManualAssignManager : MonoBehaviour
         if (assigningBuildingToHumanoid) {
             if(Input.GetMouseButtonDown(1)) {
                 //Right click : cancel assigning
-                SetAssigningBuildingToHumanoid(false, null);
+                SetAssigningBuildingToHumanoid(false, null, false);
             }
 
             if(Input.GetMouseButtonDown(0)) {
@@ -50,46 +50,45 @@ public class HumanoidManualAssignManager : MonoBehaviour
         if (productionBuildingHovered != null) {
             productionBuildingHovered.ReplaceAssignedHumanoid(humanoid);
             ProductionBuildingUI.Instance.StopSettingWorkerReplacement();
-            StopAssignmentMode();
         }
+        StopAssignmentMode();
     }
 
     private void HandleHaulierBuildingAssignment() {
-        if(!haulerOutputBuildingAssigned) {
+        if(assigningDestionationBuilding) {
 
             if (productionBuildingHovered != null) {
                 humanoid.GetComponent<HumanoidCarry>().ReplaceDestinationBuildingAssigned(productionBuildingHovered);
-                haulerOutputBuildingAssigned = true;
-                productionBuildingHovered.GetProductionBuildingUIWorld().RefreshAssignedHaulers();
+                productionBuildingHovered.GetBuildingHaulersUI_World().RefreshAssignedHaulers();
             }
 
             if(chestHovered != null) {
                 humanoid.GetComponent<HumanoidCarry>().ReplaceDestinationBuildingAssigned(chestHovered);
-                haulerOutputBuildingAssigned = true;
-                chestHovered.GetChestUIWorld().RefreshAssignedHaulers();
+                chestHovered.GetBuildingHaulersUI_World().RefreshAssignedHaulers();
             }
+
+            StopAssignmentMode();
 
         } else {
 
             if (productionBuildingHovered != null) {
                 humanoid.GetComponent<HumanoidCarry>().ReplaceSourceBuildingAssigned(productionBuildingHovered);
-                productionBuildingHovered.GetProductionBuildingUIWorld().RefreshAssignedHaulers();
-                haulerOutputBuildingAssigned = false;
-                StopAssignmentMode();
+                productionBuildingHovered.GetBuildingHaulersUI_World().RefreshAssignedHaulers();
             }
 
             if (chestHovered != null) {
                 humanoid.GetComponent<HumanoidCarry>().ReplaceSourceBuildingAssigned(chestHovered);
-                haulerOutputBuildingAssigned = true;
-                chestHovered.GetChestUIWorld().RefreshAssignedHaulers();
-                StopAssignmentMode();
+                chestHovered.GetBuildingHaulersUI_World().RefreshAssignedHaulers();
             }
+
+            StopAssignmentMode();
         }
     }
 
-    public void SetAssigningBuildingToHumanoid(bool assigning, Humanoid humanoid) {
+    public void SetAssigningBuildingToHumanoid(bool assigning, Humanoid humanoid, bool assigningDestinationBuilding) {
         assigningBuildingToHumanoid = assigning;
         this.humanoid = humanoid;
+        this.assigningDestionationBuilding = assigningDestinationBuilding;
 
         if (assigningBuildingToHumanoid) {
 
@@ -106,9 +105,11 @@ public class HumanoidManualAssignManager : MonoBehaviour
     private void StartAssignmentMode() {
         mousePositionCollider.enabled = true;
         HumanoidsMenuUI.Instance.OpenCloseHumanoidsMenu();
+
     }
 
     private void StopAssignmentMode() {
+        assigningBuildingToHumanoid = false;
         mousePositionCollider.enabled = false;
         HumanoidsMenuUI.Instance.OpenCloseHumanoidsMenu();
     }
@@ -116,21 +117,24 @@ public class HumanoidManualAssignManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         Building building = collision.GetComponent<Building>();
 
+
         if(building != null) {
             if (building is ProductionBuilding) {
 
                 ProductionBuilding productionBuilding = (ProductionBuilding)building;
                 productionBuildingHovered = productionBuilding;
 
+                ShowProductionBuildingInfo(productionBuilding);
+
                 if (humanoid.IsWorker()) {
                     ProductionBuildingUI.Instance.SetWorkerReplacement(humanoid);
                 }
 
                 if(humanoid.IsHaulier()) {
-                    if(!haulerOutputBuildingAssigned) {
-                        productionBuildingHovered.GetProductionBuildingUIWorld().ShowPotentialInputHaulerAssign(humanoid);
+                    if(assigningDestionationBuilding) {
+                        productionBuildingHovered.GetBuildingHaulersUI_World().ShowPotentialInputHaulerAssign(humanoid);
                     } else {
-                        productionBuildingHovered.GetProductionBuildingUIWorld().ShowPotentialOutputHaulerAssign(humanoid);
+                        productionBuildingHovered.GetBuildingHaulersUI_World().ShowPotentialOutputHaulerAssign(humanoid);
                     }
                 }
 
@@ -141,11 +145,13 @@ public class HumanoidManualAssignManager : MonoBehaviour
                 chestHovered = chest;
 
                 if (humanoid.IsHaulier()) {
-                    if (!haulerOutputBuildingAssigned) {
-                        chestHovered.GetChestUIWorld().ShowPotentialInputHaulerAssign(humanoid);
+
+                    ShowChestInfo(chest);
+                    if (assigningDestionationBuilding) {
+                        chestHovered.GetBuildingHaulersUI_World().ShowPotentialInputHaulerAssign(humanoid);
                     }
                     else {
-                        chestHovered.GetChestUIWorld().ShowPotentialOutputHaulerAssign(humanoid);
+                        chestHovered.GetBuildingHaulersUI_World().ShowPotentialOutputHaulerAssign(humanoid);
                     }
                 }
             }
@@ -160,7 +166,7 @@ public class HumanoidManualAssignManager : MonoBehaviour
 
             if(building is ProductionBuilding) {
                 ProductionBuildingUI.Instance.StopSettingWorkerReplacement();
-                productionBuildingHovered.GetProductionBuildingUIWorld().ShowAssignedHaulers(false);
+                productionBuildingHovered.GetBuildingHaulersUI_World().ShowAssignedHaulers(false);
                 productionBuildingHovered = null;
             }
 
@@ -170,5 +176,23 @@ public class HumanoidManualAssignManager : MonoBehaviour
                 chestHovered = null;
             }
         }
+    }
+
+    private void ShowProductionBuildingInfo(ProductionBuilding productionBuilding) {
+        productionBuilding.GetBuildingVisual().SetHovered(true);
+        ProductionBuildingUI.Instance.gameObject.SetActive(true);
+        ProductionBuildingUI.Instance.SetProductionBuilding(productionBuilding);
+        productionBuilding.GetBuildingHaulersUI_World().ShowAssignedHaulers(true);
+    }
+
+    private void ShowChestInfo(Chest chest) {
+        chest.GetChestVisual().OpenChestVisual();
+        chest.GetChestVisual().SetHovered(true);
+        chest.GetBuildingHaulersUI_World().ShowAssignedHaulers(true);
+        chest.OpenInventory();
+    } 
+
+    public bool IsAssigningBuildingToHumanoid() {
+        return assigningBuildingToHumanoid;
     }
 }

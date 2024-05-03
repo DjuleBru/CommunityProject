@@ -33,9 +33,12 @@ public class BringItemsToDestination : Action {
             return TaskStatus.Running;
         }
         else {
-            if(humanoidCarry.DropItemsInDestinationBuilding()) {
-                humanoidCarry.TryAssignBestDestinationBuilding();
-                humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
+            if (humanoidCarry.DropItemsInDestinationBuilding()) {
+                if(humanoid.GetAutoAssign()) {
+                    humanoidCarry.TryAssignBestDestinationBuilding();
+                    humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
+                }
+
                 return TaskStatus.Success;
             } else {
                 return TaskStatus.Failure;

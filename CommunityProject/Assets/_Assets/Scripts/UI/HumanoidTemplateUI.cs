@@ -14,44 +14,30 @@ public class HumanoidTemplateUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI humanoidNameText;
 
     [SerializeField] private Image humanoidJobBackgroundSpriteRenderer;
-    [SerializeField] private Image assignmentIcon;
-    [SerializeField] private TextMeshProUGUI assignmentText;
+
+    [SerializeField] private Image mainAssignmentIcon;
+    [SerializeField] private Image inputAssignmentIcon;
+    [SerializeField] private Image outputAssignmentIcon;
+    [SerializeField] private Image humanoidItemCarryingSprite;
+
+    [SerializeField] private TextMeshProUGUI mainAssignmentText;
+    [SerializeField] private TextMeshProUGUI inputAssignmentText;
+    [SerializeField] private TextMeshProUGUI outputAssignmentText;
+
     [SerializeField] private TextMeshProUGUI actionDescriptionText;
 
     [SerializeField] private Sprite unassignedSprite;
 
     [SerializeField] private HumanoidAutoAssignButton autoAssignButton;
-    
+
+    [SerializeField] private GameObject mainAssignmentSlot;
+    [SerializeField] private GameObject inputAssignmentSlot;
+    [SerializeField] private GameObject outputAssignmentSlot;
+
+
     public void SetHumanoidTemplateUI(Humanoid humanoid) {
         this.humanoid = humanoid;
-        humanoidIcon.sprite = humanoid.GetHumanoidSO().humanoidSprite;
-        humanoidJobText.text = humanoid.GetJob().ToString();
-        humanoidJobBackgroundSpriteRenderer.sprite = HumanoidsMenuUI.Instance.GetHumanoidWorkerBackgroundSprite(humanoid.GetJob());
-        humanoidNameText.text = humanoid.GetHumanoidName().ToString();
-
-        if(humanoid.GetJob() == Humanoid.Job.Haulier) {
-            if (humanoid.GetAssignedBuilding() != null) {
-                assignmentIcon.sprite = humanoid.GetAssignedBuilding().GetBuildingSO().buildingIconSprite;
-                assignmentText.text = humanoid.GetAssignedBuilding().GetBuildingSO().buildingType.ToString();
-            }
-            else {
-                assignmentIcon.sprite = unassignedSprite;
-                assignmentText.text = "unassigned";
-            }
-        }
-        
-        if(humanoid.GetJob() == Humanoid.Job.Worker) {
-            if(humanoid.GetAssignedBuilding() != null) {
-                assignmentIcon.sprite = humanoid.GetAssignedBuilding().GetBuildingSO().buildingIconSprite;
-                assignmentText.text = humanoid.GetAssignedBuilding().GetBuildingSO().buildingType.ToString();
-            } else {
-                assignmentIcon.sprite = unassignedSprite;
-                assignmentText.text = "unassigned";
-            }
-        }
-
-        actionDescriptionText.text = humanoid.GetHumanoidActionDescription();
-        autoAssignButton.SetAutoAssign(humanoid.GetAutoAssign());
+        RefreshHumanoidTemplateUI();
     }
 
     public void RefreshHumanoidTemplateUI() {
@@ -62,24 +48,48 @@ public class HumanoidTemplateUI : MonoBehaviour
         humanoidNameText.text = humanoid.GetHumanoidName().ToString();
 
         if (humanoid.GetJob() == Humanoid.Job.Haulier) {
-            if (humanoid.GetAssignedBuilding() != null) {
-                assignmentIcon.sprite = humanoid.GetAssignedBuilding().GetBuildingSO().buildingIconSprite;
-                assignmentText.text = humanoid.GetAssignedBuilding().GetBuildingSO().buildingType.ToString();
+
+            mainAssignmentSlot.SetActive(false);
+            inputAssignmentSlot.SetActive(true);
+            outputAssignmentSlot.SetActive(true);
+
+            if (humanoid.GetComponent<HumanoidCarry>().GetDestinationBuilding() != null) {
+                outputAssignmentIcon.sprite = humanoid.GetComponent<HumanoidCarry>().GetDestinationBuilding().GetBuildingSO().buildingIconSprite;
+                outputAssignmentText.text = humanoid.GetComponent<HumanoidCarry>().GetDestinationBuilding().GetBuildingSO().buildingType.ToString();
+            } else {
+                outputAssignmentIcon.sprite = unassignedSprite;
+                outputAssignmentText.text = "Unassigned";
+            }
+
+            if (humanoid.GetComponent<HumanoidCarry>().GetSourceBuilding() != null) {
+                inputAssignmentIcon.sprite = humanoid.GetComponent<HumanoidCarry>().GetSourceBuilding().GetBuildingSO().buildingIconSprite;
+                inputAssignmentText.text = humanoid.GetComponent<HumanoidCarry>().GetSourceBuilding().GetBuildingSO().buildingType.ToString();
             }
             else {
-                assignmentIcon.sprite = unassignedSprite;
-                assignmentText.text = "unassigned";
+                inputAssignmentIcon.sprite = unassignedSprite;
+                inputAssignmentText.text = "Unassigned";
+            }
+
+            if(humanoid.GetComponent<HumanoidCarry>().GetItemToCarry() != null) {
+                humanoidItemCarryingSprite.sprite = ItemAssets.Instance.GetItemSO(humanoid.GetComponent<HumanoidCarry>().GetItemToCarry().itemType).itemSprite;
+            } else {
+                humanoidItemCarryingSprite.sprite = unassignedSprite;
             }
         }
 
         if (humanoid.GetJob() == Humanoid.Job.Worker) {
+
+            mainAssignmentSlot.SetActive(true);
+            inputAssignmentSlot.SetActive(false);
+            outputAssignmentSlot.SetActive(false);
+
             if (humanoid.GetAssignedBuilding() != null) {
-                assignmentIcon.sprite = humanoid.GetAssignedBuilding().GetBuildingSO().buildingIconSprite;
-                assignmentText.text = humanoid.GetAssignedBuilding().GetBuildingSO().buildingType.ToString();
+                mainAssignmentIcon.sprite = humanoid.GetAssignedBuilding().GetBuildingSO().buildingIconSprite;
+                mainAssignmentText.text = humanoid.GetAssignedBuilding().GetBuildingSO().buildingType.ToString();
             }
             else {
-                assignmentIcon.sprite = unassignedSprite;
-                assignmentText.text = "unassigned";
+                mainAssignmentIcon.sprite = unassignedSprite;
+                mainAssignmentText.text = "Unassigned";
             }
         }
 
@@ -89,10 +99,16 @@ public class HumanoidTemplateUI : MonoBehaviour
 
     public void ToggleAutoAssign(bool autoAssign) {
         humanoid.SetAutoAssign(autoAssign);
+
     }
 
     public void SetJob(Humanoid.Job job) {
         humanoid.SetJob(job);
+        RefreshHumanoidTemplateUI();
+    }
+
+    public void SetItemToCarry(Item item) {
+        humanoid.GetComponent<HumanoidCarry>().SetItemToCarry(item);
         RefreshHumanoidTemplateUI();
     }
 

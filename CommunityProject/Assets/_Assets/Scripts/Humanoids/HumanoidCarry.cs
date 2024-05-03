@@ -15,7 +15,7 @@ public class HumanoidCarry : MonoBehaviour
 
     private Building destinationBuilding;
     private Building sourceBuilding;
-    private Item itemToCarry;
+    private Item itemToCarry = null;
     private Item itemCarrying = null;
 
     public event EventHandler OnCarryStarted;
@@ -24,6 +24,14 @@ public class HumanoidCarry : MonoBehaviour
     private void Awake() {
         humanoidCarryInventory = new Inventory(true, 1, 1, maxCarryAmount);
         humanoid = GetComponent<Humanoid>();
+    }
+
+    private void Update() {
+        if (humanoid.GetJob() == Humanoid.Job.Haulier)
+        {
+
+            //Debug.Log(itemCarrying == null);
+        }
     }
 
     public Building TryAssignBestDestinationBuilding() {
@@ -159,7 +167,8 @@ public class HumanoidCarry : MonoBehaviour
 
         if(sourceBuilding is Chest) {
             Chest chest = sourceBuilding as Chest;
-            if(chest.GetChestInventory().HasItem(itemToFetch)) {
+
+            if (chest.GetChestInventory().HasItem(itemToFetch)) {
                 chest.GetChestInventory().RemoveItemAmount(itemToFetch);
                 itemCarrying = itemToFetch;
                 OnCarryStarted?.Invoke(this, EventArgs.Empty);
@@ -268,7 +277,12 @@ public class HumanoidCarry : MonoBehaviour
         return itemToCarry; 
     }
 
+    public void SetItemToCarry(Item item) {
+        itemToCarry = item;
+    }
+
     public void StopCarrying() {
+        Debug.Log("stop carrying");
         if(destinationBuilding != null) {
             destinationBuilding.DeAssignInputHaulier(humanoid);
         }
@@ -281,6 +295,7 @@ public class HumanoidCarry : MonoBehaviour
         sourceBuilding = null;
         itemCarrying = null;
         itemToCarry = null;
+        OnCarryCompleted?.Invoke(this, EventArgs.Empty);
     }
 
     #region DEBUG

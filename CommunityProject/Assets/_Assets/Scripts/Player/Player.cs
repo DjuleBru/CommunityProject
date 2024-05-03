@@ -272,5 +272,9 @@ public class Player : MonoBehaviour, IDamageable
         return closestInteractable;
     }
 
+    public InventoryUI GetPlayerInventoryUI() {
+        return playerInventoryUI;
+    }
+
     #endregion
 }

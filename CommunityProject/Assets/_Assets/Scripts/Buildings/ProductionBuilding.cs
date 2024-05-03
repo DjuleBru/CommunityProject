@@ -21,6 +21,7 @@ public class ProductionBuilding : Building
     private bool outputInventoryFull;
 
     [SerializeField] private ProductionBuildingUI_World productionBuildingUIWorld;
+    [SerializeField] private BuildingHaulersUI_World buildingHaulersUI_World;
     [SerializeField] private ProductionBuildingVisual productionBuildingvisual;
 
     protected override void Awake() {
@@ -342,6 +343,10 @@ public class ProductionBuilding : Building
 
     public ProductionBuildingUI_World GetProductionBuildingUIWorld() {
         return productionBuildingUIWorld;
+    }
+
+    public BuildingHaulersUI_World GetBuildingHaulersUI_World() {
+        return buildingHaulersUI_World;
     }
 
     public bool GetInputItemsMissing() {

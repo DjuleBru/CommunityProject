@@ -92,6 +92,10 @@ public class InventoryUI_Interactable : InventoryUI
         inventoryPanel.SetActive(!opened);
         interactionImage.enabled = !opened;
         opened = !opened;
+
+        if(opened) {
+            HumanoidsMenuUI.Instance.CloseHumanoidsMenu();
+        }
     }
 
     public void OpenInventoryPanel() {
@@ -99,6 +103,8 @@ public class InventoryUI_Interactable : InventoryUI
         inventoryPanel.SetActive(true);
         interactionImage.enabled = true;
         opened = true;
+
+        HumanoidsMenuUI.Instance.CloseHumanoidsMenu();
     }
 
     public void CloseInventoryPanel() {

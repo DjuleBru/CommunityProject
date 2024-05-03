@@ -15,6 +15,7 @@ public class HumanoidAssignJobButton : MonoBehaviour
         if(newPosition == jobList.Count) {
             newPosition = 0;
         }
+
         GetComponentInParent<HumanoidTemplateUI>().SetJob(jobList[newPosition]);
     }
 }

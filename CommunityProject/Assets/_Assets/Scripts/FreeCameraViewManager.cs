@@ -25,7 +25,8 @@ public class FreeCameraViewManager : MonoBehaviour
     [SerializeField] float maxOrtho;
     [SerializeField] float smoothTime;
 
-
+    private bool followHumanoid;
+    private Humanoid followingHumanoid;
 
     private void Awake() {
         Instance = this; 
@@ -45,7 +46,12 @@ public class FreeCameraViewManager : MonoBehaviour
 
         HandleMovementInput();
         HandleZoom();
-        MoveCamera();
+
+        if(followHumanoid) {
+            freeLookCameraFollowTransform.transform.position = followingHumanoid.transform.position;
+        } else {
+            MoveCamera();
+        }
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         freeCameraViewMouseTransform.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
@@ -71,12 +77,27 @@ public class FreeCameraViewManager : MonoBehaviour
         }
     }
 
+    public void ZoomToLocation(Vector3 location) {
+        freeLookCameraFollowTransform.transform.position = new Vector3(location.x, location.y, 0);
+    }
+
+    public void FollowHumanoid(Humanoid humanoid) {
+        followHumanoid = true;
+        followingHumanoid = humanoid;
+        freeLookCamera.m_Lens.OrthographicSize = 10;
+        zoom = freeLookCamera.m_Lens.OrthographicSize;
+    }
+
     public bool CameraIsInFreeView() {
         return freeCamera;
     }
 
     private void HandleMovementInput() {
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
+
+        if(inputVector !=  Vector2.zero) {
+            followHumanoid = false;
+        }
         moveDirNormalized = new Vector3(inputVector.x, inputVector.y, 0).normalized;
     }
 

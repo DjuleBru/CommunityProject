@@ -1553,7 +1553,7 @@ MonoBehaviour:
   itemsInChest: []
   chestInventoryUI: {fileID: 873209372305907282}
   isDungeonChest: 0
-  chestUI_World: {fileID: 8099863970402629155}
+  buildingHaulersUI_World: {fileID: 7376843275631814777}
 --- !u!58 &2927118913035903788
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1971,7 +1971,7 @@ GameObject:
   - component: {fileID: 7294872564249855738}
   - component: {fileID: 4660024957893227847}
   - component: {fileID: 7110266577246329790}
-  - component: {fileID: 8099863970402629155}
+  - component: {fileID: 7376843275631814777}
   m_Layer: 0
   m_Name: ChestWorldUI
   m_TagString: Untagged
@@ -2065,7 +2065,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 119
---- !u!114 &8099863970402629155
+--- !u!114 &7376843275631814777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2074,11 +2074,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8663481682654008881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc99c8b379961174db01e4ab201c2850, type: 3}
+  m_Script: {fileID: 11500000, guid: 31565c4393a8c4245be2cd453954af6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outputInventoryFull: {fileID: 1464552520377020250}
-  chest: {fileID: 8001067186285909428}
+  building: {fileID: 8001067186285909428}
   assignedInputHaulersTemplate: {fileID: 6252331187300583131}
   assignedInputHaulersContainer: {fileID: 9099318984464934104}
   assignedOutputHaulersTemplate: {fileID: 4180325036818427885}

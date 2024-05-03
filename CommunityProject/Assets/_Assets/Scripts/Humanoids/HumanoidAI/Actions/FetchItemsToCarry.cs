@@ -32,15 +32,31 @@ public class FetchItemsToCarry : Action {
         if (colliderDistance2DToBuildingCollider.distance > .5f) {
             return TaskStatus.Running;
         } else {
+            // Humanoid is close to destination building
+
             if (humanoidCarry.FetchItemsInSourceBuilding()) {
-                humanoidCarry.TryAssignBestDestinationBuilding();
-                humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
+
+                Debug.Log("fetched items success!");
+
+                if (humanoid.GetAutoAssign()) {
+                    humanoidCarry.TryAssignBestDestinationBuilding();
+                    humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
+                }
+
                 return TaskStatus.Success;
             } else {
-                humanoidCarry.TryAssignBestDestinationBuilding();
-                humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
+
+                Debug.Log("fetched items fails!"); 
+
+                if (humanoid.GetAutoAssign()) {
+                    humanoidCarry.TryAssignBestDestinationBuilding();
+                    humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
+                }
+
                 return TaskStatus.Failure;
             }
+
+
         }
 
     }

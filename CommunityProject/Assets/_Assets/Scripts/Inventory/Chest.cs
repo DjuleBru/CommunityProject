@@ -9,7 +9,7 @@ public class Chest : Building
     [SerializeField] private List<Item> itemsInChest = new List<Item>();
     [SerializeField] private InventoryUI_Interactable chestInventoryUI;
     [SerializeField] bool isDungeonChest;
-    [SerializeField] private ChestUI_World chestUI_World;
+    [SerializeField] private BuildingHaulersUI_World buildingHaulersUI_World;
 
     private bool chestHasBeenFilled;
 
@@ -72,8 +72,8 @@ public class Chest : Building
         return chestInventory;
     }
 
-    public ChestUI_World GetChestUIWorld() {
-        return chestUI_World;
+    public BuildingHaulersUI_World GetBuildingHaulersUI_World() {
+        return buildingHaulersUI_World;
     }
 
     public ChestVisual GetChestVisual() {
