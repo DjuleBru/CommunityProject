@@ -53,25 +53,25 @@ public class HumanoidTemplateUI : MonoBehaviour
             inputAssignmentSlot.SetActive(true);
             outputAssignmentSlot.SetActive(true);
 
-            if (humanoid.GetComponent<HumanoidCarry>().GetDestinationBuilding() != null) {
-                outputAssignmentIcon.sprite = humanoid.GetComponent<HumanoidCarry>().GetDestinationBuilding().GetBuildingSO().buildingIconSprite;
-                outputAssignmentText.text = humanoid.GetComponent<HumanoidCarry>().GetDestinationBuilding().GetBuildingSO().buildingType.ToString();
+            if (humanoid.GetComponent<HumanoidHaul>().GetDestinationBuilding() != null) {
+                outputAssignmentIcon.sprite = humanoid.GetComponent<HumanoidHaul>().GetDestinationBuilding().GetBuildingSO().buildingIconSprite;
+                outputAssignmentText.text = humanoid.GetComponent<HumanoidHaul>().GetDestinationBuilding().GetBuildingSO().buildingType.ToString();
             } else {
                 outputAssignmentIcon.sprite = unassignedSprite;
                 outputAssignmentText.text = "Unassigned";
             }
 
-            if (humanoid.GetComponent<HumanoidCarry>().GetSourceBuilding() != null) {
-                inputAssignmentIcon.sprite = humanoid.GetComponent<HumanoidCarry>().GetSourceBuilding().GetBuildingSO().buildingIconSprite;
-                inputAssignmentText.text = humanoid.GetComponent<HumanoidCarry>().GetSourceBuilding().GetBuildingSO().buildingType.ToString();
+            if (humanoid.GetComponent<HumanoidHaul>().GetSourceBuilding() != null) {
+                inputAssignmentIcon.sprite = humanoid.GetComponent<HumanoidHaul>().GetSourceBuilding().GetBuildingSO().buildingIconSprite;
+                inputAssignmentText.text = humanoid.GetComponent<HumanoidHaul>().GetSourceBuilding().GetBuildingSO().buildingType.ToString();
             }
             else {
                 inputAssignmentIcon.sprite = unassignedSprite;
                 inputAssignmentText.text = "Unassigned";
             }
 
-            if(humanoid.GetComponent<HumanoidCarry>().GetItemToCarry() != null) {
-                humanoidItemCarryingSprite.sprite = ItemAssets.Instance.GetItemSO(humanoid.GetComponent<HumanoidCarry>().GetItemToCarry().itemType).itemSprite;
+            if(humanoid.GetComponent<HumanoidHaul>().GetItemToCarry() != null) {
+                humanoidItemCarryingSprite.sprite = ItemAssets.Instance.GetItemSO(humanoid.GetComponent<HumanoidHaul>().GetItemToCarry().itemType).itemSprite;
             } else {
                 humanoidItemCarryingSprite.sprite = unassignedSprite;
             }
@@ -86,6 +86,24 @@ public class HumanoidTemplateUI : MonoBehaviour
             if (humanoid.GetAssignedBuilding() != null) {
                 mainAssignmentIcon.sprite = humanoid.GetAssignedBuilding().GetBuildingSO().buildingIconSprite;
                 mainAssignmentText.text = humanoid.GetAssignedBuilding().GetBuildingSO().buildingType.ToString();
+            }
+            else {
+                mainAssignmentIcon.sprite = unassignedSprite;
+                mainAssignmentText.text = "Unassigned";
+            }
+        }
+
+        if (humanoid.GetJob() == Humanoid.Job.Dungeoneer) {
+
+            mainAssignmentSlot.SetActive(true);
+            inputAssignmentSlot.SetActive(false);
+            outputAssignmentSlot.SetActive(false);
+
+            DungeonEntrance dungeonEntranceAssigned = humanoid.GetComponent<HumanoidDungeonCrawl>().GetDungeonEntranceAssigned();
+
+            if (dungeonEntranceAssigned != null) {
+                mainAssignmentIcon.sprite = dungeonEntranceAssigned.GetDungeonSO().dungeonSprite;
+                mainAssignmentText.text = dungeonEntranceAssigned.GetDungeonSO().dungeonName.ToString();
             }
             else {
                 mainAssignmentIcon.sprite = unassignedSprite;
@@ -108,7 +126,7 @@ public class HumanoidTemplateUI : MonoBehaviour
     }
 
     public void SetItemToCarry(Item item) {
-        humanoid.GetComponent<HumanoidCarry>().SetItemToCarry(item);
+        humanoid.GetComponent<HumanoidHaul>().SetItemToCarry(item);
         RefreshHumanoidTemplateUI();
     }
 

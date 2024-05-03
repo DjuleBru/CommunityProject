@@ -3,18 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HasSourceBuildingAssigned : Conditional {
+public class HasDungeonAssigned : Conditional {
 
-    public HumanoidHaul humanoidCarry;
+    public HumanoidDungeonCrawl humanoidDungeonCrawl;
 
     public override void OnAwake() {
-        humanoidCarry = GetComponent<HumanoidHaul>();
+        humanoidDungeonCrawl = GetComponent<HumanoidDungeonCrawl>();
     }
 
     public override TaskStatus OnUpdate() {
-        if (humanoidCarry.GetSourceBuilding() != null) {
+        if (humanoidDungeonCrawl.GetDungeonEntranceAssigned() != null) {
             return TaskStatus.Success;
         }
         return TaskStatus.Failure;
     }
+    
 }

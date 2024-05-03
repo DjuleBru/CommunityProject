@@ -13,6 +13,7 @@ public class HumanoidManualAssignManager : MonoBehaviour
     private Collider2D mousePositionCollider;
 
     private ProductionBuilding productionBuildingHovered;
+    private DungeonEntrance dungeonEntranceHovered;
     private Chest chestHovered;
 
     private bool assigningDestionationBuilding;
@@ -27,7 +28,7 @@ public class HumanoidManualAssignManager : MonoBehaviour
         if (assigningBuildingToHumanoid) {
             if(Input.GetMouseButtonDown(1)) {
                 //Right click : cancel assigning
-                SetAssigningBuildingToHumanoid(false, null, false);
+                SetAssigningTaskToHumanoid(false, null, false);
             }
 
             if(Input.GetMouseButtonDown(0)) {
@@ -38,6 +39,10 @@ public class HumanoidManualAssignManager : MonoBehaviour
 
                 if(humanoid.IsHaulier()) {
                     HandleHaulierBuildingAssignment();
+                }
+
+                if(humanoid.IsDungeoneer()) {
+                    HandleDungeoneerDungeonAssignment();
                 }
             }
 
@@ -54,16 +59,23 @@ public class HumanoidManualAssignManager : MonoBehaviour
         StopAssignmentMode();
     }
 
+    private void HandleDungeoneerDungeonAssignment() {
+        if (dungeonEntranceHovered != null) {
+            dungeonEntranceHovered.AssignHumanoid(humanoid);
+        }
+        StopAssignmentMode();
+    }
+
     private void HandleHaulierBuildingAssignment() {
         if(assigningDestionationBuilding) {
 
             if (productionBuildingHovered != null) {
-                humanoid.GetComponent<HumanoidCarry>().ReplaceDestinationBuildingAssigned(productionBuildingHovered);
+                humanoid.GetComponent<HumanoidHaul>().ReplaceDestinationBuildingAssigned(productionBuildingHovered);
                 productionBuildingHovered.GetBuildingHaulersUI_World().RefreshAssignedHaulers();
             }
 
             if(chestHovered != null) {
-                humanoid.GetComponent<HumanoidCarry>().ReplaceDestinationBuildingAssigned(chestHovered);
+                humanoid.GetComponent<HumanoidHaul>().ReplaceDestinationBuildingAssigned(chestHovered);
                 chestHovered.GetBuildingHaulersUI_World().RefreshAssignedHaulers();
             }
 
@@ -72,12 +84,12 @@ public class HumanoidManualAssignManager : MonoBehaviour
         } else {
 
             if (productionBuildingHovered != null) {
-                humanoid.GetComponent<HumanoidCarry>().ReplaceSourceBuildingAssigned(productionBuildingHovered);
+                humanoid.GetComponent<HumanoidHaul>().ReplaceSourceBuildingAssigned(productionBuildingHovered);
                 productionBuildingHovered.GetBuildingHaulersUI_World().RefreshAssignedHaulers();
             }
 
             if (chestHovered != null) {
-                humanoid.GetComponent<HumanoidCarry>().ReplaceSourceBuildingAssigned(chestHovered);
+                humanoid.GetComponent<HumanoidHaul>().ReplaceSourceBuildingAssigned(chestHovered);
                 chestHovered.GetBuildingHaulersUI_World().RefreshAssignedHaulers();
             }
 
@@ -85,7 +97,7 @@ public class HumanoidManualAssignManager : MonoBehaviour
         }
     }
 
-    public void SetAssigningBuildingToHumanoid(bool assigning, Humanoid humanoid, bool assigningDestinationBuilding) {
+    public void SetAssigningTaskToHumanoid(bool assigning, Humanoid humanoid, bool assigningDestinationBuilding) {
         assigningBuildingToHumanoid = assigning;
         this.humanoid = humanoid;
         this.assigningDestionationBuilding = assigningDestinationBuilding;
@@ -105,7 +117,6 @@ public class HumanoidManualAssignManager : MonoBehaviour
     private void StartAssignmentMode() {
         mousePositionCollider.enabled = true;
         HumanoidsMenuUI.Instance.OpenCloseHumanoidsMenu();
-
     }
 
     private void StopAssignmentMode() {
@@ -116,7 +127,7 @@ public class HumanoidManualAssignManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         Building building = collision.GetComponent<Building>();
-
+        DungeonStatsBoard dungeonStatsBoard = collision.GetComponentInParent<DungeonStatsBoard>();
 
         if(building != null) {
             if (building is ProductionBuilding) {
@@ -156,10 +167,17 @@ public class HumanoidManualAssignManager : MonoBehaviour
                 }
             }
         }
+
+        if(dungeonStatsBoard != null) {
+            dungeonEntranceHovered = dungeonStatsBoard.GetDungeonEntrance();
+            dungeonStatsBoard.OpenPanel();
+            dungeonStatsBoard.GetDungeonStatsBoardWorldUI().ShowPotentialDungeoneersAssigned(humanoid);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         Building building = collision.GetComponent<Building>();
+        DungeonStatsBoard dungeonStatsBoard = collision.GetComponentInParent<DungeonStatsBoard>();
 
         if (building != null) {
             building.GetBuildingVisual().SetHovered(false);
@@ -175,6 +193,10 @@ public class HumanoidManualAssignManager : MonoBehaviour
                 chestHovered.CloseInventory();
                 chestHovered = null;
             }
+        }
+        if (dungeonStatsBoard != null) {
+            dungeonEntranceHovered = null;
+            dungeonStatsBoard.ClosePanel();
         }
     }
 

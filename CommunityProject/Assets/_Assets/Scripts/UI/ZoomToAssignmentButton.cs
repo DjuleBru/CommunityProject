@@ -20,15 +20,23 @@ public class ZoomToAssignmentButton : MonoBehaviour
 
         if (humanoid.GetJob() == Humanoid.Job.Haulier) {
             if(isInputBuilding) {
-                if (humanoid.GetComponent<HumanoidCarry>().GetSourceBuilding() != null) {
+                if (humanoid.GetComponent<HumanoidHaul>().GetSourceBuilding() != null) {
                     FreeCameraViewManager.Instance.SetFreeCamera(true);
-                    FreeCameraViewManager.Instance.ZoomToLocation(humanoid.GetComponent<HumanoidCarry>().GetSourceBuilding().transform.position);
-                } else {
+                    FreeCameraViewManager.Instance.ZoomToLocation(humanoid.GetComponent<HumanoidHaul>().GetSourceBuilding().transform.position);
+                } 
+            } else {
+                if (humanoid.GetComponent<HumanoidHaul>().GetDestinationBuilding() != null) {
                     FreeCameraViewManager.Instance.SetFreeCamera(true);
-                    FreeCameraViewManager.Instance.ZoomToLocation(humanoid.GetComponent<HumanoidCarry>().GetDestinationBuilding().transform.position);
+                    FreeCameraViewManager.Instance.ZoomToLocation(humanoid.GetComponent<HumanoidHaul>().GetDestinationBuilding().transform.position);
                 }
             }
-            
+        }
+
+        if(humanoid.GetJob() == Humanoid.Job.Dungeoneer) {
+            if(humanoid.GetComponent<HumanoidDungeonCrawl>().GetDungeonEntranceAssigned() != null) {
+                FreeCameraViewManager.Instance.SetFreeCamera(true);
+                FreeCameraViewManager.Instance.ZoomToLocation(humanoid.GetComponent<HumanoidDungeonCrawl>().GetDungeonEntranceAssigned().transform.position);
+            }
         }
 
     }

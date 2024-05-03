@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class HasDestinationBuildingAssigned : Conditional {
 
-    public HumanoidCarry humanoidCarry;
+    public HumanoidHaul humanoidCarry;
 
     public override void OnAwake() {
-        humanoidCarry = GetComponent<HumanoidCarry>();
+        humanoidCarry = GetComponent<HumanoidHaul>();
     }
 
     public override TaskStatus OnUpdate() {

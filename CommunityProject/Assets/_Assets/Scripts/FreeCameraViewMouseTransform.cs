@@ -7,6 +7,7 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (HumanoidManualAssignManager.Instance.IsAssigningBuildingToHumanoid()) return;
+        DungeonStatsBoard dungeonStatsBoard = collision.GetComponentInParent<DungeonStatsBoard>();
 
         Building building = collision.GetComponent<Building>();
 
@@ -31,10 +32,17 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
                 chest.OpenInventory();
             }
         }
+
+        if (dungeonStatsBoard != null) {
+            dungeonStatsBoard.SetHovered(true);
+            dungeonStatsBoard.OpenPanel();
+            dungeonStatsBoard.GetDungeonStatsBoardWorldUI().ShowAssignedDungeoneers(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         Building building = collision.GetComponent<Building>();
+        DungeonStatsBoard dungeonStatsBoard = collision.GetComponentInParent<DungeonStatsBoard>();
 
         if (building != null) {
             building.GetBuildingVisual().SetHovered(false);
@@ -53,6 +61,11 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
                 chest.GetBuildingHaulersUI_World().ShowAssignedHaulers(false);
                 chest.CloseInventory();
             }
+        }
+
+        if (dungeonStatsBoard != null) {
+            dungeonStatsBoard.ClosePanel();
+            dungeonStatsBoard.GetDungeonStatsBoardWorldUI().ShowAssignedDungeoneers(false);
         }
     }
 }

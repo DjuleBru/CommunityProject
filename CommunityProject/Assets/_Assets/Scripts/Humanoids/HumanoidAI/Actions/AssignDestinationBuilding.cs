@@ -6,11 +6,11 @@ using UnityEngine;
 public class AssignDestinationBuilding : Action {
 
     public Humanoid humanoid;
-    public HumanoidCarry humanoidCarry;
+    public HumanoidHaul humanoidCarry;
 
     public override void OnAwake() {
         humanoid = GetComponent<Humanoid>();
-        humanoidCarry = GetComponent<HumanoidCarry>();
+        humanoidCarry = GetComponent<HumanoidHaul>();
     }
 
     public override TaskStatus OnUpdate() {

@@ -19,6 +19,7 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
 
     [SerializeField] private GameObject statsBoardHoveredVisual;
     [SerializeField] private GameObject statsBoardUIGameObject;
+    [SerializeField] private DungeonStatsBoardWorldUI dungeonStatsBoardWorldUI;
 
     [SerializeField] private Collider2D solidStatsBoardCollider;
 
@@ -103,10 +104,32 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
         statsBoardHoveredVisual.SetActive(hovered);
     }
 
+    public float GetDungeonTime() {
+        return recordedDungeonTime;
+    }
+
+    public List<Item> GetDungeonLoot() {
+        return recordedDungeonLoot;
+    }
+
     public void ClosePanel() {
         statsBoardHoveredVisual.SetActive(false);
         statsBoardUIGameObject.gameObject.SetActive(false);
         statsBoardOpen = false;
+    }
+
+    public void OpenPanel() {
+        statsBoardHoveredVisual.SetActive(true);
+        statsBoardUIGameObject.gameObject.SetActive(true);
+        statsBoardOpen = true;
+    }
+
+    public DungeonEntrance GetDungeonEntrance() {
+        return dungeonEntrance;
+    }
+
+    public DungeonStatsBoardWorldUI GetDungeonStatsBoardWorldUI() {
+        return dungeonStatsBoardWorldUI;
     }
 
     public Collider2D GetSolidCollider() {

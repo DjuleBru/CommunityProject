@@ -14,6 +14,9 @@ public class DungeonEntrance : MonoBehaviour
     [SerializeField] private DungeonStatsBoard dungeonStatsBoard;
 
     [SerializeField] private bool dungeonIsComplete;
+    [SerializeField] private Collider2D dungeonEntranceColliderForDungeoneers;
+
+    private List<Humanoid> humanoidsAssigned = new List<Humanoid>();
 
     private void Start() {
         dungeonEntranceUI.SetActive(false);
@@ -77,6 +80,37 @@ public class DungeonEntrance : MonoBehaviour
 
     public bool GetDungeonComplete() {
         return dungeonIsComplete;
+    }
+
+    public void AssignHumanoid(Humanoid humanoid) {
+        if(humanoidsAssigned.Contains(humanoid)) return;
+        humanoidsAssigned.Add(humanoid);
+    }
+
+    public void DeAssignHumanoid(Humanoid humanoid) {
+        if(humanoidsAssigned.Contains(humanoid)) {
+            humanoidsAssigned.Remove(humanoid);
+        }
+    }
+
+    public List<Humanoid> GetHumanoidsAssigned() {
+        return humanoidsAssigned;
+    }
+
+    public float GetDungeonTimerRecorded() {
+        return dungeonStatsBoard.GetDungeonTime();
+    }
+
+    public List<Item> GetDungeonLootRecorded() {
+        return dungeonStatsBoard.GetDungeonLoot();
+    }
+
+    public Chest GetDungeonChest() {
+        return dungeonChest;
+    }
+
+    public Collider2D GetColliderForDungeoneers() {
+        return dungeonEntranceColliderForDungeoneers;
     }
 
     public void SaveDungeon() {

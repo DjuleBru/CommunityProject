@@ -5,10 +5,10 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class HasSetItemToCarry : Conditional {
 
-    public HumanoidCarry humanoidCarry;
+    public HumanoidHaul humanoidCarry;
 
     public override void OnAwake() {
-        humanoidCarry = GetComponent<HumanoidCarry>();
+        humanoidCarry = GetComponent<HumanoidHaul>();
     }
 
     public override TaskStatus OnUpdate() {

@@ -16,11 +16,15 @@ public class HumanoidAssignTaskButton : MonoBehaviour
         }
 
         if (humanoid.GetJob() == Humanoid.Job.Worker) {
-            HumanoidManualAssignManager.Instance.SetAssigningBuildingToHumanoid(true, humanoid, false);
+            HumanoidManualAssignManager.Instance.SetAssigningTaskToHumanoid(true, humanoid, false);
         }
 
         if (humanoid.GetJob() == Humanoid.Job.Haulier) {
-            HumanoidManualAssignManager.Instance.SetAssigningBuildingToHumanoid(true, humanoid, isDestionationBuilding);
+            HumanoidManualAssignManager.Instance.SetAssigningTaskToHumanoid(true, humanoid, isDestionationBuilding);
+        }
+
+        if (humanoid.GetJob() == Humanoid.Job.Dungeoneer) {
+            HumanoidManualAssignManager.Instance.SetAssigningTaskToHumanoid(true, humanoid, isDestionationBuilding);
         }
 
     }

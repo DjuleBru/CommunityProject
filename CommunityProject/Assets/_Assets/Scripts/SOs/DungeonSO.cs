@@ -11,4 +11,5 @@ public class DungeonSO : ScriptableObject
     public int dungeonDifficulty;
     public List<ItemSO> itemsFoundInDungeon;
     public List<MobSO> mobsFoundInDungeon;
+    public Sprite dungeonSprite;
 }

@@ -22,7 +22,9 @@ public class Humanoid : MonoBehaviour
     [SerializeField] private bool debugJob;
 
     private HumanoidWork humanoidWork;
-    private HumanoidCarry humanoidCarry;
+    private HumanoidHaul humanoidHaul;
+    private HumanoidDungeonCrawl humanoidDungeonCrawl;
+
     [SerializeField] private HumanoidVisual humanoidVisual;
     [SerializeField] private HumanoidInteraction humanoidInteraction;
     private Collider2D collider2D;
@@ -43,7 +45,8 @@ public class Humanoid : MonoBehaviour
     private void Awake() {
         behaviorTree = GetComponent<BehaviorDesigner.Runtime.BehaviorTree>();
         humanoidWork = GetComponent<HumanoidWork>();
-        humanoidCarry = GetComponent<HumanoidCarry>();
+        humanoidHaul = GetComponent<HumanoidHaul>();
+        humanoidDungeonCrawl = GetComponent<HumanoidDungeonCrawl>();
         collider2D = GetComponent<Collider2D>();
 
         if (debugJob) {
@@ -90,20 +93,27 @@ public class Humanoid : MonoBehaviour
         return jobAssigned;
     }
 
-    public void SetJob(Job job) {
-        if (jobAssigned == job) return;
-
-        if(jobAssigned == Job.Worker) {
-            if(humanoidWork.GetWorking()) {
+    private void StopTask() {
+        if (jobAssigned == Job.Worker) {
+            if (humanoidWork.GetWorking()) {
                 humanoidWork.StopWorking();
             }
         }
 
-        if(jobAssigned == Job.Haulier) {
-            humanoidCarry.StopCarrying();
+        if (jobAssigned == Job.Haulier) {
+            humanoidHaul.StopCarrying();
         }
 
-        this.jobAssigned = job;
+        if (IsDungeoneer()) {
+            humanoidDungeonCrawl.StopCrawling();
+        }
+    }
+    public void SetJob(Job job) {
+        if (jobAssigned == job) return;
+
+        StopTask();
+
+        jobAssigned = job;
         AssignBehaviorTree();
     }
 
@@ -176,14 +186,8 @@ public class Humanoid : MonoBehaviour
     public void SetAutoAssign(bool autoAssignActive) {
         if (!autoAssignActive && !autoAssign) return;
         autoAssign = autoAssignActive;
-        if (IsHaulier()) {
-            humanoidCarry.StopCarrying();
-        }
 
-        if (IsWorker()) {
-            humanoidWork.StopWorking();
-        }
-
+        StopTask();
         assignedBuilding = null;
     }
 

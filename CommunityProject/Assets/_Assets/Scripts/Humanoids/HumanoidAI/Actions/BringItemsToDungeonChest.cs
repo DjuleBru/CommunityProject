@@ -1,30 +1,32 @@
-using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviorDesigner.Runtime.Tasks;
 
-public class BringItemsToDestination : Action {
-
+public class BringItemsToDungeonChest : Action {
     public Humanoid humanoid;
-    public HumanoidHaul humanoidHaul;
+    public HumanoidCarry humanoidCarry;
+    public HumanoidDungeonCrawl humanoidDungeonCrawl;
     public HumanoidMovement humanoidMovement;
 
     public Collider2D humanoidCollider;
 
     public override void OnAwake() {
         humanoid = GetComponent<Humanoid>();
-        humanoidHaul = GetComponent<HumanoidHaul>();
+        humanoidDungeonCrawl = GetComponent<HumanoidDungeonCrawl>();
         humanoidMovement = GetComponent<HumanoidMovement>();
+        humanoidCarry = GetComponent<HumanoidCarry>();
         humanoidCollider = GetComponent<Collider2D>();
     }
 
     public override TaskStatus OnUpdate() {
 
-        if (humanoidHaul.GetDestinationBuilding() == null || humanoidHaul.GetSourceBuilding() == null) {
+        if (humanoidDungeonCrawl.GetDungeonEntranceAssigned() == null) {
             return TaskStatus.Failure;
         }
 
-        ColliderDistance2D colliderDistance2DToBuildingCollider = humanoidHaul.GetDestinationBuilding().GetComponent<Collider2D>().Distance(humanoidCollider);
+        Chest dungeonChest = humanoidDungeonCrawl.GetDungeonEntranceAssigned().GetDungeonChest();
+        ColliderDistance2D colliderDistance2DToBuildingCollider = dungeonChest.GetComponent<Collider2D>().Distance(humanoidCollider);
 
         humanoidMovement.MoveToDestination(colliderDistance2DToBuildingCollider.pointA);
         humanoid.SetHumanoidActionDescription("Carrying items");
@@ -32,15 +34,12 @@ public class BringItemsToDestination : Action {
         if (colliderDistance2DToBuildingCollider.distance > .75f) {
             return TaskStatus.Running;
         }
-        else {
-            if (humanoidHaul.DropItemsInBuilding(humanoidHaul.GetDestinationBuilding())) {
-                if(humanoid.GetAutoAssign()) {
-                    humanoidHaul.TryAssignBestDestinationBuilding();
-                    humanoidHaul.IdentifyBestSourceBuilding(humanoidHaul.GetItemToCarry());
-                }
 
+        else {
+            if (humanoidCarry.DropItemListCarryingInChest(dungeonChest)) {
                 return TaskStatus.Success;
-            } else {
+            }
+            else {
                 return TaskStatus.Failure;
             };
 

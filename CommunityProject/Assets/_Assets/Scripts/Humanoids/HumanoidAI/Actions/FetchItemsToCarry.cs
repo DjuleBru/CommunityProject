@@ -6,25 +6,25 @@ using UnityEngine;
 public class FetchItemsToCarry : Action {
 
     public Humanoid humanoid;
-    public HumanoidCarry humanoidCarry;
+    public HumanoidHaul humanoidHaul;
     public HumanoidMovement humanoidMovement;
 
     public Collider2D humanoidCollider;
 
     public override void OnAwake() {
         humanoid = GetComponent<Humanoid>();
-        humanoidCarry = GetComponent<HumanoidCarry>();
+        humanoidHaul = GetComponent<HumanoidHaul>();
         humanoidMovement = GetComponent<HumanoidMovement>();
         humanoidCollider = GetComponent<Collider2D>();
     }
 
     public override TaskStatus OnUpdate() {
 
-        if (humanoidCarry.GetDestinationBuilding() == null || humanoidCarry.GetSourceBuilding() == null) {
+        if (humanoidHaul.GetDestinationBuilding() == null || humanoidHaul.GetSourceBuilding() == null) {
             return TaskStatus.Failure;
         }
 
-        ColliderDistance2D colliderDistance2DToBuildingCollider = humanoidCarry.GetSourceBuilding().GetComponent<Collider2D>().Distance(humanoidCollider);
+        ColliderDistance2D colliderDistance2DToBuildingCollider = humanoidHaul.GetSourceBuilding().GetComponent<Collider2D>().Distance(humanoidCollider);
 
         humanoidMovement.MoveToDestination(colliderDistance2DToBuildingCollider.pointA);
         humanoid.SetHumanoidActionDescription("Fetching items");
@@ -34,23 +34,19 @@ public class FetchItemsToCarry : Action {
         } else {
             // Humanoid is close to destination building
 
-            if (humanoidCarry.FetchItemsInSourceBuilding()) {
-
-                Debug.Log("fetched items success!");
+            if (humanoidHaul.FetchItemsInBuilding(humanoidHaul.GetSourceBuilding())) {
 
                 if (humanoid.GetAutoAssign()) {
-                    humanoidCarry.TryAssignBestDestinationBuilding();
-                    humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
+                    humanoidHaul.TryAssignBestDestinationBuilding();
+                    humanoidHaul.IdentifyBestSourceBuilding(humanoidHaul.GetItemToCarry());
                 }
 
                 return TaskStatus.Success;
             } else {
 
-                Debug.Log("fetched items fails!"); 
-
                 if (humanoid.GetAutoAssign()) {
-                    humanoidCarry.TryAssignBestDestinationBuilding();
-                    humanoidCarry.IdentifyBestSourceBuilding(humanoidCarry.GetItemToCarry());
+                    humanoidHaul.TryAssignBestDestinationBuilding();
+                    humanoidHaul.IdentifyBestSourceBuilding(humanoidHaul.GetItemToCarry());
                 }
 
                 return TaskStatus.Failure;

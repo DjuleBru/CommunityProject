@@ -369,6 +369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionMarkGameObject: {fileID: 1686040479840222764}
   carryingItemSprite: {fileID: 5334358644164288421}
+  bodyGameObject: {fileID: 885884932806974049}
+  shadowGameObject: {fileID: 4942057093412395226}
 --- !u!1 &4385563531214473883
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,8 +466,10 @@ GameObject:
   - component: {fileID: 3550964446183500357}
   - component: {fileID: 3275420738517804746}
   - component: {fileID: 4971206519392686629}
+  - component: {fileID: 3330002358081176983}
   - component: {fileID: 792682508407951529}
   - component: {fileID: 3829405170516164531}
+  - component: {fileID: 6304089412155900452}
   - component: {fileID: 4101834790813537639}
   - component: {fileID: 727366065133654119}
   - component: {fileID: 3957334484888673478}
@@ -532,6 +536,18 @@ MonoBehaviour:
   nextWaypointDistance: 0.5
   roamPointRadius: 2
   roamCalculationRate: 5
+--- !u!114 &3330002358081176983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665366396381886453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8ffc3d88d32a44b9da67d5857991c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &792682508407951529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,6 +570,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83553e11ed3aed34da97dbb445d25ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6304089412155900452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665366396381886453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6eb4832d662b641884c1906ab3ea83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4101834790813537639
