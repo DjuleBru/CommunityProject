@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
+  m_Name: Blacksmith
+  m_EditorClassIdentifier: 
+  buildingCategory: 0
+  buildingType: 2
+  buildingWorksCategory: 1
+  buildingCostItems:
+  - itemType: 0
+    itemTier: 0
+    amount: 20
+  buildingRecipes:
+  - {fileID: 11400000, guid: 7f6c593f0e0521f4f876d4c146fa66bb, type: 2}
+  buildingName: Brick yard
+  buildingIconSprite: {fileID: 502287045, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
+  buildingDescriptionPanelSprite: {fileID: 802832355, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
+  buildingDescription: This building does bricks
+  buildingPrefab: {fileID: 1718341335737673364, guid: f4f332fc4d2d32b488bd0475e6a9f99d, type: 3}
