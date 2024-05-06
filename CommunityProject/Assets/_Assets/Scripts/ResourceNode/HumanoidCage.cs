@@ -7,7 +7,6 @@ public class HumanoidCage : ResourceNode
     private Humanoid humanoid;
 
     public virtual void HitResourceNode() {
-        OnResourceNodeHit?.Invoke(this, EventArgs.Empty);
         FreeHumanoid();
     }
 
