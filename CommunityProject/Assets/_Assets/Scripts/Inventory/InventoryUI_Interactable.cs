@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -94,6 +95,7 @@ public class InventoryUI_Interactable : InventoryUI
         opened = !opened;
 
         if(opened) {
+            if (HumanoidsMenuUI.Instance == null) return;
             HumanoidsMenuUI.Instance.CloseHumanoidsMenu();
         }
     }
@@ -104,6 +106,7 @@ public class InventoryUI_Interactable : InventoryUI
         interactionImage.enabled = true;
         opened = true;
 
+        if (HumanoidsMenuUI.Instance == null) return;
         HumanoidsMenuUI.Instance.CloseHumanoidsMenu();
     }
 

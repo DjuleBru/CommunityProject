@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class WeaponReloadUI : MonoBehaviour
 {
     [SerializeField] private Image weaponReloadImage;
+    [SerializeField] private Image weaponIcon;
 
     private bool reloading;
 
@@ -14,6 +15,11 @@ public class WeaponReloadUI : MonoBehaviour
     }
     private void Start() {
         PlayerAttack.Instance.OnPlayerAttackEnded += PlayerAttack_OnPlayerAttackEnded;
+        PlayerAttack.Instance.OnActiveWeaponSOChanged += PlayerAttack_OnActiveWeaponSOChanged;
+    }
+
+    private void PlayerAttack_OnActiveWeaponSOChanged(object sender, System.EventArgs e) {
+        weaponIcon.sprite = PlayerAttack.Instance.GetActiveWeaponSO().weaponSpriteUI;
     }
 
     private void Update() {

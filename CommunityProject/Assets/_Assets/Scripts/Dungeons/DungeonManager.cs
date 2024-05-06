@@ -18,6 +18,8 @@ public class DungeonManager : MonoBehaviour {
     [SerializeField] private List<MobSO> completeMobList;
     private List<MobSO> dungeonMobList = new List<MobSO>();
 
+    [SerializeField] private List<ResourceNode> resourceNodesInDungeon;
+    [SerializeField] private int resourceNodesNumberInDungeon;
 
     [SerializeField] private InventoryUI dungeonInventoryUI;
     private Inventory dungeonInventory;
@@ -31,7 +33,7 @@ public class DungeonManager : MonoBehaviour {
     }
 
     private void Start() {
-        dungeonInventory = new Inventory(false, 10, 3, false, null);
+        dungeonInventory = new Inventory(true, 8, 3, false, null);
         dungeonInventoryUI.SetInventory(dungeonInventory);
     }
 
@@ -55,8 +57,16 @@ public class DungeonManager : MonoBehaviour {
         return dungeonMobList;
     }
 
+    public List<ResourceNode> GetResourceNodesList() {
+        return resourceNodesInDungeon;
+    }
+
     public int GetDungeonDifficultyValue() {
         return dungeonDifficultyValue;
+    }
+
+    public int GetResourceNumberInDungeon() {
+        return resourceNodesNumberInDungeon;
     }
 
     public int GetTotalRoomNumber() {

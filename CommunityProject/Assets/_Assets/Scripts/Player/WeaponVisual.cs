@@ -3,16 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponVisual : MonoBehaviour
-{
+public class WeaponVisual : MonoBehaviour {
+    public static WeaponVisual Instance { get; private set; }
+
     [SerializeField] private SpriteRenderer weaponIdleSpriteRenderer;
+    private SpriteRenderer weaponAnimatorSpriteRenderer;
+
     private Animator animator;
 
     [SerializeField] private Transform WeaponHoldPoint;
 
 
     private void Awake() {
+        Instance = this;
         animator = GetComponent<Animator>();
+        weaponAnimatorSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start() {
@@ -27,6 +32,7 @@ public class WeaponVisual : MonoBehaviour
         HandleWeaponSortingLayer();
 
         if (PlayerAttack.Instance.GetAttacking()) return;
+        if (animator.runtimeAnimatorController == null) return;
         Vector2 watchDir = PlayerMovement.Instance.GetWatchVectorNormalized();
 
         if (watchDir != Vector2.zero) {
@@ -70,6 +76,7 @@ public class WeaponVisual : MonoBehaviour
     }
 
     private void PlayerAttack_OnPlayerAttack(object sender, System.EventArgs e) {
+        if (animator.runtimeAnimatorController == null) return;
         animator.SetTrigger("Attack");
     }
 
@@ -81,6 +88,5 @@ public class WeaponVisual : MonoBehaviour
         animator.runtimeAnimatorController = PlayerAttack.Instance.GetActiveWeaponSO().weaponAnimatorController;
         weaponIdleSpriteRenderer.sprite = PlayerAttack.Instance.GetActiveWeaponSO().weaponSprite;
     }
-
 
 }

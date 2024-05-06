@@ -33,7 +33,7 @@ public class ItemWorld : MonoBehaviour
 
     private bool droppedByPlayer;
     private bool attractedToPlayer;
-    private float itemSpeed = 5f;
+    private float itemSpeed = 15f;
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -54,7 +54,7 @@ public class ItemWorld : MonoBehaviour
 
     private void Update() {
         if(attractedToPlayer) {
-            Vector3 moveDirNormalized = Player.Instance.transform.position - transform.position;
+            Vector3 moveDirNormalized = (Player.Instance.transform.position - transform.position).normalized;
             transform.position += moveDirNormalized * itemSpeed * Time.deltaTime;
         }
     }
@@ -94,6 +94,15 @@ public class ItemWorld : MonoBehaviour
     }
 
     public void SetAttractedToPlayer() {
+        attractedToPlayer = true;
+    }
+
+    public void SetAttractedToPlayerAfterDelay(float delay) {
+        StartCoroutine(SetAttractedToPlayerCoroutine(delay));
+    }
+
+    public IEnumerator SetAttractedToPlayerCoroutine(float delay) {
+        yield return new WaitForSeconds(delay);
         attractedToPlayer = true;
     }
 }

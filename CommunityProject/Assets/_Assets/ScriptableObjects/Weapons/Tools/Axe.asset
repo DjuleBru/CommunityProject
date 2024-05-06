@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a507851cbae87c74faf7bf505155e85b, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: 
+  weaponSprite: {fileID: 1950253755, guid: 331f0faed5a02a4439bdb335c8e5b10a, type: 3}
+  weaponSpriteUI: {fileID: 1950253755, guid: 331f0faed5a02a4439bdb335c8e5b10a, type: 3}
+  weaponDamage: 50
+  weaponAttackRate: 0.5
+  weaponCanPierce: 0
+  weaponKnockback: 0
+  weaponDazeTime: 0
+  bodyAnimationType: 2
+  weaponAnimatorController: {fileID: 0}

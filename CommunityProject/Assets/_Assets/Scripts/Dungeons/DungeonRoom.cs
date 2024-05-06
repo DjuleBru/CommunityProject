@@ -25,10 +25,17 @@ public class DungeonRoom : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera roomCamera;
 
     [SerializeField] private GameObject mobSpawnPoints;
-    private Transform[] mobSpawnPointsList;
+    [SerializeField] private GameObject resourceNodesSpawnPoints;
+
+    private List<Transform> mobSpawnPointsList;
+    private List<Transform> resourceNodesSpawnPointsList;
+
     private List<Mob> mobsInRoom;
+    private List<ResourceNode> resourceNodesInRoom;
     private float dungeonRoomDifficultyValue;
+    private int dungeonRoomResourceValue;
     private int setDifficultyValue = 0;
+    private int resourcesSpawnedInRoom;
 
     private bool isFirstDungeonRoom;
     private bool isLastDungeonRoom;
@@ -41,6 +48,7 @@ public class DungeonRoom : MonoBehaviour
         roomCamera.m_Lens.OrthographicSize = cameraOrthographicSize;
 
         FillMobSpawnPointsList();
+        FillResourceNodesSpawnPointsList();
     }
 
     private void Start() {
@@ -51,6 +59,8 @@ public class DungeonRoom : MonoBehaviour
         while (setDifficultyValue < dungeonRoomDifficultyValue) {
             SpawnMobs();
         };
+
+        SpawnResources();
     }
 
     private void Update() {
@@ -87,12 +97,32 @@ public class DungeonRoom : MonoBehaviour
     }
 
     private void FillMobSpawnPointsList() {
-        mobSpawnPointsList = mobSpawnPoints.GetComponentsInChildren<Transform>();
+        mobSpawnPointsList = new List<Transform>();
+        Transform[] mobSpawnPointsArray = mobSpawnPoints.GetComponentsInChildren<Transform>();
+
+        foreach(Transform t in mobSpawnPointsArray) {
+            mobSpawnPointsList.Add(t);
+        }
+        mobSpawnPointsList.Remove(mobSpawnPointsList[0]);
+
         foreach (Transform mobSpawnPoint in mobSpawnPointsList) {
             mobSpawnPoint.gameObject.SetActive(false);
         }
     }
+    private void FillResourceNodesSpawnPointsList() {
+        resourceNodesSpawnPointsList = new List<Transform>();
 
+        Transform[] resourceNodesSpawnPointsArray = resourceNodesSpawnPoints.GetComponentsInChildren<Transform>();
+
+        foreach (Transform t in resourceNodesSpawnPointsArray) {
+            resourceNodesSpawnPointsList.Add(t);
+        }
+        resourceNodesSpawnPointsList.Remove(resourceNodesSpawnPointsList[0]);
+
+        foreach (Transform resourceNodeSpawnPoint in resourceNodesSpawnPointsList) {
+            resourceNodeSpawnPoint.gameObject.SetActive(false);
+        }
+    }
     private void SpawnMobs() {
         List<MobSO> mobSOs = DungeonManager.Instance.GetDungeonMobList();
         mobsInRoom = new List<Mob>();
@@ -114,6 +144,26 @@ public class DungeonRoom : MonoBehaviour
 
                 setDifficultyValue += mobToSpawnSO.mobDifficultyValue;
             } 
+        }
+    }
+
+    private void SpawnResources() {
+        List<ResourceNode> resourceNodes = DungeonManager.Instance.GetResourceNodesList();
+        resourceNodesInRoom = new List<ResourceNode>();
+
+        foreach (Transform resourceNodeSpawnPoint in resourceNodesSpawnPointsList) {
+
+            if (resourcesSpawnedInRoom < dungeonRoomResourceValue) {
+                // Spawn if we have not reached the room's resource node number
+
+                // Pick a random resource node
+                Transform resourceNodeToSpawn = DungeonManager.Instance.GetResourceNodesList()[Random.Range(0, DungeonManager.Instance.GetResourceNodesList().Count)].transform;
+
+                Vector3 spawnPosition = Utils.Randomize2DPoint(resourceNodeSpawnPoint.transform.position, 0f);
+                Instantiate(resourceNodeToSpawn, spawnPosition, Quaternion.identity, this.transform).GetComponent<Mob>();
+
+                resourcesSpawnedInRoom++;
+            }
         }
     }
 
@@ -297,6 +347,10 @@ public class DungeonRoom : MonoBehaviour
 
     public void SetRoomDifficultyValue(int difficultyValue) {
         dungeonRoomDifficultyValue = difficultyValue;
+    }
+
+    public void SetRoomResourceValue(int resourceValue) {
+        dungeonRoomResourceValue = resourceValue;
     }
 
     public Transform GetPlayerSpawnPoint() {

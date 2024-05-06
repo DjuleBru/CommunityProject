@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public static PlayerAttack Instance { get; private set; }
 
     [SerializeField] private WeaponSO activeWeaponSO;
+    private WeaponSO storeWeaponSO;
     public event EventHandler OnPlayerAttack;
     public event EventHandler OnPlayerAttackEnded;
     public event EventHandler OnActiveWeaponSOChanged;
@@ -52,6 +53,20 @@ public class PlayerAttack : MonoBehaviour
 
     public void ChangeActiveWeaponSO(WeaponSO weaponSO) {
         activeWeaponSO = weaponSO;
+        OnActiveWeaponSOChanged?.Invoke(this, EventArgs.Empty);
+        UpdateActiveStats();
+    }
+
+    public void ChangeToolWeaponSO(WeaponSO toolWeaponSO) {
+        storeWeaponSO = activeWeaponSO;
+        activeWeaponSO = toolWeaponSO;
+        OnActiveWeaponSOChanged?.Invoke(this, EventArgs.Empty);
+        UpdateActiveStats();
+    }
+
+    public void RemoveToolWeaponSO() {
+        activeWeaponSO = storeWeaponSO;
+        OnActiveWeaponSOChanged?.Invoke(this, EventArgs.Empty);
         UpdateActiveStats();
     }
 

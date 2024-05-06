@@ -6,6 +6,13 @@ using UnityEngine;
 public class PlayerAnimatorManager : MonoBehaviour {
     public static PlayerAnimatorManager Instance { get; private set; }
 
+    public enum PlayerInteractBool {
+        CutTree,
+        Mine,
+
+
+    }
+
     private Animator animator;
     [SerializeField] private Animator bodyAnimator;
 
@@ -59,26 +66,31 @@ public class PlayerAnimatorManager : MonoBehaviour {
     }
 
     private void CheckIfPlayerFinishedAttackAnimation() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash")) {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_CutTree")) {
             // Attack animation is playing
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < .95f) {
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < .7f) {
                 attacking = true;
             }
             else {
+                if(attacking) {
+                    PlayerAttack.Instance.SetAttackEnded();
+                    attacking = false;
+                }
+            }
+        }
+
+        else {
+            if (attacking) {
                 PlayerAttack.Instance.SetAttackEnded();
                 attacking = false;
             }
-        }
-        else {
-            PlayerAttack.Instance.SetAttackEnded();
-            attacking = false;
         }
 
         PlayerAttack.Instance.SetAttacking(attacking);
     }
 
     public bool CheckAttackingAnimationProgress(float animationProgress) {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash")) {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_CutTree")) {
             // Attack animation is playing
             if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < animationProgress) {
                 return true;
@@ -114,11 +126,11 @@ public class PlayerAnimatorManager : MonoBehaviour {
     }
 
     private void PlayerAttack_OnActiveWeaponSOChanged(object sender, EventArgs e) {
-        bodyAnimator.SetBool(bodyAnimationType, false);
-
+        animator.SetBool(bodyAnimationType, false);
         bodyAnimationType = PlayerAttack.Instance.GetActiveWeaponSO().bodyAnimationType.ToString();
-        bodyAnimator.SetBool(bodyAnimationType, true);
+        animator.SetBool(bodyAnimationType, true);
     }
+
     public Vector2 GetLastMoveDir() {
         return lastMoveDir;
     }

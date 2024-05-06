@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,18 +18,19 @@ public class DungeonGenerationManager : MonoBehaviour {
         Instance = this;
         GenerateDungeon();
         SetRoomDifficultyValues();
+        SetRoomTotalResourceNodes();
         DeActivateRooms();
     }
 
     private void GenerateDungeon() {
         Vector3 absoluteRoomPosition = new Vector3(0, 0, 0);
 
-        DungeonRoom initialDungeonRoom = dungeonRoomPoolList[Random.Range(0, dungeonRoomPoolList.Count)];
+        DungeonRoom initialDungeonRoom = dungeonRoomPoolList[UnityEngine.Random.Range(0, dungeonRoomPoolList.Count)];
         previousDungeonRoom = initialDungeonRoom;
 
         for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
 
-            DungeonRoom pooledDungeonRoom = dungeonRoomPoolList[Random.Range(0, dungeonRoomPoolList.Count)];
+            DungeonRoom pooledDungeonRoom = dungeonRoomPoolList[UnityEngine.Random.Range(0, dungeonRoomPoolList.Count)];
 
 
             Vector3 newRoomEnterPosition = pooledDungeonRoom.GetRoomEnterPosition();
@@ -76,7 +78,7 @@ public class DungeonGenerationManager : MonoBehaviour {
 
         for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
 
-            float roomDifficultyValue = Random.Range(0, 100);
+            float roomDifficultyValue = UnityEngine.Random.Range(0, 100);
 
             if (i == 0) {
                 // First room : no mobs
@@ -93,9 +95,38 @@ public class DungeonGenerationManager : MonoBehaviour {
             float roomDifficultyValue = roomDifficultyValues[i];
             float roomDifficultyValueScaled = (roomDifficultyValue / totalDifficultyValue)*dungeonDifficultyValue;
 
-            dungeonRoomList[i].SetRoomDifficultyValue((int)roomDifficultyValueScaled);
+            dungeonRoomList[i].SetRoomDifficultyValue((int)Math.Round(roomDifficultyValueScaled));
         }
 
+    }
+
+    private void SetRoomTotalResourceNodes() {
+        int dungeonTotalResourceNodes = DungeonManager.Instance.GetResourceNumberInDungeon();
+
+        List<int> roomResourceNodesNumber = new List<int>();
+        int totalResourcesNodesNumber = 0;
+
+        for (int i = 0; i < DungeonManager.Instance.GetResourceNumberInDungeon(); i++) {
+
+            int roomResourceValue = UnityEngine.Random.Range(0, 100);
+
+            if (i == 0) {
+                // First room : no mobs
+                roomResourceValue = 0;
+            }
+
+            roomResourceNodesNumber.Add(roomResourceValue);
+            totalResourcesNodesNumber += roomResourceValue;
+
+        }
+
+
+        for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
+            float roomDifficultyValue = roomResourceNodesNumber[i];
+            float roomDifficultyValueScaled = (roomDifficultyValue / totalResourcesNodesNumber) * dungeonTotalResourceNodes;
+
+            dungeonRoomList[i].SetRoomResourceValue((int)Math.Round(roomDifficultyValueScaled));
+        }
     }
 
     public List<DungeonRoom> GetDungeonRoomList() { 

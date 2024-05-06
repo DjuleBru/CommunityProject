@@ -203,6 +203,7 @@ public class Inventory
 
     public int AmountInventoryCanReceiveOfType(Item item) {
         if (!InventoryCanAcceptItem(item)) return 0;
+
         int maxStackableAmount = 0;
 
         if (inventoryMaxStackAmount == 0) {
@@ -233,7 +234,13 @@ public class Inventory
             }
 
             return itemAmountInventoryCanCarry;
+        } else {
+            if (itemList.Count < totalSlotNumber) {
+                // There are item slots available
+                return totalSlotNumber - itemList.Count;
+            }
         }
+
         return 0;
     }
 

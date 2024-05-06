@@ -53,9 +53,11 @@ public class Player : MonoBehaviour, IDamageable
     private void OnTriggerEnter2D(Collider2D collider) {
         HandleItemTriggerEnter(collider);
         HandleInteractableTriggerEnter(collider);
+        HandleResourceNodeTriggerEnter(collider);
     }
     private void OnTriggerExit2D(Collider2D collider) {
         HandleInteractableTriggerExit(collider);
+        HandleResourceNodeTriggerExit(collider);
     }
 
     public void SetBattleCameraAsPriority() {
@@ -94,7 +96,17 @@ public class Player : MonoBehaviour, IDamageable
         ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
 
         if (itemWorld != null) {
-            int itemAmountPlayerInventoryCanAdd = playerInventory.AmountInventoryCanReceiveOfType(itemWorld.GetItem());
+
+            Inventory inventoryToAddItem = null;
+
+            if (SavingSystem.Instance.GetSceneIsOverworld()) {
+                inventoryToAddItem = playerInventory;
+            }
+            if (SavingSystem.Instance.GetSceneIsDungeon()) {
+                inventoryToAddItem = DungeonManager.Instance.GetDungeonInventory();
+            }
+
+            int itemAmountPlayerInventoryCanAdd = inventoryToAddItem.AmountInventoryCanReceiveOfType(itemWorld.GetItem());
             Item itemToAdd = null;
 
             if (itemAmountPlayerInventoryCanAdd > 0) {
@@ -119,13 +131,8 @@ public class Player : MonoBehaviour, IDamageable
                 ItemWorld.DropItem(transform.position, itemWorld.GetItem(), 5f, true);
             }
 
-            if (SavingSystem.Instance.GetSceneIsOverworld()) {
-                playerInventory.AddItem(itemToAdd);
-            }
-            if (SavingSystem.Instance.GetSceneIsDungeon()) {
-                DungeonManager.Instance.GetDungeonInventory().AddItem(itemToAdd);
-            }
 
+            inventoryToAddItem.AddItem(itemToAdd);
             itemWorld.DestroySelf();
         }
     }
@@ -165,6 +172,27 @@ public class Player : MonoBehaviour, IDamageable
             RemoveInteractionWithInteractable(interactable);
         }
         HandleClosestInteractableChange();
+    }
+    private void HandleResourceNodeTriggerEnter(Collider2D collider) {
+        IInteractable interactable = collider.GetComponent<IInteractable>();
+        if (interactable != null) {
+
+            if (interactable is ResourceNodeInteraction) {
+                ResourceNodeInteraction resourceNodeInteraction = (ResourceNodeInteraction)interactable;
+                PlayerAttack.Instance.ChangeToolWeaponSO(resourceNodeInteraction.GetComponentInParent<ResourceNode>().GetHarvestingWeaponSO());
+            }
+        }
+    }
+
+    private void HandleResourceNodeTriggerExit(Collider2D collider) {
+        IInteractable interactable = collider.GetComponent<IInteractable>();
+        if (interactable != null) {
+
+            if (interactable is ResourceNodeInteraction) {
+                ResourceNodeInteraction resourceNodeInteraction = (ResourceNodeInteraction)interactable;
+                PlayerAttack.Instance.RemoveToolWeaponSO();
+            }
+        }
     }
 
     private void HandleClosestInteractableChange() {
