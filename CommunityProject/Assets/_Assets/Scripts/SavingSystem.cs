@@ -59,6 +59,8 @@ public class SavingSystem : MonoBehaviour {
         ES3.Save("lastDungeonTime", timeToCompleteDungeon);
         ES3.Save("playerCompletedLastDungeon", true);
         ES3.Save("playerExitedDungeon", true);
+
+        HumanoidsManager.Instance.SaveHumanoidsSavedFromDungeon();
     }
 
     public List<Item> GetLastDungeonLootedItems() {
@@ -70,5 +72,15 @@ public class SavingSystem : MonoBehaviour {
     }
     public bool GetSceneIsDungeon() {
         return sceneIsDungeon;
+    }
+
+    public void SaveOverworld() {
+        HumanoidsManager.Instance.SaveHumanoidsInOverworld();
+    }
+
+    public void OnApplicationQuit() {
+        if(sceneIsOverWorld) {
+            SaveOverworld();
+        }
     }
 }

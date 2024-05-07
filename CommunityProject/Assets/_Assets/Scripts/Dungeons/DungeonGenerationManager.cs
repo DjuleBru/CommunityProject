@@ -19,6 +19,7 @@ public class DungeonGenerationManager : MonoBehaviour {
         GenerateDungeon();
         SetRoomDifficultyValues();
         SetRoomTotalResourceNodes();
+        SetRoomHumanoidCages();
         DeActivateRooms();
     }
 
@@ -106,7 +107,7 @@ public class DungeonGenerationManager : MonoBehaviour {
         List<int> roomResourceNodesNumber = new List<int>();
         int totalResourcesNodesNumber = 0;
 
-        for (int i = 0; i < DungeonManager.Instance.GetResourceNumberInDungeon(); i++) {
+        for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
 
             int roomResourceValue = UnityEngine.Random.Range(0, 100);
 
@@ -126,6 +127,34 @@ public class DungeonGenerationManager : MonoBehaviour {
             float roomDifficultyValueScaled = (roomDifficultyValue / totalResourcesNodesNumber) * dungeonTotalResourceNodes;
 
             dungeonRoomList[i].SetRoomResourceValue((int)Math.Round(roomDifficultyValueScaled));
+        }
+    }
+
+    private void SetRoomHumanoidCages() {
+        int dungeonTotalHumanoidCaged = DungeonManager.Instance.GetHumanoidCageNUmberInDungeon();
+
+        List<int> humanoidCagesNumber = new List<int>();
+        int totalHumanoidCagesNumber = 0;
+
+        for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
+
+            int roomHumanoidCageValue = UnityEngine.Random.Range(0, 100);
+
+            if (i == 0) {
+                // First room : no mobs
+                roomHumanoidCageValue = 0;
+            }
+
+            humanoidCagesNumber.Add(roomHumanoidCageValue);
+            totalHumanoidCagesNumber += roomHumanoidCageValue;
+
+        }
+
+
+        for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
+            float roomHumanoidCageValue = humanoidCagesNumber[i];
+            float roomHumanoicCageValueScaled = (roomHumanoidCageValue / totalHumanoidCagesNumber) * dungeonTotalHumanoidCaged;
+            dungeonRoomList[i].SetRoomHumanoidCageValue((int)Math.Round(roomHumanoicCageValueScaled));
         }
     }
 

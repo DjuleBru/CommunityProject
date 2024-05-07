@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class ResourceNodeVisual : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private SpriteRenderer shadowSpriteRenderer;
-    [SerializeField] private Sprite emptyResourceNodeSprite;
-    private ResourceNode resourceNode;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected SpriteRenderer shadowSpriteRenderer;
+    [SerializeField] protected Sprite emptyResourceNodeSprite;
+    protected ResourceNode resourceNode;
 
-    private void Awake() {
+    protected void Awake() {
         resourceNode = GetComponentInParent<ResourceNode>();
     }
 
-    private void Start() {
+    protected void Start() {
         resourceNode.OnResourceNodeDepleted += ResourceNode_OnResourceNodeDepleted;
     }
 
-    private void ResourceNode_OnResourceNodeDepleted(object sender, System.EventArgs e) {
+    protected void ResourceNode_OnResourceNodeDepleted(object sender, System.EventArgs e) {
         spriteRenderer.sprite = emptyResourceNodeSprite;
         shadowSpriteRenderer.sprite = null;
     }

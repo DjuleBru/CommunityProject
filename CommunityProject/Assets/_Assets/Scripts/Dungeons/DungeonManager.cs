@@ -18,8 +18,13 @@ public class DungeonManager : MonoBehaviour {
     [SerializeField] private List<MobSO> completeMobList;
     private List<MobSO> dungeonMobList = new List<MobSO>();
 
+
+    [SerializeField] private List<HumanoidCage> completeHumanoidsCagesList;
+    [SerializeField] private GameObject humanoidSpawnedInDungeon;
+
     [SerializeField] private List<ResourceNode> resourceNodesInDungeon;
     [SerializeField] private int resourceNodesNumberInDungeon;
+    [SerializeField] private int humanoidCageNumberInDungeon;
 
     [SerializeField] private InventoryUI dungeonInventoryUI;
     private Inventory dungeonInventory;
@@ -51,6 +56,7 @@ public class DungeonManager : MonoBehaviour {
 
     public void CompleteDungeon() {
         SavingSystem.Instance.CompleteDungeon(dungeonInventory.GetItemList(), dungeonTimer);
+
     }
 
     public List<MobSO> GetDungeonMobList() {
@@ -61,12 +67,24 @@ public class DungeonManager : MonoBehaviour {
         return resourceNodesInDungeon;
     }
 
+    public List<HumanoidCage> GetHumanoidCagesList() {
+        return completeHumanoidsCagesList;
+    }
+
     public int GetDungeonDifficultyValue() {
         return dungeonDifficultyValue;
     }
 
     public int GetResourceNumberInDungeon() {
         return resourceNodesNumberInDungeon;
+    }
+
+    public int GetHumanoidCageNUmberInDungeon() {
+        return humanoidCageNumberInDungeon;
+    }
+
+    public GameObject GetHumanoidSpawnedInDungeon() {
+        return humanoidSpawnedInDungeon;
     }
 
     public int GetTotalRoomNumber() {

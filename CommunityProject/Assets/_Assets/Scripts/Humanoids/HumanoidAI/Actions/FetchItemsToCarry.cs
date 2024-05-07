@@ -30,7 +30,7 @@ public class FetchItemsToCarry : Action {
         humanoid.SetHumanoidActionDescription("Fetching items");
 
         if (colliderDistance2DToBuildingCollider.distance > .5f) {
-            return TaskStatus.Running;
+            return TaskStatus.Success;
         } else {
             // Humanoid is close to destination building
 

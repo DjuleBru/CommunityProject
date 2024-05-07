@@ -40,16 +40,16 @@ public class HumanoidMovement : MonoBehaviour
     protected Vector3 moveDirNormalized;
     protected Vector2 moveDir2DNormalized;
 
-    private void Awake() {
+    protected void Awake() {
         humanoid = GetComponent<Humanoid>();
         humanoidVisual = GetComponentInChildren<HumanoidVisual>();
         rb = GetComponent<Rigidbody2D>();
-        moveSpeed = humanoid.GetHumanoidSO().moveSpeed;
-        roamCalculationTimer = 0;
+        seeker = GetComponent<Seeker>();
     }
 
     protected virtual void Start() {
-        seeker = GetComponent<Seeker>();
+        moveSpeed = humanoid.GetHumanoidSO().moveSpeed;
+        roamCalculationTimer = 0;
         pathCalculationTimer = pathCalculationRate;
     }
 
@@ -147,5 +147,15 @@ public class HumanoidMovement : MonoBehaviour
     public void StopMoving() {
         dead = true;
         rb.velocity = Vector3.zero;
+    }
+
+    public void LoadHumanoidMovement() {
+        string humanoidID = humanoid.GetInstanceID().ToString();
+        moveSpeed = ES3.Load(humanoidID + "moveSpeed", moveSpeed);
+    }
+
+    public void SaveHumanoidMovement() {
+        string humanoidID = humanoid.GetInstanceID().ToString();
+        ES3.Save(humanoidID + "moveSpeed", moveSpeed);
     }
 }

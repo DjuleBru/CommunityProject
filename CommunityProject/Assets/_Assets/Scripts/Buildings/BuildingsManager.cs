@@ -23,6 +23,34 @@ public class BuildingsManager : MonoBehaviour
         overworldGridVisual.SetActive(false);
     }
 
+
+    private void Start() {
+        if (DungeonManager.Instance == null) {
+            //LoadBuildingsInOverworld();
+        }
+    }
+
+    //public void LoadBuildingsInOverworld() {
+    //    humanoidsSavedIDList = new List<int>();
+
+    //    foreach (Humanoid humanoid in humanoidsInOverworld) {
+    //        //humanoid.SaveHumanoid();
+    //        humanoidsSavedIDList.Add(humanoid.GetInstanceID());
+    //        ES3.Save(humanoid.GetInstanceID().ToString(), humanoid.gameObject);
+
+    //    }
+
+    //    ES3.Save("humanoidsSavedIDList", humanoidsSavedIDList);
+    //}
+
+    //public void SaveBuildingsInOverworld() {
+    //    humanoidsSavedIDList = ES3.Load("humanoidsSavedIDList", new List<int>());
+
+    //    foreach (int id in humanoidsSavedIDList) {
+    //        ES3.Load(id.ToString());
+    //    }
+    //}
+
     public void SetBuildingSpawned() {
         overworldGridVisual.SetActive(true);
         OnAnyBuildingSpawned?.Invoke(this, EventArgs.Empty);

@@ -21,18 +21,24 @@ public class DungeonDoorVisual : MonoBehaviour
 
     private void Update() {
         if(doorOpening) {
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("OpenDoor") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .95) {
+            if(animator.GetCurrentAnimatorStateInfo(0).IsName("OpenDoor") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .7) {
                 doorOpening = false;
                 if (!isShadow) {
                     tilemapCollider.enabled = false;
+
+                    // Recalculate pathfinding Graph
+                    AstarPath.active.Scan();
                 }
             };
         }
         if(doorClosing) {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("CloseDoor") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .95) {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("CloseDoor") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .7) {
                 doorClosing = false;
                 if (!isShadow) {
                     tilemapCollider.enabled = true;
+
+                    // Recalculate pathfinding Graph
+                    AstarPath.active.Scan();
                 }
             };
         }

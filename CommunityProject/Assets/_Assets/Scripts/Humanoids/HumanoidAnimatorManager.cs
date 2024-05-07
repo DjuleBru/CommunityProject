@@ -18,8 +18,10 @@ public class HumanoidAnimatorManager : MonoBehaviour
     }
 
     private void Start() {
-        humanoidCarry.OnCarryCompleted += HumanoidCarry_OnCarryCompleted;
-        humanoidCarry.OnCarryStarted += HumanoidCarry_OnCarryStarted;
+        if(humanoidCarry != null) {
+            humanoidCarry.OnCarryCompleted += HumanoidCarry_OnCarryCompleted;
+            humanoidCarry.OnCarryStarted += HumanoidCarry_OnCarryStarted;
+        }
     }
 
     private void HumanoidCarry_OnCarryStarted(object sender, System.EventArgs e) {
@@ -44,5 +46,9 @@ public class HumanoidAnimatorManager : MonoBehaviour
         }
         animator.SetFloat("X", moveDirNormalized.x);
         animator.SetFloat("Y", moveDirNormalized.y);
+    }
+
+    public void SetAnimator(AnimatorOverrideController animatorController) {
+        animator.runtimeAnimatorController = animatorController;
     }
 }

@@ -177,6 +177,8 @@ public class Player : MonoBehaviour, IDamageable
         IInteractable interactable = collider.GetComponent<IInteractable>();
         if (interactable != null) {
 
+            if (interactable is HumanoidCageInteraction) return;
+
             if (interactable is ResourceNodeInteraction) {
                 ResourceNodeInteraction resourceNodeInteraction = (ResourceNodeInteraction)interactable;
                 PlayerAttack.Instance.ChangeToolWeaponSO(resourceNodeInteraction.GetComponentInParent<ResourceNode>().GetHarvestingWeaponSO());
@@ -186,8 +188,10 @@ public class Player : MonoBehaviour, IDamageable
 
     private void HandleResourceNodeTriggerExit(Collider2D collider) {
         IInteractable interactable = collider.GetComponent<IInteractable>();
+
         if (interactable != null) {
 
+            if (interactable is HumanoidCageInteraction) return;
             if (interactable is ResourceNodeInteraction) {
                 ResourceNodeInteraction resourceNodeInteraction = (ResourceNodeInteraction)interactable;
                 PlayerAttack.Instance.RemoveToolWeaponSO();

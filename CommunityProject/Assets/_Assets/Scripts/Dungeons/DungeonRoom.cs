@@ -26,16 +26,21 @@ public class DungeonRoom : MonoBehaviour
 
     [SerializeField] private GameObject mobSpawnPoints;
     [SerializeField] private GameObject resourceNodesSpawnPoints;
+    [SerializeField] private GameObject humanoidCagesSpawnPoints;
 
     private List<Transform> mobSpawnPointsList;
     private List<Transform> resourceNodesSpawnPointsList;
+    private List<Transform> humanoidCagesSpawnPointsList;
 
     private List<Mob> mobsInRoom;
-    private List<ResourceNode> resourceNodesInRoom;
     private float dungeonRoomDifficultyValue;
-    private int dungeonRoomResourceValue;
     private int setDifficultyValue = 0;
+
+    private int dungeonRoomResourceValue;
     private int resourcesSpawnedInRoom;
+
+    private int humanoidCageValue;
+    private int humanoidCageSpawnedInRoom;
 
     private bool isFirstDungeonRoom;
     private bool isLastDungeonRoom;
@@ -49,9 +54,12 @@ public class DungeonRoom : MonoBehaviour
 
         FillMobSpawnPointsList();
         FillResourceNodesSpawnPointsList();
+        FillHumanoidCagesSpawnPointsList();
     }
 
     private void Start() {
+        mobsInRoom = new List<Mob>();
+
         if (isFirstDungeonRoom) {
             roomEnterPassageVisual.gameObject.SetActive(false);
         }
@@ -61,6 +69,7 @@ public class DungeonRoom : MonoBehaviour
         };
 
         SpawnResources();
+        SpawnHumanoidCages();
     }
 
     private void Update() {
@@ -123,9 +132,24 @@ public class DungeonRoom : MonoBehaviour
             resourceNodeSpawnPoint.gameObject.SetActive(false);
         }
     }
+
+    private void FillHumanoidCagesSpawnPointsList() {
+        humanoidCagesSpawnPointsList = new List<Transform>();
+
+        Transform[] humanoidCagesSpawnPointsArray = humanoidCagesSpawnPoints.GetComponentsInChildren<Transform>();
+
+        foreach (Transform t in humanoidCagesSpawnPointsArray) {
+            humanoidCagesSpawnPointsList.Add(t);
+        }
+        humanoidCagesSpawnPointsList.Remove(humanoidCagesSpawnPointsList[0]);
+
+        foreach (Transform humanoidCageSpawnPoint in humanoidCagesSpawnPointsList) {
+            humanoidCageSpawnPoint.gameObject.SetActive(false);
+        }
+    }
+
     private void SpawnMobs() {
         List<MobSO> mobSOs = DungeonManager.Instance.GetDungeonMobList();
-        mobsInRoom = new List<Mob>();
 
         foreach (Transform mobSpawnPoint in mobSpawnPointsList) {
             if(setDifficultyValue < dungeonRoomDifficultyValue) {
@@ -148,9 +172,6 @@ public class DungeonRoom : MonoBehaviour
     }
 
     private void SpawnResources() {
-        List<ResourceNode> resourceNodes = DungeonManager.Instance.GetResourceNodesList();
-        resourceNodesInRoom = new List<ResourceNode>();
-
         foreach (Transform resourceNodeSpawnPoint in resourceNodesSpawnPointsList) {
 
             if (resourcesSpawnedInRoom < dungeonRoomResourceValue) {
@@ -163,6 +184,25 @@ public class DungeonRoom : MonoBehaviour
                 Instantiate(resourceNodeToSpawn, spawnPosition, Quaternion.identity, this.transform).GetComponent<Mob>();
 
                 resourcesSpawnedInRoom++;
+            }
+        }
+    }
+
+    private void SpawnHumanoidCages() {
+        foreach (Transform humanoidCageSpawnPoint in humanoidCagesSpawnPointsList) {
+
+            if (humanoidCageSpawnedInRoom < humanoidCageValue) {
+                // Spawn if we have not reached the room's resource node number
+
+                // Pick a random resource node
+                Transform humanoidCageToSpawn = DungeonManager.Instance.GetHumanoidCagesList()[Random.Range(0, DungeonManager.Instance.GetHumanoidCagesList().Count)].transform;
+
+                Vector3 spawnPosition = Utils.Randomize2DPoint(humanoidCageSpawnPoint.transform.position, 0f);
+                HumanoidCage humanoidCageSpawned = Instantiate(humanoidCageToSpawn, spawnPosition, Quaternion.identity, this.transform).GetComponent<HumanoidCage>();
+
+                GameObject humanoidToSpawn = DungeonManager.Instance.GetHumanoidSpawnedInDungeon();
+                humanoidCageSpawned.SetHumanoidGameObject(humanoidToSpawn);
+                humanoidCageSpawnedInRoom++;
             }
         }
     }
@@ -289,9 +329,6 @@ public class DungeonRoom : MonoBehaviour
         roomEntryDoorShadowVisual.OpenDoor();
         roomEnterPassageVisual.gameObject.SetActive(true);
         roomEnterPassageVisual.CloseDoor();
-
-        // Recalculate pathfinding Graph
-        AstarPath.active.Scan();
     }
 
     private void OpenDungeonExit() {
@@ -351,6 +388,10 @@ public class DungeonRoom : MonoBehaviour
 
     public void SetRoomResourceValue(int resourceValue) {
         dungeonRoomResourceValue = resourceValue;
+    }
+
+    public void SetRoomHumanoidCageValue(int humanoidCageValue) {
+        this.humanoidCageValue = humanoidCageValue;
     }
 
     public Transform GetPlayerSpawnPoint() {

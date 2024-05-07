@@ -47,6 +47,7 @@ public class DungeonEntrance : MonoBehaviour
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
         if (playerIsInEntranceArea) {
+            HumanoidsManager.Instance.SaveHumanoidsInOverworld();
             SavingSystem.Instance.SetLastDungeonEntrance(this);
             SceneLoader.Load(SceneLoader.Scene.Dungeon);
         }

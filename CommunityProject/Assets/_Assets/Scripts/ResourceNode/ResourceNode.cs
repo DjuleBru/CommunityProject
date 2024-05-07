@@ -3,16 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceNode : MonoBehaviour
-{
-    [SerializeField] protected Item itemStored;
-    [SerializeField] protected int itemDropCountOnHit;
-    [SerializeField] protected WeaponSO harvestingWeaponSO;
-    [SerializeField] protected PlayerAnimatorManager.PlayerInteractBool interactBool;
+public class ResourceNode : MonoBehaviour {
 
-    protected Inventory resourceNodeInventory;
+    [SerializeField] private Item.ItemType itemTypeStored;
+    [SerializeField] private int initialItemNumber;
 
-    protected int initialItemNumber;
+    private Item itemStored;
+    [SerializeField] private int itemDropCountOnHit;
+    [SerializeField] private WeaponSO harvestingWeaponSO;
+    [SerializeField] private PlayerAnimatorManager.PlayerInteractBool interactBool;
+
+    private Inventory resourceNodeInventory;
+
     public event EventHandler OnResourceNodeHit;
     public event EventHandler OnResourceNodeDepleted;
 
@@ -21,13 +23,11 @@ public class ResourceNode : MonoBehaviour
     }
 
     protected void Start() {
+        itemStored = new Item { itemType = itemTypeStored, amount = initialItemNumber };
         resourceNodeInventory.AddItem(itemStored);
-        initialItemNumber = (int)itemStored.amount;
     }
 
     public virtual void HitResourceNode() {
-        OnResourceNodeHit?.Invoke(this, EventArgs.Empty);
-
         Item itemDropped = new Item { itemType = itemStored.itemType, amount = itemDropCountOnHit };
 
         if (resourceNodeInventory.HasItem(itemDropped)) {
@@ -38,6 +38,8 @@ public class ResourceNode : MonoBehaviour
         if (!resourceNodeInventory.HasItem(itemDropped)) {
             OnResourceNodeDepleted?.Invoke(this, EventArgs.Empty);
         }
+
+        OnResourceNodeHit?.Invoke(this, EventArgs.Empty);
     }
 
     public PlayerAnimatorManager.PlayerInteractBool GetPlayerInteractBool() {
@@ -49,7 +51,11 @@ public class ResourceNode : MonoBehaviour
     }
 
     public float GetHarvestingAmountNormalized() {
-        return initialItemNumber / itemStored.amount;
+        return (float)itemStored.amount / (float)initialItemNumber;
+    }
+
+    protected void InvokeResourceNodeDepleted() {
+        OnResourceNodeDepleted.Invoke(this, EventArgs.Empty);
     }
 
 }

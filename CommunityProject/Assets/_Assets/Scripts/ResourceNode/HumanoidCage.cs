@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class HumanoidCage : ResourceNode
 {
-    private Humanoid humanoid;
+    [SerializeField] private GameObject humanoid;
+    [SerializeField] private Transform humanoidSpawnPoint;
 
-    public virtual void HitResourceNode() {
+    public override void HitResourceNode() {
         FreeHumanoid();
     }
 
-    public void SetHumanoid(Humanoid humanoid) {
+    public void SetHumanoidGameObject(GameObject humanoid) {
         this.humanoid = humanoid;
     }
 
     private void FreeHumanoid() {
+        Instantiate(humanoid, humanoidSpawnPoint.transform.position, Quaternion.identity);
+        InvokeResourceNodeDepleted();
     }
 }

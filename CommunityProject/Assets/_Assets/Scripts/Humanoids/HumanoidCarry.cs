@@ -7,13 +7,13 @@ public class HumanoidCarry : MonoBehaviour
 {
     private Humanoid humanoid;
 
-    private Inventory humanoidCarryInventory;
-    private int maxCarryAmount = 5;
+    [SerializeField] private Inventory humanoidCarryInventory;
+    [SerializeField] private int maxCarryAmount = 5;
 
-    private Item itemCarrying = null;
-    private Item itemToCarry = null;
+    [SerializeField] private Item itemCarrying = null;
+    [SerializeField] private Item itemToCarry = null;
 
-    private List<Item> itemCarryingList = new List<Item>();
+    [SerializeField] private List<Item> itemCarryingList = new List<Item>();
 
     public event EventHandler OnCarryStarted;
     public event EventHandler OnCarryCompleted;
@@ -21,6 +21,7 @@ public class HumanoidCarry : MonoBehaviour
     private void Awake() {
         humanoidCarryInventory = new Inventory(true, 1, 1, maxCarryAmount);
         humanoid = GetComponent<Humanoid>();
+
     }
 
     public bool FetchItemsInBuilding(Building building) {
@@ -193,4 +194,13 @@ public class HumanoidCarry : MonoBehaviour
         return false;
     }
 
+    public int GetMaxCarryAmount() {
+        return maxCarryAmount;
+    }
+
+    public void LoadHumanoidCarry() {
+        if (itemCarrying.amount != 0) {
+            OnCarryStarted?.Invoke(this, EventArgs.Empty);
+        }
+    }
 }

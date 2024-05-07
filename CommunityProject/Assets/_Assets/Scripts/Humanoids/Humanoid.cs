@@ -1,4 +1,6 @@
 using BehaviorDesigner.Runtime;
+using ES3Internal;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,29 +26,34 @@ public class Humanoid : MonoBehaviour
     private HumanoidWork humanoidWork;
     private HumanoidHaul humanoidHaul;
     private HumanoidDungeonCrawl humanoidDungeonCrawl;
+    private HumanoidAnimatorManager humanoidAnimatorManager;
+    private HumanoidMovement humanoidMovement;
+    private HumanoidCarry humanoidCarry;
 
-    [SerializeField] private HumanoidVisual humanoidVisual;
-    [SerializeField] private HumanoidInteraction humanoidInteraction;
+    private HumanoidVisual humanoidVisual;
+    private HumanoidInteraction humanoidInteraction;
     private Collider2D collider2D;
 
     private string humanoidName;
     private string humanoidActionDesriprion;
 
     private float workingSpeed;
-
     private Job jobAssigned;
     private bool autoAssign = true;
 
     [SerializeField] private BehaviorDesigner.Runtime.BehaviorTree behaviorTree;
-    [SerializeField] ExternalBehaviorTree workerBehaviorTree;
-    [SerializeField] ExternalBehaviorTree haulierBehaviorTree;
-    [SerializeField] ExternalBehaviorTree dungeoneerBehaviorTree;
 
     private void Awake() {
         behaviorTree = GetComponent<BehaviorDesigner.Runtime.BehaviorTree>();
         humanoidWork = GetComponent<HumanoidWork>();
         humanoidHaul = GetComponent<HumanoidHaul>();
+        humanoidVisual = GetComponentInChildren<HumanoidVisual>();
+        humanoidInteraction = GetComponentInChildren<HumanoidInteraction>();
         humanoidDungeonCrawl = GetComponent<HumanoidDungeonCrawl>();
+        humanoidAnimatorManager = GetComponentInChildren<HumanoidAnimatorManager>();
+        humanoidMovement = GetComponent<HumanoidMovement>();
+        humanoidCarry = GetComponent<HumanoidCarry>();
+
         collider2D = GetComponent<Collider2D>();
 
         if (debugJob) {
@@ -54,15 +61,24 @@ public class Humanoid : MonoBehaviour
             AssignBehaviorTree();
         }
 
-        humanoidName = HumanoidNames.GetRandomName();
-        workingSpeed = humanoidSO.workingSpeed;
+        if (humanoidName == null) {
+            humanoidName = HumanoidNames.GetRandomName();
+        }
     }
 
     private void Start() {
+        if (DungeonManager.Instance != null) {
+            // This is a dungeon scene
+            // Humanoid is being freed from dungeon
+            behaviorTree.ExternalBehavior = HumanoidsManager.Instance.GetJustFreedBehaviorTree();
+            HumanoidsManager.Instance.AddHumanoidSavedFromDungeon(GetInstanceID());
+        } else {
+            HumanoidsManager.Instance.AddHumanoidInOverworld(this);
+        }
+
+        LoadHumanoid();
         humanoidWork.OnHumanoidWorkStarted += HumanoidWork_OnHumanoidWorkStarted;
         humanoidWork.OnHumanoidWorkStopped += HumanoidWork_OnHumanoidWorkStopped;
-
-        HumanoidsManager.Instance.AddHumanoidSaved(this);
     }
 
     private void HumanoidWork_OnHumanoidWorkStopped(object sender, System.EventArgs e) {
@@ -86,7 +102,7 @@ public class Humanoid : MonoBehaviour
     }
 
     public float GetWorkingSpeed() {
-        return workingSpeed;
+        return humanoidSO.workingSpeed;
     }
 
     public Job GetJob() {
@@ -119,18 +135,24 @@ public class Humanoid : MonoBehaviour
 
 
     public void AssignBehaviorTree() {
+
         if (jobAssigned == Job.Worker) {
-            behaviorTree.ExternalBehavior = workerBehaviorTree;
+            behaviorTree.ExternalBehavior = HumanoidsManager.Instance.GetWorkerBehaviorTree();
             return;
         }
 
         if (jobAssigned == Job.Haulier) {
-            behaviorTree.ExternalBehavior = haulierBehaviorTree;
+            behaviorTree.ExternalBehavior = HumanoidsManager.Instance.GetHaulerBehaviorTree();
             return;
         }
 
         if (jobAssigned == Job.Dungeoneer) {
-            behaviorTree.ExternalBehavior = dungeoneerBehaviorTree;
+            behaviorTree.ExternalBehavior = HumanoidsManager.Instance.GetDungeoneerBehaviorTree();
+            return;
+        }
+
+        if (jobAssigned == Job.Unassigned) {
+            behaviorTree.ExternalBehavior = HumanoidsManager.Instance.GetUnassignedBehaviorTree();
             return;
         }
     }
@@ -183,6 +205,10 @@ public class Humanoid : MonoBehaviour
         return autoAssign;
     }
 
+    public HumanoidVisual GetHumanoidVisual() {
+        return humanoidVisual;
+    }
+
     public void SetAutoAssign(bool autoAssignActive) {
         if (!autoAssignActive && !autoAssign) return;
         autoAssign = autoAssignActive;
@@ -195,4 +221,9 @@ public class Humanoid : MonoBehaviour
         humanoidActionDesriprion = description;
         ProductionBuildingUI.Instance.RefreshWorkerPanel();
     }
+
+    public void LoadHumanoid() {
+        humanoidCarry.LoadHumanoidCarry();
+    }
+
 }

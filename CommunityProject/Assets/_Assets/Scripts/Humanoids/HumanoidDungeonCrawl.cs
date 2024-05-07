@@ -8,9 +8,9 @@ public class HumanoidDungeonCrawl : MonoBehaviour
     private DungeonEntrance dungeonEntranceAssigned;
     private HumanoidCarry humanoidCarry;
     private Humanoid humanoid;
-    private float crawlTimer;
+    [SerializeField] private float crawlTimer;
 
-    private bool crawling;
+    [SerializeField] private bool crawling;
 
     public event EventHandler OnCrawlStarted;
     public event EventHandler OnCrawlSuccess;
@@ -70,6 +70,20 @@ public class HumanoidDungeonCrawl : MonoBehaviour
             dungeonEntranceAssigned.DeAssignHumanoid(humanoid);
             dungeonEntranceAssigned = null;
         }
+    }
+
+    public void LoadHumanoidDungeonCrawl() {
+        string humanoidID = humanoid.GetInstanceID().ToString();
+        dungeonEntranceAssigned = ES3.Load(humanoidID + "dungeonEntranceAssigned", dungeonEntranceAssigned);
+        crawling = ES3.Load(humanoidID + "crawling", crawling);
+        crawlTimer = ES3.Load(humanoidID + "crawlTimer", crawlTimer);
+    }
+
+    public void SaveHumanoidDungeonCrawl() {
+        string humanoidID = humanoid.GetInstanceID().ToString();
+        ES3.Save(humanoidID + "dungeonEntranceAssigned", dungeonEntranceAssigned);
+        ES3.Save(humanoidID + "crawling", crawling);
+        ES3.Save(humanoidID + "crawlTimer", crawlTimer);
     }
 
 }

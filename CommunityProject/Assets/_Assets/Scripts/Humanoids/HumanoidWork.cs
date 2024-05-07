@@ -7,12 +7,12 @@ using UnityEngine;
 public class HumanoidWork : MonoBehaviour
 {
     private Humanoid humanoid;
-    private bool working;
+    [SerializeField] private bool working;
     public event EventHandler OnHumanoidWorkStarted;
     public event EventHandler OnHumanoidWorkStopped;
 
-    private float assignBuildingTimer;
-    private float assignBuildingRate = 2f;
+    [SerializeField] private float assignBuildingTimer;
+    [SerializeField] private float assignBuildingRate = 2f;
 
     private void Awake() {
         humanoid = GetComponent<Humanoid>();
@@ -92,5 +92,19 @@ public class HumanoidWork : MonoBehaviour
         assignedBuilding.RemoveAssignedHumanoid();
         assignedBuilding.SetHumanoidWorking(false, humanoid.GetHumanoidSO().humanoidType);
         humanoid.RemoveAssignedBuilding();
+    }
+
+    public void LoadHumanoidWork() {
+        string humanoidID = humanoid.GetInstanceID().ToString();
+        working = ES3.Load(humanoidID + "working", working);
+        assignBuildingTimer = ES3.Load(humanoidID + "assignBuildingTimer", assignBuildingTimer);
+        assignBuildingRate = ES3.Load(humanoidID + "assignBuildingRate", assignBuildingRate);
+    }
+
+    public void SaveHumanoidWork() {
+        string humanoidID = humanoid.GetInstanceID().ToString();
+        ES3.Save(humanoidID + "working", working);
+        ES3.Save(humanoidID + "assignBuildingTimer", assignBuildingTimer);
+        ES3.Save(humanoidID + "assignBuildingRate", assignBuildingRate);
     }
 }

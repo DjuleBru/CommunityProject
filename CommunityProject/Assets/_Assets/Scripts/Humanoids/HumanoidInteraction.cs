@@ -33,4 +33,5 @@ public class HumanoidInteraction : MonoBehaviour, IInteractable {
     public bool GetPlayerInTriggerArea() {
         return playerInTriggerArea;
     }
+
 }

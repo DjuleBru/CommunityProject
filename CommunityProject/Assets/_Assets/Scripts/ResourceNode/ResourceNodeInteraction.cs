@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class ResourceNodeInteraction : MonoBehaviour, IInteractable {
 
-    [SerializeField] private Collider2D solidCollider;
-    [SerializeField] private GameObject hoveredGameObject;
-    private ResourceNode resourceNode;
-    private bool playerInTriggerArea;
-    private bool resourceNodeDepleted;
+    [SerializeField] protected Collider2D solidCollider;
+    [SerializeField] protected GameObject hoveredGameObject;
+    protected ResourceNode resourceNode;
+    protected bool playerInTriggerArea;
+    protected bool resourceNodeDepleted;
 
-    private void Awake() {
+    protected void Awake() {
         hoveredGameObject.SetActive(false);
         resourceNode = GetComponentInParent<ResourceNode>();
     }
 
-    private void Start() {
+    protected void Start() {
         PlayerAttack.Instance.OnPlayerAttackEnded += PlayerAttack_OnPlayerAttackEnded;
         resourceNode.OnResourceNodeDepleted += ResourceNode_OnResourceNodeDepleted;
     }
 
-    private void ResourceNode_OnResourceNodeDepleted(object sender, System.EventArgs e) {
+    protected void ResourceNode_OnResourceNodeDepleted(object sender, System.EventArgs e) {
         resourceNodeDepleted = true;
         hoveredGameObject.SetActive(false);
     }
 
-    private void PlayerAttack_OnPlayerAttackEnded(object sender, System.EventArgs e) {
+    protected void PlayerAttack_OnPlayerAttackEnded(object sender, System.EventArgs e) {
         if (playerInTriggerArea) {
             HitResourceNode();
         }
     }
 
-    private void HitResourceNode() {
+    protected void HitResourceNode() {
         if (resourceNodeDepleted) return;
         resourceNode.HitResourceNode();
     }

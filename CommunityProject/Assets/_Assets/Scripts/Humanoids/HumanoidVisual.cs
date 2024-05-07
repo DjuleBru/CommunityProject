@@ -15,18 +15,16 @@ public class HumanoidVisual : MonoBehaviour
     [SerializeField] private GameObject shadowGameObject;
 
     private void Awake() {
+        questionMarkGameObject.SetActive(false);
         humanoid = GetComponentInParent<Humanoid>();
         humanoidCarry = GetComponentInParent<HumanoidCarry>();
         humanoidDungeonCrawl = GetComponentInParent<HumanoidDungeonCrawl>();
+    }
 
+    private void Start() {
         humanoidDungeonCrawl.OnCrawlSuccess += HumanoidDungeonCrawl_OnCrawlSuccess;
         humanoidDungeonCrawl.OnCrawlStarted += HumanoidDungeonCrawl_OnCrawlStarted;
 
-        questionMarkGameObject.SetActive(false);
-    }
-
-
-    private void Start() {
         humanoidCarry.OnCarryStarted += HumanoidCarry_OnCarryStarted;
         humanoidCarry.OnCarryCompleted += HumanoidCarry_OnCarryCompleted;
     }

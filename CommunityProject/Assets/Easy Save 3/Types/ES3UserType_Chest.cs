@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("chestInventory", "itemsInChest")]
+	[ES3PropertiesAttribute("chestInventory", "itemsInChest", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers")]
 	public class ES3UserType_Chest : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -18,6 +18,9 @@ namespace ES3Types
 			
 			writer.WritePrivateField("chestInventory", instance);
 			writer.WritePrivateField("itemsInChest", instance);
+			writer.WritePrivateFieldByRef("assignedHumanoid", instance);
+			writer.WritePrivateField("assignedInputHauliers", instance);
+			writer.WritePrivateField("assignedOutputHauliers", instance);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -33,6 +36,15 @@ namespace ES3Types
 					break;
 					case "itemsInChest":
 					instance = (Chest)reader.SetPrivateField("itemsInChest", reader.Read<System.Collections.Generic.List<Item>>(), instance);
+					break;
+					case "assignedHumanoid":
+					instance = (Chest)reader.SetPrivateField("assignedHumanoid", reader.Read<Humanoid>(), instance);
+					break;
+					case "assignedInputHauliers":
+					instance = (Chest)reader.SetPrivateField("assignedInputHauliers", reader.Read<System.Collections.Generic.List<Humanoid>>(), instance);
+					break;
+					case "assignedOutputHauliers":
+					instance = (Chest)reader.SetPrivateField("assignedOutputHauliers", reader.Read<System.Collections.Generic.List<Humanoid>>(), instance);
 					break;
 					default:
 						reader.Skip();
