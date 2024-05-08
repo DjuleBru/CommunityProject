@@ -5244,6 +5244,7 @@ GameObject:
   - component: {fileID: 6337998917530640858}
   - component: {fileID: 6337998917530640859}
   - component: {fileID: 6337998917530640856}
+  - component: {fileID: 3394445978950833908}
   - component: {fileID: 7769778346219670304}
   m_Layer: 0
   m_Name: DungeonEntrance
@@ -5328,6 +5329,22 @@ MonoBehaviour:
   dungeonStatsBoard: {fileID: 1765191484933010345}
   dungeonIsComplete: 0
   dungeonEntranceColliderForDungeoneers: {fileID: 2280711079788545089}
+--- !u!114 &3394445978950833908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337998917530640857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabId: 5531591930339389542
+  localRefs:
+    _Keys: []
+    _Values: 
 --- !u!114 &7769778346219670304
 MonoBehaviour:
   m_ObjectHideFlags: 0
