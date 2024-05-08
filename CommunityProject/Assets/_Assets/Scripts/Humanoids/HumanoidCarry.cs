@@ -199,6 +199,7 @@ public class HumanoidCarry : MonoBehaviour
     }
 
     public void LoadHumanoidCarry() {
+        if (itemCarrying == null) return;
         if (itemCarrying.amount != 0) {
             OnCarryStarted?.Invoke(this, EventArgs.Empty);
         }

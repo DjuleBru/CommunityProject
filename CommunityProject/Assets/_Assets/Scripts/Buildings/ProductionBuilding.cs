@@ -27,10 +27,6 @@ public class ProductionBuilding : Building
     protected override void Awake() {
         base.Awake();
         itemWorldProducedList = new List<ItemWorld>();
-
-
-        inputInventoryList = new List<Inventory>();
-        outputInventoryList = new List<Inventory>();
     }
 
     protected override void Update() {
@@ -359,6 +355,45 @@ public class ProductionBuilding : Building
 
     public bool GetPlayerInteractingWithBuilding() {
         return playerInteractingWithBuilding;
+    }
+
+    public override void LoadBuilding() {
+        base.LoadBuilding();
+
+        if(inputInventoryList == null) {
+            inputInventoryList = new List<Inventory>();
+        }
+
+        if(outputInventoryList == null) {
+            outputInventoryList = new List<Inventory>();
+        }
+ 
+        if(assignedHumanoid == null) {
+            productionBuildingUIWorld.SetWorkerMissing(true);
+        } else {
+            productionBuildingUIWorld.SetWorkerMissing(false);
+        }
+
+        if (selectedRecipeSO == null) {
+            productionBuildingUIWorld.SetRecipeMissing(true);
+        }
+        else {
+            productionBuildingUIWorld.SetRecipeMissing(false);
+        }
+
+        if(inputItemsMissing) {
+            productionBuildingUIWorld.SetItemsMissing(true);
+        } else {
+            productionBuildingUIWorld.SetItemsMissing(false);
+        }
+
+        if (outputInventoryFull) {
+            productionBuildingUIWorld.SetOutputInventoryFull(true);
+        }
+        else {
+            productionBuildingUIWorld.SetOutputInventoryFull(false);
+        }
+
     }
 
 

@@ -51,6 +51,7 @@ public class SavingSystem : MonoBehaviour {
     }
 
     public void SetLastDungeonEntrance(DungeonEntrance dungeonEntrance) {
+        Debug.Log("set last dungeon entrance to " + dungeonEntrance);
         ES3.Save("dungeonEntrance", dungeonEntrance);
     }
 
@@ -70,12 +71,14 @@ public class SavingSystem : MonoBehaviour {
     public bool GetSceneIsOverworld() {
         return sceneIsOverWorld;
     }
+
     public bool GetSceneIsDungeon() {
         return sceneIsDungeon;
     }
 
     public void SaveOverworld() {
         HumanoidsManager.Instance.SaveHumanoidsInOverworld();
+        BuildingsManager.Instance.SaveBuildingsInOverworld();
     }
 
     public void OnApplicationQuit() {

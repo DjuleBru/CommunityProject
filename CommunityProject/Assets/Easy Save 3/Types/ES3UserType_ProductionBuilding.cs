@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("selectedRecipeSO", "productionTimer", "inputInventoryList", "outputInventoryList", "itemWorldProducedList", "working", "inputItemsMissing", "outputInventoryFull", "productionBuildingUIWorld", "buildingHaulersUI_World", "productionBuildingvisual", "buildingSO", "buildingSizeX", "buildingSizeY", "buildingCamera", "buildingVisual", "interactionCollider", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers", "workerInteractingWithBuilding")]
+	[ES3PropertiesAttribute("selectedRecipeSO", "productionTimer", "inputInventoryList", "outputInventoryList", "itemWorldProducedList", "working", "inputItemsMissing", "outputInventoryFull", "productionBuildingUIWorld", "buildingHaulersUI_World", "productionBuildingvisual", "buildingSO", "buildingSizeX", "buildingSizeY", "buildingCamera", "buildingVisual", "interactionCollider", "buildingPlaced", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers", "workerInteractingWithBuilding")]
 	public class ES3UserType_ProductionBuilding : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -33,6 +33,7 @@ namespace ES3Types
 			writer.WritePrivateFieldByRef("buildingCamera", instance);
 			writer.WritePrivateFieldByRef("buildingVisual", instance);
 			writer.WritePrivateFieldByRef("interactionCollider", instance);
+			writer.WritePrivateField("buildingPlaced", instance);
 			writer.WritePrivateFieldByRef("assignedHumanoid", instance);
 			writer.WritePrivateField("assignedInputHauliers", instance);
 			writer.WritePrivateField("assignedOutputHauliers", instance);
@@ -97,6 +98,9 @@ namespace ES3Types
 					break;
 					case "interactionCollider":
 					instance = (ProductionBuilding)reader.SetPrivateField("interactionCollider", reader.Read<UnityEngine.Collider2D>(), instance);
+					break;
+					case "buildingPlaced":
+					instance = (ProductionBuilding)reader.SetPrivateField("buildingPlaced", reader.Read<System.Boolean>(), instance);
 					break;
 					case "assignedHumanoid":
 					instance = (ProductionBuilding)reader.SetPrivateField("assignedHumanoid", reader.Read<Humanoid>(), instance);

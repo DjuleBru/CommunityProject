@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("assignedBuilding", "roamDistanceToBuilding", "humanoidSO", "job", "humanoidDungeonCrawl", "humanoidVisual", "humanoidInteraction", "collider2D", "humanoidName", "humanoidActionDesriprion", "workingSpeed", "jobAssigned", "autoAssign", "m_CancellationTokenSource")]
+	[ES3PropertiesAttribute("assignedBuilding", "roamDistanceToBuilding", "humanoidSO", "job", "collider2D", "humanoidName", "humanoidActionDesriprion", "workingSpeed", "jobAssigned", "autoAssign", "m_CancellationTokenSource")]
 	public class ES3UserType_Humanoid : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -20,9 +20,6 @@ namespace ES3Types
 			writer.WritePrivateField("roamDistanceToBuilding", instance);
 			writer.WritePrivateFieldByRef("humanoidSO", instance);
 			writer.WritePrivateField("job", instance);
-			writer.WritePrivateFieldByRef("humanoidDungeonCrawl", instance);
-			writer.WritePrivateFieldByRef("humanoidVisual", instance);
-			writer.WritePrivateFieldByRef("humanoidInteraction", instance);
 			writer.WritePrivateFieldByRef("collider2D", instance);
 			writer.WritePrivateField("humanoidName", instance);
 			writer.WritePrivateField("humanoidActionDesriprion", instance);
@@ -51,15 +48,6 @@ namespace ES3Types
 					break;
 					case "job":
 					instance = (Humanoid)reader.SetPrivateField("job", reader.Read<Humanoid.Job>(), instance);
-					break;
-					case "humanoidDungeonCrawl":
-					instance = (Humanoid)reader.SetPrivateField("humanoidDungeonCrawl", reader.Read<HumanoidDungeonCrawl>(), instance);
-					break;
-					case "humanoidVisual":
-					instance = (Humanoid)reader.SetPrivateField("humanoidVisual", reader.Read<HumanoidVisual>(), instance);
-					break;
-					case "humanoidInteraction":
-					instance = (Humanoid)reader.SetPrivateField("humanoidInteraction", reader.Read<HumanoidInteraction>(), instance);
 					break;
 					case "collider2D":
 					instance = (Humanoid)reader.SetPrivateField("collider2D", reader.Read<UnityEngine.Collider2D>(), instance);

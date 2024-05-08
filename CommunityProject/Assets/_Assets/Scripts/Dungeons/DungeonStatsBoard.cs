@@ -89,7 +89,7 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
         previousRunStatsBoardUI.gameObject.SetActive(false);
         recordedStatsBoardUI.transform.position = recordedStatsBoardUIInitialPosition.position;
 
-        dungeonEntrance.SaveDungeon();
+        //dungeonEntrance.SaveDungeon();
     }
 
     public void SetPlayerInTriggerArea(bool playerInTriggerArea) {

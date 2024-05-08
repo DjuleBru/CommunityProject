@@ -13,6 +13,8 @@ public class BuildingsManager : MonoBehaviour
     private List<Building> buildingsSpawned;
     private List<ProductionBuilding> productionBuildingsSpawned;
 
+    [SerializeField] private List<int> buildingsSavedIDList;
+
     public event EventHandler OnAnyBuildingSpawned;
     public event EventHandler OnAnyBuildingPlacedOrCancelled;
 
@@ -25,31 +27,28 @@ public class BuildingsManager : MonoBehaviour
 
 
     private void Start() {
-        if (DungeonManager.Instance == null) {
-            //LoadBuildingsInOverworld();
-        }
+         LoadBuildingsInOverworld();
     }
 
-    //public void LoadBuildingsInOverworld() {
-    //    humanoidsSavedIDList = new List<int>();
+    public void SaveBuildingsInOverworld() {
+        buildingsSavedIDList = new List<int>();
 
-    //    foreach (Humanoid humanoid in humanoidsInOverworld) {
-    //        //humanoid.SaveHumanoid();
-    //        humanoidsSavedIDList.Add(humanoid.GetInstanceID());
-    //        ES3.Save(humanoid.GetInstanceID().ToString(), humanoid.gameObject);
+        foreach (Building building in buildingsSpawned) {
+            buildingsSavedIDList.Add(building.GetInstanceID());
+            ES3.Save(building.GetInstanceID().ToString(), building.gameObject);
+        }
 
-    //    }
+        ES3.Save("productionBuildingsSavedIDList", buildingsSavedIDList);
+    }
 
-    //    ES3.Save("humanoidsSavedIDList", humanoidsSavedIDList);
-    //}
+    public void LoadBuildingsInOverworld() {
+        buildingsSavedIDList = ES3.Load("productionBuildingsSavedIDList", new List<int>());
 
-    //public void SaveBuildingsInOverworld() {
-    //    humanoidsSavedIDList = ES3.Load("humanoidsSavedIDList", new List<int>());
-
-    //    foreach (int id in humanoidsSavedIDList) {
-    //        ES3.Load(id.ToString());
-    //    }
-    //}
+        foreach (int id in buildingsSavedIDList) {
+            ES3.Load(id.ToString());
+        }
+        overworldGridVisual.SetActive(false);
+    }
 
     public void SetBuildingSpawned() {
         overworldGridVisual.SetActive(true);

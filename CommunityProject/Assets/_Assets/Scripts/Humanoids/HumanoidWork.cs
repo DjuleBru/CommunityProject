@@ -95,16 +95,10 @@ public class HumanoidWork : MonoBehaviour
     }
 
     public void LoadHumanoidWork() {
-        string humanoidID = humanoid.GetInstanceID().ToString();
-        working = ES3.Load(humanoidID + "working", working);
-        assignBuildingTimer = ES3.Load(humanoidID + "assignBuildingTimer", assignBuildingTimer);
-        assignBuildingRate = ES3.Load(humanoidID + "assignBuildingRate", assignBuildingRate);
-    }
-
-    public void SaveHumanoidWork() {
-        string humanoidID = humanoid.GetInstanceID().ToString();
-        ES3.Save(humanoidID + "working", working);
-        ES3.Save(humanoidID + "assignBuildingTimer", assignBuildingTimer);
-        ES3.Save(humanoidID + "assignBuildingRate", assignBuildingRate);
+        if(working) {
+            OnHumanoidWorkStarted?.Invoke(this, EventArgs.Empty);
+            ProductionBuilding assignedBuilding = humanoid.GetAssignedBuilding() as ProductionBuilding;
+            assignedBuilding.SetHumanoidWorking(true, humanoid.GetHumanoidSO().humanoidType);
+        }
     }
 }

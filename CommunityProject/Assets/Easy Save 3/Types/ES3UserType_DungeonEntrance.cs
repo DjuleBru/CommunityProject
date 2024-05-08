@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("dungeonIsComplete")]
+	[ES3PropertiesAttribute("dungeonIsComplete", "humanoidsAssigned")]
 	public class ES3UserType_DungeonEntrance : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -17,6 +17,7 @@ namespace ES3Types
 			var instance = (DungeonEntrance)obj;
 			
 			writer.WritePrivateField("dungeonIsComplete", instance);
+			writer.WritePrivateField("humanoidsAssigned", instance);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -29,6 +30,9 @@ namespace ES3Types
 					
 					case "dungeonIsComplete":
 					instance = (DungeonEntrance)reader.SetPrivateField("dungeonIsComplete", reader.Read<System.Boolean>(), instance);
+					break;
+					case "humanoidsAssigned":
+					instance = (DungeonEntrance)reader.SetPrivateField("humanoidsAssigned", reader.Read<System.Collections.Generic.List<Humanoid>>(), instance);
 					break;
 					default:
 						reader.Skip();

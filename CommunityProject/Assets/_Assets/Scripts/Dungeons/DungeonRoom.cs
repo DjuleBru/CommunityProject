@@ -307,6 +307,7 @@ public class DungeonRoom : MonoBehaviour
             //Enable player actions
             SetBattleCamera();
         } else {
+            Player.Instance.EnablePlayerActions();
             CompleteRoom();
         }
     }

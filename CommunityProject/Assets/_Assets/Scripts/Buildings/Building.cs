@@ -67,9 +67,10 @@ public class Building : MonoBehaviour
     }
 
     protected virtual void Start() {
+        LoadBuilding();
+
         GameInput.Instance.OnPlaceBuilding += GameInput_OnPlaceBuilding;
         GameInput.Instance.OnPlaceBuildingCancelled += GameInput_OnPlaceBuildingCancelled;
-        BuildingsManager.Instance.SetBuildingSpawned();
     }
 
     protected virtual void Update() {
@@ -244,5 +245,18 @@ public class Building : MonoBehaviour
 
     public virtual BuildingVisual GetBuildingVisual() {
         return buildingVisual;
+    }
+
+    public virtual void LoadBuilding() {
+        if(buildingPlaced) {
+            buildingCollider.isTrigger = false;
+            interactionCollider.enabled = true;
+            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+            BuildingsManager.Instance.AddBuilding(this);
+            buildingVisual.DisableBackground();
+        }
+        else {
+            BuildingsManager.Instance.SetBuildingSpawned();
+        }
     }
 }

@@ -67,6 +67,7 @@ public class Humanoid : MonoBehaviour
     }
 
     private void Start() {
+
         if (DungeonManager.Instance != null) {
             // This is a dungeon scene
             // Humanoid is being freed from dungeon
@@ -76,9 +77,10 @@ public class Humanoid : MonoBehaviour
             HumanoidsManager.Instance.AddHumanoidInOverworld(this);
         }
 
-        LoadHumanoid();
         humanoidWork.OnHumanoidWorkStarted += HumanoidWork_OnHumanoidWorkStarted;
         humanoidWork.OnHumanoidWorkStopped += HumanoidWork_OnHumanoidWorkStopped;
+
+        LoadHumanoid();
     }
 
     private void HumanoidWork_OnHumanoidWorkStopped(object sender, System.EventArgs e) {
@@ -223,7 +225,11 @@ public class Humanoid : MonoBehaviour
     }
 
     public void LoadHumanoid() {
+        AssignBehaviorTree();
         humanoidCarry.LoadHumanoidCarry();
+        humanoidAnimatorManager.SetAnimator(humanoidSO.animatorController);
+        humanoidMovement.LoadHumanoidMovement();
+        humanoidWork.LoadHumanoidWork();
     }
 
 }

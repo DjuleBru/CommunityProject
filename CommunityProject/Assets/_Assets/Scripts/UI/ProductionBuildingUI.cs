@@ -62,6 +62,7 @@ public class ProductionBuildingUI : BuildingUI
     }
 
     public void RefreshProductionBuildingUI() {
+        if (productionBuilding == null) return;
         nameText.text = productionBuilding.GetBuildingSO().name;
         RefreshRecipeList();
         RefreshRecipePanel();

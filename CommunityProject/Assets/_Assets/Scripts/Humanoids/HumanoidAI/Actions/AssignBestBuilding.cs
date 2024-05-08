@@ -14,7 +14,6 @@ public class AssignBestBuilding : Action
     }
 
     public override TaskStatus OnUpdate() {
-
         if (humanoid.GetAutoAssign()) {
             humanoid.AssignBuilding(humanoidWork.FindBestWorkingBuilding());
             if (humanoid.GetAssignedBuilding() != null) {

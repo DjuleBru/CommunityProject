@@ -28,7 +28,7 @@ public class HumanoidsManager : MonoBehaviour
         humanoidsInOverworld = new List<Humanoid>();
 
         if(DungeonManager.Instance == null) {
-            //LoadHumanoidsInOverworld();
+            LoadHumanoidsInOverworld();
             //LoadHumanoidsSavedFromDungeonsInOverworld();
         }
     }

@@ -25,7 +25,7 @@ public class HumanoidHaul : MonoBehaviour
 
         List<Building> destinationBuildingsList = new List<Building>();
 
-        if (humanoidCarry.GetItemCarrying() == null) {
+        if (humanoidCarry.GetItemCarrying() == null || humanoidCarry.GetItemCarrying().amount == 0) {
             destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(humanoidCarry.GetMaxCarryAmount());
         } else {
             destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(humanoidCarry.GetMaxCarryAmount(), humanoidCarry.GetItemCarrying());

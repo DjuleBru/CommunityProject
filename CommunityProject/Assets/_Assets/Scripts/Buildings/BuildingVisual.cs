@@ -82,6 +82,10 @@ public class BuildingVisual : MonoBehaviour, IInteractable
 
     }
 
+    public void DisableBackground() {
+        placingBuildingBackgroundSprite.enabled = false;
+    }
+
     public bool GetPlayerInTriggerArea() {
         return playerInTriggerArea;
     }

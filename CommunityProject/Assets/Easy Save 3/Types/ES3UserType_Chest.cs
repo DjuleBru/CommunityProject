@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("chestInventory", "itemsInChest", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers")]
+	[ES3PropertiesAttribute("chestInventory", "itemsInChest", "isDungeonChest", "buildingSO", "buildingPlaced", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers", "enabled")]
 	public class ES3UserType_Chest : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -18,9 +18,13 @@ namespace ES3Types
 			
 			writer.WritePrivateField("chestInventory", instance);
 			writer.WritePrivateField("itemsInChest", instance);
+			writer.WritePrivateField("isDungeonChest", instance);
+			writer.WritePrivateFieldByRef("buildingSO", instance);
+			writer.WritePrivateField("buildingPlaced", instance);
 			writer.WritePrivateFieldByRef("assignedHumanoid", instance);
 			writer.WritePrivateField("assignedInputHauliers", instance);
 			writer.WritePrivateField("assignedOutputHauliers", instance);
+			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -37,6 +41,15 @@ namespace ES3Types
 					case "itemsInChest":
 					instance = (Chest)reader.SetPrivateField("itemsInChest", reader.Read<System.Collections.Generic.List<Item>>(), instance);
 					break;
+					case "isDungeonChest":
+					instance = (Chest)reader.SetPrivateField("isDungeonChest", reader.Read<System.Boolean>(), instance);
+					break;
+					case "buildingSO":
+					instance = (Chest)reader.SetPrivateField("buildingSO", reader.Read<BuildingSO>(), instance);
+					break;
+					case "buildingPlaced":
+					instance = (Chest)reader.SetPrivateField("buildingPlaced", reader.Read<System.Boolean>(), instance);
+					break;
 					case "assignedHumanoid":
 					instance = (Chest)reader.SetPrivateField("assignedHumanoid", reader.Read<Humanoid>(), instance);
 					break;
@@ -46,6 +59,9 @@ namespace ES3Types
 					case "assignedOutputHauliers":
 					instance = (Chest)reader.SetPrivateField("assignedOutputHauliers", reader.Read<System.Collections.Generic.List<Humanoid>>(), instance);
 					break;
+					case "enabled":
+						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						break;
 					default:
 						reader.Skip();
 						break;

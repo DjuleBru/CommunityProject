@@ -150,12 +150,10 @@ public class HumanoidMovement : MonoBehaviour
     }
 
     public void LoadHumanoidMovement() {
-        string humanoidID = humanoid.GetInstanceID().ToString();
-        moveSpeed = ES3.Load(humanoidID + "moveSpeed", moveSpeed);
+        if(roaming) {
+            humanoidVisual.SetQuestionMarkActive(true);
+            humanoid.SetHumanoidActionDescription("Idle");
+        }
     }
 
-    public void SaveHumanoidMovement() {
-        string humanoidID = humanoid.GetInstanceID().ToString();
-        ES3.Save(humanoidID + "moveSpeed", moveSpeed);
-    }
 }

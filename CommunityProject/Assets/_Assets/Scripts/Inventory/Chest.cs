@@ -27,15 +27,12 @@ public class Chest : Building
     }
 
     protected override void Start() {
-        if(!isDungeonChest) {
-            base.Start();
-        } else {
+        base.Start();
+        if(isDungeonChest) {
             buildingPlaced = true;
             rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+            chestHasBeenFilled = false;
         }
-
-        chestInventory = new Inventory(false, 3, 3, false, null);
-        chestHasBeenFilled = false;
 
         BuildingsManager.Instance.AddBuilding(this);
     }
@@ -78,6 +75,13 @@ public class Chest : Building
 
     public ChestVisual GetChestVisual() {
         return buildingVisual as ChestVisual;
+    }
+
+    public override void LoadBuilding() {
+        base.LoadBuilding();
+        if(chestInventory == null) {
+            chestInventory = new Inventory(false, 3, 3, false, null);
+        }
     }
 
 }

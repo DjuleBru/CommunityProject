@@ -5244,6 +5244,7 @@ GameObject:
   - component: {fileID: 6337998917530640858}
   - component: {fileID: 6337998917530640859}
   - component: {fileID: 6337998917530640856}
+  - component: {fileID: 7769778346219670304}
   m_Layer: 0
   m_Name: DungeonEntrance
   m_TagString: Untagged
@@ -5327,6 +5328,19 @@ MonoBehaviour:
   dungeonStatsBoard: {fileID: 1765191484933010345}
   dungeonIsComplete: 0
   dungeonEntranceColliderForDungeoneers: {fileID: 2280711079788545089}
+--- !u!114 &7769778346219670304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337998917530640857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2cacabe81aea8468e08e911727ee97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
 --- !u!1 &6337998917622318682
 GameObject:
   m_ObjectHideFlags: 0
@@ -7689,10 +7703,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1116902525220704799, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
     - target: {fileID: -8660279521276128320, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
-      propertyPath: localRefs._Keys.Array.data[128]
-      value: 
-      objectReference: {fileID: 4080621597034216706}
-    - target: {fileID: -8660279521276128320, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
       propertyPath: localRefs._Keys.Array.data[129]
       value: 
       objectReference: {fileID: 5797186604892557726}
@@ -9304,10 +9314,6 @@ PrefabInstance:
       propertyPath: localRefs._Keys.Array.data[531]
       value: 
       objectReference: {fileID: 2720768697198448357}
-    - target: {fileID: -8660279521276128320, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
-      propertyPath: localRefs._Keys.Array.data[532]
-      value: 
-      objectReference: {fileID: 2727255853316493018}
     - target: {fileID: -8660279521276128320, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
       propertyPath: localRefs._Keys.Array.data[533]
       value: 
@@ -21660,7 +21666,9 @@ PrefabInstance:
       propertyPath: isDungeonChest
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8660279521276128320, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
+    - {fileID: 1921047679013822488, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -22188,17 +22196,6 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 546017827264665722, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
   m_PrefabInstance: {fileID: 2452677390111333658}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2727255853316493018 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -8660279521276128320, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
-  m_PrefabInstance: {fileID: 2452677390111333658}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701220915260630438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &2775464769110035671 stripped
 CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 328137802633810381, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
@@ -22920,17 +22917,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1573489046335267261, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
   m_PrefabInstance: {fileID: 2452677390111333658}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4080621597034216706 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1921047679013822488, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
-  m_PrefabInstance: {fileID: 2452677390111333658}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701220915260630438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4110681278108733600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1947168850381557178, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}
