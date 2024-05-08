@@ -11,7 +11,6 @@ public class Chest : Building
     [SerializeField] bool isDungeonChest;
     [SerializeField] private BuildingHaulersUI_World buildingHaulersUI_World;
 
-    private bool chestHasBeenFilled;
 
     protected override void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -28,10 +27,10 @@ public class Chest : Building
 
     protected override void Start() {
         base.Start();
-        if(isDungeonChest) {
+
+        if (isDungeonChest) {
             buildingPlaced = true;
             rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
-            chestHasBeenFilled = false;
         }
 
         BuildingsManager.Instance.AddBuilding(this);
@@ -41,18 +40,18 @@ public class Chest : Building
         foreach (Item item in itemList) {
             itemsInChest.Add(item);
         }
+
+        if (chestInventory == null) {
+            Debug.Log("null chest inventory - creating one");
+            chestInventory = new Inventory(false, 3, 3, false, null);
+        }
+
+        chestInventory.AddItemList(itemList);
     }
 
     protected override void Update() {
         if(!isDungeonChest) {
             base.Update();
-        }
-        
-        if(!chestHasBeenFilled) {
-            if (chestInventory != null) {
-                chestInventory.AddItemList(itemsInChest);
-            }
-            chestHasBeenFilled = true;
         }
     }
 
@@ -79,9 +78,7 @@ public class Chest : Building
 
     public override void LoadBuilding() {
         base.LoadBuilding();
-        if(chestInventory == null) {
-            chestInventory = new Inventory(false, 3, 3, false, null);
-        }
+
     }
 
 }

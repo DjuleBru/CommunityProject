@@ -18,7 +18,13 @@ public class DungeonEntrance : MonoBehaviour
 
     private List<Humanoid> humanoidsAssigned = new List<Humanoid>();
 
+    private void Awake() {
+    }
+
     private void Start() {
+
+        LoadDungeon();
+
         dungeonEntranceUI.SetActive(false);
         enterUI.SetActive(false);
 
@@ -64,10 +70,10 @@ public class DungeonEntrance : MonoBehaviour
 
     public void RecordLastRun(List<Item> loot, float time) {
         dungeonStatsBoard.RecordLastRun(loot, time);
-        SaveDungeon();
     }
 
     public void AddItemsToInventory(List<Item> itemList) {
+        Debug.Log("adding items to dungeon chest");
         dungeonChest.AddItemsToChest(itemList);
     }
 
@@ -75,8 +81,6 @@ public class DungeonEntrance : MonoBehaviour
         dungeonIsComplete = true;
         dungeonChest.gameObject.SetActive(true);
         dungeonStatsBoard.gameObject.SetActive(true);
-
-        SaveDungeon();
     }
 
     public bool GetDungeonComplete() {
@@ -115,7 +119,15 @@ public class DungeonEntrance : MonoBehaviour
     }
 
     public void SaveDungeon() {
-        ES3AutoSaveMgr.Current.Save();
+        DungeonEntranceManager.Instance.SaveDungeonEntrance(this);
+    }
+
+    public void LoadDungeon() {
+        dungeonStatsBoard.LoadStatsBoardUI();
+
+        if (dungeonIsComplete) {
+            dungeonChest.gameObject.SetActive(true);
+        }
     }
 
 }

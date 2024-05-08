@@ -6,10 +6,10 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
 
     private DungeonEntrance dungeonEntrance;
 
-    [SerializeField] private List<Item> recordedDungeonLoot = new List<Item>();
+    [SerializeField] private List<Item> recordedDungeonLoot;
     [SerializeField] private float recordedDungeonTime;
 
-    [SerializeField] private List<Item> previousRunDungeonLoot = new List<Item>();
+    [SerializeField] private List<Item> previousRunDungeonLoot;
     [SerializeField] private float previousRunDungeonTime;
 
     [SerializeField] private DungeonStatsBoardUI recordedStatsBoardUI;
@@ -31,14 +31,10 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
     }
 
     private void Start() {
-
         if(previousRunDungeonLoot.Count == 0) {
             recordedStatsBoardUI.transform.position = recordedStatsBoardUIInitialPosition.position;
             previousRunStatsBoardUI.gameObject.SetActive(false);
         }
-
-        recordedStatsBoardUI.SetDungeonLootUI(recordedDungeonLoot);
-        recordedStatsBoardUI.SetDungeonTimeUI(recordedDungeonTime);
 
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
 
@@ -60,6 +56,7 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
     }
 
     public void RecordDungeon(List<Item> loot, float time) {
+        Debug.Log("recording dungeon loot " + time);
         recordedDungeonLoot = loot;
         recordedDungeonTime = time;
 
@@ -68,6 +65,7 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
     }
 
     public void RecordLastRun(List<Item> loot, float time) {
+        Debug.Log("recording last run " + time);
         previousRunStatsBoardUI.gameObject.SetActive(true);
 
         previousRunDungeonLoot = loot;
@@ -134,5 +132,11 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
 
     public Collider2D GetSolidCollider() {
         return solidStatsBoardCollider;
+    }
+
+    public void LoadStatsBoardUI() {
+        Debug.Log("load stats board ui " + recordedDungeonLoot.Count);
+        recordedStatsBoardUI.SetDungeonLootUI(recordedDungeonLoot);
+        recordedStatsBoardUI.SetDungeonTimeUI(recordedDungeonTime);
     }
 }

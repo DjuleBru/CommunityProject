@@ -33,16 +33,6 @@ public class HumanoidsManager : MonoBehaviour
         }
     }
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.T)) {
-            SaveHumanoidsInOverworld();
-        }
-
-        if(Input.GetKeyDown(KeyCode.U)) {
-            LoadHumanoidsInOverworld();
-        }
-    }
-
     public void AddHumanoidInOverworld(Humanoid humanoid) {
         if(humanoidsInOverworld.Contains(humanoid)) return;
         humanoidsInOverworld.Add(humanoid);
@@ -92,9 +82,7 @@ public class HumanoidsManager : MonoBehaviour
 
 
     public void SaveHumanoidsSavedFromDungeon() {
-        Debug.Log("saving humanoid savec from dungeons :");
         foreach(int id in humanoidsSavedFromDungeonIDList) {
-            Debug.Log(id);  
         }
         ES3.Save("humanoidsSavedFromLastDungeon", humanoidsSavedFromDungeonIDList);
     }

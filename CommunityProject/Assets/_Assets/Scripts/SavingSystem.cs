@@ -19,7 +19,6 @@ public class SavingSystem : MonoBehaviour {
 
         // Did the player just exit a dungeon ?
         playerExitedDungeon = ES3.Load("playerExitedDungeon", false);
-        ES3.Save("playerExitedDungeon", false);
 
         if (SceneManager.GetActiveScene().name == SceneLoader.Scene.OverWorld.ToString()) {
             sceneIsOverWorld = true;
@@ -31,6 +30,7 @@ public class SavingSystem : MonoBehaviour {
     }
 
     private void Start() {
+        Debug.Log("player exited dungeon " + playerExitedDungeon);
         if (playerExitedDungeon) {
             lastDungeonEntrance = ES3.Load("dungeonEntrance", lastDungeonEntrance);
 
@@ -46,12 +46,12 @@ public class SavingSystem : MonoBehaviour {
 
             lastDungeonEntrance.AddItemsToInventory(lastDungeonLootedItems);
             Player.Instance.transform.position = lastDungeonEntrance.transform.position;
-        }
 
+            ES3.Save("playerExitedDungeon", false);
+        }
     }
 
     public void SetLastDungeonEntrance(DungeonEntrance dungeonEntrance) {
-        Debug.Log("set last dungeon entrance to " + dungeonEntrance);
         ES3.Save("dungeonEntrance", dungeonEntrance);
     }
 
