@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class HumanoidSO : ScriptableObject
 {
+
+    public GameObject humanoidPrefab;
+
     public enum HumanoidType {
         Human,
         Elf,

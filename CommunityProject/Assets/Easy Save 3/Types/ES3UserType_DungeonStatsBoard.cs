@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("recordedDungeonLoot", "recordedDungeonTime")]
+	[ES3PropertiesAttribute("recordedDungeonLoot", "recordedDungeonTime", "recordedhumanoidsSaved")]
 	public class ES3UserType_DungeonStatsBoard : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -18,6 +18,7 @@ namespace ES3Types
 			
 			writer.WritePrivateField("recordedDungeonLoot", instance);
 			writer.WritePrivateField("recordedDungeonTime", instance);
+			writer.WritePrivateField("recordedhumanoidsSaved", instance);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -33,6 +34,9 @@ namespace ES3Types
 					break;
 					case "recordedDungeonTime":
 					instance = (DungeonStatsBoard)reader.SetPrivateField("recordedDungeonTime", reader.Read<System.Single>(), instance);
+					break;
+					case "recordedhumanoidsSaved":
+					instance = (DungeonStatsBoard)reader.SetPrivateField("recordedhumanoidsSaved", reader.Read<System.Int32>(), instance);
 					break;
 					default:
 						reader.Skip();

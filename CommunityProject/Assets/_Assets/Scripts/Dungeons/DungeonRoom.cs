@@ -194,7 +194,7 @@ public class DungeonRoom : MonoBehaviour
             if (humanoidCageSpawnedInRoom < humanoidCageValue) {
                 // Spawn if we have not reached the room's resource node number
 
-                // Pick a random resource node
+                // Pick a random humanoid cage
                 Transform humanoidCageToSpawn = DungeonManager.Instance.GetHumanoidCagesList()[Random.Range(0, DungeonManager.Instance.GetHumanoidCagesList().Count)].transform;
 
                 Vector3 spawnPosition = Utils.Randomize2DPoint(humanoidCageSpawnPoint.transform.position, 0f);

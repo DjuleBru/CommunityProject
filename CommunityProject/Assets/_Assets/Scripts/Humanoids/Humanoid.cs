@@ -40,6 +40,7 @@ public class Humanoid : MonoBehaviour
     private float workingSpeed;
     private Job jobAssigned;
     private bool autoAssign = true;
+    private bool freedFromDungeon;
 
     [SerializeField] private BehaviorDesigner.Runtime.BehaviorTree behaviorTree;
 
@@ -67,20 +68,21 @@ public class Humanoid : MonoBehaviour
     }
 
     private void Start() {
-
-        if (DungeonManager.Instance != null) {
-            // This is a dungeon scene
-            // Humanoid is being freed from dungeon
-            behaviorTree.ExternalBehavior = HumanoidsManager.Instance.GetJustFreedBehaviorTree();
-            HumanoidsManager.Instance.AddHumanoidSavedFromDungeon(GetInstanceID());
-        } else {
-            HumanoidsManager.Instance.AddHumanoidInOverworld(this);
-        }
-
         humanoidWork.OnHumanoidWorkStarted += HumanoidWork_OnHumanoidWorkStarted;
         humanoidWork.OnHumanoidWorkStopped += HumanoidWork_OnHumanoidWorkStopped;
 
         LoadHumanoid();
+
+        if (DungeonManager.Instance != null) {
+            // This is a dungeon scene : Humanoid is being freed from dungeon
+            freedFromDungeon = true;
+            behaviorTree.ExternalBehavior = HumanoidsManager.Instance.GetJustFreedBehaviorTree();
+            HumanoidsManager.Instance.AddHumanoidSavedFromDungeon(this);
+            DungeonManager.Instance.SetHumanoidsAsSaved();
+        }
+        else {
+            HumanoidsManager.Instance.AddHumanoidInOverworld(this);
+        }
     }
 
     private void HumanoidWork_OnHumanoidWorkStopped(object sender, System.EventArgs e) {
@@ -225,6 +227,11 @@ public class Humanoid : MonoBehaviour
     }
 
     public void LoadHumanoid() {
+        if(freedFromDungeon) {
+            freedFromDungeon = false;
+            transform.position = Vector3.zero;
+        }
+
         AssignBehaviorTree();
         humanoidCarry.LoadHumanoidCarry();
         humanoidAnimatorManager.SetAnimator(humanoidSO.animatorController);

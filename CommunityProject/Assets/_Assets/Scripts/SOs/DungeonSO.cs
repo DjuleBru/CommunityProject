@@ -9,7 +9,13 @@ public class DungeonSO : ScriptableObject
     public DungeonManager.DungeonType dungeonType;
 
     public int dungeonDifficulty;
+    public int totalRoomNumber;
+
     public List<ItemSO> itemsFoundInDungeon;
+    public List<GameObject> resourceNodesInDungeon;
+    public int resourceNodesNumberInDungeon;
     public List<MobSO> mobsFoundInDungeon;
+    public HumanoidSO humanoidTypeFoundInDungeon;
+    public int humanoidsToSaveFromDungeon;
     public Sprite dungeonSprite;
 }

@@ -248,6 +248,8 @@ public class Building : MonoBehaviour
     }
 
     public virtual void LoadBuilding() {
+        Debug.Log(this + " loading building, buildingPlaced " + buildingPlaced);
+
         if(buildingPlaced) {
             buildingCollider.isTrigger = false;
             interactionCollider.enabled = true;

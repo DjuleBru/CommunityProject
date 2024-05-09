@@ -23,11 +23,8 @@ public class BuildingsManager : MonoBehaviour
         buildingsSpawned = new List<Building>();
         productionBuildingsSpawned = new List<ProductionBuilding>();
         overworldGridVisual.SetActive(false);
-    }
 
-
-    private void Start() {
-         LoadBuildingsInOverworld();
+        LoadBuildingsInOverworld();
     }
 
     public void SaveBuildingsInOverworld() {
@@ -36,6 +33,7 @@ public class BuildingsManager : MonoBehaviour
         foreach (Building building in buildingsSpawned) {
             buildingsSavedIDList.Add(building.GetInstanceID());
             ES3.Save(building.GetInstanceID().ToString(), building.gameObject);
+            Debug.Log("saving building " + building);
         }
 
         ES3.Save("productionBuildingsSavedIDList", buildingsSavedIDList);
@@ -46,6 +44,7 @@ public class BuildingsManager : MonoBehaviour
 
         foreach (int id in buildingsSavedIDList) {
             ES3.Load(id.ToString());
+            Debug.Log("loading building " +  id);
         }
         overworldGridVisual.SetActive(false);
     }

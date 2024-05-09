@@ -12,29 +12,40 @@ public class DungeonManager : MonoBehaviour {
 
     public static DungeonManager Instance { get; private set; }
 
-    [SerializeField] private int totalRoomNumber;
-    [SerializeField] private int dungeonDifficultyValue;
+    private DungeonSO dungeonSO;
+    [SerializeField] private DungeonSO defaultDungeonSO;
+
+    private int totalRoomNumber;
+    private int dungeonDifficultyValue;
 
     [SerializeField] private List<MobSO> completeMobList;
     private List<MobSO> dungeonMobList = new List<MobSO>();
 
+    [SerializeField] private List<GameObject> humanoidsCagesList;
+    private GameObject humanoidSpawnedInDungeon;
 
-    [SerializeField] private List<HumanoidCage> completeHumanoidsCagesList;
-    [SerializeField] private GameObject humanoidSpawnedInDungeon;
-
-    [SerializeField] private List<ResourceNode> resourceNodesInDungeon;
-    [SerializeField] private int resourceNodesNumberInDungeon;
-    [SerializeField] private int humanoidCageNumberInDungeon;
+    private List<GameObject> resourceNodesInDungeon;
+    private int resourceNodesNumberInDungeon;
+    private int humanoidCageNumberInDungeon;
 
     [SerializeField] private InventoryUI dungeonInventoryUI;
     private Inventory dungeonInventory;
 
+    private int humanoidsSaved;
     private float dungeonTimer;
 
     private void Awake() {
         Instance = this;
+        dungeonSO = ES3.Load("lastDungeonEnteredDungeonSO", defaultDungeonSO);
+        FillCompleteMobList();
 
-        FillMobList();
+        dungeonMobList = dungeonSO.mobsFoundInDungeon;
+        resourceNodesInDungeon = dungeonSO.resourceNodesInDungeon;
+        resourceNodesNumberInDungeon = dungeonSO.resourceNodesNumberInDungeon;
+        humanoidCageNumberInDungeon = ES3.Load("lastDungeonEnteredRemainingHumanoidsToSave", 0);
+        totalRoomNumber = dungeonSO.totalRoomNumber;
+        dungeonDifficultyValue = dungeonSO.dungeonDifficulty;
+        humanoidSpawnedInDungeon = dungeonSO.humanoidTypeFoundInDungeon.humanoidPrefab;
     }
 
     private void Start() {
@@ -46,7 +57,7 @@ public class DungeonManager : MonoBehaviour {
         dungeonTimer += Time.deltaTime;
     }
 
-    private void FillMobList() {
+    private void FillCompleteMobList() {
         foreach(MobSO mobSO in completeMobList) {
             if(mobSO.foundInDungeonTypes.Contains(dungeonType)) {
                 dungeonMobList.Add(mobSO);
@@ -54,21 +65,24 @@ public class DungeonManager : MonoBehaviour {
         }
     }
 
-    public void CompleteDungeon() {
-        SavingSystem.Instance.CompleteDungeon(dungeonInventory.GetItemList(), dungeonTimer);
+    public void SetHumanoidsAsSaved() {
+        humanoidsSaved++;
+    }
 
+    public void CompleteDungeon() {
+        SavingSystem.Instance.CompleteDungeon(dungeonInventory.GetItemList(), dungeonTimer, humanoidsSaved);
     }
 
     public List<MobSO> GetDungeonMobList() {
         return dungeonMobList;
     }
 
-    public List<ResourceNode> GetResourceNodesList() {
+    public List<GameObject> GetResourceNodesList() {
         return resourceNodesInDungeon;
     }
 
-    public List<HumanoidCage> GetHumanoidCagesList() {
-        return completeHumanoidsCagesList;
+    public List<GameObject> GetHumanoidCagesList() {
+        return humanoidsCagesList;
     }
 
     public int GetDungeonDifficultyValue() {
@@ -79,7 +93,7 @@ public class DungeonManager : MonoBehaviour {
         return resourceNodesNumberInDungeon;
     }
 
-    public int GetHumanoidCageNUmberInDungeon() {
+    public int GetHumanoidCageNumberInDungeon() {
         return humanoidCageNumberInDungeon;
     }
 

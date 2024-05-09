@@ -18,11 +18,7 @@ public class DungeonEntrance : MonoBehaviour
 
     private List<Humanoid> humanoidsAssigned = new List<Humanoid>();
 
-    private void Awake() {
-    }
-
     private void Start() {
-
         LoadDungeon();
 
         dungeonEntranceUI.SetActive(false);
@@ -55,6 +51,7 @@ public class DungeonEntrance : MonoBehaviour
         if (playerIsInEntranceArea) {
             HumanoidsManager.Instance.SaveHumanoidsInOverworld();
             SavingSystem.Instance.SetLastDungeonEntrance(this);
+            SavingSystem.Instance.SaveOverworld();
             SceneLoader.Load(SceneLoader.Scene.Dungeon);
         }
     }
@@ -63,13 +60,13 @@ public class DungeonEntrance : MonoBehaviour
         return dungeonSO;
     }
 
-    public void RecordDungeon(List<Item> loot, float time) {
-        dungeonStatsBoard.RecordDungeon(loot, time);
+    public void RecordDungeon(List<Item> loot, float time, int humanoidsSaved) {
+        dungeonStatsBoard.RecordDungeon(loot, time, humanoidsSaved);
         SaveDungeon();
     }
 
-    public void RecordLastRun(List<Item> loot, float time) {
-        dungeonStatsBoard.RecordLastRun(loot, time);
+    public void RecordLastRun(List<Item> loot, float time, int humanoidsSaved) {
+        dungeonStatsBoard.RecordLastRun(loot, time, humanoidsSaved);
     }
 
     public void AddItemsToInventory(List<Item> itemList) {
@@ -108,6 +105,10 @@ public class DungeonEntrance : MonoBehaviour
 
     public List<Item> GetDungeonLootRecorded() {
         return dungeonStatsBoard.GetDungeonLoot();
+    }
+
+    public DungeonStatsBoard GetDungeonStatsBoard() {
+        return dungeonStatsBoard;
     }
 
     public Chest GetDungeonChest() {

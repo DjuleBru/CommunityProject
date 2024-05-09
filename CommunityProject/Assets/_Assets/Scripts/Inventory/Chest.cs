@@ -6,7 +6,6 @@ public class Chest : Building
 {
     [ES3Serializable]
     private Inventory chestInventory;
-    [SerializeField] private List<Item> itemsInChest = new List<Item>();
     [SerializeField] private InventoryUI_Interactable chestInventoryUI;
     [SerializeField] bool isDungeonChest;
     [SerializeField] private BuildingHaulersUI_World buildingHaulersUI_World;
@@ -28,9 +27,9 @@ public class Chest : Building
     protected override void Start() {
         base.Start();
 
-        if (isDungeonChest) {
-            buildingPlaced = true;
-            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+        if (chestInventory == null) {
+            Debug.Log("null chest inventory - creating one");
+            chestInventory = new Inventory(false, 3, 3, false, null);
         }
 
         BuildingsManager.Instance.AddBuilding(this);
@@ -38,15 +37,9 @@ public class Chest : Building
 
     public void AddItemsToChest(List<Item> itemList) {
         foreach (Item item in itemList) {
-            itemsInChest.Add(item);
+            Debug.Log("adding " + item.itemType + " " + item.amount);
+            chestInventory.AddItem(item);
         }
-
-        if (chestInventory == null) {
-            Debug.Log("null chest inventory - creating one");
-            chestInventory = new Inventory(false, 3, 3, false, null);
-        }
-
-        chestInventory.AddItemList(itemList);
     }
 
     protected override void Update() {
@@ -77,8 +70,11 @@ public class Chest : Building
     }
 
     public override void LoadBuilding() {
-        base.LoadBuilding();
+        if (isDungeonChest) {
+            buildingPlaced = true;
+        }
 
+        base.LoadBuilding();
     }
 
 }

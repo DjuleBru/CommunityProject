@@ -50,7 +50,7 @@ public class HumanoidMovement : MonoBehaviour
     protected virtual void Start() {
         moveSpeed = humanoid.GetHumanoidSO().moveSpeed;
         roamCalculationTimer = 0;
-        pathCalculationTimer = pathCalculationRate;
+        pathCalculationTimer = 0;
     }
 
 

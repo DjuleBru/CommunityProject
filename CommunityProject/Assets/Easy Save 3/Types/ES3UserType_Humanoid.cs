@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("assignedBuilding", "roamDistanceToBuilding", "humanoidSO", "job", "collider2D", "humanoidName", "humanoidActionDesriprion", "workingSpeed", "jobAssigned", "autoAssign", "m_CancellationTokenSource")]
+	[ES3PropertiesAttribute("assignedBuilding", "roamDistanceToBuilding", "humanoidSO", "job", "collider2D", "humanoidName", "humanoidActionDesriprion", "workingSpeed", "jobAssigned", "autoAssign", "freedFromDungeon", "m_CancellationTokenSource")]
 	public class ES3UserType_Humanoid : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -26,6 +26,7 @@ namespace ES3Types
 			writer.WritePrivateField("workingSpeed", instance);
 			writer.WritePrivateField("jobAssigned", instance);
 			writer.WritePrivateField("autoAssign", instance);
+			writer.WritePrivateField("freedFromDungeon", instance);
 			writer.WritePrivateField("m_CancellationTokenSource", instance);
 		}
 
@@ -66,6 +67,9 @@ namespace ES3Types
 					break;
 					case "autoAssign":
 					instance = (Humanoid)reader.SetPrivateField("autoAssign", reader.Read<System.Boolean>(), instance);
+					break;
+					case "freedFromDungeon":
+					instance = (Humanoid)reader.SetPrivateField("freedFromDungeon", reader.Read<System.Boolean>(), instance);
 					break;
 					case "m_CancellationTokenSource":
 					instance = (Humanoid)reader.SetPrivateField("m_CancellationTokenSource", reader.Read<System.Threading.CancellationTokenSource>(), instance);

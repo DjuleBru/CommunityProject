@@ -8,6 +8,7 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
 
     [SerializeField] private List<Item> recordedDungeonLoot;
     [SerializeField] private float recordedDungeonTime;
+    [SerializeField] private int recordedhumanoidsSaved;
 
     [SerializeField] private List<Item> previousRunDungeonLoot;
     [SerializeField] private float previousRunDungeonTime;
@@ -55,18 +56,21 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
         }
     }
 
-    public void RecordDungeon(List<Item> loot, float time) {
-        Debug.Log("recording dungeon loot " + time);
+    public void RecordDungeon(List<Item> loot, float time, int humanoidsSaved) {
+        Debug.Log("recording dungeon loot " + time + " " + humanoidsSaved);
         recordedDungeonLoot = loot;
         recordedDungeonTime = time;
+        recordedhumanoidsSaved = humanoidsSaved;
 
         recordedStatsBoardUI.SetDungeonLootUI(recordedDungeonLoot);
         recordedStatsBoardUI.SetDungeonTimeUI(recordedDungeonTime);
     }
 
-    public void RecordLastRun(List<Item> loot, float time) {
+    public void RecordLastRun(List<Item> loot, float time, int newHumanoidsSaved) {
         Debug.Log("recording last run " + time);
         previousRunStatsBoardUI.gameObject.SetActive(true);
+
+        recordedhumanoidsSaved += newHumanoidsSaved;
 
         previousRunDungeonLoot = loot;
         previousRunDungeonTime = time;
@@ -87,7 +91,7 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
         previousRunStatsBoardUI.gameObject.SetActive(false);
         recordedStatsBoardUI.transform.position = recordedStatsBoardUIInitialPosition.position;
 
-        //dungeonEntrance.SaveDungeon();
+        dungeonEntrance.SaveDungeon();
     }
 
     public void SetPlayerInTriggerArea(bool playerInTriggerArea) {
@@ -132,6 +136,10 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
 
     public Collider2D GetSolidCollider() {
         return solidStatsBoardCollider;
+    }
+
+    public int GetRecordedHumanoidsNumberSaved() {
+        return recordedhumanoidsSaved;
     }
 
     public void LoadStatsBoardUI() {

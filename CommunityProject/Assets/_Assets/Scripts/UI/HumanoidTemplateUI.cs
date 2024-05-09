@@ -111,6 +111,14 @@ public class HumanoidTemplateUI : MonoBehaviour
             }
         }
 
+        if (humanoid.GetJob() == Humanoid.Job.Unassigned) {
+
+            Debug.Log("unassigned humanoid");
+            mainAssignmentSlot.SetActive(false);
+            inputAssignmentSlot.SetActive(false);
+            outputAssignmentSlot.SetActive(false);
+        }
+
         actionDescriptionText.text = humanoid.GetHumanoidActionDescription();
         autoAssignButton.SetAutoAssign(humanoid.GetAutoAssign());
     }

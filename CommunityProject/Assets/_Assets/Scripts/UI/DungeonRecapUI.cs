@@ -11,10 +11,12 @@ public class DungeonRecapUI : MonoBehaviour
 
     [SerializeField] private GameObject mobTemplatePrefab;
     [SerializeField] private GameObject resourcesTemplatePrefab;
-
+    [SerializeField] private GameObject humanoidsTemplatePrefab;
 
     [SerializeField] private Transform mobTemplateContainer;
     [SerializeField] private Transform resourcesTemplateContainer;
+    [SerializeField] private Transform humanoidsTemplateContainer;
+
 
     private DungeonEntrance dungeonEntrance;
     private DungeonSO dungeonSO;
@@ -25,9 +27,12 @@ public class DungeonRecapUI : MonoBehaviour
         dungeonSO = dungeonEntrance.GetDungeonSO();
         dungeonNameText.text = dungeonSO.name;
         dungeonDifficultyValueText.text = dungeonSO.dungeonDifficulty.ToString();
+    }
 
+    private void Start() {
         InstantiateMobTemplates();
         InstantiateResourceTemplates();
+        InstantiateHumanoidsTemplates();
     }
 
     private void InstantiateMobTemplates() {
@@ -46,6 +51,19 @@ public class DungeonRecapUI : MonoBehaviour
         }
 
         resourcesTemplatePrefab.SetActive(false);
+    }
+
+    private void InstantiateHumanoidsTemplates() {
+
+        Debug.Log(dungeonSO.humanoidsToSaveFromDungeon + " " + dungeonEntrance.GetDungeonStatsBoard().GetRecordedHumanoidsNumberSaved());
+        int humanoidsRemainingInDungeon = dungeonSO.humanoidsToSaveFromDungeon - dungeonEntrance.GetDungeonStatsBoard().GetRecordedHumanoidsNumberSaved();
+
+        for (int i = 0; i < humanoidsRemainingInDungeon; i++) {
+            GameObject itemPrefab = Instantiate(humanoidsTemplatePrefab, humanoidsTemplateContainer);
+            itemPrefab.transform.Find("HumanoidSprite").GetComponent<Image>().sprite = dungeonSO.humanoidTypeFoundInDungeon.humanoidSprite;
+        }
+
+        humanoidsTemplatePrefab.SetActive(false);
     }
 
 

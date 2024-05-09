@@ -131,7 +131,7 @@ public class DungeonGenerationManager : MonoBehaviour {
     }
 
     private void SetRoomHumanoidCages() {
-        int dungeonTotalHumanoidCaged = DungeonManager.Instance.GetHumanoidCageNUmberInDungeon();
+        int dungeonTotalHumanoidCaged = DungeonManager.Instance.GetHumanoidCageNumberInDungeon();
 
         List<int> humanoidCagesNumber = new List<int>();
         int totalHumanoidCagesNumber = 0;

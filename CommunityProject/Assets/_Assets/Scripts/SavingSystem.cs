@@ -27,21 +27,23 @@ public class SavingSystem : MonoBehaviour {
             sceneIsDungeon = true;
         }
 
+        LoadLastDungeonData();
     }
 
-    private void Start() {
-        Debug.Log("player exited dungeon " + playerExitedDungeon);
+    private void LoadLastDungeonData() {
         if (playerExitedDungeon) {
-            lastDungeonEntrance = ES3.Load("dungeonEntrance", lastDungeonEntrance);
+            lastDungeonEntrance = ES3.Load("lastDungeonEntered", lastDungeonEntrance);
 
             List<Item> lastDungeonLootedItems = GetLastDungeonLootedItems();
             float timeToCompleteDungeon = ES3.Load("lastDungeonTime", 0f);
+            int humanoidsSaved = ES3.Load("lastDungeonHumanoidsSaved", 0);
 
             if (!lastDungeonEntrance.GetDungeonComplete()) {
                 lastDungeonEntrance.SetDungeonAsComplete();
-                lastDungeonEntrance.RecordDungeon(lastDungeonLootedItems, timeToCompleteDungeon);
-            } else {
-                lastDungeonEntrance.RecordLastRun(lastDungeonLootedItems, timeToCompleteDungeon);
+                lastDungeonEntrance.RecordDungeon(lastDungeonLootedItems, timeToCompleteDungeon, humanoidsSaved);
+            }
+            else {
+                lastDungeonEntrance.RecordLastRun(lastDungeonLootedItems, timeToCompleteDungeon, humanoidsSaved);
             }
 
             lastDungeonEntrance.AddItemsToInventory(lastDungeonLootedItems);
@@ -52,12 +54,17 @@ public class SavingSystem : MonoBehaviour {
     }
 
     public void SetLastDungeonEntrance(DungeonEntrance dungeonEntrance) {
-        ES3.Save("dungeonEntrance", dungeonEntrance);
+        ES3.Save("lastDungeonEntered", dungeonEntrance);
+        ES3.Save("lastDungeonEnteredDungeonSO", dungeonEntrance.GetDungeonSO());
+
+        int humanoidsToSave = dungeonEntrance.GetDungeonSO().humanoidsToSaveFromDungeon - dungeonEntrance.GetDungeonStatsBoard().GetRecordedHumanoidsNumberSaved();
+        ES3.Save("lastDungeonEnteredRemainingHumanoidsToSave", humanoidsToSave);
     }
 
-    public void CompleteDungeon(List<Item> itemList, float timeToCompleteDungeon) {
+    public void CompleteDungeon(List<Item> itemList, float timeToCompleteDungeon, int humanoidsNumberSaved) {
         ES3.Save("lastDungeonItemList", itemList);
         ES3.Save("lastDungeonTime", timeToCompleteDungeon);
+        ES3.Save("lastDungeonHumanoidsSaved", humanoidsNumberSaved);
         ES3.Save("playerCompletedLastDungeon", true);
         ES3.Save("playerExitedDungeon", true);
 

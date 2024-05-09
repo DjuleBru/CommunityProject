@@ -9,6 +9,7 @@ public class HumanoidsManager : MonoBehaviour
     public static HumanoidsManager Instance { get; private set; }
 
     [SerializeField] private List<Humanoid> humanoidsInOverworld;
+    [SerializeField] private List<Humanoid> humanoidsSavedFromDungeon;
     [SerializeField] private List<int> humanoidsSavedIDList;
     [SerializeField] private List<int> humanoidsSavedFromDungeonIDList;
 
@@ -26,16 +27,20 @@ public class HumanoidsManager : MonoBehaviour
 
     private void Start() {
         humanoidsInOverworld = new List<Humanoid>();
+        humanoidsSavedFromDungeon = new List<Humanoid>();
 
-        if(DungeonManager.Instance == null) {
+        if (DungeonManager.Instance == null) {
             LoadHumanoidsInOverworld();
-            //LoadHumanoidsSavedFromDungeonsInOverworld();
+            LoadHumanoidsSavedFromDungeonsInOverworld();
         }
     }
 
     public void AddHumanoidInOverworld(Humanoid humanoid) {
         if(humanoidsInOverworld.Contains(humanoid)) return;
         humanoidsInOverworld.Add(humanoid);
+    }
+    public void AddHumanoidSavedFromDungeon(Humanoid humanoid) {
+        humanoidsSavedFromDungeon.Add(humanoid);
     }
 
     public List<Humanoid> GetHumanoids() {
@@ -46,13 +51,24 @@ public class HumanoidsManager : MonoBehaviour
         humanoidsSavedIDList = new List<int>();
 
         foreach (Humanoid humanoid in humanoidsInOverworld) {
-            //humanoid.SaveHumanoid();
             humanoidsSavedIDList.Add(humanoid.GetInstanceID());
             ES3.Save(humanoid.GetInstanceID().ToString(), humanoid.gameObject);
 
         }
 
         ES3.Save("humanoidsSavedIDList", humanoidsSavedIDList);
+    }
+
+
+    public void SaveHumanoidsSavedFromDungeon() {
+        humanoidsSavedFromDungeonIDList = new List<int>();
+
+        foreach (Humanoid humanoid in humanoidsSavedFromDungeon) {
+            humanoidsSavedFromDungeonIDList.Add(humanoid.GetInstanceID());
+            ES3.Save(humanoid.GetInstanceID().ToString(), humanoid.gameObject);
+        }
+
+        ES3.Save("humanoidsSavedFromLastDungeon", humanoidsSavedFromDungeonIDList);
     }
 
     public void LoadHumanoidsInOverworld() {
@@ -62,30 +78,17 @@ public class HumanoidsManager : MonoBehaviour
             ES3.Load(id.ToString());
         }
     }
-    public void AddHumanoidSavedFromDungeon(int id) {
-        humanoidsSavedFromDungeonIDList.Add(id);
-    }
 
     public void LoadHumanoidsSavedFromDungeonsInOverworld() {
 
         humanoidsSavedFromDungeonIDList = ES3.Load("humanoidsSavedFromLastDungeon", new List<int>());
 
-        if (humanoidsSavedFromDungeonIDList.Count != 0) {
-            foreach (int id in humanoidsSavedFromDungeonIDList) {
-                //GameObject humanoidGO = Instantiate(defaultHumanoid);
-                //GameObject humanoidGO = ES3.Load(id.ToString(), defaultHumanoid);
-            }
+        foreach (int id in humanoidsSavedFromDungeonIDList) {
+            ES3.Load(id.ToString());
         }
-
-        ES3.Save("humanoidsSavedFromLastDungeon", new List<int>());
     }
 
 
-    public void SaveHumanoidsSavedFromDungeon() {
-        foreach(int id in humanoidsSavedFromDungeonIDList) {
-        }
-        ES3.Save("humanoidsSavedFromLastDungeon", humanoidsSavedFromDungeonIDList);
-    }
 
     public ExternalBehaviorTree GetJustFreedBehaviorTree() {
         return justFreedBehaviorTree;
