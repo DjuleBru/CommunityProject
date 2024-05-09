@@ -70,6 +70,10 @@ public class HumanoidDungeonCrawl : MonoBehaviour
             dungeonEntranceAssigned.DeAssignHumanoid(humanoid);
             dungeonEntranceAssigned = null;
         }
+
+        if(humanoid.GetAssignedBuilding() != null) {
+            humanoid.RemoveAssignedBuilding();
+        }
     }
 
     public void LoadHumanoidDungeonCrawl() {
