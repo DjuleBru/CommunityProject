@@ -40,6 +40,25 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Start() {
         playerInventory.AddItem(new Item { itemType = Item.ItemType.Wood, amount = 5 });
+        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, EventArgs e) {
+        // Check if there is a humanoid in trigger area
+
+        bool humanoidsInTriggerArea = false;
+        if (interactablesInTriggerArea.Count > 0) {
+            foreach (IInteractable interactable1 in interactablesInTriggerArea) {
+                if ((interactable1 is HumanoidInteraction | interactable1 is Humanoid)) {
+                    //Interactable is not a humanoid
+                    humanoidsInTriggerArea = true;
+                }
+            }
+        }
+
+        if(!humanoidsInTriggerArea) {
+            HumanoidUI.Instance.ClosePanel();
+        }
     }
 
     private void Update() {
@@ -214,20 +233,34 @@ public class Player : MonoBehaviour, IDamageable
             return;
         }
 
+        // Check if the interactables in area are only humanoids
+        bool onlyHumanoidsSurrounding = true;
+        if (interactablesInTriggerArea.Count > 0) {
+            foreach (IInteractable interactable1 in interactablesInTriggerArea) {
+                if (!(interactable1 is HumanoidInteraction | interactable1 is Humanoid)) {
+                    //Interactable is not a humanoid
+                    onlyHumanoidsSurrounding = false;
+                }
+            }
+        }
+
         // Find closest interactable
         foreach (IInteractable interactable in interactablesInTriggerArea) {
+
+            //Skip humanoid interaction if there are other types of interactables in trigger area
+            if ((interactable is HumanoidInteraction | interactable is Humanoid) && !onlyHumanoidsSurrounding) continue;
 
             Collider2D interactableCollider = interactable.GetSolidCollider();
 
             ColliderDistance2D colliderDistance2DToInteractableSolidCollider = interactableCollider.Distance(GetComponent<Collider2D>());
             float distanceToInteractableCollider = colliderDistance2DToInteractableSolidCollider.distance;
 
-            if(distanceToInteractableCollider < 0.1f) {
+            if (distanceToInteractableCollider < 0.1f) {
                 distanceToInteractableCollider = 0.1f;
             }
 
-            if (distanceToInteractableCollider <= closestInteractableDistance) {
-                if(closestInteractable != null) {
+            if (distanceToInteractableCollider < closestInteractableDistance) {
+                if (closestInteractable != null) {
                     RemoveInteractionWithInteractable(closestInteractable);
                 }
 
@@ -235,9 +268,11 @@ public class Player : MonoBehaviour, IDamageable
                 closestInteractable.SetPlayerInTriggerArea(true);
                 closestInteractable.SetHovered(true);
                 closestInteractableDistance = distanceToInteractableCollider;
+
+                Debug.Log(closestInteractableDistance + " " + closestInteractable);
             }
-            
         }
+
     }
 
     private void RemoveInteractionWithInteractable(IInteractable interactable) {

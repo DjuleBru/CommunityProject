@@ -37,7 +37,18 @@ public class Humanoid : MonoBehaviour
     private string humanoidName;
     private string humanoidActionDesriprion;
 
+    private float moveSpeed;
     private float workingSpeed;
+    private float productivity;
+    private float hunger;
+    private float energy;
+    private float strength;
+    private float armor;
+    private int carryCapacity;
+
+    [SerializeField] private float hungerDepletionRate;
+    [SerializeField] private float energyDepletionRate;
+
     private Job jobAssigned;
     private bool autoAssign = true;
     private bool freedFromDungeon;
@@ -72,6 +83,7 @@ public class Humanoid : MonoBehaviour
         humanoidWork.OnHumanoidWorkStopped += HumanoidWork_OnHumanoidWorkStopped;
 
         LoadHumanoid();
+        InitializeHumanoidStats();
 
         if (DungeonManager.Instance != null) {
             // This is a dungeon scene : Humanoid is being freed from dungeon
@@ -85,6 +97,12 @@ public class Humanoid : MonoBehaviour
         }
     }
 
+    private void Update() {
+        hunger -= hungerDepletionRate * Time.deltaTime;
+        energy -= energyDepletionRate * Time.deltaTime;
+    }
+
+    #region EVENT RESPONSES
     private void HumanoidWork_OnHumanoidWorkStopped(object sender, System.EventArgs e) {
         humanoidVisual.gameObject.SetActive(true);
         humanoidInteraction.gameObject.SetActive(false);
@@ -101,33 +119,9 @@ public class Humanoid : MonoBehaviour
         SetHumanoidActionDescription("At work !");
     }
 
-    public HumanoidSO GetHumanoidSO() {
-        return humanoidSO;
-    }
+    #endregion
 
-    public float GetWorkingSpeed() {
-        return humanoidSO.workingSpeed;
-    }
-
-    public Job GetJob() {
-        return jobAssigned;
-    }
-
-    private void StopTask() {
-        if (jobAssigned == Job.Worker) {
-            if (humanoidWork.GetWorking()) {
-                humanoidWork.StopWorking();
-            }
-        }
-
-        if (jobAssigned == Job.Haulier) {
-            humanoidHaul.StopCarrying();
-        }
-
-        if (IsDungeoneer()) {
-            humanoidDungeonCrawl.StopCrawling();
-        }
-    }
+    #region SET PARAMETERS
     public void SetJob(Job job) {
         if (jobAssigned == job) return;
 
@@ -136,7 +130,6 @@ public class Humanoid : MonoBehaviour
         jobAssigned = job;
         AssignBehaviorTree();
     }
-
 
     public void AssignBehaviorTree() {
 
@@ -167,6 +160,63 @@ public class Humanoid : MonoBehaviour
 
     public void RemoveAssignedBuilding() {
         assignedBuilding = null;
+    }
+
+    public void SetAutoAssign(bool autoAssignActive) {
+        if (!autoAssignActive && !autoAssign) return;
+        autoAssign = autoAssignActive;
+
+        StopTask();
+        assignedBuilding = null;
+    }
+
+    public void SetHumanoidActionDescription(string description) {
+        humanoidActionDesriprion = description;
+        ProductionBuildingUI.Instance.RefreshWorkerPanel();
+    }
+
+    #endregion
+
+    #region GET PARAMETERS
+
+    public HumanoidSO GetHumanoidSO() {
+        return humanoidSO;
+    }
+
+    public float GetWorkingSpeed() {
+        return workingSpeed;
+    }
+
+    public float GetMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public float GetProductivity() {
+        return productivity;
+    }
+
+    public float GetHunger() {
+        return hunger;
+    }
+
+    public float GetEnergy() {
+        return energy;
+    }
+
+    public float GetStrength() {
+        return strength;
+    }
+
+    public float GetArmor() {
+        return armor;
+    }
+
+    public int GetCarryCapacity() {
+        return carryCapacity;
+    }
+
+    public Job GetJob() {
+        return jobAssigned;
     }
 
     public Building GetAssignedBuilding() {
@@ -213,17 +263,62 @@ public class Humanoid : MonoBehaviour
         return humanoidVisual;
     }
 
-    public void SetAutoAssign(bool autoAssignActive) {
-        if (!autoAssignActive && !autoAssign) return;
-        autoAssign = autoAssignActive;
+    #endregion
 
-        StopTask();
-        assignedBuilding = null;
+    #region MODIFY STATS
+
+    public void ChangeMoveSpeed(float moveSpeedAddition) {
+        moveSpeed += moveSpeedAddition;
     }
 
-    public void SetHumanoidActionDescription(string description) {
-        humanoidActionDesriprion = description;
-        ProductionBuildingUI.Instance.RefreshWorkerPanel();
+    public void MultiplyMoveSpeed(float moveSpeedMultiplier) {
+        moveSpeed *= moveSpeedMultiplier;
+    }
+
+    public void ChangeCarryCapacity(int carryCapacityAddition) {
+        carryCapacity += carryCapacityAddition;
+    }
+
+    public void ChangeWorkingSpeed(float workingSpeedAddition) {
+        workingSpeed += workingSpeedAddition;
+    }
+
+    public void MultiplyWorkingSpeed(float workingSpeedMultiplier) {
+        workingSpeed *= workingSpeedMultiplier;
+    }
+
+    public void ChangeStrength(float strengthAddition) {
+        strength += strengthAddition;
+    }
+
+    public void ChangeArmor(float armorAddition) {
+        armor += armorAddition;
+    }
+
+    public void Feed(float hungerAddition) {
+        hunger += hungerAddition;
+    }
+
+    public void FillEnergy() {
+        energy = 100;
+    }
+
+    #endregion
+
+    private void StopTask() {
+        if (jobAssigned == Job.Worker) {
+            if (humanoidWork.GetWorking()) {
+                humanoidWork.StopWorking();
+            }
+        }
+
+        if (jobAssigned == Job.Haulier) {
+            humanoidHaul.StopCarrying();
+        }
+
+        if (IsDungeoneer()) {
+            humanoidDungeonCrawl.StopCrawling();
+        }
     }
 
     public void LoadHumanoid() {
@@ -237,6 +332,33 @@ public class Humanoid : MonoBehaviour
         humanoidAnimatorManager.SetAnimator(humanoidSO.animatorController);
         humanoidMovement.LoadHumanoidMovement();
         humanoidWork.LoadHumanoidWork();
+    }
+
+    public void InitializeHumanoidStats() {
+        if(moveSpeed == 0) {
+            moveSpeed = humanoidSO.moveSpeed;
+        }
+
+        if(workingSpeed == 0) {
+            workingSpeed = humanoidSO.workingSpeed;
+        }
+
+        if(strength == 0) {
+            strength = humanoidSO.strength;
+        }
+
+        if(carryCapacity == 0) {
+            carryCapacity = humanoidSO.carryCapacity;
+        }
+
+        // hunger and happiness set to <0 if already initialized and empty
+        if(hunger == 0) {
+            hunger = 100;
+        }
+
+        if(energy == 0) {
+            energy = 100;
+        }
     }
 
 }

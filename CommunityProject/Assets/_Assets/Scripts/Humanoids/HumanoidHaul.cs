@@ -26,9 +26,9 @@ public class HumanoidHaul : MonoBehaviour
         List<Building> destinationBuildingsList = new List<Building>();
 
         if (humanoidCarry.GetItemCarrying() == null || humanoidCarry.GetItemCarrying().amount == 0) {
-            destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(humanoidCarry.GetMaxCarryAmount());
+            destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(humanoid.GetCarryCapacity());
         } else {
-            destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(humanoidCarry.GetMaxCarryAmount(), humanoidCarry.GetItemCarrying());
+            destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(humanoid.GetCarryCapacity(), humanoidCarry.GetItemCarrying());
         }
 
         float bestBuildingScore = 0f;
@@ -77,7 +77,7 @@ public class HumanoidHaul : MonoBehaviour
 
     public Building IdentifyBestSourceBuilding(Item itemToCarry) {
 
-        List<Building> sourceBuildingsList = BuildingsManager.Instance.GetSourceBuildingsList(humanoidCarry.GetMaxCarryAmount(), itemToCarry);
+        List<Building> sourceBuildingsList = BuildingsManager.Instance.GetSourceBuildingsList(humanoid.GetCarryCapacity(), itemToCarry);
 
         float bestBuildingScore = 0f;
         Building bestBuilding = null;
@@ -146,7 +146,7 @@ public class HumanoidHaul : MonoBehaviour
     }
 
     public bool FetchItemsInBuilding(Building building) {
-        Item itemToFetch = new Item { itemType = itemToCarry.itemType, amount = humanoidCarry.GetMaxCarryAmount()};
+        Item itemToFetch = new Item { itemType = itemToCarry.itemType, amount = humanoid.GetCarryCapacity()};
 
         if(building is Chest) {
             Chest chest = building as Chest;
@@ -293,7 +293,7 @@ public class HumanoidHaul : MonoBehaviour
     [Button]
     public Building IdentifyBestDestinationBuildingDebug() {
 
-        List<Building> destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(humanoidCarry.GetMaxCarryAmount());
+        List<Building> destinationBuildingsList = BuildingsManager.Instance.GetDestinationBuildingsList(humanoid.GetCarryCapacity());
 
         float bestBuildingScore = 0f;
         Building bestBuilding = null;
@@ -323,7 +323,7 @@ public class HumanoidHaul : MonoBehaviour
     [Button]
     public Building IdentifyBestSourceBuildingDebug() {
 
-        List<Building> sourceBuildingsList = BuildingsManager.Instance.GetSourceBuildingsList(humanoidCarry.GetMaxCarryAmount(), itemToCarry);
+        List<Building> sourceBuildingsList = BuildingsManager.Instance.GetSourceBuildingsList(humanoid.GetCarryCapacity(), itemToCarry);
 
         float bestBuildingScore = 0f;
         Building bestBuilding = null;

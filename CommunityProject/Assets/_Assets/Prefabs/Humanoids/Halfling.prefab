@@ -28,6 +28,14 @@ PrefabInstance:
       propertyPath: humanoidSO
       value: 
       objectReference: {fileID: 11400000, guid: be440d834a6c1c8438232bb7b4ade791, type: 2}
+    - target: {fileID: 3275420738517804746, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
+      propertyPath: energyDepletionRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275420738517804746, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
+      propertyPath: hungerDepletionRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3550964446183500357, guid: d6bcf0fcc1bffe74383a6a93d77dbf55, type: 3}
       propertyPath: m_RootOrder
       value: 0

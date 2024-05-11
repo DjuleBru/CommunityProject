@@ -26,7 +26,9 @@ public class SavingSystem : MonoBehaviour {
         if (SceneManager.GetActiveScene().name == SceneLoader.Scene.Dungeon.ToString()) {
             sceneIsDungeon = true;
         }
+    }
 
+    private void Start() {
         LoadLastDungeonData();
     }
 

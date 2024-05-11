@@ -36,6 +36,12 @@ public class Chest : Building
     }
 
     public void AddItemsToChest(List<Item> itemList) {
+
+        if (chestInventory == null) {
+            Debug.Log("null chest inventory - creating one");
+            chestInventory = new Inventory(false, 3, 3, false, null);
+        }
+
         foreach (Item item in itemList) {
             Debug.Log("adding " + item.itemType + " " + item.amount);
             chestInventory.AddItem(item);

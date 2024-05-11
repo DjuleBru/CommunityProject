@@ -22,5 +22,8 @@ public class HumanoidSO : ScriptableObject
     public AnimatorOverrideController animatorController;
     public float moveSpeed;
     public float workingSpeed;
+    public float productivity;
+    public float strength;
+    public int carryCapacity;
 
 }

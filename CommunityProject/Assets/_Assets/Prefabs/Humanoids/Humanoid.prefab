@@ -557,6 +557,8 @@ MonoBehaviour:
   humanoidSO: {fileID: 0}
   job: 0
   debugJob: 0
+  hungerDepletionRate: 1
+  energyDepletionRate: 0.5
   behaviorTree: {fileID: 727366065133654119}
 --- !u!114 &4971206519392686629
 MonoBehaviour:
@@ -586,7 +588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8ffc3d88d32a44b9da67d5857991c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCarryAmount: 5
   itemCarrying:
     itemType: 0
     itemTier: 0
