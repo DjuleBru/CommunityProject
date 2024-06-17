@@ -10,6 +10,7 @@ public class Chest : Building
     [SerializeField] bool isDungeonChest;
     [SerializeField] private BuildingHaulersUI_World buildingHaulersUI_World;
 
+    [SerializeField] private Item.ItemCategory itemCategoryToStore;
 
     protected override void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -29,7 +30,14 @@ public class Chest : Building
 
         if (chestInventory == null) {
             Debug.Log("null chest inventory - creating one");
-            chestInventory = new Inventory(false, 3, 3, false, null);
+
+            if(itemCategoryToStore == Item.ItemCategory.All) {
+                chestInventory = new Inventory(false, 3, 3, false, null);
+            } else {
+                List<Item> itemsRestricted = ItemAssets.Instance.GetItemListOfCategory(itemCategoryToStore);
+
+                chestInventory = new Inventory(false, 3, 3, true, itemsRestricted);
+            }
         }
 
         BuildingsManager.Instance.AddBuilding(this);
@@ -75,6 +83,7 @@ public class Chest : Building
         return buildingVisual as ChestVisual;
     }
 
+    public Item.ItemCategory GetItemCategoryToStore() {  return itemCategoryToStore; }
     public override void LoadBuilding() {
         if (isDungeonChest) {
             buildingPlaced = true;

@@ -13,6 +13,8 @@ public class HumanoidUI : MonoBehaviour
     private bool panelOpen;
 
     private Humanoid humanoid;
+    private HumanoidNeeds humanoidNeeds;
+
     [SerializeField] private Image hungerBarFillImage;
     [SerializeField] private Image energyBarFillImage;
     [SerializeField] private Image humanoidIcon;
@@ -43,13 +45,15 @@ public class HumanoidUI : MonoBehaviour
 
     private void Update() {
         if (panelOpen) {
-            hungerBarFillImage.fillAmount = humanoid.GetHunger() / 100;
-            energyBarFillImage.fillAmount = humanoid.GetEnergy() / 100;
+            hungerBarFillImage.fillAmount = humanoidNeeds.GetHunger() / 100;
+            energyBarFillImage.fillAmount = humanoidNeeds.GetEnergy() / 100;
         }
     }
 
     public void SetHumanoid(Humanoid humanoid) {
         this.humanoid = humanoid;
+        humanoidNeeds = humanoid.GetComponent<HumanoidNeeds>();
+
         humanoidIcon.sprite = humanoid.GetHumanoidSO().humanoidSprite;
         humanoidNameText.text = humanoid.GetHumanoidName();
         humanoidJobText.text = humanoid.GetJob().ToString();

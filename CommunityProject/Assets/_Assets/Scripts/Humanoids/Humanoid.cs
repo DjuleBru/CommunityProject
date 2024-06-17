@@ -17,6 +17,7 @@ public class Humanoid : MonoBehaviour
     }
 
     protected Building assignedBuilding;
+
     [SerializeField] private float roamDistanceToBuilding;
 
     [SerializeField] private HumanoidSO humanoidSO;
@@ -40,14 +41,10 @@ public class Humanoid : MonoBehaviour
     private float moveSpeed;
     private float workingSpeed;
     private float productivity;
-    private float hunger;
-    private float energy;
     private float strength;
     private float armor;
     private int carryCapacity;
 
-    [SerializeField] private float hungerDepletionRate;
-    [SerializeField] private float energyDepletionRate;
 
     private Job jobAssigned;
     private bool autoAssign = true;
@@ -97,10 +94,6 @@ public class Humanoid : MonoBehaviour
         }
     }
 
-    private void Update() {
-        hunger -= hungerDepletionRate * Time.deltaTime;
-        energy -= energyDepletionRate * Time.deltaTime;
-    }
 
     #region EVENT RESPONSES
     private void HumanoidWork_OnHumanoidWorkStopped(object sender, System.EventArgs e) {
@@ -195,14 +188,6 @@ public class Humanoid : MonoBehaviour
         return productivity;
     }
 
-    public float GetHunger() {
-        return hunger;
-    }
-
-    public float GetEnergy() {
-        return energy;
-    }
-
     public float GetStrength() {
         return strength;
     }
@@ -295,13 +280,6 @@ public class Humanoid : MonoBehaviour
         armor += armorAddition;
     }
 
-    public void Feed(float hungerAddition) {
-        hunger += hungerAddition;
-    }
-
-    public void FillEnergy() {
-        energy = 100;
-    }
 
     #endregion
 
@@ -349,15 +327,6 @@ public class Humanoid : MonoBehaviour
 
         if(carryCapacity == 0) {
             carryCapacity = humanoidSO.carryCapacity;
-        }
-
-        // hunger and happiness set to <0 if already initialized and empty
-        if(hunger == 0) {
-            hunger = 100;
-        }
-
-        if(energy == 0) {
-            energy = 100;
         }
     }
 

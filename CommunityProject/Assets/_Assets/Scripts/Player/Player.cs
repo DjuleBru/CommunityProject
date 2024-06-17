@@ -268,8 +268,6 @@ public class Player : MonoBehaviour, IDamageable
                 closestInteractable.SetPlayerInTriggerArea(true);
                 closestInteractable.SetHovered(true);
                 closestInteractableDistance = distanceToInteractableCollider;
-
-                Debug.Log(closestInteractableDistance + " " + closestInteractable);
             }
         }
 

@@ -51,4 +51,13 @@ public class HumanoidAnimatorManager : MonoBehaviour
     public void SetAnimator(AnimatorOverrideController animatorController) {
         animator.runtimeAnimatorController = animatorController;
     }
+
+    public void PauseAnimator(bool pause) {
+        if(pause) {
+            animator.speed = 0;
+        } else {
+            animator.speed = 1f;
+        }
+    }
+
 }

@@ -20,4 +20,17 @@ public class ItemSO : ScriptableObject
     [ShowIf("isStackable")]
     [BoxGroup("Basic Info")]
     public int maxStackableAmount;
+
+
+    [BoxGroup("Crops")]
+    public Sprite seedSprite;
+    [BoxGroup("Crops")]
+    public Sprite growth1Sprite;
+    [BoxGroup("Crops")]
+    public Sprite growth2Sprite;
+    [BoxGroup("Crops")]
+    public Sprite growth3Sprite;
+
+    [BoxGroup("Food")]
+    public int foodValue;
 }

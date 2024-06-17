@@ -83,10 +83,12 @@ public class HumanoidMovement : MonoBehaviour
     }
 
     public void MoveToDestination(Vector3 destination) {
+
         if (roaming) {
             roaming = false;
             humanoidVisual.SetQuestionMarkActive(false);
         }
+
         CalculatePath(transform.position, destination);
     }
 

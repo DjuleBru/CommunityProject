@@ -12,13 +12,14 @@ public class Building : MonoBehaviour
         Workstation,
         AssemblyStation,
         FoodProduction,
-        Storage
+        Storage,
+        Utility
     }
 
     public enum BuildingWorksCategory {
         WoodWork,
         MetalWork,
-        Storage
+        Storage,
     }
 
     public enum BuildingType {
@@ -27,6 +28,10 @@ public class Building : MonoBehaviour
         brickyard,
         woodworkBench,
         woodenchest,
+        foodChest,
+        field,
+        canteen,
+        tent
     }
 
     [SerializeField] protected BuildingSO buildingSO;
@@ -248,7 +253,6 @@ public class Building : MonoBehaviour
     }
 
     public virtual void LoadBuilding() {
-        Debug.Log(this + " loading building, buildingPlaced " + buildingPlaced);
 
         if(buildingPlaced) {
             buildingCollider.isTrigger = false;

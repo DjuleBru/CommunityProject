@@ -9,13 +9,29 @@ public class HumanoidVisual : MonoBehaviour
     private HumanoidDungeonCrawl humanoidDungeonCrawl;
 
     [SerializeField] private GameObject questionMarkGameObject;
+    [SerializeField] private GameObject hungryStatusGameObject;
+    [SerializeField] private GameObject exhaustedStatusGameObject;
     [SerializeField] private SpriteRenderer carryingItemSprite;
+
+    [SerializeField] private SpriteRenderer eatingItemSprite;
+    [SerializeField] private Animator eatingItemAnimator;
+
+    [SerializeField] private ParticleSystem sleepingPS;
 
     [SerializeField] private GameObject bodyGameObject;
     [SerializeField] private GameObject shadowGameObject;
 
+    [SerializeField] private GameObject statusesContainer;
+
+
+
     private void Awake() {
         questionMarkGameObject.SetActive(false);
+        hungryStatusGameObject.SetActive(false);
+        exhaustedStatusGameObject.SetActive(false);
+        eatingItemSprite.gameObject.SetActive(false);
+
+
         humanoid = GetComponentInParent<Humanoid>();
         humanoidCarry = GetComponentInParent<HumanoidCarry>();
         humanoidDungeonCrawl = GetComponentInParent<HumanoidDungeonCrawl>();
@@ -27,6 +43,16 @@ public class HumanoidVisual : MonoBehaviour
 
         humanoidCarry.OnCarryStarted += HumanoidCarry_OnCarryStarted;
         humanoidCarry.OnCarryCompleted += HumanoidCarry_OnCarryCompleted;
+    }
+
+    public void SetEating(Item itemEating) {
+        eatingItemSprite.gameObject.SetActive(true);
+        eatingItemSprite.sprite = ItemAssets.Instance.GetItemSO(itemEating.itemType).itemSprite;
+        eatingItemAnimator.SetTrigger("Eat");
+    }
+
+    public void StopEating() {
+        eatingItemSprite.gameObject.SetActive(false);
     }
 
     private void HumanoidCarry_OnCarryCompleted(object sender, System.EventArgs e) {
@@ -55,8 +81,48 @@ public class HumanoidVisual : MonoBehaviour
         shadowGameObject.SetActive(true);
     }
 
+    public void ShowStatuses() {
+        statusesContainer.SetActive(true);
+    }
+
+    public void HideStatuses() {
+        statusesContainer.SetActive(false);
+    }
+
+
     public void SetQuestionMarkActive(bool active) {
         questionMarkGameObject.SetActive(active);
+    }
+
+    public void SetHungryStatusActive(bool active) {
+        hungryStatusGameObject.SetActive(active);
+    }
+
+    public void SetExhaustedStatusActive(bool active) {
+        exhaustedStatusGameObject.SetActive(active);
+    }
+
+    public void SetSleeping(bool sleeping) {
+        if (sleeping) {
+            bodyGameObject.transform.eulerAngles = new Vector3(0, 0, 44f);
+            shadowGameObject.SetActive(false);
+            HideStatuses();
+
+        } else {
+            bodyGameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+            shadowGameObject.SetActive(true);
+            ShowStatuses();
+        }
+    }
+
+    public void SetSleepingPS(bool sleeping) {
+        if (sleeping) {
+            sleepingPS.Play();
+
+        }
+        else {
+            sleepingPS.Stop();
+        }
     }
 
     public void SetCarryingItemSprite(Item item) {

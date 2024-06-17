@@ -35,4 +35,16 @@ public class ItemAssets : MonoBehaviour {
     public List<ItemSO> GetItemSOList() {
         return itemSOList;
     }
+
+    public List<Item> GetItemListOfCategory(Item.ItemCategory itemCategory) {
+        List<Item> itemsRestricted = new List<Item>();
+
+        foreach (ItemSO itemSO in itemSOList) {
+            if(itemSO.itemCategory == itemCategory) {
+                itemsRestricted.Add(new Item { itemType = itemSO.itemType, amount = 0 });
+            }
+        }
+
+        return itemsRestricted;
+    }
 }

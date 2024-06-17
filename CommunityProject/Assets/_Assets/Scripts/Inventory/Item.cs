@@ -15,12 +15,15 @@ public class Item
         Brick,
         WoodenShield,
         HealthPotion,
+        Potato,
     }
 
     public enum ItemCategory {
+        All,
         Material,
         Equipment,
         Consumable,
+        Food,
     }
 
     public enum ItemTier {

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fbae1f91d76d554ca4d3b7c41e640b2, type: 3}
+  m_Name: Potatoes
+  m_EditorClassIdentifier: 
+  recipeName: Potatoes
+  recipeSprite: {fileID: -281890985, guid: bd40e411837643645bf72d263f829470, type: 3}
+  inputItems: []
+  outputItems:
+  - itemType: 8
+    itemTier: 0
+    amount: 10
+  standardProductionTime: 30

@@ -147,6 +147,41 @@ public class BuildingsManager : MonoBehaviour
         return sourceBuildingList;
     }
 
+    public List<Building> GetFoodDistributionBuildingsList() {
+        List<Building> foodDistributionBuildingsList = new List<Building>();
+
+        foreach (Building building in buildingsSpawned) {
+
+            if (building is Chest) {
+                Chest chest = (Chest)building;
+
+                if (chest.GetItemCategoryToStore() == Item.ItemCategory.Food) {
+
+                    List<Item> foodItems = ItemAssets.Instance.GetItemListOfCategory(Item.ItemCategory.Food);
+
+                    foreach (Item item in foodItems) {
+                        if (chest.GetChestInventory().AmountInventoryHasOfType(item) > 0) {
+                            foodDistributionBuildingsList.Add(chest);
+                        }
+                    }
+
+                }
+            }
+        }
+        return foodDistributionBuildingsList;
+    }
+
+    public List<Building> GetHousingBuildingsList() {
+        List<Building> housingBuildingsList = new List<Building>();
+
+        foreach (Building building in buildingsSpawned) {
+            if(building.GetBuildingSO().housingCapacity != 0) {
+                housingBuildingsList.Add(building);
+            }
+        }
+        return housingBuildingsList;
+    }
+
     public void SetAllVisualCollidersActive(bool active) {
         foreach(Building building in buildingsSpawned) {
             building.GetBuildingVisual().SetColliderActive(active);
