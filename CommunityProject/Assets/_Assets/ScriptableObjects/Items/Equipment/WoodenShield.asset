@@ -13,8 +13,20 @@ MonoBehaviour:
   m_Name: WoodenShield
   m_EditorClassIdentifier: 
   itemType: 6
-  itemCategory: 1
-  itemTier: 1
+  itemCategory: 2
+  itemTier: 0
   itemSprite: {fileID: -930637474, guid: 15e365539ea8b564a96391f0aa4c8afc, type: 3}
   isStackable: 1
   maxStackableAmount: 9
+  seedSprite: {fileID: 0}
+  growth1Sprite: {fileID: 0}
+  growth2Sprite: {fileID: 0}
+  growth3Sprite: {fileID: 0}
+  foodValue: 0
+  itemEquipmentCategory: 1
+  strengthBonusValue: 0
+  intelligenceBonusValue: 0
+  moveSpeedBonusValue: 0
+  healthBonusValue: 0
+  damageBonusValue: 0
+  armorBonusValue: 1

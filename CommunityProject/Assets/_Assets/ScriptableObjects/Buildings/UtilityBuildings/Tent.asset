@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Tent
   m_EditorClassIdentifier: 
   buildingCategory: 4
-  buildingType: 8
+  buildingType: 9
   buildingWorksCategory: 2
   buildingCostItems:
   - itemType: 0
     itemTier: 0
     amount: 5
+  canInteractWithBuilding: 0
   buildingRecipes: []
-  housingCapacity: 1
+  housingCapacity: 3
   energyFillRateMultiplier: 3
   buildingName: Tent
   buildingIconSprite: {fileID: -126680881, guid: 767cccf871712ad45a47acc6660aab52, type: 3}

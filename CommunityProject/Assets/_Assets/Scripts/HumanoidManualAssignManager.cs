@@ -8,11 +8,13 @@ public class HumanoidManualAssignManager : MonoBehaviour
     public static HumanoidManualAssignManager Instance { get; private set; }
 
     private bool assigningBuildingToHumanoid;
+    private bool assigningHousing;
 
     private Humanoid humanoid;
     private Collider2D mousePositionCollider;
 
     private ProductionBuilding productionBuildingHovered;
+    private House houseHovered;
     private DungeonEntrance dungeonEntranceHovered;
     private Chest chestHovered;
 
@@ -28,11 +30,17 @@ public class HumanoidManualAssignManager : MonoBehaviour
         if (assigningBuildingToHumanoid) {
             if(Input.GetMouseButtonDown(1)) {
                 //Right click : cancel assigning
-                SetAssigningTaskToHumanoid(false, null, false);
+                SetAssigningTaskToHumanoid(false, null, false, false);
             }
 
             if(Input.GetMouseButtonDown(0)) {
-                // Left click : assign building 
+                // Left click : assign building
+                
+                if(assigningHousing) {
+                    HandleHousingAssigment();
+                    return;
+                }
+
                 if(humanoid.IsWorker()) {
                     HandleWorkerBuildingAssignment();
                 }
@@ -48,6 +56,15 @@ public class HumanoidManualAssignManager : MonoBehaviour
 
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+        }
+    }
+
+    private void HandleHousingAssigment() {
+        if (houseHovered != null) {
+            houseHovered.AssignHumanoidHousing(humanoid);
+            humanoid.GetComponent<HumanoidNeeds>().AssignHousingManual(houseHovered);
+            houseHovered.GetHousingBuildingUIWorld().ShowAssignedHoused(false);
+            StopAssignmentMode();
         }
     }
 
@@ -97,10 +114,11 @@ public class HumanoidManualAssignManager : MonoBehaviour
         }
     }
 
-    public void SetAssigningTaskToHumanoid(bool assigning, Humanoid humanoid, bool assigningDestinationBuilding) {
+    public void SetAssigningTaskToHumanoid(bool assigning, Humanoid humanoid, bool assigningDestinationBuilding, bool assigningHousing) {
         assigningBuildingToHumanoid = assigning;
         this.humanoid = humanoid;
         this.assigningDestionationBuilding = assigningDestinationBuilding;
+        this.assigningHousing = assigningHousing;
 
         if (assigningBuildingToHumanoid) {
 
@@ -121,6 +139,7 @@ public class HumanoidManualAssignManager : MonoBehaviour
 
     private void StopAssignmentMode() {
         assigningBuildingToHumanoid = false;
+        assigningHousing = false;
         mousePositionCollider.enabled = false;
         HumanoidsMenuUI.Instance.OpenCloseHumanoidsMenu();
     }
@@ -166,6 +185,17 @@ public class HumanoidManualAssignManager : MonoBehaviour
                     }
                 }
             }
+
+            if (building is House) {
+                House house = (House)building;
+                houseHovered = house;
+                ShowHousingInfo(house);
+
+                if (assigningHousing) {
+                    houseHovered.GetHousingBuildingUIWorld().ShowPotentialInputHousingAssign(humanoid);
+                }
+                
+            }
         }
 
         if(dungeonStatsBoard != null) {
@@ -193,6 +223,14 @@ public class HumanoidManualAssignManager : MonoBehaviour
                 chestHovered.CloseInventory();
                 chestHovered = null;
             }
+
+            if (building is House) {
+                if (assigningHousing) {
+                    houseHovered.GetHousingBuildingUIWorld().ShowAssignedHoused(false);
+                }
+
+                houseHovered = null;
+            }
         }
         if (dungeonStatsBoard != null) {
             dungeonEntranceHovered = null;
@@ -213,6 +251,11 @@ public class HumanoidManualAssignManager : MonoBehaviour
         chest.GetBuildingHaulersUI_World().ShowAssignedHaulers(true);
         chest.OpenInventory();
     } 
+
+    private void ShowHousingInfo(House house) {
+        house.GetBuildingVisual().SetHovered(true);
+        house.GetHousingBuildingUIWorld().ShowAssignedHoused(true);
+    }
 
     public bool IsAssigningBuildingToHumanoid() {
         return assigningBuildingToHumanoid;

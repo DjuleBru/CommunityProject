@@ -33,4 +33,20 @@ public class ItemSO : ScriptableObject
 
     [BoxGroup("Food")]
     public int foodValue;
+
+
+    [BoxGroup("Equipment")]
+    public Item.ItemEquipmentCategory itemEquipmentCategory;
+    [BoxGroup("Equipment")]
+    public int strengthBonusValue;
+    [BoxGroup("Equipment")]
+    public int intelligenceBonusValue;
+    [BoxGroup("Equipment")]
+    public int moveSpeedBonusValue;
+    [BoxGroup("Equipment")]
+    public int healthBonusValue;
+    [BoxGroup("Equipment")]
+    public int damageBonusValue;
+    [BoxGroup("Equipment")]
+    public int armorBonusValue;
 }

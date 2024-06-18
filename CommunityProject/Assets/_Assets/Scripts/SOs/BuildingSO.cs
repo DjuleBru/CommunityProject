@@ -11,6 +11,8 @@ public class BuildingSO : ScriptableObject
     public Building.BuildingWorksCategory buildingWorksCategory;
     public List<Item> buildingCostItems;
 
+    public bool canInteractWithBuilding;
+
     [BoxGroup("ProductionBuilding")]
     public List<RecipeSO> buildingRecipes;
 

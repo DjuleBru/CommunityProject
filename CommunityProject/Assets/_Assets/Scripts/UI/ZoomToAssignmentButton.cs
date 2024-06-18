@@ -6,9 +6,18 @@ public class ZoomToAssignmentButton : MonoBehaviour
 {
 
     [SerializeField] private bool isInputBuilding;
+    [SerializeField] private bool ishousingBuilding;
 
     public void ZoomToAssignment() {
         Humanoid humanoid = GetComponentInParent<HumanoidTemplateUI>().GetHumanoid();
+
+        if(ishousingBuilding) {
+            if (humanoid.GetComponent<HumanoidNeeds>().GetAssignedHousing() != null) {
+                FreeCameraViewManager.Instance.SetFreeCamera(true);
+
+                FreeCameraViewManager.Instance.ZoomToLocation(humanoid.GetComponent<HumanoidNeeds>().GetAssignedHousing().transform.position);
+            }
+        }
 
         if(humanoid.GetJob() == Humanoid.Job.Worker) {
             if (humanoid.GetAssignedBuilding() != null) {

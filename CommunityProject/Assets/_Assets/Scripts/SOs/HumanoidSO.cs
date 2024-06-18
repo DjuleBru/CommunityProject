@@ -20,10 +20,14 @@ public class HumanoidSO : ScriptableObject
     public HumanoidType humanoidType;
     public Sprite humanoidSprite;
     public AnimatorOverrideController animatorController;
+
     public float moveSpeed;
-    public float workingSpeed;
-    public float productivity;
+    public float intelligence;
     public float strength;
+    public float health;
+    public float damage;
+    public float armor;
+
     public int carryCapacity;
 
 }

@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: FoodChest
   m_EditorClassIdentifier: 
   buildingCategory: 3
-  buildingType: 5
+  buildingType: 4
   buildingWorksCategory: 2
   buildingCostItems:
   - itemType: 0
     itemTier: 0
     amount: 20
+  canInteractWithBuilding: 1
   buildingRecipes: []
+  housingCapacity: 0
+  energyFillRateMultiplier: 0
   buildingName: Food chest
   buildingIconSprite: {fileID: -938314305, guid: 0a6973059568138488c5adcd99af4344, type: 3}
   buildingDescriptionPanelSprite: {fileID: -938314305, guid: 0a6973059568138488c5adcd99af4344, type: 3}

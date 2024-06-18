@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
+  m_Name: EquipmentChest
+  m_EditorClassIdentifier: 
+  buildingCategory: 3
+  buildingType: 6
+  buildingWorksCategory: 2
+  buildingCostItems:
+  - itemType: 0
+    itemTier: 0
+    amount: 20
+  canInteractWithBuilding: 1
+  buildingRecipes: []
+  housingCapacity: 0
+  energyFillRateMultiplier: 0
+  buildingName: Equipment chest
+  buildingIconSprite: {fileID: -1479573188, guid: 0a6973059568138488c5adcd99af4344, type: 3}
+  buildingDescriptionPanelSprite: {fileID: -1479573188, guid: 0a6973059568138488c5adcd99af4344, type: 3}
+  buildingDescription: Stores and distributes equipment to workers
+  buildingPrefab: {fileID: 2673477164891949255, guid: 81cfd3d6e896ff846bed6887fa059596, type: 3}

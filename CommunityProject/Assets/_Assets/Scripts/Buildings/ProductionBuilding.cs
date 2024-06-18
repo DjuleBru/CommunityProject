@@ -39,7 +39,7 @@ public class ProductionBuilding : Building
 
         if(assignedHumanoid != null) {
             if(working) {
-                Work(assignedHumanoid.GetWorkingSpeed(), false);
+                Work(assignedHumanoid.GetIntelligence(), false);
             }
         }
     }

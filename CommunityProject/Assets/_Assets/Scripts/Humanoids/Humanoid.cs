@@ -38,19 +38,30 @@ public class Humanoid : MonoBehaviour
     private string humanoidName;
     private string humanoidActionDesriprion;
 
-    private float moveSpeed;
-    private float workingSpeed;
-    private float productivity;
     private float strength;
+    private float intelligence;
+    private float moveSpeed;
+    private float health;
+    private float damage;
     private float armor;
-    private int carryCapacity;
 
+    private int carryCapacity;
 
     private Job jobAssigned;
     private bool autoAssign = true;
     private bool freedFromDungeon;
 
     [SerializeField] private BehaviorDesigner.Runtime.BehaviorTree behaviorTree;
+
+    public event EventHandler OnEquipmentChanged;
+    private Item mainHandItem;
+    private Item secondaryHandItem;
+    private Item helmetItem;
+    private Item bootsItem;
+    private Item necklaceItem;
+    private Item ringItem;
+
+    private List<Item> equippedItems = new List<Item>();
 
     private void Awake() {
         behaviorTree = GetComponent<BehaviorDesigner.Runtime.BehaviorTree>();
@@ -159,13 +170,87 @@ public class Humanoid : MonoBehaviour
         if (!autoAssignActive && !autoAssign) return;
         autoAssign = autoAssignActive;
 
-        StopTask();
-        assignedBuilding = null;
+        //StopTask();
+        //assignedBuilding = null;
     }
 
     public void SetHumanoidActionDescription(string description) {
         humanoidActionDesriprion = description;
         ProductionBuildingUI.Instance.RefreshWorkerPanel();
+    }
+
+    public void SetMainHandItem(Item item) {
+        StopTask();
+
+        if(mainHandItem != null && equippedItems.Contains(mainHandItem)) {
+            equippedItems.Remove(mainHandItem);
+        }
+
+        mainHandItem = item;
+
+        equippedItems.Add(mainHandItem);
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void SetSecondaryHandItem(Item item) {
+        StopTask();
+
+        if (secondaryHandItem != null && equippedItems.Contains(secondaryHandItem)) {
+            equippedItems.Remove(secondaryHandItem);
+        }
+
+        secondaryHandItem = item;
+        equippedItems.Add(secondaryHandItem);
+
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void SetHeadItem(Item item) {
+        StopTask();
+
+        if (helmetItem != null && equippedItems.Contains(helmetItem)) {
+            equippedItems.Remove(helmetItem);
+        }
+
+        helmetItem = item;
+        equippedItems.Add(helmetItem);
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void SetBootsItem(Item item) {
+        StopTask();
+
+        if (bootsItem != null && equippedItems.Contains(bootsItem)) {
+            equippedItems.Remove(bootsItem);
+        }
+
+        bootsItem = item;
+        equippedItems.Add(bootsItem);
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void SetNecklaceItem(Item item) {
+        StopTask();
+
+        if (necklaceItem != null && equippedItems.Contains(necklaceItem)) {
+            equippedItems.Remove(necklaceItem);
+        }
+
+        necklaceItem = item;
+        equippedItems.Add(necklaceItem);
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void SetRingItem(Item item) {
+        StopTask();
+
+        if (ringItem != null && equippedItems.Contains(ringItem)) {
+            equippedItems.Remove(ringItem);
+        }
+
+        ringItem = item;
+        equippedItems.Add(ringItem);
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
 
     #endregion
@@ -176,24 +261,61 @@ public class Humanoid : MonoBehaviour
         return humanoidSO;
     }
 
-    public float GetWorkingSpeed() {
-        return workingSpeed;
+    public float GetIntelligence() {
+        float totalIntelligence = intelligence;
+
+        foreach(Item item in equippedItems) {
+            if (item.amount == 0) continue;
+            totalIntelligence += ItemAssets.Instance.GetItemSO(item.itemType).intelligenceBonusValue;
+        }
+
+        return totalIntelligence;
     }
 
     public float GetMoveSpeed() {
-        return moveSpeed;
+        float totalMoveSpeed = moveSpeed;
+        foreach (Item item in equippedItems) {
+            if (item.amount == 0) continue;
+            totalMoveSpeed += ItemAssets.Instance.GetItemSO(item.itemType).moveSpeedBonusValue;
+        }
+
+        return totalMoveSpeed;
     }
 
-    public float GetProductivity() {
-        return productivity;
+    public float GetHealth() {
+        float totalHealth = health;
+        foreach (Item item in equippedItems) {
+            if (item.amount == 0) continue;
+            totalHealth += ItemAssets.Instance.GetItemSO(item.itemType).healthBonusValue;
+        }
+        return totalHealth;
     }
 
     public float GetStrength() {
-        return strength;
+        float totalStrength = strength;
+        foreach (Item item in equippedItems) {
+            if (item.amount == 0) continue;
+            totalStrength += ItemAssets.Instance.GetItemSO(item.itemType).strengthBonusValue;
+        }
+        return totalStrength;
     }
 
     public float GetArmor() {
-        return armor;
+        float totalArmor = armor;
+        foreach (Item item in equippedItems) {
+            if (item.amount == 0) continue;
+            totalArmor += ItemAssets.Instance.GetItemSO(item.itemType).armorBonusValue;
+        }
+        return totalArmor;
+    }
+
+    public float GetDamage() {
+        float totalDamage = damage;
+        foreach (Item item in equippedItems) {
+            if (item.amount == 0) continue;
+            totalDamage += ItemAssets.Instance.GetItemSO(item.itemType).damageBonusValue;
+        }
+        return totalDamage;
     }
 
     public int GetCarryCapacity() {
@@ -248,6 +370,26 @@ public class Humanoid : MonoBehaviour
         return humanoidVisual;
     }
 
+    public Item GetMainHandItem() {
+        return mainHandItem;
+    }
+    public Item GetSecondaryHandItem() {
+        return secondaryHandItem;
+    }
+    public Item GetHeadItem() {
+        return helmetItem;
+    }
+    public Item GetBootsItem() {
+        return bootsItem;
+    }
+    public Item GetNecklaceItem() {
+        return necklaceItem;
+    }
+    public Item GetRingItem() {
+        return ringItem;
+    }
+
+
     #endregion
 
     #region MODIFY STATS
@@ -264,12 +406,12 @@ public class Humanoid : MonoBehaviour
         carryCapacity += carryCapacityAddition;
     }
 
-    public void ChangeWorkingSpeed(float workingSpeedAddition) {
-        workingSpeed += workingSpeedAddition;
+    public void ChangeIntelligence(float intelligenceAddition) {
+        intelligence += intelligenceAddition;
     }
 
-    public void MultiplyWorkingSpeed(float workingSpeedMultiplier) {
-        workingSpeed *= workingSpeedMultiplier;
+    public void MultiplyIntelligence(float intelligenceMultiplier) {
+        intelligence *= intelligenceMultiplier;
     }
 
     public void ChangeStrength(float strengthAddition) {
@@ -280,10 +422,14 @@ public class Humanoid : MonoBehaviour
         armor += armorAddition;
     }
 
+    public void ChangeDamage(float damageAddition) {
+        damage += damageAddition;
+    }
+
 
     #endregion
 
-    private void StopTask() {
+    public void StopTask() {
         if (jobAssigned == Job.Worker) {
             if (humanoidWork.GetWorking()) {
                 humanoidWork.StopWorking();
@@ -317,15 +463,27 @@ public class Humanoid : MonoBehaviour
             moveSpeed = humanoidSO.moveSpeed;
         }
 
-        if(workingSpeed == 0) {
-            workingSpeed = humanoidSO.workingSpeed;
+        if(intelligence == 0) {
+            intelligence = humanoidSO.intelligence;
         }
 
         if(strength == 0) {
             strength = humanoidSO.strength;
         }
 
-        if(carryCapacity == 0) {
+        if (health == 0) {
+            health = humanoidSO.health;
+        }
+
+        if (damage == 0) {
+            damage = humanoidSO.damage;
+        }
+
+        if (armor == 0) {
+            armor = humanoidSO.armor;
+        }
+
+        if (carryCapacity == 0) {
             carryCapacity = humanoidSO.carryCapacity;
         }
     }

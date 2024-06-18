@@ -29,6 +29,8 @@ public class HumanoidNeeds : MonoBehaviour {
     [SerializeField] private float energyDepletionRate;
 
     private float energyFillRate;
+    private float housingAssignmentAttemptRate = .5f;
+    private float housingAssignmentAttemptTimer;
 
     private void Awake() {
         humanoid = GetComponent<Humanoid>();
@@ -42,9 +44,29 @@ public class HumanoidNeeds : MonoBehaviour {
 
     private void Update() {
 
+        TryAssignHousing();
+
         RefreshHungerStatuses();
         RefreshEnergyStatuses();
 
+        if(hunger < 10) {
+            humanoid.StopTask();
+        }
+        if(energy < 10) {
+            humanoid.StopTask();
+        }
+
+    }
+
+    private void TryAssignHousing() {
+        if (assignedHousing != null) return;
+        if (!humanoid.GetAutoAssign()) return;
+
+        housingAssignmentAttemptTimer += Time.deltaTime;
+        if(housingAssignmentAttemptTimer >= housingAssignmentAttemptRate) {
+            housingAssignmentAttemptTimer = 0;
+            AssignHousing();
+        }
     }
 
     #region HUNGER
@@ -133,8 +155,6 @@ public class HumanoidNeeds : MonoBehaviour {
     }
 
     public void StopEating() {
-        bestFoodSourceBuilding = null;
-        itemEating = null;
         humanoidVisual.StopEating();
     }
 
@@ -183,7 +203,7 @@ public class HumanoidNeeds : MonoBehaviour {
         foreach (Building building in housingBuildingsList) {
             House house = building as House;
 
-            if(house.GetHousedHumanoidsNumber() <= house.GetBuildingSO().housingCapacity) {
+            if(house.GetHousedHumanoidsNumber() < house.GetBuildingSO().housingCapacity) {
                 house.AssignHumanoidHousing(humanoid);
                 assignedHousing = house;
                 energyFillRate *= house.GetBuildingSO().energyFillRateMultiplier;
@@ -192,13 +212,19 @@ public class HumanoidNeeds : MonoBehaviour {
         }
         return false;
     }
-    public void DeAssignHousing() {
+
+    public void AssignHousingManual(House house) {
+        assignedHousing = house;
+    }
+
+    public void UnAssignHousing() {
         assignedHousing = null;
         energyFillRate = energyDepletionRate * 2f;
     }
     public Building GetAssignedHousing() {
         return assignedHousing;
     }
+
 
     public void SetSleeping(bool sleeping) {
         this.sleeping = sleeping;

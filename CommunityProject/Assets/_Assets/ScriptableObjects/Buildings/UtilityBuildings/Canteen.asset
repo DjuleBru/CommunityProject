@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Canteen
   m_EditorClassIdentifier: 
   buildingCategory: 3
-  buildingType: 6
+  buildingType: 8
   buildingWorksCategory: 2
   buildingCostItems:
   - itemType: 3
@@ -22,7 +22,10 @@ MonoBehaviour:
   - itemType: 5
     itemTier: 0
     amount: 100
+  canInteractWithBuilding: 0
   buildingRecipes: []
+  housingCapacity: 0
+  energyFillRateMultiplier: 0
   buildingName: Brick yard
   buildingIconSprite: {fileID: 502287045, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
   buildingDescriptionPanelSprite: {fileID: 802832355, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}

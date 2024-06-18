@@ -182,6 +182,48 @@ public class BuildingsManager : MonoBehaviour
         return housingBuildingsList;
     }
 
+    public List<Item> GetAllEquipmentItemsOfCategory(Item.ItemEquipmentCategory category) {
+
+        List<Item> allEquipmentItems = new List<Item>();
+
+        foreach (Building building in buildingsSpawned) {
+            if (!(building is Chest)) continue;
+
+            Chest chest = building as Chest;
+            if (chest.GetItemCategoryToStore() != Item.ItemCategory.Equipment) continue;
+
+            // We have an equipment holding chest
+            foreach(Item item in chest.GetChestInventory().GetItemList()) {
+                if(ItemAssets.Instance.GetItemSO(item.itemType).itemEquipmentCategory == category) {
+                    allEquipmentItems.Add(item);
+                }
+            }
+        }
+
+        return allEquipmentItems;
+    }
+
+    public List<Chest> GetBuildingStoringEquipment(Item item) {
+
+        List<Chest> chestsStoringEquipment = new List<Chest>();
+
+        foreach (Building building in buildingsSpawned) {
+            if (!(building is Chest)) continue;
+
+            Chest chest = building as Chest;
+            if (chest.GetItemCategoryToStore() != Item.ItemCategory.Equipment) continue;
+
+            // We have an equipment holding chest
+            foreach (Item storedItem in chest.GetChestInventory().GetItemList()) {
+                if(storedItem.itemType == item.itemType) {
+                    chestsStoringEquipment.Add(chest);
+                }
+            }
+        }
+
+        return chestsStoringEquipment;
+    }
+
     public void SetAllVisualCollidersActive(bool active) {
         foreach(Building building in buildingsSpawned) {
             building.GetBuildingVisual().SetColliderActive(active);

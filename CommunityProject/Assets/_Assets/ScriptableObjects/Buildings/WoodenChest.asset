@@ -19,7 +19,10 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
+  canInteractWithBuilding: 1
   buildingRecipes: []
+  housingCapacity: 0
+  energyFillRateMultiplier: 0
   buildingName: Wooden Chest
   buildingIconSprite: {fileID: 1710505256, guid: 0a6973059568138488c5adcd99af4344, type: 3}
   buildingDescriptionPanelSprite: {fileID: 1710505256, guid: 0a6973059568138488c5adcd99af4344, type: 3}

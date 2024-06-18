@@ -33,15 +33,15 @@ public class BuildingVisual : MonoBehaviour, IInteractable
     }
 
     protected virtual void GameInput_OnInteractAction(object sender, System.EventArgs e) {
-        if (playerInTriggerArea) {
 
             if (!building.GetInteractingWithBuilding()) {
-                InteractWithBuilding();
+                if (playerInTriggerArea) {
+                    InteractWithBuilding();
+                }
             }
             else {
                 StopInteractingWithBuilding();
             }
-        }
     }
 
     protected virtual void Building_OnBuildingPlaced(object sender, System.EventArgs e) {
@@ -97,6 +97,7 @@ public class BuildingVisual : MonoBehaviour, IInteractable
 
     public virtual void InteractWithBuilding() {
         //Pass through function
+        if (!building.CanInteractWithBuilding()) return;
         building.InteractWithBuilding();
         interactingWithBuilding = true;
     }

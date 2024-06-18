@@ -6,7 +6,6 @@ using BehaviorDesigner.Runtime.Tasks;
 public class AssignHousing : Action {
 
     private HumanoidNeeds humanoidNeeds;
-    private Humanoid humanoid;
 
     public override void OnAwake() {
         humanoidNeeds = GetComponent<HumanoidNeeds>();

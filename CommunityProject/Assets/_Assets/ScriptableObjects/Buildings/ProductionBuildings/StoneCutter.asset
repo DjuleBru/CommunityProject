@@ -22,8 +22,11 @@ MonoBehaviour:
   - itemType: 1
     itemTier: 0
     amount: 10
+  canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 9e93db43854f6254b80e3968f05e448f, type: 2}
+  housingCapacity: 0
+  energyFillRateMultiplier: 0
   buildingName: Stone cutter
   buildingIconSprite: {fileID: -2047189166, guid: c1d1d8c0f592ed24f9b0ec0626058fee, type: 3}
   buildingDescriptionPanelSprite: {fileID: 835923586, guid: c1d1d8c0f592ed24f9b0ec0626058fee, type: 3}

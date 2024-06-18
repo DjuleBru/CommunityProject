@@ -29,6 +29,7 @@ public class Building : MonoBehaviour
         woodworkBench,
         woodenchest,
         foodChest,
+        equipmentChest,
         field,
         canteen,
         tent
@@ -234,6 +235,10 @@ public class Building : MonoBehaviour
     public virtual void StopInteractingWithBuilding() {
         buildingCamera.enabled = false;
         OverworldCamera.Instance.ActivatePlayerCamera();
+    }
+
+    public virtual bool CanInteractWithBuilding() {
+        return buildingSO.canInteractWithBuilding;
     }
 
     public virtual void ClosePanel() {

@@ -39,8 +39,6 @@ public class Chest : Building
                 chestInventory = new Inventory(false, 3, 3, true, itemsRestricted);
             }
         }
-
-        BuildingsManager.Instance.AddBuilding(this);
     }
 
     public void AddItemsToChest(List<Item> itemList) {

@@ -33,6 +33,10 @@ public class ItemSlot : MonoBehaviour
         SetItemSlotVisuals(item);
     }
 
+    public Item GetItem() {
+        return item;
+    }
+
     public void SetParentInventory(Inventory parentInventory) {
         this.parentInventory = parentInventory;
     }

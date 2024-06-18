@@ -19,8 +19,11 @@ MonoBehaviour:
   - itemType: 1
     itemTier: 0
     amount: 20
+  canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 4a4767972b7882f4992d06aacb5b2edb, type: 2}
+  housingCapacity: 0
+  energyFillRateMultiplier: 0
   buildingName: Woodwork bench
   buildingIconSprite: {fileID: 911695891, guid: f8e0b972c3170a040bbf5dfe632f0271, type: 3}
   buildingDescriptionPanelSprite: {fileID: 911695891, guid: f8e0b972c3170a040bbf5dfe632f0271, type: 3}

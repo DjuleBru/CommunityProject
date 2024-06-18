@@ -31,6 +31,12 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
                 chest.GetBuildingHaulersUI_World().ShowAssignedHaulers(true);
                 chest.OpenInventory();
             }
+
+            if (building is House) {
+                House house = (House)building;
+                house.GetBuildingVisual().SetHovered(true);
+                house.GetHousingBuildingUIWorld().ShowAssignedHoused(true);
+            }
         }
 
         if (dungeonStatsBoard != null) {
@@ -60,6 +66,12 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
                 chest.GetChestVisual().SetHovered(false);
                 chest.GetBuildingHaulersUI_World().ShowAssignedHaulers(false);
                 chest.CloseInventory();
+            }
+
+            if (building is House) {
+                House house = (House)building;
+                house.GetBuildingVisual().SetHovered(false);
+                house.GetHousingBuildingUIWorld().ShowAssignedHoused(false);
             }
         }
 

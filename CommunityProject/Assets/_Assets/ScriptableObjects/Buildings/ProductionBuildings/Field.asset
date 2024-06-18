@@ -19,8 +19,11 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 5
+  canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 4818f7c39f6e1d641b5b6244aa566927, type: 2}
+  housingCapacity: 0
+  energyFillRateMultiplier: 0
   buildingName: Field
   buildingIconSprite: {fileID: -281890985, guid: bd40e411837643645bf72d263f829470, type: 3}
   buildingDescriptionPanelSprite: {fileID: -1351908250, guid: 8e57feb5da5fce544a8b5aee5ca9193e, type: 3}

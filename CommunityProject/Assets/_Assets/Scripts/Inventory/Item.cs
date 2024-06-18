@@ -16,6 +16,12 @@ public class Item
         WoodenShield,
         HealthPotion,
         Potato,
+        WoodenArmor,
+        WoodenBoots,
+        WoodenHelmet,
+        WoodenNecklace,
+        WoodenRing,
+        WoodenSword,
     }
 
     public enum ItemCategory {
@@ -24,6 +30,15 @@ public class Item
         Equipment,
         Consumable,
         Food,
+    }
+
+    public enum ItemEquipmentCategory {
+        main,
+        secondary,
+        head,
+        boots,
+        necklace,
+        ring
     }
 
     public enum ItemTier {

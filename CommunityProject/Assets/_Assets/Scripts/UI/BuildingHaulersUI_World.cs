@@ -104,7 +104,6 @@ public class BuildingHaulersUI_World : MonoBehaviour
             potentiallyAssignedHauler.Find("HaulerImage").GetComponent<Image>().sprite = humanoidPotentiallyAssigned.GetHumanoidSO().humanoidSprite;
             potentiallyAssignedHauler.GetComponent<CanvasGroup>().alpha = .6f;
         }
-
     }
 
     public void ShowPotentialOutputHaulerAssign(Humanoid humanoidPotentiallyAssigned) {

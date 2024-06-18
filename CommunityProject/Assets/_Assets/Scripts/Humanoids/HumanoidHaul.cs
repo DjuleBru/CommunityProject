@@ -253,7 +253,6 @@ public class HumanoidHaul : MonoBehaviour
     }
 
     public void StopCarrying() {
-        Debug.Log("stop carrying");
         if(destinationBuilding != null) {
             destinationBuilding.DeAssignInputHaulier(humanoid);
         }
