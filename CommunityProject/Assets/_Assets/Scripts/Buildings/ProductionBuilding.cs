@@ -17,6 +17,7 @@ public class ProductionBuilding : Building
     private List<ItemWorld> itemWorldProducedList;
 
     private bool working;
+    private float humanoidWorkingSpeed;
     private bool inputItemsMissing;
     private bool outputInventoryFull;
 
@@ -39,7 +40,7 @@ public class ProductionBuilding : Building
 
         if(assignedHumanoid != null) {
             if(working) {
-                Work(assignedHumanoid.GetIntelligence(), false);
+                Work(humanoidWorkingSpeed, false);
             }
         }
     }
@@ -148,6 +149,7 @@ public class ProductionBuilding : Building
     }
 
     public void SetHumanoidWorking(bool working, HumanoidSO.HumanoidType humanoidType) {
+
         if(!playerInteractingWithBuilding) {
             this.working = working;
             productionBuildingUIWorld.SetWorking(working);
@@ -311,6 +313,7 @@ public class ProductionBuilding : Building
         productionBuildingUIWorld.SetWorkerMissing(false);
 
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
+        SetHumanoidWorkingSpeed();
     }
 
     public override void ReplaceAssignedHumanoid(Humanoid humanoid) {
@@ -320,12 +323,41 @@ public class ProductionBuilding : Building
         assignedHumanoid = humanoid;
         assignedHumanoid.AssignBuilding(this);
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
+        SetHumanoidWorkingSpeed();
     }
 
     public override void RemoveAssignedHumanoid() {
         this.assignedHumanoid = null;
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
         productionBuildingUIWorld.SetWorkerMissing(true);
+    }
+
+    private void SetHumanoidWorkingSpeed() {
+
+        if(buildingSO.statAffectingProductivity == Humanoid.Stat.strength) {
+            humanoidWorkingSpeed = assignedHumanoid.GetStrength() /5f;
+        }
+
+        if (buildingSO.statAffectingProductivity == Humanoid.Stat.intelligence) {
+            humanoidWorkingSpeed = assignedHumanoid.GetIntelligence() / 5f;
+        }
+
+        if (buildingSO.statAffectingProductivity == Humanoid.Stat.agility) {
+            humanoidWorkingSpeed = assignedHumanoid.GetAgility() / 5f;
+        }
+
+        if (buildingSO.statAffectingProductivity == Humanoid.Stat.speed) {
+            humanoidWorkingSpeed = assignedHumanoid.GetMoveSpeed() / 5f;
+        }
+
+        if(assignedHumanoid.GetHumanoidSO().humanoidProficiencies.Contains(buildingSO.buildingWorksCategory)) {
+            humanoidWorkingSpeed *= 1.5f;
+        }
+
+    }
+
+    public float GetHumanoidWorkingSpeed() {
+        return humanoidWorkingSpeed;
     }
 
     public Humanoid GetAssignedHumanoid() {

@@ -16,6 +16,9 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
     [SerializeField] Image buildingWorksCategory;
     [SerializeField] Image bestWorkerIcon;
 
+    [SerializeField] private Transform preferredWorkersContainer;
+    [SerializeField] private Transform preferredWorkersTemplate;
+
     [SerializeField] Transform buildingCostContainer;
     [SerializeField] Transform itemCostTemplate;
     [SerializeField] Transform recipeContainer;
@@ -27,6 +30,7 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
     private void Awake() {
         Instance = this;
         gameObject.SetActive(false);
+        preferredWorkersTemplate.gameObject.SetActive(false);
     }
 
     public void SetBuildingSO(BuildingSO buildingSO) {
@@ -35,12 +39,31 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
     }
 
     private void RefreshBuildingDescriptionPanel() {
+
         buildingNameText.text = buildingSO.name;
         buildingDescriptionText.text = buildingSO.buildingDescription;
         buildingWorksText.text = buildingSO.buildingWorksCategory.ToString();
 
+        buildingWorksCategory.sprite = BuildingsManager.Instance.GetWorkingCategorySprite(buildingSO.buildingWorksCategory);
+
+        RefreshPreferredWorkers();
         RefreshBuildingCost();
         RefreshBuildingRecipes();
+    }
+
+    private void RefreshPreferredWorkers() {
+
+        foreach(Transform child in  preferredWorkersContainer) {
+            if (child == preferredWorkersTemplate) continue;
+            Destroy(child.gameObject);
+        }
+
+        List<HumanoidSO> humanoidSOList = HumanoidsManager.Instance.GetBuildingHumanoidTypeProficiency(buildingSO);
+        foreach(HumanoidSO humanoidSO in humanoidSOList) {
+            Transform preferredWorker = Instantiate(preferredWorkersTemplate, preferredWorkersContainer);
+            preferredWorker.Find("Icon").GetComponent<Image>().sprite = humanoidSO.humanoidSprite;
+            preferredWorker.gameObject.SetActive(true);
+        }
     }
 
     private void RefreshBuildingCost() {

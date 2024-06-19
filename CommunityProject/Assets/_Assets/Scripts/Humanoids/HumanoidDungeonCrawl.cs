@@ -14,6 +14,7 @@ public class HumanoidDungeonCrawl : MonoBehaviour
 
     public event EventHandler OnCrawlStarted;
     public event EventHandler OnCrawlSuccess;
+    private float health;
 
     private void Awake() {
         humanoidCarry = GetComponent<HumanoidCarry>();
@@ -24,23 +25,46 @@ public class HumanoidDungeonCrawl : MonoBehaviour
         if(crawling) {
             crawlTimer -= Time.deltaTime;
 
-            if(crawlTimer < 0) {
-                EndCrawl();
+            float healthLoss = Time.deltaTime / 50 * dungeonEntranceAssigned.GetDungeonSO().recommendedHealth;
+            float newHealth = humanoid.GetHealth() - healthLoss;
+            humanoid.SetHealth(newHealth);
+
+            if(crawlTimer < 0 || newHealth <= 0) {
+                EndCrawl(crawlTimer);
             }
         }
     }
 
-    private void EndCrawl() {
+    private void EndCrawl(float crawlTimer) {
         crawling = false;
         OnCrawlSuccess?.Invoke(this, EventArgs.Empty);
-        foreach (Item item in dungeonEntranceAssigned.GetDungeonLootRecorded()) { 
-            humanoidCarry.AddItemCarrying(item); 
+
+        foreach (Item item in dungeonEntranceAssigned.GetDungeonLootRecorded()) {
+
+            int itemAmount = item.amount;
+            float itemAmountBuffDueToDamageStat = itemAmount * ((humanoid.GetDamage() - dungeonEntranceAssigned.GetDungeonSO().recommendedDamage) / 10);
+            float itemAmountDeBuffDueToUnfinishedDungeon = 0;
+
+            if (crawlTimer > 0) {
+                itemAmountDeBuffDueToUnfinishedDungeon = itemAmount * crawlTimer/ dungeonEntranceAssigned.GetDungeonTimerRecorded();
+            } 
+
+            Debug.Log("item debuff due to damage " + itemAmountBuffDueToDamageStat);
+            Debug.Log("item debuff due to unfinished dungeon " + itemAmountDeBuffDueToUnfinishedDungeon);
+
+            float itemAmountLooted = itemAmount + itemAmountBuffDueToDamageStat - itemAmountDeBuffDueToUnfinishedDungeon;
+
+            Item itemLooted = new Item { itemType = item.itemType, amount = (int)itemAmountLooted };
+            humanoidCarry.AddItemCarrying(itemLooted); 
         }
+
     }
 
     public void AssignDungeonEntrance(DungeonEntrance dungeonEtrance) {
         dungeonEntranceAssigned = dungeonEtrance;
-        humanoid.AssignBuilding(dungeonEtrance.GetDungeonChest());
+        if(dungeonEntranceAssigned != null) {
+            humanoid.AssignBuilding(dungeonEtrance.GetDungeonChest());
+        }
     }
 
     public DungeonEntrance GetDungeonEntranceAssigned() { 
@@ -48,7 +72,13 @@ public class HumanoidDungeonCrawl : MonoBehaviour
     }
 
     public DungeonEntrance FindBestDungeonEntrance() {
-        return DungeonEntranceManager.Instance.GetAllDungeonEntrances()[0];
+
+        foreach(DungeonEntrance dungeonEntrance in DungeonEntranceManager.Instance.GetAllDungeonEntrances()) {
+            if(dungeonEntrance.GetDungeonComplete()) { 
+                return dungeonEntrance; 
+            }
+        }
+        return null;
     }
 
     public void StartCrawling() {

@@ -27,6 +27,7 @@ public class HumanoidNeeds : MonoBehaviour {
 
     [SerializeField] private float hungerDepletionRate;
     [SerializeField] private float energyDepletionRate;
+    [SerializeField] private float baseHealRate;
 
     private float energyFillRate;
     private float housingAssignmentAttemptRate = .5f;
@@ -263,6 +264,13 @@ public class HumanoidNeeds : MonoBehaviour {
 
     #endregion
 
+    public float GetHealRate() {
+        if(assignedHousing != null) {
+            return baseHealRate * assignedHousing.GetBuildingSO().healRate;
+        } else {
+            return baseHealRate;
+        }
+    }
     public void InitializeHumanoidNeedStats() {
         // hunger and happiness set to <0 if already initialized and empty
         if (hunger == 0) {

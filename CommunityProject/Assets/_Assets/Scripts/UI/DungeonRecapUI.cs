@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class DungeonRecapUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI dungeonNameText;
-    [SerializeField] private TextMeshProUGUI dungeonDifficultyValueText;
+    [SerializeField] private TextMeshProUGUI recommendedHealth;
+    [SerializeField] private TextMeshProUGUI recommendedDamage;
 
     [SerializeField] private GameObject mobTemplatePrefab;
     [SerializeField] private GameObject resourcesTemplatePrefab;
@@ -26,7 +27,8 @@ public class DungeonRecapUI : MonoBehaviour
 
         dungeonSO = dungeonEntrance.GetDungeonSO();
         dungeonNameText.text = dungeonSO.name;
-        dungeonDifficultyValueText.text = dungeonSO.dungeonDifficulty.ToString();
+        recommendedHealth.text = dungeonSO.recommendedHealth.ToString();
+        recommendedDamage.text = dungeonSO.recommendedDamage.ToString();
     }
 
     private void Start() {

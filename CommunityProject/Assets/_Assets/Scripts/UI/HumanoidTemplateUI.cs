@@ -10,6 +10,7 @@ public class HumanoidTemplateUI : MonoBehaviour
     private Humanoid humanoid;
 
     [SerializeField] private Image humanoidIcon;
+    [SerializeField] private OpenHumanoidUIButton openHumanoidUIButton;
     [SerializeField] private TextMeshProUGUI humanoidJobText;
     [SerializeField] private TextMeshProUGUI humanoidNameText;
 
@@ -57,6 +58,8 @@ public class HumanoidTemplateUI : MonoBehaviour
 
         humanoidJobBackgroundSpriteRenderer.sprite = HumanoidsMenuUI.Instance.GetHumanoidWorkerBackgroundSprite(humanoid.GetJob());
         humanoidNameText.text = humanoid.GetHumanoidName().ToString();
+
+        openHumanoidUIButton.SetHumanoid(humanoid);
 
         if (humanoid.GetJob() == Humanoid.Job.Haulier) {
 

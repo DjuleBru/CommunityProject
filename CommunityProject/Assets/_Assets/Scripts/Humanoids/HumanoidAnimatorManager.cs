@@ -22,6 +22,17 @@ public class HumanoidAnimatorManager : MonoBehaviour
             humanoidCarry.OnCarryCompleted += HumanoidCarry_OnCarryCompleted;
             humanoidCarry.OnCarryStarted += HumanoidCarry_OnCarryStarted;
         }
+
+        humanoid.OnHealingStarted += Humanoid_OnHealingStarted;
+        humanoid.OnHealingStopped += Humanoid_OnHealingStopped;
+    }
+
+    private void Humanoid_OnHealingStopped(object sender, System.EventArgs e) {
+        PauseAnimator(false);
+    }
+
+    private void Humanoid_OnHealingStarted(object sender, System.EventArgs e) {
+        PauseAnimator(true);
     }
 
     private void HumanoidCarry_OnCarryStarted(object sender, System.EventArgs e) {

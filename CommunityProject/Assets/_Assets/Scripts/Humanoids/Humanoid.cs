@@ -16,6 +16,16 @@ public class Humanoid : MonoBehaviour
         Shipper
     }
 
+    public enum Stat {
+        strength,
+        intelligence,
+        agility,
+        speed,
+        health,
+        damage,
+        armor
+    }
+
     protected Building assignedBuilding;
 
     [SerializeField] private float roamDistanceToBuilding;
@@ -26,6 +36,7 @@ public class Humanoid : MonoBehaviour
 
     private HumanoidWork humanoidWork;
     private HumanoidHaul humanoidHaul;
+    private HumanoidNeeds humanoidNeeds;
     private HumanoidDungeonCrawl humanoidDungeonCrawl;
     private HumanoidAnimatorManager humanoidAnimatorManager;
     private HumanoidMovement humanoidMovement;
@@ -41,7 +52,7 @@ public class Humanoid : MonoBehaviour
     private float strength;
     private float intelligence;
     private float moveSpeed;
-    private float health;
+    private float agility;
     private float damage;
     private float armor;
 
@@ -49,7 +60,15 @@ public class Humanoid : MonoBehaviour
 
     private Job jobAssigned;
     private bool autoAssign = true;
+    private bool autoAssignBestEquipment = true;
     private bool freedFromDungeon;
+
+    private float health;
+    private float maxHealth;
+    private bool healing;
+    public event EventHandler OnHealingStarted;
+    public event EventHandler OnHealingStopped;
+
 
     [SerializeField] private BehaviorDesigner.Runtime.BehaviorTree behaviorTree;
 
@@ -60,6 +79,20 @@ public class Humanoid : MonoBehaviour
     private Item bootsItem;
     private Item necklaceItem;
     private Item ringItem;
+
+    private float mainHandItemDurability;
+    private float secondaryHandItemDurability;
+    private float helmetItemDurability;
+    private float bootsItemDurability;
+    private float necklaceItemDurability;
+    private float ringItemDurability;
+
+    private float mainHandItemMaxDurability;
+    private float secondaryHandItemMaxDurability;
+    private float helmetItemMaxDurability;
+    private float bootsItemMaxDurability;
+    private float necklaceItemMaxDurability;
+    private float ringItemMaxDurability;
 
     private List<Item> equippedItems = new List<Item>();
 
@@ -73,6 +106,7 @@ public class Humanoid : MonoBehaviour
         humanoidAnimatorManager = GetComponentInChildren<HumanoidAnimatorManager>();
         humanoidMovement = GetComponent<HumanoidMovement>();
         humanoidCarry = GetComponent<HumanoidCarry>();
+        humanoidNeeds = GetComponent<HumanoidNeeds>();
 
         collider2D = GetComponent<Collider2D>();
 
@@ -105,6 +139,104 @@ public class Humanoid : MonoBehaviour
         }
     }
 
+    private void Update() {
+        HandleEquipmentDurability();
+    }
+
+    private void HandleEquipmentDurability() {
+
+        if(mainHandItem != null && mainHandItem.amount > 0) {
+            mainHandItemDurability -= Time.deltaTime;
+
+            if(mainHandItemDurability < 0 ) {
+                mainHandItem.amount --;
+                OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+                if (mainHandItem.amount == 0) {
+                    mainHandItemDurability = 0;
+                }
+                else {
+                    mainHandItemDurability = mainHandItemMaxDurability;
+                }
+            }
+        }
+
+        if (secondaryHandItem != null && secondaryHandItem.amount > 0) {
+            secondaryHandItemDurability -= Time.deltaTime;
+
+            if (secondaryHandItemDurability < 0) {
+                secondaryHandItem.amount--;
+                OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+
+                if (secondaryHandItem.amount == 0) {
+                    secondaryHandItemDurability = 0;
+                }
+                else {
+                    secondaryHandItemDurability = secondaryHandItemMaxDurability;
+                }
+            }
+        }
+
+        if (helmetItem != null && helmetItem.amount > 0) {
+            helmetItemDurability -= Time.deltaTime;
+
+            if (helmetItemDurability < 0) {
+                helmetItem.amount--;
+                OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+                if (helmetItem.amount == 0) {
+                    helmetItemDurability = 0;
+                }
+                else {
+                    helmetItemDurability = helmetItemMaxDurability;
+                }
+            }
+        }
+
+        if (bootsItem != null && bootsItem.amount > 0) {
+            bootsItemDurability -= Time.deltaTime;
+
+            if (bootsItemDurability < 0) {
+                bootsItem.amount--;
+                OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+                if (bootsItem.amount == 0) {
+                    bootsItemDurability = 0;
+                }
+                else {
+                    bootsItemDurability = bootsItemMaxDurability;
+                }
+            }
+        }
+
+        if (necklaceItem != null && necklaceItem.amount > 0) {
+            necklaceItemDurability -= Time.deltaTime;
+
+            if (necklaceItemDurability < 0) {
+                necklaceItem.amount--;
+                OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+                if (necklaceItem.amount == 0) {
+                    necklaceItemDurability = 0;
+                }
+                else {
+                    necklaceItemDurability = necklaceItemMaxDurability;
+                }
+            }
+        }
+
+        if (ringItem != null && ringItem.amount > 0) {
+            ringItemDurability -= Time.deltaTime;
+
+            if (ringItemDurability < 0) {
+                ringItem.amount--;
+                OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+
+                if (ringItem.amount == 0) {
+                    ringItemDurability = 0;
+                } else {
+                    ringItemDurability = ringItemMaxDurability;
+                }
+            }
+        }
+
+    }
 
     #region EVENT RESPONSES
     private void HumanoidWork_OnHumanoidWorkStopped(object sender, System.EventArgs e) {
@@ -174,83 +306,101 @@ public class Humanoid : MonoBehaviour
         //assignedBuilding = null;
     }
 
+    public void SetAutoAssignBestEquipment(bool autoAssignActive) {
+        if (!autoAssignActive && !autoAssign) return;
+        autoAssignBestEquipment = autoAssignActive;
+
+        //StopTask();
+        //assignedBuilding = null;
+    }
+
     public void SetHumanoidActionDescription(string description) {
         humanoidActionDesriprion = description;
         ProductionBuildingUI.Instance.RefreshWorkerPanel();
     }
-
-    public void SetMainHandItem(Item item) {
+    
+    public void SetEquipmentType(Item item) {
         StopTask();
+        Item.ItemEquipmentCategory category = ItemAssets.Instance.GetItemSO(item.itemType).itemEquipmentCategory;
 
-        if(mainHandItem != null && equippedItems.Contains(mainHandItem)) {
-            equippedItems.Remove(mainHandItem);
+        if (category == Item.ItemEquipmentCategory.main) {
+            if (mainHandItem != null && equippedItems.Contains(mainHandItem)) {
+                equippedItems.Remove(mainHandItem);
+            }
+            mainHandItem = item;
+            mainHandItemDurability = ItemAssets.Instance.GetItemSO(item.itemType).equipmentDurability;
+            mainHandItemMaxDurability = mainHandItemDurability;
         }
 
-        mainHandItem = item;
+        if (category == Item.ItemEquipmentCategory.secondary) {
+            if (secondaryHandItem != null && equippedItems.Contains(secondaryHandItem)) {
+                equippedItems.Remove(secondaryHandItem);
+            }
 
-        equippedItems.Add(mainHandItem);
+            secondaryHandItem = item;
+            secondaryHandItemDurability = ItemAssets.Instance.GetItemSO(item.itemType).equipmentDurability;
+            secondaryHandItemMaxDurability = secondaryHandItemDurability;
+        }
+
+        if (category == Item.ItemEquipmentCategory.head) {
+            if (helmetItem != null && equippedItems.Contains(helmetItem)) {
+                equippedItems.Remove(helmetItem);
+            }
+
+            helmetItem = item;
+            helmetItemDurability = ItemAssets.Instance.GetItemSO(item.itemType).equipmentDurability;
+            helmetItemMaxDurability = helmetItemDurability;
+        }
+
+        if (category == Item.ItemEquipmentCategory.boots) {
+            if (bootsItem != null && equippedItems.Contains(bootsItem)) {
+                equippedItems.Remove(bootsItem);
+            }
+
+            bootsItem = item;
+            bootsItemDurability = ItemAssets.Instance.GetItemSO(item.itemType).equipmentDurability;
+            bootsItemMaxDurability = bootsItemDurability;
+        }
+
+        if (category == Item.ItemEquipmentCategory.ring) {
+            if (ringItem != null && equippedItems.Contains(ringItem)) {
+                equippedItems.Remove(ringItem);
+            }
+
+            ringItem = item;
+            ringItemDurability = ItemAssets.Instance.GetItemSO(item.itemType).equipmentDurability;
+            ringItemMaxDurability = ringItemDurability;
+        }
+
+        if (category == Item.ItemEquipmentCategory.necklace) {
+            if (necklaceItem != null && equippedItems.Contains(necklaceItem)) {
+                equippedItems.Remove(necklaceItem);
+            }
+
+            necklaceItem = item;
+            necklaceItemDurability = ItemAssets.Instance.GetItemSO(item.itemType).equipmentDurability;
+            necklaceItemMaxDurability= necklaceItemDurability;
+        }
+
+        equippedItems.Add(item);
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void SetSecondaryHandItem(Item item) {
-        StopTask();
-
-        if (secondaryHandItem != null && equippedItems.Contains(secondaryHandItem)) {
-            equippedItems.Remove(secondaryHandItem);
-        }
-
-        secondaryHandItem = item;
-        equippedItems.Add(secondaryHandItem);
-
-        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    public void SetHealth(float health) {
+        this.health = health;
     }
 
-    public void SetHeadItem(Item item) {
-        StopTask();
-
-        if (helmetItem != null && equippedItems.Contains(helmetItem)) {
-            equippedItems.Remove(helmetItem);
+    public void Heal() {
+        if(!healing) {
+            healing = true;
+            OnHealingStarted?.Invoke(this, EventArgs.Empty);
         }
-
-        helmetItem = item;
-        equippedItems.Add(helmetItem);
-        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+        health += Time.deltaTime * humanoidNeeds.GetHealRate() / 10;
     }
 
-    public void SetBootsItem(Item item) {
-        StopTask();
-
-        if (bootsItem != null && equippedItems.Contains(bootsItem)) {
-            equippedItems.Remove(bootsItem);
-        }
-
-        bootsItem = item;
-        equippedItems.Add(bootsItem);
-        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void SetNecklaceItem(Item item) {
-        StopTask();
-
-        if (necklaceItem != null && equippedItems.Contains(necklaceItem)) {
-            equippedItems.Remove(necklaceItem);
-        }
-
-        necklaceItem = item;
-        equippedItems.Add(necklaceItem);
-        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void SetRingItem(Item item) {
-        StopTask();
-
-        if (ringItem != null && equippedItems.Contains(ringItem)) {
-            equippedItems.Remove(ringItem);
-        }
-
-        ringItem = item;
-        equippedItems.Add(ringItem);
-        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    public void StopHealing() {
+        OnHealingStopped?.Invoke(this, EventArgs.Empty);
+        healing = false;
     }
 
     #endregion
@@ -259,6 +409,14 @@ public class Humanoid : MonoBehaviour
 
     public HumanoidSO GetHumanoidSO() {
         return humanoidSO;
+    }
+
+    public float GetHealth() {
+        return health;
+    }
+
+    public float GetHealthNormalized() {
+        return health /  maxHealth;
     }
 
     public float GetIntelligence() {
@@ -272,6 +430,17 @@ public class Humanoid : MonoBehaviour
         return totalIntelligence;
     }
 
+    public float GetAgility() {
+        float totalAgility = agility;
+
+        foreach (Item item in equippedItems) {
+            if (item.amount == 0) continue;
+            totalAgility += ItemAssets.Instance.GetItemSO(item.itemType).agilityBonusValue;
+        }
+
+        return totalAgility;
+    }
+
     public float GetMoveSpeed() {
         float totalMoveSpeed = moveSpeed;
         foreach (Item item in equippedItems) {
@@ -282,8 +451,8 @@ public class Humanoid : MonoBehaviour
         return totalMoveSpeed;
     }
 
-    public float GetHealth() {
-        float totalHealth = health;
+    public float GetMaxHealth() {
+        float totalHealth = maxHealth;
         foreach (Item item in equippedItems) {
             if (item.amount == 0) continue;
             totalHealth += ItemAssets.Instance.GetItemSO(item.itemType).healthBonusValue;
@@ -370,6 +539,54 @@ public class Humanoid : MonoBehaviour
         return humanoidVisual;
     }
 
+    public bool GetAutoAssignBestEquipment() {
+        return autoAssignBestEquipment;
+    }
+
+    public Item GetEquipmentItem(Item.ItemEquipmentCategory category) {
+        if(category == Item.ItemEquipmentCategory.main) {
+            return mainHandItem;
+        }
+        if (category == Item.ItemEquipmentCategory.secondary) {
+            return secondaryHandItem;
+        }
+        if (category == Item.ItemEquipmentCategory.head) {
+            return helmetItem;
+        }
+        if (category == Item.ItemEquipmentCategory.boots) {
+            return bootsItem;
+        }
+        if (category == Item.ItemEquipmentCategory.ring) {
+            return ringItem;
+        }
+        if (category == Item.ItemEquipmentCategory.necklace) {
+            return necklaceItem;
+        }
+        return null;
+    }
+
+    public float GetEquipmentItemDurabilityNormalized(Item.ItemEquipmentCategory category) {
+        if (category == Item.ItemEquipmentCategory.main) {
+            return mainHandItemDurability / mainHandItemMaxDurability;
+        }
+        if (category == Item.ItemEquipmentCategory.secondary) {
+            return secondaryHandItemDurability / secondaryHandItemMaxDurability;
+        }
+        if (category == Item.ItemEquipmentCategory.head) {
+            return helmetItemDurability / helmetItemMaxDurability;
+        }
+        if (category == Item.ItemEquipmentCategory.boots) {
+            return bootsItemDurability / bootsItemMaxDurability;
+        }
+        if (category == Item.ItemEquipmentCategory.ring) {
+            return ringItemDurability / ringItemMaxDurability;
+        }
+        if (category == Item.ItemEquipmentCategory.necklace) {
+            return necklaceItemDurability / necklaceItemMaxDurability;
+        }
+        return 0;
+    }
+
     public Item GetMainHandItem() {
         return mainHandItem;
     }
@@ -389,46 +606,7 @@ public class Humanoid : MonoBehaviour
         return ringItem;
     }
 
-
     #endregion
-
-    #region MODIFY STATS
-
-    public void ChangeMoveSpeed(float moveSpeedAddition) {
-        moveSpeed += moveSpeedAddition;
-    }
-
-    public void MultiplyMoveSpeed(float moveSpeedMultiplier) {
-        moveSpeed *= moveSpeedMultiplier;
-    }
-
-    public void ChangeCarryCapacity(int carryCapacityAddition) {
-        carryCapacity += carryCapacityAddition;
-    }
-
-    public void ChangeIntelligence(float intelligenceAddition) {
-        intelligence += intelligenceAddition;
-    }
-
-    public void MultiplyIntelligence(float intelligenceMultiplier) {
-        intelligence *= intelligenceMultiplier;
-    }
-
-    public void ChangeStrength(float strengthAddition) {
-        strength += strengthAddition;
-    }
-
-    public void ChangeArmor(float armorAddition) {
-        armor += armorAddition;
-    }
-
-    public void ChangeDamage(float damageAddition) {
-        damage += damageAddition;
-    }
-
-
-    #endregion
-
     public void StopTask() {
         if (jobAssigned == Job.Worker) {
             if (humanoidWork.GetWorking()) {
@@ -467,12 +645,17 @@ public class Humanoid : MonoBehaviour
             intelligence = humanoidSO.intelligence;
         }
 
-        if(strength == 0) {
+        if (agility == 0) {
+            agility = humanoidSO.agility;
+        }
+
+        if (strength == 0) {
             strength = humanoidSO.strength;
         }
 
-        if (health == 0) {
-            health = humanoidSO.health;
+        if (maxHealth == 0) {
+            maxHealth = humanoidSO.maxHealth;
+            health = maxHealth;
         }
 
         if (damage == 0) {

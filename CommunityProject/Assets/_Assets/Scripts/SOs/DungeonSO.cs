@@ -18,4 +18,8 @@ public class DungeonSO : ScriptableObject
     public HumanoidSO humanoidTypeFoundInDungeon;
     public int humanoidsToSaveFromDungeon;
     public Sprite dungeonSprite;
+
+    public HumanoidSO.HumanoidType proficiencyHumanoidType;
+    public int recommendedHealth;
+    public int recommendedDamage;
 }

@@ -126,9 +126,12 @@ public class DungeonEntrance : MonoBehaviour
     public void LoadDungeon() {
         dungeonStatsBoard.LoadStatsBoardUI();
 
-        if (dungeonIsComplete) {
+        if(dungeonStatsBoard.GetRecordedDungeonTime() != 0) {
             dungeonChest.gameObject.SetActive(true);
+            dungeonIsComplete = true;
+            Debug.Log(dungeonIsComplete);
         }
+
     }
 
 }

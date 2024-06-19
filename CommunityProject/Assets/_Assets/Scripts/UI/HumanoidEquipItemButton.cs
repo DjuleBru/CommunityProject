@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HumanoidEquipItemButton : MonoBehaviour
+public class HumanoidEquipItemButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Button button;
 
@@ -15,5 +16,14 @@ public class HumanoidEquipItemButton : MonoBehaviour
 
             HumanoidUI.Instance.SetItemToEquip(itemToEquip);
         });
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        EquipmentTooltipUI.Instance.EnableToolTip(false);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        EquipmentTooltipUI.Instance.SetToolTip(GetComponent<ItemSlot>().GetItem());
+        EquipmentTooltipUI.Instance.EnableToolTip(true);
     }
 }

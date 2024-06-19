@@ -19,7 +19,7 @@ public class HumanoidCarry : MonoBehaviour
     public event EventHandler OnCarryCompleted;
 
     private void Awake() {
-        humanoidCarryInventory = new Inventory(true, 1, 1, carryCapacity);
+        humanoidCarryInventory = new Inventory(false, 0, 0, carryCapacity);
         humanoid = GetComponent<Humanoid>();
     }
 
@@ -129,7 +129,15 @@ public class HumanoidCarry : MonoBehaviour
     public void SetItemCarrying(Item itemCarrying) {
         this.itemCarrying = itemCarrying;
 
-        if(itemCarrying != null ) {
+        if(itemCarrying != null) {
+            itemCarryingList.Add(itemCarrying);
+            humanoidCarryInventory.AddItem(itemCarrying);
+        } else {
+            itemCarryingList.Clear();
+            humanoidCarryInventory.RemoveAllItems();
+        }
+
+        if (itemCarrying != null ) {
             OnCarryStarted?.Invoke(this, EventArgs.Empty);
         } else {
             OnCarryCompleted?.Invoke(this, EventArgs.Empty);
@@ -143,19 +151,24 @@ public class HumanoidCarry : MonoBehaviour
 
     public void AddItemCarrying(Item itemCarrying) {
         itemCarryingList.Add(itemCarrying);
+        humanoidCarryInventory.AddItem(itemCarrying);
         OnCarryStarted?.Invoke(this, EventArgs.Empty);
     }
 
     public void RemoveItemCarrying(Item itemCarrying) {
         itemCarryingList.Remove(itemCarrying);
+        humanoidCarryInventory.RemoveItemAmount(itemCarrying);
 
-        if(itemCarryingList.Count == 0) {
+        if (itemCarryingList.Count == 0) {
             OnCarryCompleted?.Invoke(this, EventArgs.Empty);
         }
     }
 
     public void ClearItemsCarryingList() {
         itemCarryingList.Clear();
+        foreach(Item item in humanoidCarryInventory.GetItemList()) {
+            humanoidCarryInventory.RemoveItemAmount(item);
+        }
     }
 
     public Item GetItemCarrying() {
@@ -178,6 +191,7 @@ public class HumanoidCarry : MonoBehaviour
 
         if(itemCarrying == null) {
             if (itemCarryingList.Count != 0) {
+
                 return true;
             }
             else {
@@ -187,6 +201,7 @@ public class HumanoidCarry : MonoBehaviour
 
         if(itemCarrying != null) {
             if (itemCarrying.amount != 0 || itemCarryingList.Count != 0) {
+
                 return true;
             }
             else {

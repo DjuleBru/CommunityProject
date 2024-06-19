@@ -15,6 +15,7 @@ public class AssignBestDungeon : Action {
     public override TaskStatus OnUpdate() {
 
         if (humanoid.GetAutoAssign()) {
+
             humanoidDungeonCrawl.AssignDungeonEntrance(humanoidDungeonCrawl.FindBestDungeonEntrance());
 
             if (humanoidDungeonCrawl.GetDungeonEntranceAssigned() != null) {

@@ -7,6 +7,7 @@ public class ItemAssets : MonoBehaviour {
 
     public Transform itemWorldPrefab;
     [SerializeField] private List<ItemSO> itemSOList;
+    [SerializeField] private int maxItemTier;
 
     private void Awake() {
         Instance = this;
@@ -46,5 +47,9 @@ public class ItemAssets : MonoBehaviour {
         }
 
         return itemsRestricted;
+    }
+
+    public int GetMaxItemTier() {
+        return maxItemTier;
     }
 }

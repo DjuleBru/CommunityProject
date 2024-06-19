@@ -34,7 +34,7 @@ public class DebugItemsPanel : MonoBehaviour
 
             debugItem = new Item { itemType = itemSO.itemType, amount = 1 };
             if (itemSO.isStackable) {
-                debugItem = new Item { itemType = itemSO.itemType, amount = (int)(itemSO.maxStackableAmount/10) };
+                debugItem = new Item { itemType = itemSO.itemType, amount = 1 };
             }
 
             inventoryItemSlot.SetItem(debugItem);

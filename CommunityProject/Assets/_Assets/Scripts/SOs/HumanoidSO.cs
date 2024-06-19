@@ -18,13 +18,16 @@ public class HumanoidSO : ScriptableObject
     }
 
     public HumanoidType humanoidType;
+    public List<Building.BuildingWorksCategory> humanoidProficiencies;
+
     public Sprite humanoidSprite;
     public AnimatorOverrideController animatorController;
 
     public float moveSpeed;
     public float intelligence;
     public float strength;
-    public float health;
+    public float agility;
+    public float maxHealth;
     public float damage;
     public float armor;
 

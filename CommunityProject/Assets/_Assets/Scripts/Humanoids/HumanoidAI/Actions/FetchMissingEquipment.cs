@@ -10,6 +10,9 @@ public class FetchMissingEquipment : Action {
     public HumanoidMovement humanoidMovement;
     public Collider2D humanoidCollider;
 
+    bool allEquipmentsFetched;
+    Item itemToFetch;
+
     public override void OnAwake() {
         humanoid = GetComponent<Humanoid>();
         humanoidMovement = GetComponent<HumanoidMovement>();
@@ -17,168 +20,47 @@ public class FetchMissingEquipment : Action {
     }
 
     public override TaskStatus OnUpdate() {
-
-        bool allEquipmentsFetched = true;
+        allEquipmentsFetched = true;
 
         if (humanoid.GetMainHandItem() != null) {
-
-            if(humanoid.GetMainHandItem().amount == 0) {
-                allEquipmentsFetched = false;
-                List<Chest> chestList = BuildingsManager.Instance.GetBuildingStoringEquipment(humanoid.GetMainHandItem());
-
-                Chest closestChest = FindClosestChest(chestList);
-
-                if(closestChest != null) {
-                    ColliderDistance2D colliderDistance2DToChest = closestChest.GetComponent<Collider2D>().Distance(humanoidCollider);
-                    humanoidMovement.MoveToDestination(colliderDistance2DToChest.pointA);
-                    humanoid.SetHumanoidActionDescription("Fetching equipment");
-
-                    if (colliderDistance2DToChest.distance < .5f) {
-                        Item itemToFetch = new Item { itemType = humanoid.GetMainHandItem().itemType, amount = 1 };
-
-                        closestChest.GetChestInventory().RemoveItemAmount(itemToFetch);
-                        humanoid.SetMainHandItem(itemToFetch);
-
-                    }
-                    else {
-                        return TaskStatus.Running;
-                    }
-                }
+            Item.ItemEquipmentCategory equipmentCategory = Item.ItemEquipmentCategory.main;
+            if (humanoid.GetEquipmentItem(equipmentCategory).amount == 0) {
+                FetchEquipment(equipmentCategory);
             }
         }
 
         if (humanoid.GetSecondaryHandItem() != null) {
-
-            if (humanoid.GetSecondaryHandItem().amount == 0) {
-                allEquipmentsFetched = false;
-                List<Chest> chestList = BuildingsManager.Instance.GetBuildingStoringEquipment(humanoid.GetSecondaryHandItem());
-
-                Chest closestChest = FindClosestChest(chestList);
-
-                if (closestChest != null) {
-                    ColliderDistance2D colliderDistance2DToChest = closestChest.GetComponent<Collider2D>().Distance(humanoidCollider);
-                    humanoidMovement.MoveToDestination(colliderDistance2DToChest.pointA);
-                    humanoid.SetHumanoidActionDescription("Fetching equipment");
-
-                    if (colliderDistance2DToChest.distance < .5f) {
-                        Item itemToFetch = new Item { itemType = humanoid.GetSecondaryHandItem().itemType, amount = 1 };
-
-                        closestChest.GetChestInventory().RemoveItemAmount(itemToFetch);
-                        humanoid.SetSecondaryHandItem(itemToFetch);
-
-                    }
-                    else {
-                        return TaskStatus.Running;
-                    }
-                }
+            Item.ItemEquipmentCategory equipmentCategory = Item.ItemEquipmentCategory.secondary;
+            if (humanoid.GetEquipmentItem(equipmentCategory).amount == 0) {
+                FetchEquipment(equipmentCategory);
             }
         }
 
         if (humanoid.GetHeadItem() != null) {
-
-            if (humanoid.GetHeadItem().amount == 0) {
-                allEquipmentsFetched = false;
-                List<Chest> chestList = BuildingsManager.Instance.GetBuildingStoringEquipment(humanoid.GetHeadItem());
-
-                Chest closestChest = FindClosestChest(chestList);
-
-                if (closestChest != null) {
-                    ColliderDistance2D colliderDistance2DToChest = closestChest.GetComponent<Collider2D>().Distance(humanoidCollider);
-                    humanoidMovement.MoveToDestination(colliderDistance2DToChest.pointA);
-                    humanoid.SetHumanoidActionDescription("Fetching equipment");
-
-                    if (colliderDistance2DToChest.distance < .5f) {
-                        Item itemToFetch = new Item { itemType = humanoid.GetHeadItem().itemType, amount = 1 };
-
-                        closestChest.GetChestInventory().RemoveItemAmount(itemToFetch);
-                        humanoid.SetHeadItem(itemToFetch);
-
-                    }
-                    else {
-                        return TaskStatus.Running;
-                    }
-                }
+            Item.ItemEquipmentCategory equipmentCategory = Item.ItemEquipmentCategory.head;
+            if (humanoid.GetEquipmentItem(equipmentCategory).amount == 0) {
+                FetchEquipment(equipmentCategory);
             }
         }
 
         if (humanoid.GetBootsItem() != null) {
-
-            if (humanoid.GetBootsItem().amount == 0) {
-                allEquipmentsFetched = false;
-                List<Chest> chestList = BuildingsManager.Instance.GetBuildingStoringEquipment(humanoid.GetBootsItem());
-
-                Chest closestChest = FindClosestChest(chestList);
-
-                if (closestChest != null) {
-                    ColliderDistance2D colliderDistance2DToChest = closestChest.GetComponent<Collider2D>().Distance(humanoidCollider);
-                    humanoidMovement.MoveToDestination(colliderDistance2DToChest.pointA);
-                    humanoid.SetHumanoidActionDescription("Fetching equipment");
-
-                    if (colliderDistance2DToChest.distance < .5f) {
-                        Item itemToFetch = new Item { itemType = humanoid.GetBootsItem().itemType, amount = 1 };
-
-                        closestChest.GetChestInventory().RemoveItemAmount(itemToFetch);
-                        humanoid.SetBootsItem(itemToFetch);
-
-                    }
-                    else {
-                        return TaskStatus.Running;
-                    }
-                }
+            Item.ItemEquipmentCategory equipmentCategory = Item.ItemEquipmentCategory.boots;
+            if (humanoid.GetEquipmentItem(equipmentCategory).amount == 0) {
+                FetchEquipment(equipmentCategory);
             }
         }
 
         if (humanoid.GetNecklaceItem() != null) {
-
-            if (humanoid.GetNecklaceItem().amount == 0) {
-                allEquipmentsFetched = false;
-                List<Chest> chestList = BuildingsManager.Instance.GetBuildingStoringEquipment(humanoid.GetNecklaceItem());
-
-                Chest closestChest = FindClosestChest(chestList);
-
-                if (closestChest != null) {
-                    ColliderDistance2D colliderDistance2DToChest = closestChest.GetComponent<Collider2D>().Distance(humanoidCollider);
-                    humanoidMovement.MoveToDestination(colliderDistance2DToChest.pointA);
-                    humanoid.SetHumanoidActionDescription("Fetching equipment");
-
-                    if (colliderDistance2DToChest.distance < .5f) {
-                        Item itemToFetch = new Item { itemType = humanoid.GetNecklaceItem().itemType, amount = 1 };
-
-                        closestChest.GetChestInventory().RemoveItemAmount(itemToFetch);
-                        humanoid.SetNecklaceItem(itemToFetch);
-
-                    }
-                    else {
-                        return TaskStatus.Running;
-                    }
-                }
+            Item.ItemEquipmentCategory equipmentCategory = Item.ItemEquipmentCategory.necklace;
+            if (humanoid.GetEquipmentItem(equipmentCategory).amount == 0) {
+                FetchEquipment(equipmentCategory);
             }
         }
 
         if (humanoid.GetRingItem() != null) {
-
-            if (humanoid.GetRingItem().amount == 0) {
-                allEquipmentsFetched = false;
-                List<Chest> chestList = BuildingsManager.Instance.GetBuildingStoringEquipment(humanoid.GetRingItem());
-
-                Chest closestChest = FindClosestChest(chestList);
-
-                if (closestChest != null) {
-                    ColliderDistance2D colliderDistance2DToChest = closestChest.GetComponent<Collider2D>().Distance(humanoidCollider);
-                    humanoidMovement.MoveToDestination(colliderDistance2DToChest.pointA);
-                    humanoid.SetHumanoidActionDescription("Fetching equipment");
-
-                    if (colliderDistance2DToChest.distance < .5f) {
-                        Item itemToFetch = new Item { itemType = humanoid.GetRingItem().itemType, amount = 1 };
-
-                        closestChest.GetChestInventory().RemoveItemAmount(itemToFetch);
-                        humanoid.SetRingItem(itemToFetch);
-
-                    }
-                    else {
-                        return TaskStatus.Running;
-                    }
-                }
+            Item.ItemEquipmentCategory equipmentCategory = Item.ItemEquipmentCategory.ring;
+            if (humanoid.GetEquipmentItem(equipmentCategory).amount == 0) {
+                FetchEquipment(equipmentCategory);
             }
         }
 
@@ -188,6 +70,53 @@ public class FetchMissingEquipment : Action {
             return TaskStatus.Failure;
         }
 
+    }
+
+    private TaskStatus FetchEquipment(Item.ItemEquipmentCategory equipmentCategory) {
+
+            allEquipmentsFetched = false;
+
+            if(itemToFetch == null) {
+                itemToFetch = humanoid.GetEquipmentItem(equipmentCategory);
+                if (humanoid.GetAutoAssignBestEquipment()) {
+                    itemToFetch = BuildingsManager.Instance.GetBestItemTierAvailable(itemToFetch);
+                }
+            }
+
+            List<Chest> chestList = BuildingsManager.Instance.GetChestStoringEquipment(itemToFetch);
+
+            Chest closestChest = FindClosestChest(chestList);
+            if(closestChest != null) {
+
+                ColliderDistance2D colliderDistance2DToChest = closestChest.GetComponent<Collider2D>().Distance(humanoidCollider);
+                humanoidMovement.MoveToDestination(colliderDistance2DToChest.pointA);
+                humanoid.SetHumanoidActionDescription("Fetching equipment");
+
+                if (colliderDistance2DToChest.distance < .5f) {
+
+                int amountThatCanBeFetched = 0;
+                Debug.Log(closestChest.GetChestInventory().AmountInventoryHasOfType(itemToFetch));
+
+                if(closestChest.GetChestInventory().AmountInventoryHasOfType(itemToFetch) >= 5) {
+                    amountThatCanBeFetched = 5;
+                } else {
+                    amountThatCanBeFetched = closestChest.GetChestInventory().AmountInventoryHasOfType(itemToFetch);
+                }
+
+                Debug.Log(amountThatCanBeFetched);
+                Item itemToFetchWithAmount = new Item { itemType = itemToFetch.itemType, amount = amountThatCanBeFetched };
+
+                closestChest.GetChestInventory().RemoveItemAmount(itemToFetchWithAmount);
+                humanoid.SetEquipmentType(itemToFetchWithAmount);
+                itemToFetch = null;
+                return TaskStatus.Success;
+                }
+                else {
+                    return TaskStatus.Running;
+                }
+        }
+        itemToFetch = null;
+        return TaskStatus.Failure;
     }
 
     private Chest FindClosestChest(List<Chest> chestList) {

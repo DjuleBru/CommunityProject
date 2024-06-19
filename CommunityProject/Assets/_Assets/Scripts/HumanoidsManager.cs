@@ -10,6 +10,7 @@ public class HumanoidsManager : MonoBehaviour
 
     [SerializeField] private List<Humanoid> humanoidsInOverworld;
     [SerializeField] private List<Humanoid> humanoidsSavedFromDungeon;
+    [SerializeField] private List<HumanoidSO> humanoidSOList;
     [SerializeField] private List<int> humanoidsSavedIDList;
     [SerializeField] private List<int> humanoidsSavedFromDungeonIDList;
 
@@ -106,4 +107,16 @@ public class HumanoidsManager : MonoBehaviour
         return joblessBehaviorTree;
     }
 
+
+    public List<HumanoidSO> GetBuildingHumanoidTypeProficiency(BuildingSO buildingSO) {
+        Building.BuildingWorksCategory worksCategory = buildingSO.buildingWorksCategory;
+        List<HumanoidSO> humanoidWithProficiency = new List<HumanoidSO>();
+
+        foreach (HumanoidSO humanoidSO in humanoidSOList) {
+            if(humanoidSO.humanoidProficiencies.Contains(worksCategory)) {
+                humanoidWithProficiency.Add(humanoidSO);
+            }
+        }
+        return humanoidWithProficiency;
+    }
 }

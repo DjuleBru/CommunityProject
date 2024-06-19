@@ -11,6 +11,7 @@ public class HumanoidUI : MonoBehaviour
 
     [SerializeField] private GameObject humanoidUIPanel;
     [SerializeField] private InventoryUI equipmentInventoryUI;
+    [SerializeField] private InventoryUI humanoidInventoryUI;
 
     private bool panelOpen;
 
@@ -18,8 +19,12 @@ public class HumanoidUI : MonoBehaviour
     private HumanoidNeeds humanoidNeeds;
     private HumanoidEquipmentButton lastEquipmentButtonPressed;
 
+    [SerializeField] private Transform proficiencyContainer;
+    [SerializeField] private Transform proficiencyTemplate;
+
     [SerializeField] private Image hungerBarFillImage;
     [SerializeField] private Image energyBarFillImage;
+    [SerializeField] private Image healthBarFillImage;
     [SerializeField] private Image humanoidIcon;
     [SerializeField] private Image jobBackgroundImage;
 
@@ -29,6 +34,8 @@ public class HumanoidUI : MonoBehaviour
     [SerializeField] private HumanoidEquipmentButton bootsSlot;
     [SerializeField] private HumanoidEquipmentButton trinket1Slot;
     [SerializeField] private HumanoidEquipmentButton trinket2Slot;
+
+    [SerializeField] private Image autoAssignBestEquipmentImage;
 
     [SerializeField] private TextMeshProUGUI humanoidNameText;
     [SerializeField] private TextMeshProUGUI humanoidJobText;
@@ -45,6 +52,8 @@ public class HumanoidUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI intelligenceBonusStatText;
     [SerializeField] private TextMeshProUGUI moveSpeedStatText;
     [SerializeField] private TextMeshProUGUI moveSpeedBonusStatText;
+    [SerializeField] private TextMeshProUGUI agilityStatText;
+    [SerializeField] private TextMeshProUGUI agilityBonusStatText;
     [SerializeField] private TextMeshProUGUI totalOverworldProductivity;
     [SerializeField] private TextMeshProUGUI healthStatText;
     [SerializeField] private TextMeshProUGUI healthStatBonusText;
@@ -54,10 +63,13 @@ public class HumanoidUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI armorStatBonusText;
     [SerializeField] private TextMeshProUGUI totalDungeonProductivity;
 
+    [SerializeField] private Color semiTransparentColor;
+
     private void Awake() {
         Instance = this;
         humanoidUIPanel.SetActive(false);
         equipmentInventoryUI.gameObject.SetActive(false);
+        proficiencyTemplate.gameObject.SetActive(false);
     }
 
     public bool GetPanelOpen() {
@@ -91,6 +103,7 @@ public class HumanoidUI : MonoBehaviour
         if (panelOpen) {
             hungerBarFillImage.fillAmount = humanoidNeeds.GetHunger() / 100;
             energyBarFillImage.fillAmount = humanoidNeeds.GetEnergy() / 100;
+            healthBarFillImage.fillAmount = humanoid.GetHealthNormalized();
         }
     }
 
@@ -102,6 +115,7 @@ public class HumanoidUI : MonoBehaviour
         this.humanoid = humanoid;
         humanoid.OnEquipmentChanged += Humanoid_OnEquipmentChanged;
         humanoidNeeds = humanoid.GetComponent<HumanoidNeeds>();
+        humanoidInventoryUI.ReplaceInventory(humanoid.GetComponent<HumanoidCarry>().GetHumanoidCarryInventory());
 
         humanoidIcon.sprite = humanoid.GetHumanoidSO().humanoidSprite;
         humanoidNameText.text = humanoid.GetHumanoidName();
@@ -112,6 +126,21 @@ public class HumanoidUI : MonoBehaviour
         RefreshHumanoidEquipment();
         RefreshHumanoidAssignments();
         RefreshHumanoidStats();
+        RefreshHumanoidProficiencies();
+    }
+
+    private void RefreshHumanoidProficiencies() {
+
+        foreach(Transform child in proficiencyContainer) {
+            if (child == proficiencyTemplate) continue;
+            Destroy(child.gameObject);
+        }
+
+        foreach(Building.BuildingWorksCategory category in humanoid.GetHumanoidSO().humanoidProficiencies) {
+            Transform proficiency = Instantiate(proficiencyTemplate, proficiencyContainer);
+            proficiency.GetComponent<Image>().sprite = BuildingsManager.Instance.GetWorkingCategorySprite(category);
+            proficiency.gameObject.SetActive(true);
+        }
     }
 
     private void Humanoid_OnEquipmentChanged(object sender, System.EventArgs e) {
@@ -126,6 +155,13 @@ public class HumanoidUI : MonoBehaviour
         bootsSlot.SetItem(humanoid.GetBootsItem());
         trinket1Slot.SetItem(humanoid.GetNecklaceItem());
         trinket2Slot.SetItem(humanoid.GetRingItem());
+
+        bool autoAssignBestEquipment = humanoid.GetAutoAssignBestEquipment();
+        if(autoAssignBestEquipment) {
+            autoAssignBestEquipmentImage.color = Color.white;
+        } else {
+            autoAssignBestEquipmentImage.color = semiTransparentColor;
+        }
     }
 
     private void RefreshHumanoidAssignments() {
@@ -152,15 +188,17 @@ public class HumanoidUI : MonoBehaviour
     private void RefreshHumanoidStats() {
         int strength = (int)humanoid.GetStrength();
         int intelligence = (int)humanoid.GetIntelligence();
+        int agility = (int)humanoid.GetAgility();
         int moveSpeed = (int)humanoid.GetMoveSpeed();
-        int health = (int)humanoid.GetHealth();
+        int health = (int)humanoid.GetMaxHealth();
         int damage = (int)humanoid.GetDamage();
         int armor = (int)humanoid.GetArmor();
 
         int bonusStrength = strength - (int)humanoid.GetHumanoidSO().strength;
         int bonusintelligence = intelligence - (int)humanoid.GetHumanoidSO().intelligence;
         int bonusMoveSpeed = moveSpeed - (int)humanoid.GetHumanoidSO().moveSpeed;
-        int bonusHealth = health - (int)humanoid.GetHumanoidSO().health;
+        int bonusAgility = agility - (int)humanoid.GetHumanoidSO().agility;
+        int bonusHealth = health - (int)humanoid.GetHumanoidSO().maxHealth;
         int bonusDamage = damage - (int)humanoid.GetHumanoidSO().damage;
         int bonusArmor = armor - (int)humanoid.GetHumanoidSO().armor;
 
@@ -170,6 +208,7 @@ public class HumanoidUI : MonoBehaviour
         healthStatText.text = (health).ToString();
         damageStatText.text = (damage).ToString();
         armorStatText.text = (armor).ToString();
+        agilityStatText.text = (armor).ToString();
 
         if (bonusStrength != 0) {
             strenthStatBonusText.text = "(+" + (bonusStrength).ToString() + ")";
@@ -183,6 +222,13 @@ public class HumanoidUI : MonoBehaviour
         }
         else {
             intelligenceBonusStatText.text = "";
+        }
+
+        if (bonusAgility != 0) {
+            agilityBonusStatText.text = "(+" + (bonusAgility).ToString() + ")";
+        }
+        else {
+            agilityBonusStatText.text = "";
         }
 
         if (bonusMoveSpeed != 0) {
@@ -242,30 +288,20 @@ public class HumanoidUI : MonoBehaviour
 
         lastEquipmentButtonPressed.SetItem(item);
 
-        if (itemSO.itemEquipmentCategory == Item.ItemEquipmentCategory.main) {
-            humanoid.SetMainHandItem(item);
-        }
+        humanoid.SetEquipmentType(item);
+    }
 
-        if (itemSO.itemEquipmentCategory == Item.ItemEquipmentCategory.secondary) {
-            humanoid.SetSecondaryHandItem(item);
-        }
+    public void ToggleAutoAssignBestEquipment() {
+        bool autoAssignBestEquipment = humanoid.GetAutoAssignBestEquipment();
 
-        if (itemSO.itemEquipmentCategory == Item.ItemEquipmentCategory.head) {
-            humanoid.SetHeadItem(item);
-        }
+        humanoid.SetAutoAssignBestEquipment((!autoAssignBestEquipment));
 
-        if (itemSO.itemEquipmentCategory == Item.ItemEquipmentCategory.boots) {
-            humanoid.SetBootsItem(item);
+        if (!autoAssignBestEquipment) {
+            autoAssignBestEquipmentImage.color = Color.white;
         }
-
-        if (itemSO.itemEquipmentCategory == Item.ItemEquipmentCategory.necklace) {
-            humanoid.SetNecklaceItem(item);
+        else {
+            autoAssignBestEquipmentImage.color = semiTransparentColor;
         }
-
-        if (itemSO.itemEquipmentCategory == Item.ItemEquipmentCategory.ring) {
-            humanoid.SetRingItem(item);
-        }
-
     }
 
 }

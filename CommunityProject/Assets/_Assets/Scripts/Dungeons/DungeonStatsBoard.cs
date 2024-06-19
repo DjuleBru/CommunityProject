@@ -142,6 +142,10 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
         return recordedhumanoidsSaved;
     }
 
+    public float GetRecordedDungeonTime() {
+        return recordedDungeonTime;
+    }
+
     public void LoadStatsBoardUI() {
         Debug.Log("load stats board ui " + recordedDungeonLoot.Count);
         recordedStatsBoardUI.SetDungeonLootUI(recordedDungeonLoot);

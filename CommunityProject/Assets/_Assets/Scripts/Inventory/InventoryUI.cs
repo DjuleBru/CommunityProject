@@ -27,6 +27,16 @@ public class InventoryUI : MonoBehaviour {
         RefreshInventoryUI();
     }
 
+    public virtual void ReplaceInventory(Inventory inventory) {
+        if(inventory != null) {
+            inventory.OnItemListChanged -= Inventory_OnItemListChanged;
+        }
+        this.inventory = inventory;
+
+        inventory.OnItemListChanged += Inventory_OnItemListChanged;
+        RefreshInventoryUI();
+    }
+
     protected void Inventory_OnItemListChanged(object sender, System.EventArgs e) {
         RefreshInventoryUI();
     }

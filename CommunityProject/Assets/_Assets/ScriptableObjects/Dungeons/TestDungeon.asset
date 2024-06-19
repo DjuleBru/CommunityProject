@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dungeonName: Testing
   dungeonType: 0
-  dungeonDifficulty: 50
+  dungeonDifficulty: 10
   totalRoomNumber: 2
   itemsFoundInDungeon:
-  - {fileID: 11400000, guid: 21753a9b1a2cb804eacdb389675b51a6, type: 2}
   - {fileID: 11400000, guid: 611e91fb308509f4d949ba22d4b85478, type: 2}
   resourceNodesInDungeon:
   - {fileID: 840820483134563200, guid: a63c362565e146c40887a97e2cce95bf, type: 3}
@@ -25,5 +24,8 @@ MonoBehaviour:
   mobsFoundInDungeon:
   - {fileID: 11400000, guid: 305b1c4b4b660b342b6ed635128bd4bf, type: 2}
   humanoidTypeFoundInDungeon: {fileID: 11400000, guid: 5474f6fd72cdbe84ea28d92795cee655, type: 2}
-  humanoidsToSaveFromDungeon: 4
+  humanoidsToSaveFromDungeon: 0
   dungeonSprite: {fileID: 1308879337, guid: 6a12f61ca3b2d7d43a0bb1b51684d940, type: 3}
+  proficiencyHumanoidType: 0
+  recommendedHealth: 2
+  recommendedDamage: 4

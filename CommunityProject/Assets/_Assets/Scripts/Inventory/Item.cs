@@ -22,6 +22,7 @@ public class Item
         WoodenNecklace,
         WoodenRing,
         WoodenSword,
+        StoneSword,
     }
 
     public enum ItemCategory {
@@ -39,6 +40,24 @@ public class Item
         boots,
         necklace,
         ring
+    }
+
+    public enum ItemEquipmentType {
+        stick,
+        sword,
+        flail,
+        spear,
+        longsword,
+        bow,
+        hammer,
+        axe,
+        pickaxe,
+        shield,
+        brestplate,
+        intelligenceRing,
+        intelligenceNecklace,
+        helmet,
+        speedBoots,
     }
 
     public enum ItemTier {

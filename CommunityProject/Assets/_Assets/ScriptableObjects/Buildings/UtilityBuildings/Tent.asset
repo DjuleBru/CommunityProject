@@ -15,6 +15,7 @@ MonoBehaviour:
   buildingCategory: 4
   buildingType: 9
   buildingWorksCategory: 2
+  statAffectingProductivity: 0
   buildingCostItems:
   - itemType: 0
     itemTier: 0
@@ -23,6 +24,7 @@ MonoBehaviour:
   buildingRecipes: []
   housingCapacity: 3
   energyFillRateMultiplier: 3
+  healRate: 2
   buildingName: Tent
   buildingIconSprite: {fileID: -126680881, guid: 767cccf871712ad45a47acc6660aab52, type: 3}
   buildingDescriptionPanelSprite: {fileID: -126680881, guid: 767cccf871712ad45a47acc6660aab52, type: 3}

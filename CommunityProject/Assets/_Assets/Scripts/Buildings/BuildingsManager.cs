@@ -18,6 +18,10 @@ public class BuildingsManager : MonoBehaviour
     public event EventHandler OnAnyBuildingSpawned;
     public event EventHandler OnAnyBuildingPlacedOrCancelled;
 
+    [SerializeField] private Sprite metalWorkCategorySprite;
+    [SerializeField] private Sprite woodWorkCategorySprite;
+    [SerializeField] private Sprite foodProductionCategorySprite;
+
     private void Awake() {
         Instance = this;
         buildingsSpawned = new List<Building>();
@@ -183,7 +187,6 @@ public class BuildingsManager : MonoBehaviour
     }
 
     public List<Item> GetAllEquipmentItemsOfCategory(Item.ItemEquipmentCategory category) {
-
         List<Item> allEquipmentItems = new List<Item>();
 
         foreach (Building building in buildingsSpawned) {
@@ -203,7 +206,7 @@ public class BuildingsManager : MonoBehaviour
         return allEquipmentItems;
     }
 
-    public List<Chest> GetBuildingStoringEquipment(Item item) {
+    public List<Chest> GetChestStoringEquipment(Item item) {
 
         List<Chest> chestsStoringEquipment = new List<Chest>();
 
@@ -224,9 +227,71 @@ public class BuildingsManager : MonoBehaviour
         return chestsStoringEquipment;
     }
 
+    public Item GetBestItemTierAvailable(Item item) {
+        Item bestEquipment = item;
+
+        int itemTier = (int)ItemAssets.Instance.GetItemSO(item.itemType).itemTier;
+        Item.ItemEquipmentType equipmentType = ItemAssets.Instance.GetItemSO(item.itemType).itemEquipmentType;
+
+        for (int i = itemTier; i < ItemAssets.Instance.GetMaxItemTier(); i++) {
+
+            foreach (Building building in buildingsSpawned) {
+            if (!(building is Chest)) continue;
+
+            Chest chest = building as Chest;
+            if (chest.GetItemCategoryToStore() != Item.ItemCategory.Equipment) continue;
+
+            // We have an equipment holding chest
+            foreach (Item storedItem in chest.GetChestInventory().GetItemList()) {
+                    Debug.Log(storedItem.itemType);
+                    // Check if we have the same item equipment type of equal or higher tier
+                    if (ItemAssets.Instance.GetItemSO(storedItem.itemType).itemEquipmentType == equipmentType && (int)storedItem.itemTier == i) {
+                        bestEquipment = storedItem;
+                    }
+
+                }
+            }
+        }
+
+        Debug.Log(bestEquipment.itemType);
+        return bestEquipment;
+    }
+
+    public List<Chest> GetChestStoringBestEquipment(Item item) {
+
+        List<Chest> chestsStoringEquipment = new List<Chest>();
+
+        foreach (Building building in buildingsSpawned) {
+            if (!(building is Chest)) continue;
+
+            Chest chest = building as Chest;
+            if (chest.GetItemCategoryToStore() != Item.ItemCategory.Equipment) continue;
+
+            // We have an equipment holding chest
+            foreach (Item storedItem in chest.GetChestInventory().GetItemList()) {
+                if (storedItem.itemType == item.itemType) {
+                    chestsStoringEquipment.Add(chest);
+                }
+            }
+        }
+
+        return chestsStoringEquipment;
+    }
+
     public void SetAllVisualCollidersActive(bool active) {
         foreach(Building building in buildingsSpawned) {
             building.GetBuildingVisual().SetColliderActive(active);
         }
+    }
+
+    public Sprite GetWorkingCategorySprite(Building.BuildingWorksCategory category) {
+        if(category == Building.BuildingWorksCategory.WoodWork) {
+            return woodWorkCategorySprite;
+        }
+
+        if (category == Building.BuildingWorksCategory.MetalWork) {
+            return metalWorkCategorySprite;
+        }
+        return null;
     }
 }

@@ -185,6 +185,7 @@ public class HumanoidHaul : MonoBehaviour
             if (chest.GetChestInventory().InventoryCanAcceptItem(humanoidCarry.GetItemCarrying()) && chest.GetChestInventory().AmountInventoryCanReceiveOfType(humanoidCarry.GetItemCarrying()) >= humanoidCarry.GetItemCarrying().amount) {
                 chest.GetChestInventory().AddItem(humanoidCarry.GetItemCarrying());
                 humanoidCarry.SetItemCarrying(null);
+
                 return true;
             } else {
                 return false;

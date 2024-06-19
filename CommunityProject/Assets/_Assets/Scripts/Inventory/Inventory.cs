@@ -61,6 +61,11 @@ public class Inventory
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    public void RemoveAllItems() {
+        itemList.Clear();
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     private void AddStackableItemToInventory(Item item) {
         bool itemAlreadyInInventory = false;
         bool stackIsFull = false;
@@ -216,7 +221,14 @@ public class Inventory
 
             if (itemList.Count < totalSlotNumber) {
                 // There are item slots available
-                return maxStackableAmount;
+                int slotsAvailable = totalSlotNumber - itemList.Count;
+                int itemAmountThatInventoryCanHold = 0;
+
+                for (int i = 0; i <= slotsAvailable; i++) {
+                    itemAmountThatInventoryCanHold += maxStackableAmount;
+                }
+
+                return itemAmountThatInventoryCanHold;
             }
 
             //There are no empty item slots available

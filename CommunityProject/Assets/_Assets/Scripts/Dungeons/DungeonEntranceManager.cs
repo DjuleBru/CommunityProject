@@ -29,12 +29,14 @@ public class DungeonEntranceManager : MonoBehaviour
 
     public void SaveDungeonEntrancesInOverworld() {
         dungeonEntrancesSavedIDList = new List<int>();
+
         foreach (DungeonEntrance dungeonEntrance in dungeonEntranceList) {
             dungeonEntrancesSavedIDList.Add(dungeonEntrance.GetInstanceID());
             ES3.Save(dungeonEntrance.GetInstanceID().ToString(), dungeonEntrance);
             Debug.Log("saved dungeon entrance " + dungeonEntrance.GetInstanceID().ToString());
         }
 
+        Debug.Log(dungeonEntrancesSavedIDList.Count);
         ES3.Save("dungeonEntrancesSavedIDList", dungeonEntrancesSavedIDList);
     }
 
@@ -67,6 +69,10 @@ public class DungeonEntranceManager : MonoBehaviour
         }
     }
 
+    public void OnApplicationQuit() {
+        SaveDungeonEntrancesInOverworld();
+        SaveStatsBoardsInOverworld();
+    }
 
     public void SaveDungeonEntrance(DungeonEntrance entrance) {
         SaveDungeonEntrancesInOverworld();

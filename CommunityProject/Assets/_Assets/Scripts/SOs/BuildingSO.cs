@@ -9,6 +9,7 @@ public class BuildingSO : ScriptableObject
     public Building.BuildingUICategory buildingCategory;
     public Building.BuildingType buildingType;
     public Building.BuildingWorksCategory buildingWorksCategory;
+    public Humanoid.Stat statAffectingProductivity;
     public List<Item> buildingCostItems;
 
     public bool canInteractWithBuilding;
@@ -20,6 +21,8 @@ public class BuildingSO : ScriptableObject
     public int housingCapacity;
     [BoxGroup("Housing")]
     public int energyFillRateMultiplier;
+    [BoxGroup("Housing")]
+    public int healRate;
 
     public string buildingName;
     public Sprite buildingIconSprite;

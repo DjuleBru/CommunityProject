@@ -17,6 +17,7 @@ public class HumanoidVisual : MonoBehaviour
     [SerializeField] private Animator eatingItemAnimator;
 
     [SerializeField] private ParticleSystem sleepingPS;
+    [SerializeField] private ParticleSystem healingPS;
 
     [SerializeField] private GameObject bodyGameObject;
     [SerializeField] private GameObject shadowGameObject;
@@ -43,6 +44,9 @@ public class HumanoidVisual : MonoBehaviour
 
         humanoidCarry.OnCarryStarted += HumanoidCarry_OnCarryStarted;
         humanoidCarry.OnCarryCompleted += HumanoidCarry_OnCarryCompleted;
+
+        humanoid.OnHealingStarted += Humanoid_OnHealingStarted;
+        humanoid.OnHealingStopped += Humanoid_OnHealingStopped;
     }
 
     public void SetEating(Item itemEating) {
@@ -100,6 +104,20 @@ public class HumanoidVisual : MonoBehaviour
 
     public void SetExhaustedStatusActive(bool active) {
         exhaustedStatusGameObject.SetActive(active);
+    }
+
+    private void Humanoid_OnHealingStopped(object sender, System.EventArgs e) {
+        bodyGameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        shadowGameObject.SetActive(true);
+        ShowStatuses();
+        healingPS.Stop();
+    }
+
+    private void Humanoid_OnHealingStarted(object sender, System.EventArgs e) {
+        bodyGameObject.transform.eulerAngles = new Vector3(0, 0, 44f);
+        shadowGameObject.SetActive(false);
+        healingPS.Play();
+        HideStatuses();
     }
 
     public void SetSleeping(bool sleeping) {

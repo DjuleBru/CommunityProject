@@ -16,6 +16,8 @@ public class ItemSO : ScriptableObject
     public Sprite itemSprite;
     [BoxGroup("Basic Info")]
     public bool isStackable;
+    [BoxGroup("Basic Info")]
+    public string itemDescription;
 
     [ShowIf("isStackable")]
     [BoxGroup("Basic Info")]
@@ -38,9 +40,13 @@ public class ItemSO : ScriptableObject
     [BoxGroup("Equipment")]
     public Item.ItemEquipmentCategory itemEquipmentCategory;
     [BoxGroup("Equipment")]
+    public Item.ItemEquipmentType itemEquipmentType;
+    [BoxGroup("Equipment")]
     public int strengthBonusValue;
     [BoxGroup("Equipment")]
     public int intelligenceBonusValue;
+    [BoxGroup("Equipment")]
+    public int agilityBonusValue;
     [BoxGroup("Equipment")]
     public int moveSpeedBonusValue;
     [BoxGroup("Equipment")]
@@ -49,4 +55,6 @@ public class ItemSO : ScriptableObject
     public int damageBonusValue;
     [BoxGroup("Equipment")]
     public int armorBonusValue;
+    [BoxGroup("Equipment")]
+    public int equipmentDurability;
 }

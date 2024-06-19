@@ -8,11 +8,15 @@ public class ProductionBuildingUI : BuildingUI
 {
     public static ProductionBuildingUI Instance { get; private set; }
 
+    [SerializeField] private OpenHumanoidUIButton openHumanoidUIButton;
+
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI workerNameText;
     [SerializeField] private TextMeshProUGUI workerDescriptionText;
     [SerializeField] private TextMeshProUGUI selectRecipeText;
-    [SerializeField] private TextMeshProUGUI recipeTimeText;
+    [SerializeField] private TextMeshProUGUI recipeOriginalTimeText;
+    [SerializeField] private TextMeshProUGUI recipeModifiedTimeText;
+    [SerializeField] private TextMeshProUGUI workerProductionSpeedText;
 
     [SerializeField] private Image workerImage;
     [SerializeField] private Image workerReplacementImage;
@@ -115,7 +119,20 @@ public class ProductionBuildingUI : BuildingUI
 
             RefreshRecipeItemsList(inputIngredientsContainer, inputTemplateSlot, selectedRecipeSO.inputItems);
             RefreshRecipeItemsList(outputIngredientsContainer, outputTemplateSlot, selectedRecipeSO.outputItems);
-            recipeTimeText.text = selectedRecipeSO.standardProductionTime.ToString() + "s";
+            recipeOriginalTimeText.text = selectedRecipeSO.standardProductionTime.ToString() + "s";
+
+            if(productionBuilding.GetHumanoidWorkingSpeed() != 0) {
+
+                float productionSpeed = productionBuilding.GetHumanoidWorkingSpeed() * 100f;
+                workerProductionSpeedText.text = productionSpeed.ToString() + "%";
+                float modifiedProductionTime = (selectedRecipeSO.standardProductionTime / (productionSpeed / 100));
+                modifiedProductionTime = Mathf.Round(modifiedProductionTime * 10.0f) * 0.1f;
+                recipeModifiedTimeText.text = modifiedProductionTime.ToString() + "s";
+            } else {
+                recipeModifiedTimeText.text = "";
+                workerProductionSpeedText.text = "";
+
+            }
         }
         else {
             recipeDescriptionPanel.gameObject.SetActive(false);
@@ -185,6 +202,10 @@ public class ProductionBuildingUI : BuildingUI
         if (productionBuilding == null) return;
         if(productionBuilding.GetAssignedHumanoid() != null) {
             Humanoid assignedHumanoid = productionBuilding.GetAssignedHumanoid();
+
+            openHumanoidUIButton.EnableButton(true);
+            openHumanoidUIButton.SetHumanoid(assignedHumanoid);
+
             workerImage.enabled = true;
 
             workerImage.sprite = assignedHumanoid.GetHumanoidSO().humanoidSprite;
@@ -193,6 +214,7 @@ public class ProductionBuildingUI : BuildingUI
             workerDescriptionText.text = assignedHumanoid.GetHumanoidActionDescription();
         } else {
 
+            openHumanoidUIButton.EnableButton(false);
             workerImage.enabled = false;
             workerNameText.text = "";
             workerDescriptionText.text = "No humanoid assigned to this building";
