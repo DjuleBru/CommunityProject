@@ -6,16 +6,16 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class BuildingSO : ScriptableObject
 {
-    public Building.BuildingUICategory buildingCategory;
+    public Building.BuildingUICategory buildingUICategory;
     public Building.BuildingType buildingType;
-    public Building.BuildingWorksCategory buildingWorksCategory;
-    public Humanoid.Stat statAffectingProductivity;
+    public Building.BuildingCategory buildingCategory;
     public List<Item> buildingCostItems;
-
     public bool canInteractWithBuilding;
 
     [BoxGroup("ProductionBuilding")]
     public List<RecipeSO> buildingRecipes;
+    [BoxGroup("ProductionBuilding")]
+    public Humanoid.Stat statAffectingProductivity;
 
     [BoxGroup("Housing")]
     public int housingCapacity;

@@ -12,7 +12,7 @@ public class HasDestinationBuildingAssigned : Conditional {
     }
 
     public override TaskStatus OnUpdate() {
-        if (humanoidCarry.GetDestinationBuilding() != null) {
+        if (humanoidCarry.GetDestinationBuilding() != null && humanoidCarry.GetSourceBuilding() != null) {
             return TaskStatus.Success;
         }
         return TaskStatus.Failure;

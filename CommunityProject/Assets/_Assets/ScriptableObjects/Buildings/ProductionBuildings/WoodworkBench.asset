@@ -12,21 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
   m_Name: WoodworkBench
   m_EditorClassIdentifier: 
-  buildingCategory: 1
+  buildingUICategory: 1
   buildingType: 3
-  buildingWorksCategory: 0
-  statAffectingProductivity: 2
+  buildingCategory: 0
   buildingCostItems:
   - itemType: 1
     itemTier: 0
     amount: 20
   canInteractWithBuilding: 1
   buildingRecipes:
-  - {fileID: 11400000, guid: 4a4767972b7882f4992d06aacb5b2edb, type: 2}
+  - {fileID: 11400000, guid: 5a87078d691fdc5499d1b16f45b23d0f, type: 2}
+  - {fileID: 11400000, guid: d48dd9c3921e45441a1b14035e8fe184, type: 2}
+  - {fileID: 11400000, guid: a3451349b8d08014289481ce680f44af, type: 2}
+  - {fileID: 11400000, guid: d9e1d226059f80c499f265cb519d33c2, type: 2}
+  - {fileID: 11400000, guid: a0f11b3d2aa1bae4091cdcacd2da6ac0, type: 2}
+  - {fileID: 11400000, guid: affc0698663e8ff4c9c3ca036e985b8f, type: 2}
+  - {fileID: 11400000, guid: 8217abd405fd60648a31a3f537683314, type: 2}
+  statAffectingProductivity: 2
   housingCapacity: 0
   energyFillRateMultiplier: 0
+  healRate: 0
   buildingName: Woodwork bench
-  buildingIconSprite: {fileID: 911695891, guid: f8e0b972c3170a040bbf5dfe632f0271, type: 3}
+  buildingIconSprite: {fileID: 1985936278, guid: dfa83d8eb7c785a4d99a699af38ad26d, type: 3}
   buildingDescriptionPanelSprite: {fileID: 911695891, guid: f8e0b972c3170a040bbf5dfe632f0271, type: 3}
-  buildingDescription: Wood wood
+  buildingDescription: Crafts wood-based items
   buildingPrefab: {fileID: 1718341335737673364, guid: 97a6576e261990447af640070ba8e653, type: 3}

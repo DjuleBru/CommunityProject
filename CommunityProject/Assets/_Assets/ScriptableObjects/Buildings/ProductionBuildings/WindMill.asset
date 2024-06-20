@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
+  m_Name: WindMill
+  m_EditorClassIdentifier: 
+  buildingUICategory: 2
+  buildingType: 26
+  buildingCategory: 6
+  buildingCostItems:
+  - itemType: 1
+    itemTier: 0
+    amount: 50
+  canInteractWithBuilding: 1
+  buildingRecipes:
+  - {fileID: 11400000, guid: a322ecf24ea933f41a84448f90090a88, type: 2}
+  statAffectingProductivity: 0
+  housingCapacity: 0
+  energyFillRateMultiplier: 0
+  healRate: 0
+  buildingName: Windmill
+  buildingIconSprite: {fileID: -25577975, guid: 3085a006acd0b764d907e72415506183, type: 3}
+  buildingDescriptionPanelSprite: {fileID: -976223611, guid: 478ed34349dc0a042bc905bcb4c7652b, type: 3}
+  buildingDescription: Turns wheat into flour
+  buildingPrefab: {fileID: 1718341335737673364, guid: 1316fcaca60424543ba9e91b3953a0cc, type: 3}

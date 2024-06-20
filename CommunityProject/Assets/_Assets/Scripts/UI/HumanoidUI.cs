@@ -136,7 +136,7 @@ public class HumanoidUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach(Building.BuildingWorksCategory category in humanoid.GetHumanoidSO().humanoidProficiencies) {
+        foreach(Building.BuildingCategory category in humanoid.GetHumanoidSO().humanoidProficiencies) {
             Transform proficiency = Instantiate(proficiencyTemplate, proficiencyContainer);
             proficiency.GetComponent<Image>().sprite = BuildingsManager.Instance.GetWorkingCategorySprite(category);
             proficiency.gameObject.SetActive(true);

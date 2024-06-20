@@ -12,20 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
   m_Name: Jewelry
   m_EditorClassIdentifier: 
-  buildingCategory: 0
-  buildingType: 2
-  buildingWorksCategory: 1
+  buildingUICategory: 1
+  buildingType: 17
+  buildingCategory: 5
   buildingCostItems:
-  - itemType: 0
+  - itemType: 3
     itemTier: 0
     amount: 20
   canInteractWithBuilding: 1
   buildingRecipes:
-  - {fileID: 11400000, guid: 7f6c593f0e0521f4f876d4c146fa66bb, type: 2}
+  - {fileID: 11400000, guid: 20e4f45c12e3ae0448385359cf07100e, type: 2}
+  - {fileID: 11400000, guid: e59c25c702937c445bdbd6fbc0da750a, type: 2}
+  statAffectingProductivity: 0
   housingCapacity: 0
   energyFillRateMultiplier: 0
-  buildingName: Brick yard
-  buildingIconSprite: {fileID: 502287045, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
-  buildingDescriptionPanelSprite: {fileID: 802832355, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
-  buildingDescription: This building does bricks
+  healRate: 0
+  buildingName: Jewelry
+  buildingIconSprite: {fileID: -1863786093, guid: fb1d43ee7de4aa847866dfb43cc0ae6f, type: 3}
+  buildingDescriptionPanelSprite: {fileID: 1894087398, guid: 607c603328ead2044b6d1dc9eb9eca07, type: 3}
+  buildingDescription: Crafts trinkets
   buildingPrefab: {fileID: 1718341335737673364, guid: 9b9332ceed6d6d04d8e7ad4598c87cbd, type: 3}

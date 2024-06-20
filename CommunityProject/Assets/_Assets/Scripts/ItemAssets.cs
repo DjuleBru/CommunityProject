@@ -7,6 +7,7 @@ public class ItemAssets : MonoBehaviour {
 
     public Transform itemWorldPrefab;
     [SerializeField] private List<ItemSO> itemSOList;
+    [SerializeField] private List<RecipeSO> recipeSOList;
     [SerializeField] private int maxItemTier;
 
     private void Awake() {
@@ -51,5 +52,19 @@ public class ItemAssets : MonoBehaviour {
 
     public int GetMaxItemTier() {
         return maxItemTier;
+    }
+
+    public List<RecipeSO> GetUsedInRecipeSOList(RecipeSO inputRecipeSO) {
+        List<RecipeSO> usedInRecipeSOList = new List<RecipeSO>();
+
+        foreach (RecipeSO recipeSO in recipeSOList) {
+            foreach (Item item in recipeSO.inputItems) {
+                if (inputRecipeSO.outputItems[0].itemType == item.itemType) {
+                    usedInRecipeSOList.Add(recipeSO);
+                }
+            }
+        }
+
+        return usedInRecipeSOList;
     }
 }

@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   humanoidPrefab: {fileID: 8860567661041266290, guid: 9a67e347a6c86ad45bde94d85a90c8c3, type: 3}
   humanoidType: 4
+  humanoidProficiencies: 
   humanoidSprite: {fileID: -1572280528, guid: 9922f22d93dfb4646ac3e21d9dd8f0d8, type: 3}
   animatorController: {fileID: 22100000, guid: 038f25a074f8da54eb5c5f97f8849fba, type: 2}
   moveSpeed: 180
   intelligence: 1
   strength: 7
-  health: 8
+  agility: 0
+  maxHealth: 0
   damage: 6
   armor: 0
-  carryCapacity: 5
+  carryCapacity: 1

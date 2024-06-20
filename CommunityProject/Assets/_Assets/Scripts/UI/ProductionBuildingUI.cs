@@ -90,10 +90,24 @@ public class ProductionBuildingUI : BuildingUI
         }
 
         foreach (RecipeSO recipeSO in productionBuilding.GetBuildingSO().buildingRecipes) {
-            RectTransform recipeTemplateRectTransform = Instantiate(recipeTemplate, recipeContainer).GetComponent<RectTransform>();
 
+            if(productionBuilding.GetBuildingSO().buildingRecipes.Count <= 4) {
+                recipeContainer.GetComponent<GridLayoutGroup>().padding.left = 25;
+                recipeContainer.GetComponent<GridLayoutGroup>().padding.top = 25;
+                recipeContainer.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 0);
+                recipeContainer.GetComponent<GridLayoutGroup>().cellSize = new Vector2(65,65);
+            } else {
+
+                recipeContainer.GetComponent<GridLayoutGroup>().padding.left = 15;
+                recipeContainer.GetComponent<GridLayoutGroup>().padding.top = 15;
+                recipeContainer.GetComponent<GridLayoutGroup>().spacing = new Vector2(6, 7);
+                recipeContainer.GetComponent<GridLayoutGroup>().cellSize = new Vector2(40, 40);
+            }
+
+            RectTransform recipeTemplateRectTransform = Instantiate(recipeTemplate, recipeContainer).GetComponent<RectTransform>();
+            recipeTemplateRectTransform.GetComponent<RecipeSlotTemplate>().SetRecipe(recipeSO);
             recipeTemplateRectTransform.gameObject.SetActive(true);
-            recipeTemplateRectTransform.Find("RecipeIcon").GetComponent<Image>().sprite = recipeSO.recipeSprite;
+            recipeTemplateRectTransform.Find("RecipeIcon").GetComponent<Image>().sprite = ItemAssets.Instance.GetItemSO(recipeSO.outputItems[0].itemType).itemSprite;
 
             if(productionBuilding.GetSelectedRecipeSO() != null) {
                 // Production building has a recipe selected
@@ -230,6 +244,10 @@ public class ProductionBuildingUI : BuildingUI
 
     public void StopSettingWorkerReplacement() {
         workerReplacementGameObject.SetActive(false);
+    }
+
+    private void OnDisable() {
+        RecipeTooltipUI.Instance.ResetTooltip();
     }
 
 }

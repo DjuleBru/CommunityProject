@@ -18,7 +18,7 @@ public class HumanoidSO : ScriptableObject
     }
 
     public HumanoidType humanoidType;
-    public List<Building.BuildingWorksCategory> humanoidProficiencies;
+    public List<Building.BuildingCategory> humanoidProficiencies;
 
     public Sprite humanoidSprite;
     public AnimatorOverrideController animatorController;

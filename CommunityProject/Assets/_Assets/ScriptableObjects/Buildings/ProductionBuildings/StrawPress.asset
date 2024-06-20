@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
   m_Name: StrawPress
   m_EditorClassIdentifier: 
-  buildingCategory: 0
-  buildingType: 2
-  buildingWorksCategory: 1
+  buildingUICategory: 0
+  buildingType: 23
+  buildingCategory: 6
   buildingCostItems:
   - itemType: 0
     itemTier: 0
     amount: 20
   canInteractWithBuilding: 1
-  buildingRecipes:
-  - {fileID: 11400000, guid: 7f6c593f0e0521f4f876d4c146fa66bb, type: 2}
+  buildingRecipes: []
+  statAffectingProductivity: 0
   housingCapacity: 0
   energyFillRateMultiplier: 0
+  healRate: 0
   buildingName: Brick yard
-  buildingIconSprite: {fileID: 502287045, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
-  buildingDescriptionPanelSprite: {fileID: 802832355, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
-  buildingDescription: This building does bricks
+  buildingIconSprite: {fileID: 274644571, guid: d6cb6f110a0be1142b07423244dcfea0, type: 3}
+  buildingDescriptionPanelSprite: {fileID: -1704832411, guid: 667c004f9df4d1f4ba1f99a1418a2a37, type: 3}
+  buildingDescription: Turns straw into haystacks
   buildingPrefab: {fileID: 1718341335737673364, guid: ba85a93d17dfb424d82c0f99302bde5a, type: 3}

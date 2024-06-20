@@ -3,36 +3,63 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class Building : MonoBehaviour
 {
     public enum BuildingUICategory {
-        Workstation,
+        rawStations,
         AssemblyStation,
         FoodProduction,
         Storage,
         Utility
     }
 
-    public enum BuildingWorksCategory {
+    public enum BuildingCategory {
         WoodWork,
         MetalWork,
+        Alchemy,
+        Research,
+        FoodPreparation,
+        Craftsmanship,
+        FoodProduction,
+        Housing,
         Storage,
+        MineralProcessing,
+        Fabric,
     }
 
     public enum BuildingType {
         lumberMill,
-        stonecutter,
-        brickyard,
+        stoneCutter,
+        brickYard,
         woodworkBench,
-        woodenchest,
+        woodenChest,
         foodChest,
         equipmentChest,
         field,
         canteen,
-        tent
+        tent,
+        architectTable,
+        blackSmith,
+        cookingStation,
+        fletcherWorkshop,
+        foodPreparationTable,
+        foundry,
+        furnace,
+        jewelry,
+        laboratory,
+        leatherWorkbench,
+        loom,
+        spinningWheel,
+        stavesWorkshop,
+        strawPress,
+        house,
+        hammoc,
+        windMill,
     }
 
     [SerializeField] protected BuildingSO buildingSO;
@@ -60,6 +87,8 @@ public class Building : MonoBehaviour
     public event EventHandler OnBuildingIsUnvalidPlacement;
     public event EventHandler OnBuildingPlaced;
 
+    private EventSystem eventSystem;
+
     protected virtual void Awake() {
         buildingCollider = GetComponent<Collider2D>();
         buildingVisual = GetComponentInChildren<BuildingVisual>();
@@ -74,6 +103,7 @@ public class Building : MonoBehaviour
 
     protected virtual void Start() {
         LoadBuilding();
+        eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 
         GameInput.Instance.OnPlaceBuilding += GameInput_OnPlaceBuilding;
         GameInput.Instance.OnPlaceBuildingCancelled += GameInput_OnPlaceBuildingCancelled;
@@ -113,6 +143,9 @@ public class Building : MonoBehaviour
     }
 
     protected bool TryPlaceBuilding() {
+        if (eventSystem.IsPointerOverGameObject())
+        return false;
+
         if (isValidBuildingPlacement) return true;
         return false;
     }

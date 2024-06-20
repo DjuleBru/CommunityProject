@@ -350,7 +350,7 @@ public class ProductionBuilding : Building
             humanoidWorkingSpeed = assignedHumanoid.GetMoveSpeed() / 5f;
         }
 
-        if(assignedHumanoid.GetHumanoidSO().humanoidProficiencies.Contains(buildingSO.buildingWorksCategory)) {
+        if(assignedHumanoid.GetHumanoidSO().humanoidProficiencies.Contains(buildingSO.buildingCategory)) {
             humanoidWorkingSpeed *= 1.5f;
         }
 

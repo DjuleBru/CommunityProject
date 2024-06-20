@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86dbb87dd1e773344aa61522f3be7eec, type: 3}
+  m_Name: CopperShield
+  m_EditorClassIdentifier: 
+  itemType: 27
+  itemCategory: 2
+  itemTier: 0
+  itemSprite: {fileID: -288070600, guid: 15e365539ea8b564a96391f0aa4c8afc, type: 3}
+  isStackable: 1
+  itemDescription: 
+  maxStackableAmount: 9
+  seedSprite: {fileID: 0}
+  growth1Sprite: {fileID: 0}
+  growth2Sprite: {fileID: 0}
+  growth3Sprite: {fileID: 0}
+  foodValue: 0
+  itemEquipmentCategory: 1
+  itemEquipmentType: 9
+  strengthBonusValue: 0
+  intelligenceBonusValue: 0
+  agilityBonusValue: 0
+  moveSpeedBonusValue: 0
+  healthBonusValue: 0
+  damageBonusValue: 0
+  armorBonusValue: 1
+  equipmentDurability: 10

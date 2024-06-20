@@ -30,6 +30,7 @@ public class BuildingVisual : MonoBehaviour, IInteractable
         BuildingsManager.Instance.OnAnyBuildingSpawned += BuildingsManager_OnAnyBuildingSpawned;
 
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        buildingHoveredVisual.gameObject.SetActive(false);
     }
 
     protected virtual void GameInput_OnInteractAction(object sender, System.EventArgs e) {
@@ -115,6 +116,7 @@ public class BuildingVisual : MonoBehaviour, IInteractable
 
     public virtual void OpenPanel() {
         //Pass through function
+        if (!building.GetBuildingPlaced()) return;
         building.OpenBuildingUI();
     }
 

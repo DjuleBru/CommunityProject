@@ -109,7 +109,7 @@ public class HumanoidsManager : MonoBehaviour
 
 
     public List<HumanoidSO> GetBuildingHumanoidTypeProficiency(BuildingSO buildingSO) {
-        Building.BuildingWorksCategory worksCategory = buildingSO.buildingWorksCategory;
+        Building.BuildingCategory worksCategory = buildingSO.buildingCategory;
         List<HumanoidSO> humanoidWithProficiency = new List<HumanoidSO>();
 
         foreach (HumanoidSO humanoidSO in humanoidSOList) {

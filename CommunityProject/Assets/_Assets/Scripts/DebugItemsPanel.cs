@@ -28,16 +28,16 @@ public class DebugItemsPanel : MonoBehaviour
 
             inventoryItemSlot.SetItem(debugItem);
 
-            itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
-            itemSlotRectTransform.gameObject.SetActive(true);
-            inventoryItemSlot = itemSlotRectTransform.GetComponent<ItemSlot>();
+            //itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
+            //itemSlotRectTransform.gameObject.SetActive(true);
+            //inventoryItemSlot = itemSlotRectTransform.GetComponent<ItemSlot>();
 
-            debugItem = new Item { itemType = itemSO.itemType, amount = 1 };
-            if (itemSO.isStackable) {
-                debugItem = new Item { itemType = itemSO.itemType, amount = 1 };
-            }
+            //debugItem = new Item { itemType = itemSO.itemType, amount = 1 };
+            //if (itemSO.isStackable) {
+            //    debugItem = new Item { itemType = itemSO.itemType, amount = 1 };
+            //}
 
-            inventoryItemSlot.SetItem(debugItem);
+            //inventoryItemSlot.SetItem(debugItem);
         }
     }
 }

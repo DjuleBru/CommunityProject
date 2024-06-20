@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
   m_Name: StavesWorkshop
   m_EditorClassIdentifier: 
-  buildingCategory: 0
-  buildingType: 2
-  buildingWorksCategory: 1
+  buildingUICategory: 1
+  buildingType: 22
+  buildingCategory: 5
   buildingCostItems:
   - itemType: 0
     itemTier: 0
     amount: 20
   canInteractWithBuilding: 1
-  buildingRecipes:
-  - {fileID: 11400000, guid: 7f6c593f0e0521f4f876d4c146fa66bb, type: 2}
+  buildingRecipes: []
+  statAffectingProductivity: 0
   housingCapacity: 0
   energyFillRateMultiplier: 0
+  healRate: 0
   buildingName: Brick yard
-  buildingIconSprite: {fileID: 502287045, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
-  buildingDescriptionPanelSprite: {fileID: 802832355, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
-  buildingDescription: This building does bricks
+  buildingIconSprite: {fileID: -291328146, guid: 331f0faed5a02a4439bdb335c8e5b10a, type: 3}
+  buildingDescriptionPanelSprite: {fileID: 1197428316, guid: a68c72895a4270c4eaa8a360c92dee24, type: 3}
+  buildingDescription: Crafts magic staffs
   buildingPrefab: {fileID: 1718341335737673364, guid: 285784b2e0cd0f8448a6bd8c58e6239a, type: 3}

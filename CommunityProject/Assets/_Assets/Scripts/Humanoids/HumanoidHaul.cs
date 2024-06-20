@@ -65,11 +65,13 @@ public class HumanoidHaul : MonoBehaviour
 
         destinationBuilding = bestBuilding;
 
-        if(destinationBuilding != null) {
+        if (destinationBuilding != null) {
             Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding);
             itemToCarry = destinationBuildingInventory.GetRestrictedItemList()[0];
             humanoid.AssignBuilding(destinationBuilding);
             destinationBuilding.AssignInputHaulier(humanoid);
+
+            sourceBuilding = IdentifyBestSourceBuilding(itemToCarry);
         }
 
         return destinationBuilding;

@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
   m_Name: Loom
   m_EditorClassIdentifier: 
-  buildingCategory: 0
-  buildingType: 2
-  buildingWorksCategory: 1
+  buildingUICategory: 1
+  buildingType: 20
+  buildingCategory: 10
   buildingCostItems:
   - itemType: 0
     itemTier: 0
     amount: 20
   canInteractWithBuilding: 1
-  buildingRecipes:
-  - {fileID: 11400000, guid: 7f6c593f0e0521f4f876d4c146fa66bb, type: 2}
+  buildingRecipes: []
+  statAffectingProductivity: 0
   housingCapacity: 0
   energyFillRateMultiplier: 0
-  buildingName: Brick yard
-  buildingIconSprite: {fileID: 502287045, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
-  buildingDescriptionPanelSprite: {fileID: 802832355, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
-  buildingDescription: This building does bricks
+  healRate: 0
+  buildingName: Loom
+  buildingIconSprite: {fileID: 1998118039, guid: 15e365539ea8b564a96391f0aa4c8afc, type: 3}
+  buildingDescriptionPanelSprite: {fileID: -89912685, guid: ab31ac04fb4b46940a572ee7c63766ca, type: 3}
+  buildingDescription: Crafts clothes from fabric
   buildingPrefab: {fileID: 1718341335737673364, guid: 8ac8b0837b590104aa300de6794017a8, type: 3}

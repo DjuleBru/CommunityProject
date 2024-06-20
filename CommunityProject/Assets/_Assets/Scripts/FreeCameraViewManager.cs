@@ -33,7 +33,7 @@ public class FreeCameraViewManager : MonoBehaviour
     }
 
     private void Start() {
-        zoom = freeLookCamera.m_Lens.OrthographicSize;
+        zoom = playerCamera.m_Lens.OrthographicSize;
     }
 
     private void Update() {
@@ -42,10 +42,13 @@ public class FreeCameraViewManager : MonoBehaviour
             SetFreeCamera(!freeCamera);
         }
 
-        if (!freeCamera) return;
+        if (!freeCamera) {
+            HandlePlayerCameraZoom();
+            return;
+        };
 
         HandleMovementInput();
-        HandleZoom();
+        HandleFreeCameraZoom();
 
         if(followHumanoid) {
             freeLookCameraFollowTransform.transform.position = followingHumanoid.transform.position;
@@ -67,6 +70,7 @@ public class FreeCameraViewManager : MonoBehaviour
             HotbarUI.Instance.SetHotbarActive(false);
             PlayerMovement.Instance.DisableMovement();
             freeCameraViewMouseTransform.GetComponent<Collider2D>().enabled = true;
+            zoom = freeLookCamera.m_Lens.OrthographicSize;
         } else {
             OverworldCamera.Instance.ActivatePlayerCamera();
             freeLookCamera.gameObject.SetActive(false);
@@ -74,6 +78,7 @@ public class FreeCameraViewManager : MonoBehaviour
             PlayerMovement.Instance.EnableMovement();
             HotbarUI.Instance.SetHotbarActive(true);
             freeCameraViewMouseTransform.GetComponent<Collider2D>().enabled = false;
+            zoom = playerCamera.m_Lens.OrthographicSize;
         }
     }
 
@@ -105,12 +110,20 @@ public class FreeCameraViewManager : MonoBehaviour
         freeLookCameraFollowTransform.transform.position += moveDirNormalized * freeCameraMoveSpeed * Time.deltaTime;
     }
 
-    private void HandleZoom() {
+    private void HandleFreeCameraZoom() {
         float scroll = GameInput.Instance.GetZoomVector().y;
 
         zoom -= scroll * cameraZoomSpeed;
         zoom = Mathf.Clamp(zoom, minOrtho, maxOrtho);
         freeLookCamera.m_Lens.OrthographicSize = Mathf.SmoothDamp(freeLookCamera.m_Lens.OrthographicSize, zoom, ref velocity, smoothTime);
+    }
+
+    private void HandlePlayerCameraZoom() {
+        float scroll = GameInput.Instance.GetZoomVector().y;
+
+        zoom -= scroll * cameraZoomSpeed;
+        zoom = Mathf.Clamp(zoom, minOrtho, maxOrtho);
+        playerCamera.m_Lens.OrthographicSize = Mathf.SmoothDamp(playerCamera.m_Lens.OrthographicSize, zoom, ref velocity, smoothTime);
     }
 
 }

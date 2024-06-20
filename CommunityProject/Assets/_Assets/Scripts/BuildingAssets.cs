@@ -22,14 +22,31 @@ public class BuildingAssets : MonoBehaviour
         return null;
     }
 
-    public List<BuildingSO> GetBuildingSOsInCategory(Building.BuildingUICategory buildingCategory) {
+    public List<BuildingSO> GetBuildingSOsInUICategory(Building.BuildingUICategory buildingCategory) {
         List<BuildingSO> buildingSOListInCategory = new List<BuildingSO>();
         foreach(BuildingSO buildingSO in buildingSOList) {
-            if(buildingSO.buildingCategory  == buildingCategory) {
+            if(buildingSO.buildingUICategory  == buildingCategory) {
                 buildingSOListInCategory.Add(buildingSO);
             }
         }
 
         return buildingSOListInCategory;
     }
+
+    public List<BuildingSO> GetBuildingSOsInCategory(Building.BuildingUICategory buildingUICategory, Building.BuildingCategory buildingCategory) {
+        List<BuildingSO> buildingSOListInCategory = new List<BuildingSO>();
+
+        foreach (BuildingSO buildingSO in buildingSOList) {
+            if (buildingSO.buildingUICategory == buildingUICategory) {
+                if(buildingSO.buildingCategory == buildingCategory) {
+                    Debug.Log(buildingSO + " buildingUICat " + buildingSO.buildingUICategory + " buildingCat " + buildingSO.buildingCategory);
+                    buildingSOListInCategory.Add(buildingSO);
+                }
+            }
+        }
+
+        return buildingSOListInCategory;
+    }
+
+
 }

@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
   m_Name: Tent
   m_EditorClassIdentifier: 
-  buildingCategory: 4
+  buildingUICategory: 4
   buildingType: 9
-  buildingWorksCategory: 2
-  statAffectingProductivity: 0
+  buildingCategory: 7
   buildingCostItems:
   - itemType: 0
     itemTier: 0
     amount: 5
   canInteractWithBuilding: 0
   buildingRecipes: []
-  housingCapacity: 3
+  statAffectingProductivity: 0
+  housingCapacity: 2
   energyFillRateMultiplier: 3
   healRate: 2
   buildingName: Tent

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
   m_Name: Field
   m_EditorClassIdentifier: 
-  buildingCategory: 2
-  buildingType: 5
-  buildingWorksCategory: 1
+  buildingUICategory: 2
+  buildingType: 7
+  buildingCategory: 6
   buildingCostItems:
   - itemType: 0
     itemTier: 0
@@ -22,10 +22,13 @@ MonoBehaviour:
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 4818f7c39f6e1d641b5b6244aa566927, type: 2}
+  - {fileID: 11400000, guid: d9d6770ca387a144e8e28fa9fcc2cf79, type: 2}
+  statAffectingProductivity: 0
   housingCapacity: 0
   energyFillRateMultiplier: 0
+  healRate: 0
   buildingName: Field
-  buildingIconSprite: {fileID: -281890985, guid: bd40e411837643645bf72d263f829470, type: 3}
+  buildingIconSprite: {fileID: 267375912, guid: fb1d43ee7de4aa847866dfb43cc0ae6f, type: 3}
   buildingDescriptionPanelSprite: {fileID: -1351908250, guid: 8e57feb5da5fce544a8b5aee5ca9193e, type: 3}
-  buildingDescription: A farm to grow crops !
+  buildingDescription: A field to grow all kind of crops !
   buildingPrefab: {fileID: 1718341335737673364, guid: e35e4b159950e6d45870aaf1b1223d02, type: 3}

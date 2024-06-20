@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
   m_Name: Furnace
   m_EditorClassIdentifier: 
-  buildingCategory: 0
-  buildingType: 2
-  buildingWorksCategory: 1
+  buildingUICategory: 0
+  buildingType: 16
+  buildingCategory: 1
   buildingCostItems:
   - itemType: 0
     itemTier: 0
     amount: 20
   canInteractWithBuilding: 1
-  buildingRecipes:
-  - {fileID: 11400000, guid: 7f6c593f0e0521f4f876d4c146fa66bb, type: 2}
+  buildingRecipes: []
+  statAffectingProductivity: 0
   housingCapacity: 0
   energyFillRateMultiplier: 0
-  buildingName: Brick yard
-  buildingIconSprite: {fileID: 502287045, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
-  buildingDescriptionPanelSprite: {fileID: 802832355, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
+  healRate: 0
+  buildingName: Furnace
+  buildingIconSprite: {fileID: 1411262136, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}
+  buildingDescriptionPanelSprite: {fileID: 1411262136, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}
   buildingDescription: This building does bricks
   buildingPrefab: {fileID: 1718341335737673364, guid: 0cbb855a185c9c04687dfb2a73ce1aa3, type: 3}

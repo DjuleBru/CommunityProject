@@ -12,24 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
   m_Name: StoneCutter
   m_EditorClassIdentifier: 
-  buildingCategory: 0
+  buildingUICategory: 0
   buildingType: 1
-  buildingWorksCategory: 1
-  statAffectingProductivity: 2
+  buildingCategory: 9
   buildingCostItems:
-  - itemType: 0
-    itemTier: 0
-    amount: 20
   - itemType: 1
     itemTier: 0
-    amount: 10
+    amount: 20
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 9e93db43854f6254b80e3968f05e448f, type: 2}
+  statAffectingProductivity: 2
   housingCapacity: 0
   energyFillRateMultiplier: 0
+  healRate: 0
   buildingName: Stone cutter
   buildingIconSprite: {fileID: -2047189166, guid: c1d1d8c0f592ed24f9b0ec0626058fee, type: 3}
   buildingDescriptionPanelSprite: {fileID: 835923586, guid: c1d1d8c0f592ed24f9b0ec0626058fee, type: 3}
-  buildingDescription: I like stone
+  buildingDescription: Refines raw stone into cut stone
   buildingPrefab: {fileID: 1718341335737673364, guid: dcab5e7724c79d54380c5d3729983ca2, type: 3}

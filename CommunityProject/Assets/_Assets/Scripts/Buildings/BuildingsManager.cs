@@ -20,7 +20,15 @@ public class BuildingsManager : MonoBehaviour
 
     [SerializeField] private Sprite metalWorkCategorySprite;
     [SerializeField] private Sprite woodWorkCategorySprite;
+    [SerializeField] private Sprite alchemyCategorySprite;
+    [SerializeField] private Sprite craftsManShipCategorySprite;
+    [SerializeField] private Sprite housingCategorySprite;
     [SerializeField] private Sprite foodProductionCategorySprite;
+    [SerializeField] private Sprite researchCategorySprite;
+    [SerializeField] private Sprite mineralProcessingSprite;
+    [SerializeField] private Sprite fabricProcessingSprite;
+    [SerializeField] private Sprite foodPreparationSprite;
+    [SerializeField] private Sprite storageSprite;
 
     private void Awake() {
         Instance = this;
@@ -133,7 +141,7 @@ public class BuildingsManager : MonoBehaviour
                 ProductionBuilding productionBuilding = building as ProductionBuilding;
                 foreach (Inventory outputInventory in productionBuilding.GetOutputInventoryList()) {
 
-                    if (outputInventory.AmountInventoryHasOfType(sourceItem) > carryCapacity) {
+                    if (outputInventory.AmountInventoryHasOfType(sourceItem) > 0) {
                         sourceBuildingList.Add(productionBuilding);
                     }
 
@@ -143,7 +151,7 @@ public class BuildingsManager : MonoBehaviour
             if (building is Chest) {
                 Chest chest = (Chest)building;
 
-                if (chest.GetChestInventory().AmountInventoryHasOfType(sourceItem) > carryCapacity) {
+                if (chest.GetChestInventory().AmountInventoryHasOfType(sourceItem) > 0) {
                     sourceBuildingList.Add(chest);
                 }
             }
@@ -284,13 +292,41 @@ public class BuildingsManager : MonoBehaviour
         }
     }
 
-    public Sprite GetWorkingCategorySprite(Building.BuildingWorksCategory category) {
-        if(category == Building.BuildingWorksCategory.WoodWork) {
+    public Sprite GetWorkingCategorySprite(Building.BuildingCategory category) {
+        if(category == Building.BuildingCategory.WoodWork) {
             return woodWorkCategorySprite;
         }
 
-        if (category == Building.BuildingWorksCategory.MetalWork) {
+        if (category == Building.BuildingCategory.MetalWork) {
             return metalWorkCategorySprite;
+        }
+
+        if (category == Building.BuildingCategory.Alchemy) {
+            return alchemyCategorySprite;
+        }
+        if (category == Building.BuildingCategory.Craftsmanship) {
+            return craftsManShipCategorySprite;
+        }
+        if (category == Building.BuildingCategory.Housing) {
+            return housingCategorySprite;
+        }
+        if (category == Building.BuildingCategory.FoodProduction) {
+            return foodProductionCategorySprite;
+        }
+        if (category == Building.BuildingCategory.FoodPreparation) {
+            return foodPreparationSprite;
+        }
+        if (category == Building.BuildingCategory.Research) {
+            return researchCategorySprite;
+        }
+        if (category == Building.BuildingCategory.MineralProcessing) {
+            return mineralProcessingSprite;
+        }
+        if (category == Building.BuildingCategory.Fabric) {
+            return fabricProcessingSprite;
+        }
+        if (category == Building.BuildingCategory.Storage) {
+            return storageSprite;
         }
         return null;
     }
