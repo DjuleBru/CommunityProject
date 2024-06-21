@@ -544,25 +544,28 @@ public class Humanoid : MonoBehaviour
     }
 
     public Item GetEquipmentItem(Item.ItemEquipmentCategory category) {
-        if(category == Item.ItemEquipmentCategory.main) {
-            return mainHandItem;
+        Item equippedItem = null;
+
+        if(category == Item.ItemEquipmentCategory.main && mainHandItem.itemType != Item.ItemType.Wood) {
+            equippedItem = mainHandItem;
         }
-        if (category == Item.ItemEquipmentCategory.secondary) {
-            return secondaryHandItem;
+        if (category == Item.ItemEquipmentCategory.secondary && secondaryHandItem.itemType != Item.ItemType.Wood) {
+            equippedItem = secondaryHandItem;
         }
-        if (category == Item.ItemEquipmentCategory.head) {
-            return helmetItem;
+        if (category == Item.ItemEquipmentCategory.head && helmetItem.itemType != Item.ItemType.Wood) {
+            equippedItem = helmetItem;
         }
-        if (category == Item.ItemEquipmentCategory.boots) {
-            return bootsItem;
+        if (category == Item.ItemEquipmentCategory.boots && bootsItem.itemType != Item.ItemType.Wood) {
+            equippedItem = bootsItem;
         }
-        if (category == Item.ItemEquipmentCategory.ring) {
-            return ringItem;
+        if (category == Item.ItemEquipmentCategory.ring && ringItem.itemType != Item.ItemType.Wood) {
+            equippedItem = ringItem;
         }
-        if (category == Item.ItemEquipmentCategory.necklace) {
-            return necklaceItem;
+        if (category == Item.ItemEquipmentCategory.necklace && necklaceItem.itemType != Item.ItemType.Wood) {
+            equippedItem = necklaceItem;
         }
-        return null;
+
+        return equippedItem;
     }
 
     public float GetEquipmentItemDurabilityNormalized(Item.ItemEquipmentCategory category) {
@@ -588,21 +591,28 @@ public class Humanoid : MonoBehaviour
     }
 
     public Item GetMainHandItem() {
+        if (mainHandItem != null && mainHandItem.itemType == Item.ItemType.Wood) return null;
         return mainHandItem;
     }
+
     public Item GetSecondaryHandItem() {
+        if (secondaryHandItem != null && secondaryHandItem.itemType == Item.ItemType.Wood) return null;
         return secondaryHandItem;
     }
     public Item GetHeadItem() {
+        if (helmetItem != null && helmetItem.itemType == Item.ItemType.Wood) return null;
         return helmetItem;
     }
     public Item GetBootsItem() {
+        if (bootsItem != null && bootsItem.itemType == Item.ItemType.Wood) return null;
         return bootsItem;
     }
     public Item GetNecklaceItem() {
+        if (necklaceItem != null && necklaceItem.itemType == Item.ItemType.Wood) return null;
         return necklaceItem;
     }
     public Item GetRingItem() {
+        if (ringItem != null && ringItem.itemType == Item.ItemType.Wood) return null;
         return ringItem;
     }
 

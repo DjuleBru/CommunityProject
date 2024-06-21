@@ -19,6 +19,10 @@ MonoBehaviour:
   - itemType: 1
     itemTier: 0
     amount: 20
+  buildingUnlockItems:
+  - itemType: 42
+    itemTier: 0
+    amount: 1
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 7f6c593f0e0521f4f876d4c146fa66bb, type: 2}

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592e2ac813835d840bbe59ff0cae8271, type: 3}
+  m_Name: Grinder
+  m_EditorClassIdentifier: 
+  buildingUICategory: 0
+  buildingType: 16
+  buildingCategory: 11
+  buildingCostItems:
+  - itemType: 0
+    itemTier: 0
+    amount: 20
+  buildingUnlockItems: []
+  canInteractWithBuilding: 1
+  buildingRecipes:
+  - {fileID: 11400000, guid: de2cdccf98887814db211a5272bc64d6, type: 2}
+  statAffectingProductivity: 0
+  housingCapacity: 0
+  energyFillRateMultiplier: 0
+  healRate: 0
+  buildingName: Grinder
+  buildingIconSprite: {fileID: 1578100095, guid: 12b8a5dc38a5f974398f8d07edac6523, type: 3}
+  buildingDescriptionPanelSprite: {fileID: 1411262136, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}
+  buildingDescription: Grinds materials into powder
+  buildingPrefab: {fileID: 1718341335737673364, guid: 8e57dab08a734c842bf19aa018c2b0c0, type: 3}

@@ -16,8 +16,14 @@ public class SetBuildingCategoryButton : MonoBehaviour
         });
     }
 
-    public void SetBuildingCategory(Building.BuildingCategory buildingCategory) {
+    public void SetBuildingCategory(Building.BuildingCategory buildingCategory, bool categoryLocked) {
         this.buildingCategory = buildingCategory;
         icon.sprite = BuildingsManager.Instance.GetWorkingCategorySprite(buildingCategory);
+
+        if(categoryLocked) {
+            button.interactable = false;
+        } else {
+            button.interactable = true;
+        }
     }
 }

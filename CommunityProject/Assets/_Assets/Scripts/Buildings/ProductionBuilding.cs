@@ -9,21 +9,21 @@ public class ProductionBuilding : Building
     public event EventHandler OnWorkerStartedWorking;
     public event EventHandler OnWorkerFinishedWorking;
 
-    private RecipeSO selectedRecipeSO;
-    private float productionTimer;
+    protected RecipeSO selectedRecipeSO;
+    protected float productionTimer;
 
-    private List<Inventory> inputInventoryList;
-    private List<Inventory> outputInventoryList;
-    private List<ItemWorld> itemWorldProducedList;
+    protected List<Inventory> inputInventoryList;
+    protected List<Inventory> outputInventoryList;
+    protected List<ItemWorld> itemWorldProducedList;
 
-    private bool working;
-    private float humanoidWorkingSpeed;
-    private bool inputItemsMissing;
-    private bool outputInventoryFull;
+    protected bool working;
+    protected float humanoidWorkingSpeed;
+    protected bool inputItemsMissing;
+    protected bool outputInventoryFull;
 
-    [SerializeField] private ProductionBuildingUI_World productionBuildingUIWorld;
-    [SerializeField] private BuildingHaulersUI_World buildingHaulersUI_World;
-    [SerializeField] private ProductionBuildingVisual productionBuildingvisual;
+    [SerializeField] protected ProductionBuildingUI_World productionBuildingUIWorld;
+    [SerializeField] protected BuildingHaulersUI_World buildingHaulersUI_World;
+    [SerializeField] protected ProductionBuildingVisual productionBuildingvisual;
 
     protected override void Awake() {
         base.Awake();
@@ -45,7 +45,7 @@ public class ProductionBuilding : Building
         }
     }
 
-    protected void Work(float productionSpeed, bool isPlayerWorking) {
+    protected virtual void Work(float productionSpeed, bool isPlayerWorking) {
         productionTimer += Time.deltaTime * productionSpeed;
 
         if (productionTimer >= selectedRecipeSO.standardProductionTime) {
@@ -55,7 +55,7 @@ public class ProductionBuilding : Building
         }
     }
 
-    protected bool ProduceSelectedRecipe(bool isPlayerWorking) {
+    protected virtual bool ProduceSelectedRecipe(bool isPlayerWorking) {
         // Check input items missing
         CheckInputItems();
         if(inputItemsMissing) { return false; }
@@ -164,7 +164,7 @@ public class ProductionBuilding : Building
         productionBuildingUIWorld.SetRecipeMissing(true);
     }
 
-    public void SetSelectedRecipeSO(RecipeSO selectedRecipeSO) {
+    public virtual void SetSelectedRecipeSO(RecipeSO selectedRecipeSO) {
 
         productionBuildingUIWorld.SetRecipeMissing(false);
         productionBuildingUIWorld.SetItemsMissing(true);
@@ -175,7 +175,7 @@ public class ProductionBuilding : Building
         }
     }
 
-    private void ChangeInventories() {
+    protected virtual void ChangeInventories() {
         // Unsub from previous inventory events
         if(inputInventoryList != null) {
             foreach(var inventory in inputInventoryList) {
@@ -213,12 +213,12 @@ public class ProductionBuilding : Building
         productionBuildingUIWorld.SetItemsMissing(true);
     }
 
-    private void NewInventory_OnItemListChanged(object sender, EventArgs e) {
+    protected void NewInventory_OnItemListChanged(object sender, EventArgs e) {
         CheckInputItems();
         CheckOutputItems();
     }
 
-    private void DropInventoryItems() {
+    protected void DropInventoryItems() {
         if(inputInventoryList != null) {
             foreach (Inventory inventory in inputInventoryList) {
                 foreach (Item item in inventory.GetItemList()) {
@@ -236,7 +236,7 @@ public class ProductionBuilding : Building
         }
     }
 
-    public float GetProductionTimerNormalized() {
+    public virtual float GetProductionTimerNormalized() {
         return (productionTimer / selectedRecipeSO.standardProductionTime);
     }
 
@@ -256,7 +256,7 @@ public class ProductionBuilding : Building
         return selectedRecipeSO;
     }
 
-    public void CheckInputItems() {
+    public virtual void CheckInputItems() {
 
         if (selectedRecipeSO != null) {
 
@@ -377,7 +377,7 @@ public class ProductionBuilding : Building
         return buildingHaulersUI_World;
     }
 
-    public bool GetInputItemsMissing() {
+    public virtual bool GetInputItemsMissing() {
         return inputItemsMissing;
     }
 

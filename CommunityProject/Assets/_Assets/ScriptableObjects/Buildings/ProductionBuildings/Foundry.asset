@@ -19,9 +19,14 @@ MonoBehaviour:
   - itemType: 5
     itemTier: 0
     amount: 20
+  buildingUnlockItems:
+  - itemType: 42
+    itemTier: 0
+    amount: 1
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 2097e82e9d0fa264da3709f5f65425ec, type: 2}
+  - {fileID: 11400000, guid: 9e4170526a6f4c144a379ef1897eed60, type: 2}
   statAffectingProductivity: 0
   housingCapacity: 0
   energyFillRateMultiplier: 0

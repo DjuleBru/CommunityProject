@@ -10,6 +10,7 @@ public class BuildingSO : ScriptableObject
     public Building.BuildingType buildingType;
     public Building.BuildingCategory buildingCategory;
     public List<Item> buildingCostItems;
+    public List<Item> itemsToUnlockList;
     public bool canInteractWithBuilding;
 
     [BoxGroup("ProductionBuilding")]

@@ -10,6 +10,7 @@ public class RecipeSO : ScriptableObject
 
     public List<Item> inputItems;
     public List<Item> outputItems;
+    public List<Item> itemsToUnlockList;
 
     public float standardProductionTime;
 }

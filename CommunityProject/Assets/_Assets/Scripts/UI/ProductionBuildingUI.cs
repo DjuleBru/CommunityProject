@@ -27,10 +27,17 @@ public class ProductionBuildingUI : BuildingUI
     [SerializeField] private Transform recipeTemplate;
 
     [SerializeField] private GameObject recipeDescriptionPanel;
+    [SerializeField] private GameObject processingGameObject;
     [SerializeField] private Transform inputIngredientsContainer;
     [SerializeField] private Transform outputIngredientsContainer;
     [SerializeField] private Transform inputTemplateSlot;
     [SerializeField] private Transform outputTemplateSlot;
+
+    [SerializeField] private GameObject researchPanelGameObject;
+    [SerializeField] private Transform remainingItemsContainer;
+    [SerializeField] private Transform remainingItemsTemplate;
+    [SerializeField] private Image researchImage;
+    [SerializeField] private TextMeshProUGUI researchNameText;
 
     [SerializeField] private Transform inputInventoryContainer;
     [SerializeField] private Transform outputInventoryContainer;
@@ -65,13 +72,24 @@ public class ProductionBuildingUI : BuildingUI
         RefreshProductionBuildingUI();
     }
 
-    public void RefreshProductionBuildingUI() {
+    public virtual void RefreshProductionBuildingUI() {
         if (productionBuilding == null) return;
+
         nameText.text = productionBuilding.GetBuildingSO().name;
+        RefreshWorkerPanel();
+
+        if (productionBuilding is ArchitectTable) {
+            RefreshArchitectTableUI();
+            return;
+        } else {
+            processingGameObject.SetActive(true);
+            researchPanelGameObject.SetActive(false);
+            remainingItemsContainer.gameObject.SetActive(false);
+        }
+
         RefreshRecipeList();
         RefreshRecipePanel();
         RefreshInventoryPanels();
-        RefreshWorkerPanel();
 
         productionBuilding.CheckInputItems();
         if(productionBuilding.GetSelectedRecipeSO() != null) {
@@ -150,6 +168,7 @@ public class ProductionBuildingUI : BuildingUI
         }
         else {
             recipeDescriptionPanel.gameObject.SetActive(false);
+            selectRecipeText.text = "Select a Recipe";
             selectRecipeText.gameObject.SetActive(true);
         }
     }
@@ -233,6 +252,51 @@ public class ProductionBuildingUI : BuildingUI
             workerNameText.text = "";
             workerDescriptionText.text = "No humanoid assigned to this building";
 
+        }
+    }
+
+    public void RefreshArchitectTableUI() {
+
+        processingGameObject.SetActive(false);
+
+        foreach (Transform child in inputInventoryContainer) {
+            if (child.GetComponent<InventoryUI_ProductionBuilding>() != null) {
+                if (child != inputInventoryTemplate) {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
+
+        if (ResearchMenuUI.Instance.GetCurrentResearch() == null) {
+            selectRecipeText.text = "Select a research";
+            researchPanelGameObject.SetActive(false);
+            return;
+        }
+
+        researchImage.sprite = ResearchMenuUI.Instance.GetCurrentResearchSprite();
+        researchNameText.text = ResearchMenuUI.Instance.GetCurrentResearchName();
+        remainingItemsContainer.gameObject.SetActive(true);
+        researchPanelGameObject.SetActive(true);
+
+        selectRecipeText.text = "";
+        int itemCount = 0;
+
+        foreach (Transform child in remainingItemsContainer) {
+            if (child == remainingItemsTemplate) continue;
+            Destroy(child.gameObject);
+        }
+
+        foreach (Item item in ResearchMenuUI.Instance.GetCurrentResearch().remainingItemList) {
+
+            Transform itemTemplate = Instantiate(remainingItemsTemplate, remainingItemsContainer);
+            itemTemplate.GetComponent<ItemSlot>().SetItem(item);
+            itemTemplate.gameObject.SetActive(true);
+
+            RectTransform inputInventorySlotRectTransform = Instantiate(inputInventoryTemplate, inputInventoryContainer).GetComponent<RectTransform>();
+
+            inputInventorySlotRectTransform.GetComponent<InventoryUI_ProductionBuilding>().SetInventory(productionBuilding.GetInputInventoryList()[itemCount]);
+            inputInventorySlotRectTransform.gameObject.SetActive(true);
+            itemCount++;
         }
     }
 

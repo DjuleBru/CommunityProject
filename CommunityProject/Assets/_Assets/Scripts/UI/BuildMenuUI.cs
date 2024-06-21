@@ -50,11 +50,20 @@ public class BuildMenuUI : MonoBehaviour, IPointerExitHandler {
             Destroy(child.gameObject);
         }
 
+
         foreach(Building.BuildingCategory category in buildingCategoryList) {
+            // Check if there is at least one building unlocked in that category
+            bool categoryLocked = true;
+            foreach(BuildingSO buildingSO in BuildingAssets.Instance.GetBuildingSOsInCategory(buildingUICategory, category)) {
+                if(BuildingsManager.Instance.GetUnlockedBuildingSOList().Contains(buildingSO)) {
+                    categoryLocked = false;
+                }
+            };
+
             RectTransform buildingButtonRectTransform = Instantiate(buildingCategoryTemplate, buildingCategoryContainer).GetComponent<RectTransform>();
             buildingButtonRectTransform.gameObject.SetActive(true);
             SetBuildingCategoryButton categoryButton = buildingButtonRectTransform.GetComponent<SetBuildingCategoryButton>();
-            categoryButton.SetBuildingCategory(category);
+            categoryButton.SetBuildingCategory(category, categoryLocked);
             buildingCategory = buildingCategoryList[0];
         }
 
@@ -73,7 +82,13 @@ public class BuildMenuUI : MonoBehaviour, IPointerExitHandler {
 
             buildingButtonRectTransform.gameObject.SetActive(true);
             SpawnBuildingButton buildingButton = buildingButtonRectTransform.GetComponent<SpawnBuildingButton>();
-            buildingButton.SetBuildingSO(buildingSO);
+
+            // Is the building unlocked ?
+            bool buildingLocked = true;
+            if(BuildingsManager.Instance.GetUnlockedBuildingSOList().Contains(buildingSO)) {
+                buildingLocked = false;
+            }
+            buildingButton.SetBuildingSO(buildingSO, buildingLocked);
         }
     }
 
@@ -111,8 +126,6 @@ public class BuildMenuUI : MonoBehaviour, IPointerExitHandler {
 
     public void SetBuildingCategory(Building.BuildingCategory category) {
         this.buildingCategory = category;
-        Debug.Log(buildingUICategory);
-        Debug.Log(buildingCategory);
         RefreshBuildingButtons();
     }
 }

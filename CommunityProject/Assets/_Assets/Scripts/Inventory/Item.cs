@@ -41,6 +41,19 @@ public class Item
         Bread,
         HayStack,
         monsterMeat,
+        monterExtractT1,
+        monsterExtractT2,
+        monsterExtractT3,
+        monsterExtractT4,
+        monsterExtractT5,
+        Sand,
+        Glass,
+        GlassVial,
+        knowledgePotionT1,
+        knowledgePotionT2,
+        knowledgePotionT3,
+        Poppy,
+        PoppyPowder,
     }
 
     public enum ItemCategory {

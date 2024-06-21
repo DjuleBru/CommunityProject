@@ -10,8 +10,37 @@ public class ItemAssets : MonoBehaviour {
     [SerializeField] private List<RecipeSO> recipeSOList;
     [SerializeField] private int maxItemTier;
 
+    private List<RecipeSO> unlockedRecipeSOList;
+    private List<RecipeSO> lockedRecipeSOList;
+
     private void Awake() {
         Instance = this;
+        InitializeUnlockedRecipeList();
+    }
+
+    private void InitializeUnlockedRecipeList() {
+        if (unlockedRecipeSOList == null) {
+            unlockedRecipeSOList = new List<RecipeSO>();
+            lockedRecipeSOList = new List<RecipeSO>();
+
+            foreach (RecipeSO recipeSO in recipeSOList) {
+                if (recipeSO.itemsToUnlockList.Count == 0) {
+                    // building is unlocked at the very beginning
+                    unlockedRecipeSOList.Add(recipeSO);
+                }
+                else {
+                    lockedRecipeSOList.Add(recipeSO);
+                }
+            };
+        }
+    }
+
+    public List<RecipeSO> GetUnlockedRecipeSOList() {
+        return unlockedRecipeSOList;
+    }
+
+    public List<RecipeSO> GetLockedRecipeSOList() {
+        return lockedRecipeSOList;
     }
 
     public ItemSO GetItemSO(Item.ItemType itemType) {

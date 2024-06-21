@@ -30,6 +30,7 @@ public class Building : MonoBehaviour
         Storage,
         MineralProcessing,
         Fabric,
+        Industry,
     }
 
     public enum BuildingType {
@@ -60,6 +61,8 @@ public class Building : MonoBehaviour
         house,
         hammoc,
         windMill,
+        dwarvenWorkshop,
+        grinder,
     }
 
     [SerializeField] protected BuildingSO buildingSO;

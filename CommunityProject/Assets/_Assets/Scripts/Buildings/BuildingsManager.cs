@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class BuildingsManager : MonoBehaviour
@@ -12,6 +13,8 @@ public class BuildingsManager : MonoBehaviour
 
     private List<Building> buildingsSpawned;
     private List<ProductionBuilding> productionBuildingsSpawned;
+    private List<BuildingSO> unlockedBuildingSOList;
+    private List<BuildingSO> lockedBuildingSOList;
 
     [SerializeField] private List<int> buildingsSavedIDList;
 
@@ -29,6 +32,7 @@ public class BuildingsManager : MonoBehaviour
     [SerializeField] private Sprite fabricProcessingSprite;
     [SerializeField] private Sprite foodPreparationSprite;
     [SerializeField] private Sprite storageSprite;
+    [SerializeField] private Sprite industrySprite;
 
     private void Awake() {
         Instance = this;
@@ -37,6 +41,22 @@ public class BuildingsManager : MonoBehaviour
         overworldGridVisual.SetActive(false);
 
         LoadBuildingsInOverworld();
+        InitializeUnlockedBuildingsList();
+    }
+
+    private void InitializeUnlockedBuildingsList() {
+        if (unlockedBuildingSOList == null) {
+            unlockedBuildingSOList = new List<BuildingSO>();
+            lockedBuildingSOList = new List<BuildingSO>();
+            foreach (BuildingSO buildingSO in BuildingAssets.Instance.GetBuildingSOList()) {
+                if (buildingSO.itemsToUnlockList.Count == 0) {
+                    // building is unlocked at the very beginning
+                    unlockedBuildingSOList.Add(buildingSO);
+                } else {
+                    lockedBuildingSOList.Add(buildingSO);
+                }
+            };
+        }
     }
 
     public void SaveBuildingsInOverworld() {
@@ -85,6 +105,13 @@ public class BuildingsManager : MonoBehaviour
         if (building is ProductionBuilding) {
             productionBuildingsSpawned.Remove(building as ProductionBuilding);
         }
+    }
+
+    public List<BuildingSO> GetUnlockedBuildingSOList() {
+        return unlockedBuildingSOList;
+    }
+    public List<BuildingSO> GetLockedBuildingSOList() {
+        return lockedBuildingSOList;
     }
 
     public List<ProductionBuilding> GetProductionBuildings() {
@@ -260,8 +287,6 @@ public class BuildingsManager : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log(bestEquipment.itemType);
         return bestEquipment;
     }
 
@@ -327,6 +352,9 @@ public class BuildingsManager : MonoBehaviour
         }
         if (category == Building.BuildingCategory.Storage) {
             return storageSprite;
+        }
+        if (category == Building.BuildingCategory.Industry) {
+            return industrySprite;
         }
         return null;
     }

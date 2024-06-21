@@ -39,7 +39,6 @@ public class BuildingAssets : MonoBehaviour
         foreach (BuildingSO buildingSO in buildingSOList) {
             if (buildingSO.buildingUICategory == buildingUICategory) {
                 if(buildingSO.buildingCategory == buildingCategory) {
-                    Debug.Log(buildingSO + " buildingUICat " + buildingSO.buildingUICategory + " buildingCat " + buildingSO.buildingCategory);
                     buildingSOListInCategory.Add(buildingSO);
                 }
             }
@@ -48,5 +47,8 @@ public class BuildingAssets : MonoBehaviour
         return buildingSOListInCategory;
     }
 
+    public List<BuildingSO> GetBuildingSOList() {
+        return buildingSOList;
+    }
 
 }

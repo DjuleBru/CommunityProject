@@ -118,8 +118,6 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
             RectTransform recipeTemplateRectTransform = Instantiate(recipeTemplate, recipeContainer).GetComponent<RectTransform>();
 
             recipeTemplateRectTransform.gameObject.SetActive(true);
-            Debug.Log(recipeSO.outputItems[0].itemType);
-            Debug.Log(ItemAssets.Instance.GetItemSO(recipeSO.outputItems[0].itemType));
             recipeTemplateRectTransform.Find("RecipeIcon").GetComponent<Image>().sprite = ItemAssets.Instance.GetItemSO(recipeSO.outputItems[0].itemType).itemSprite;
             recipeTemplateRectTransform.GetComponent<RecipeSlotTemplate>().SetRecipe(recipeSO);
         }
