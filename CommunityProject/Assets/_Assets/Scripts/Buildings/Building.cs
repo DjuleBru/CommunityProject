@@ -221,6 +221,7 @@ public class Building : MonoBehaviour
 
     public virtual void RemoveAssignedHumanoid() {
         this.assignedHumanoid = null;
+        assignedHumanoid.RemoveAssignedBuilding();
     }
 
     public BuildingSO GetBuildingSO() {
@@ -294,6 +295,7 @@ public class Building : MonoBehaviour
     }
 
     public virtual void LoadBuilding() {
+        Debug.Log("buiding placed " + buildingPlaced);
 
         if(buildingPlaced) {
             buildingCollider.isTrigger = false;

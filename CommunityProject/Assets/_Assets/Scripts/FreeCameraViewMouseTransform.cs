@@ -5,13 +5,33 @@ using UnityEngine;
 public class FreeCameraViewMouseTransform : MonoBehaviour
 {
 
+    public static FreeCameraViewMouseTransform Instance;
+    public Building buildingHovered;
+
+    private bool collidingActive;
+
+    private void Awake() {
+        Instance = this;
+    }
+
+    public void EnableMouseTransform(bool enable) {
+        collidingActive = enable;
+    }
+
+    public Building GetBuildingHovered() {
+        return buildingHovered;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
+        if (!collidingActive) return;
         if (HumanoidManualAssignManager.Instance.IsAssigningBuildingToHumanoid()) return;
+
         DungeonStatsBoard dungeonStatsBoard = collision.GetComponentInParent<DungeonStatsBoard>();
 
         Building building = collision.GetComponent<Building>();
 
         if (building != null) {
+            buildingHovered = building;
             if (building is ProductionBuilding) {
 
                 ProductionBuilding productionBuilding = (ProductionBuilding)building;
@@ -47,10 +67,12 @@ public class FreeCameraViewMouseTransform : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
+        if (!collidingActive) return;
         Building building = collision.GetComponent<Building>();
         DungeonStatsBoard dungeonStatsBoard = collision.GetComponentInParent<DungeonStatsBoard>();
 
         if (building != null) {
+            buildingHovered = null;
             building.GetBuildingVisual().SetHovered(false);
 
             if (building is ProductionBuilding) {

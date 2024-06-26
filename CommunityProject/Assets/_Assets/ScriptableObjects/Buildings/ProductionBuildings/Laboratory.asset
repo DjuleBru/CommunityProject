@@ -22,12 +22,13 @@ MonoBehaviour:
   itemsToUnlockList:
   - itemType: 14
     itemTier: 0
-    amount: 10
-  - itemType: 2
+    amount: 3
+  - itemType: 3
     itemTier: 0
-    amount: 5
+    amount: 3
   canInteractWithBuilding: 1
-  buildingRecipes: []
+  buildingRecipes:
+  - {fileID: 11400000, guid: e30428d77eb91004b9fb213c24be1982, type: 2}
   statAffectingProductivity: 0
   housingCapacity: 0
   energyFillRateMultiplier: 0

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class HumanoidHaul : MonoBehaviour
 {
@@ -32,42 +33,50 @@ public class HumanoidHaul : MonoBehaviour
         }
 
         float bestBuildingScore = 0f;
-        Building bestBuilding = null;
+        if(destinationBuildingsList.Count == 0) {
+            return null;
+        }
+
+        Building bestBuilding = destinationBuildingsList[0];
+        Inventory destinationBuildingInventory = null;
 
         foreach (Building building in destinationBuildingsList) {
+
             float inventoryScore = CalculateDestinationInventoryScore(building);
             float assignedHauliersScore = 1;
+
             if (building.GetAssignedInputHauliersList() != null) {
                 assignedHauliersScore = building.GetAssignedInputHauliersList().Count + 1;
             }
             assignedHauliersScore += 1f;
 
             float score = inventoryScore / assignedHauliersScore;
-            //building.SetBuildingVisualDebugScore(score.ToString());
 
             if (score > bestBuildingScore) {
                 if(destinationBuilding is ProductionBuilding) {
+                    ProductionBuilding destination = (ProductionBuilding)destinationBuilding;
 
                     //Check if there are source buildings for that destination building
-                    Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding);
+                    destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding);
                     Item itemAskedForDestinationBuilding = destinationBuildingInventory.GetRestrictedItemList()[0];
-
-                    if (IdentifyBestSourceBuilding(itemAskedForDestinationBuilding) != null) {
-                        bestBuildingScore = score;
-                        bestBuilding = building;
-                    }
                 } else {
                     bestBuildingScore = score;
                     bestBuilding = building;
                 }
             }
+
         }
 
         destinationBuilding = bestBuilding;
 
         if (destinationBuilding != null) {
-            Inventory destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding);
-            itemToCarry = destinationBuildingInventory.GetRestrictedItemList()[0];
+
+            if(destinationBuildingInventory == null) {
+                destinationBuildingInventory = FindHighestPriorityInventoryInBuilding(destinationBuilding);
+            }
+
+            Item itemAskedForDestinationBuilding = destinationBuildingInventory.GetRestrictedItemList()[0];
+            itemToCarry = itemAskedForDestinationBuilding;
             humanoid.AssignBuilding(destinationBuilding);
             destinationBuilding.AssignInputHaulier(humanoid);
 
@@ -125,14 +134,24 @@ public class HumanoidHaul : MonoBehaviour
 
        if(building is ProductionBuilding) {
             ProductionBuilding producerBuilding = (ProductionBuilding)building;
+
             foreach (Inventory inventory in producerBuilding.GetInputInventoryList()) {
                 Item inputInventoryItem = inventory.GetRestrictedItemList()[0];
 
                 // inventory priority [0,1] - 0 when full, 1 when empty
                 float inventoryPriority = (float)inventory.AmountInventoryCanReceiveOfType(inputInventoryItem) / (float)ItemAssets.Instance.GetItemSO(inputInventoryItem.itemType).maxStackableAmount;
-                if (inventoryPriority >= highestInventoryPriority) {
+                
+                if (inventoryPriority > highestInventoryPriority) {
                     highestInventoryPriority = inventoryPriority;
                     highestPriorityInventory = inventory;
+                }
+
+                if(inventoryPriority == highestInventoryPriority) {
+                    // Inventory has the same priority as max priority inventory : randomize
+                    if (UnityEngine.Random.Range(0,100) > 50) {
+                        highestInventoryPriority = inventoryPriority;
+                        highestPriorityInventory = inventory;
+                    }
                 }
             }
         }
@@ -182,6 +201,7 @@ public class HumanoidHaul : MonoBehaviour
     }
 
     public bool DropItemsInBuilding(Building building) {
+        bool canDropInBuilding = false;
         if (building is Chest) {
             Chest chest = building as Chest;
             if (chest.GetChestInventory().InventoryCanAcceptItem(humanoidCarry.GetItemCarrying()) && chest.GetChestInventory().AmountInventoryCanReceiveOfType(humanoidCarry.GetItemCarrying()) >= humanoidCarry.GetItemCarrying().amount) {
@@ -190,12 +210,13 @@ public class HumanoidHaul : MonoBehaviour
 
                 return true;
             } else {
-                return false;
+                canDropInBuilding = false;
             }
         }
 
         if (building is ProductionBuilding) {
             ProductionBuilding productionBuilding = building as ProductionBuilding;
+
 
             foreach (Inventory intputInventory in productionBuilding.GetInputInventoryList()) {
 
@@ -204,12 +225,12 @@ public class HumanoidHaul : MonoBehaviour
                     humanoidCarry.SetItemCarrying(null);
                     return true;
                 } else {
-                    return false;
+                    canDropInBuilding = false;
                 }
             };
         }
 
-        return false;
+        return canDropInBuilding;
     }
 
     public void ReplaceDestinationBuildingAssigned(Building newDestinationBuilding) {

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +30,11 @@ public class ResearchMenuUI : MonoBehaviour
 
     [SerializeField] private Transform buildingRecipeContainer;
     [SerializeField] private Transform buildingRecipeTemplate;
+
+    [SerializeField] private GameObject buildingResearchButtonsHolder;
+    [SerializeField] private GameObject recipeResearchButtonsHolder;
+    private ResearchButtonUI researchButtonSelected;
+
 
     [SerializeField] private Image researchProgressImage;
 
@@ -179,6 +185,9 @@ public class ResearchMenuUI : MonoBehaviour
         researchDescriptionPanel.gameObject.SetActive(open);
     }
 
+    public void SetResearchButtonSelected(ResearchButtonUI researchButton) {
+        researchButtonSelected = researchButton;
+    }
     public void SetResearchSelected(RecipeSO recipeSO) {
         researchSelected = null;
 
@@ -231,9 +240,21 @@ public class ResearchMenuUI : MonoBehaviour
         }
 
         if(researchIsFinished) {
+            FinishSelectedResearch();
             researchSelected = null;
             OnSelectedResearchFinished?.Invoke(this, EventArgs.Empty);
-            Debug.Log("research Finished");
+        }
+    }
+
+    private void FinishSelectedResearch() {
+        researchButtonSelected.SetResearchUnlocked();
+
+        if(researchSelected.recipeSO != null) {
+
+        }
+
+        if(researchSelected.buildingSO != null) {
+            BuildingsManager.Instance.UnlockBuilding(researchSelected.buildingSO);
         }
     }
 

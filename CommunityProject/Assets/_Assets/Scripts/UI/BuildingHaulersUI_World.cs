@@ -16,7 +16,7 @@ public class BuildingHaulersUI_World : MonoBehaviour
     [SerializeField] private Image inputArrowImage;
     [SerializeField] private Image outputArrowImage;
 
-    private void Awake() {
+    private void Start() {
         outputInventoryFull.SetActive(false);
 
         assignedInputHaulersTemplate.gameObject.SetActive(false);

@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class FreeCameraViewManager : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class FreeCameraViewManager : MonoBehaviour
     private bool followHumanoid;
     private Humanoid followingHumanoid;
 
+    private bool destroyingBuildings;
+
     private void Awake() {
         Instance = this; 
     }
@@ -49,6 +52,9 @@ public class FreeCameraViewManager : MonoBehaviour
 
         HandleMovementInput();
         HandleFreeCameraZoom();
+        if(destroyingBuildings) {
+            HandleDestroyBuilding();
+        }
 
         if(followHumanoid) {
             freeLookCameraFollowTransform.transform.position = followingHumanoid.transform.position;
@@ -71,6 +77,7 @@ public class FreeCameraViewManager : MonoBehaviour
             PlayerMovement.Instance.DisableMovement();
             freeCameraViewMouseTransform.GetComponent<Collider2D>().enabled = true;
             zoom = freeLookCamera.m_Lens.OrthographicSize;
+            FreeCameraViewMouseTransform.Instance.EnableMouseTransform(true);
         } else {
             OverworldCamera.Instance.ActivatePlayerCamera();
             freeLookCamera.gameObject.SetActive(false);
@@ -79,6 +86,8 @@ public class FreeCameraViewManager : MonoBehaviour
             HotbarUI.Instance.SetHotbarActive(true);
             freeCameraViewMouseTransform.GetComponent<Collider2D>().enabled = false;
             zoom = playerCamera.m_Lens.OrthographicSize;
+            CursorManager.Instance.ResetCursor();
+            FreeCameraViewMouseTransform.Instance.EnableMouseTransform(false);
         }
     }
 
@@ -124,6 +133,29 @@ public class FreeCameraViewManager : MonoBehaviour
         zoom -= scroll * cameraZoomSpeed;
         zoom = Mathf.Clamp(zoom, minOrtho, maxOrtho);
         playerCamera.m_Lens.OrthographicSize = Mathf.SmoothDamp(playerCamera.m_Lens.OrthographicSize, zoom, ref velocity, smoothTime);
+    }
+
+    public void SetDestroyBuilding() {
+        destroyingBuildings = true;
+    }
+
+    private void HandleDestroyBuilding() {
+        if(Input.GetMouseButtonDown(0)) {
+
+            Building buildingToDestroy = FreeCameraViewMouseTransform.Instance.GetBuildingHovered();
+
+            if (buildingToDestroy != null) {
+                
+                buildingToDestroy.RemoveAssignedHumanoid();
+                BuildingsManager.Instance.RemoveBuilding(buildingToDestroy);
+                Destroy(buildingToDestroy.gameObject);
+            }
+        }
+
+        if(Input.GetMouseButtonDown(1) ) {
+            SetFreeCamera(false);
+        }
+        
     }
 
 }

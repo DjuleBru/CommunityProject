@@ -91,6 +91,7 @@ public class HumanoidWork : MonoBehaviour
     private float CalculateBuildingScore(ProductionBuilding building) {
         if(building is ArchitectTable) {
 
+            if (building.GetAssignedHumanoid() != null) return 0f;
         } else {
             if (building.GetSelectedRecipeSO() == null) return 0f;
             if (building.GetAssignedHumanoid() != null) return 0f;

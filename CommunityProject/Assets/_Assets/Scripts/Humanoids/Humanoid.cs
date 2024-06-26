@@ -116,7 +116,7 @@ public class Humanoid : MonoBehaviour
         }
 
         if (humanoidName == null) {
-            humanoidName = HumanoidNames.GetRandomName();
+            humanoidName = HumanoidNames.GetRandomName(humanoidSO.humanoidType);
         }
     }
 
@@ -546,22 +546,22 @@ public class Humanoid : MonoBehaviour
     public Item GetEquipmentItem(Item.ItemEquipmentCategory category) {
         Item equippedItem = null;
 
-        if(category == Item.ItemEquipmentCategory.main && mainHandItem.itemType != Item.ItemType.Wood) {
+        if(category == Item.ItemEquipmentCategory.main && mainHandItem != null && mainHandItem.itemType != Item.ItemType.Wood) {
             equippedItem = mainHandItem;
         }
-        if (category == Item.ItemEquipmentCategory.secondary && secondaryHandItem.itemType != Item.ItemType.Wood) {
+        if (category == Item.ItemEquipmentCategory.secondary && secondaryHandItem != null && secondaryHandItem.itemType != Item.ItemType.Wood) {
             equippedItem = secondaryHandItem;
         }
-        if (category == Item.ItemEquipmentCategory.head && helmetItem.itemType != Item.ItemType.Wood) {
+        if (category == Item.ItemEquipmentCategory.head && helmetItem != null && helmetItem.itemType != Item.ItemType.Wood) {
             equippedItem = helmetItem;
         }
-        if (category == Item.ItemEquipmentCategory.boots && bootsItem.itemType != Item.ItemType.Wood) {
+        if (category == Item.ItemEquipmentCategory.boots && bootsItem != null && bootsItem.itemType != Item.ItemType.Wood) {
             equippedItem = bootsItem;
         }
-        if (category == Item.ItemEquipmentCategory.ring && ringItem.itemType != Item.ItemType.Wood) {
+        if (category == Item.ItemEquipmentCategory.ring && ringItem != null && ringItem.itemType != Item.ItemType.Wood) {
             equippedItem = ringItem;
         }
-        if (category == Item.ItemEquipmentCategory.necklace && necklaceItem.itemType != Item.ItemType.Wood) {
+        if (category == Item.ItemEquipmentCategory.necklace && necklaceItem != null && necklaceItem.itemType != Item.ItemType.Wood) {
             equippedItem = necklaceItem;
         }
 
@@ -619,9 +619,7 @@ public class Humanoid : MonoBehaviour
     #endregion
     public void StopTask() {
         if (jobAssigned == Job.Worker) {
-            if (humanoidWork.GetWorking()) {
-                humanoidWork.StopWorking();
-            }
+            humanoidWork.StopWorking();
         }
 
         if (jobAssigned == Job.Haulier) {

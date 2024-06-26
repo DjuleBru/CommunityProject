@@ -37,7 +37,6 @@ public class Inventory
 
     public bool InventoryCanAcceptItem(Item item) {
         if (!restrictedInventory) return true;
-
         foreach(Item acceptedItem in restrictedItemList) {
             if(item.itemType == acceptedItem.itemType) {
                 return true;

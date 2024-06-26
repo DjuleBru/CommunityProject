@@ -30,6 +30,14 @@ public class BuildMenuUI : MonoBehaviour, IPointerExitHandler {
         gameObject.SetActive(false);
     }
 
+    private void Start() {
+        ResearchMenuUI.Instance.OnSelectedResearchFinished += ResearchMenuUI_OnSelectedResearchFinished;
+    }
+
+    private void ResearchMenuUI_OnSelectedResearchFinished(object sender, System.EventArgs e) {
+        RefreshBuildCategoriesUI();
+    }
+
     public void SetBuildMenuUI(Building.BuildingUICategory buildingCategory) {
         this.buildingUICategory = buildingCategory;
         RefreshBuildCategoriesUI();

@@ -34,7 +34,6 @@ public class BringItemsToDestination : Action {
         }
         else {
             if (humanoidHaul.DropItemsInBuilding(humanoidHaul.GetDestinationBuilding())) {
-
                 if(humanoid.GetAutoAssign()) {
                     humanoidHaul.TryAssignBestDestinationBuilding();
                     humanoidHaul.IdentifyBestSourceBuilding(humanoidHaul.GetItemToCarry());

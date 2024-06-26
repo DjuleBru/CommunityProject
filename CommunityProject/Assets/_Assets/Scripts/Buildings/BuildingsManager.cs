@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Sirenix;
 
 public class BuildingsManager : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class BuildingsManager : MonoBehaviour
         if (unlockedBuildingSOList == null) {
             unlockedBuildingSOList = new List<BuildingSO>();
             lockedBuildingSOList = new List<BuildingSO>();
+
             foreach (BuildingSO buildingSO in BuildingAssets.Instance.GetBuildingSOList()) {
                 if (buildingSO.itemsToUnlockList.Count == 0) {
                     // building is unlocked at the very beginning
@@ -59,6 +61,12 @@ public class BuildingsManager : MonoBehaviour
         }
     }
 
+    public void UnlockBuilding(BuildingSO buildingSO) {
+        unlockedBuildingSOList.Add(buildingSO);
+        lockedBuildingSOList.Remove(buildingSO);
+    }
+
+
     public void SaveBuildingsInOverworld() {
         buildingsSavedIDList = new List<int>();
 
@@ -68,11 +76,13 @@ public class BuildingsManager : MonoBehaviour
             Debug.Log("saving building " + building);
         }
 
-        ES3.Save("productionBuildingsSavedIDList", buildingsSavedIDList);
+        ES3.Save("buildingsSavedIDList", buildingsSavedIDList);
+        Debug.Log("savec building saved ids " + buildingsSavedIDList.Count);
     }
 
     public void LoadBuildingsInOverworld() {
-        buildingsSavedIDList = ES3.Load("productionBuildingsSavedIDList", new List<int>());
+        buildingsSavedIDList = ES3.Load("buildingsSavedIDList", new List<int>());
+        Debug.Log("loaded building saved ids " + buildingsSavedIDList.Count);
 
         foreach (int id in buildingsSavedIDList) {
             ES3.Load(id.ToString());
@@ -97,6 +107,8 @@ public class BuildingsManager : MonoBehaviour
         if(building is ProductionBuilding) {
             productionBuildingsSpawned.Add(building as ProductionBuilding);
         }
+
+        SaveBuildingsInOverworld();
     }
 
     public void RemoveBuilding(Building building) {
@@ -125,6 +137,7 @@ public class BuildingsManager : MonoBehaviour
 
             if(building is ProductionBuilding) {
                 ProductionBuilding productionBuilding = building as ProductionBuilding;
+                if (productionBuilding.GetSelectedRecipeSO() == null) continue;
 
                 foreach(Inventory inputInventory in productionBuilding.GetInputInventoryList()) {
                     Item inputInventoryItem = inputInventory.GetRestrictedItemList()[0];
@@ -358,4 +371,5 @@ public class BuildingsManager : MonoBehaviour
         }
         return null;
     }
+
 }

@@ -14,7 +14,6 @@ public class House : Building
     public event EventHandler OnAssignedHumanoidChanged;
 
     public void AssignHumanoidHousing(Humanoid humanoid) {
-        Debug.Log("Assigned " +  humanoid + " to " + this);
         humanoidsAssigned.Add(humanoid);
         humanoidsSleeping.Add(false);
         OnAssignedHumanoidChanged?.Invoke(this, EventArgs.Empty);

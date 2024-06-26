@@ -36,7 +36,6 @@ public class DungeonEntranceManager : MonoBehaviour
             Debug.Log("saved dungeon entrance " + dungeonEntrance.GetInstanceID().ToString());
         }
 
-        Debug.Log(dungeonEntrancesSavedIDList.Count);
         ES3.Save("dungeonEntrancesSavedIDList", dungeonEntrancesSavedIDList);
     }
 

@@ -57,7 +57,6 @@ public class DungeonRecapUI : MonoBehaviour
 
     private void InstantiateHumanoidsTemplates() {
 
-        Debug.Log(dungeonSO.humanoidsToSaveFromDungeon + " " + dungeonEntrance.GetDungeonStatsBoard().GetRecordedHumanoidsNumberSaved());
         int humanoidsRemainingInDungeon = dungeonSO.humanoidsToSaveFromDungeon - dungeonEntrance.GetDungeonStatsBoard().GetRecordedHumanoidsNumberSaved();
 
         for (int i = 0; i < humanoidsRemainingInDungeon; i++) {

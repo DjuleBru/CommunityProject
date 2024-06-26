@@ -22,6 +22,8 @@ public class HumanoidsManager : MonoBehaviour
     [SerializeField] ExternalBehaviorTree joblessBehaviorTree;
     [SerializeField] ExternalBehaviorTree justFreedBehaviorTree;
 
+
+
     private void Awake() {
         Instance = this;
     }
@@ -54,6 +56,7 @@ public class HumanoidsManager : MonoBehaviour
         foreach (Humanoid humanoid in humanoidsInOverworld) {
             humanoidsSavedIDList.Add(humanoid.GetInstanceID());
             ES3.Save(humanoid.GetInstanceID().ToString(), humanoid.gameObject);
+            Debug.Log("saved " + humanoid);
 
         }
 
@@ -74,7 +77,7 @@ public class HumanoidsManager : MonoBehaviour
 
     public void LoadHumanoidsInOverworld() {
         humanoidsSavedIDList = ES3.Load("humanoidsSavedIDList", new List<int>());
-
+        Debug.Log("loading " + humanoidsSavedIDList.Count + " humanoids ");
         foreach (int id in humanoidsSavedIDList) {
             ES3.Load(id.ToString());
         }

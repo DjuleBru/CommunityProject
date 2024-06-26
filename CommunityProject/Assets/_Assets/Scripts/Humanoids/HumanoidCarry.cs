@@ -128,7 +128,6 @@ public class HumanoidCarry : MonoBehaviour
 
     public void SetItemCarrying(Item itemCarrying) {
         this.itemCarrying = itemCarrying;
-
         if(itemCarrying != null) {
             itemCarryingList.Add(itemCarrying);
             humanoidCarryInventory.AddItem(itemCarrying);

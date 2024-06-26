@@ -233,7 +233,7 @@ public class ProductionBuildingUI : BuildingUI
 
     public void RefreshWorkerPanel() {
         if (productionBuilding == null) return;
-        if(productionBuilding.GetAssignedHumanoid() != null) {
+        if (productionBuilding.GetAssignedHumanoid() != null) {
             Humanoid assignedHumanoid = productionBuilding.GetAssignedHumanoid();
 
             openHumanoidUIButton.EnableButton(true);

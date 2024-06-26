@@ -10,7 +10,10 @@ public class ResearchButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Button button;
     [SerializeField] private BuildingSO buildingSO;
     [SerializeField] private RecipeSO recipeSO;
+
+    [SerializeField] private bool researchIsUnlockedAtGameStart;
     [SerializeField] private GameObject selectedGameObject;
+    [SerializeField] private List<ResearchButtonUI> researchUnlockedByThis;
 
     private bool researchSelected;
     public static event EventHandler OnAnyResearchButtonPressed;
@@ -31,7 +34,9 @@ public class ResearchButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private void Awake() {
         button = GetComponent<Button>();
+
         button.onClick.AddListener(() => {
+            ResearchMenuUI.Instance.SetResearchButtonSelected(this);
             if (buildingSO != null) {
                 ResearchMenuUI.Instance.SetResearchSelected(buildingSO);
             }
@@ -40,6 +45,10 @@ public class ResearchButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
             }
             OnAnyResearchButtonPressed?.Invoke(this, EventArgs.Empty);
         });
+
+        if(!researchIsUnlockedAtGameStart) {
+            button.interactable = false;
+        }
     }
 
     private void Start() {
@@ -69,4 +78,17 @@ public class ResearchButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private void SetButtonSelected(bool selected) {
         selectedGameObject.SetActive(selected);
     }
+
+    public void SetResearchSelectable() {
+        button.interactable = true;
+    }
+
+    public void SetResearchUnlocked() {
+        button.enabled = false;
+        selectedGameObject.SetActive(false);
+        foreach (ResearchButtonUI researchButtonUI in researchUnlockedByThis) {
+            researchButtonUI.SetResearchSelectable();
+        }
+    }
+
 }
