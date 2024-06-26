@@ -19,7 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems: []
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -29,5 +29,6 @@ MonoBehaviour:
   buildingName: Architect Table
   buildingIconSprite: {fileID: -622069172, guid: c57990bd086e02944a9a274bb3b853a2, type: 3}
   buildingDescriptionPanelSprite: {fileID: -1256668029, guid: ced85a22906d6ce4093c0e347f8ca14e, type: 3}
+  buildingTileMap: {fileID: 5770961853342914587, guid: fea9de8a6a4489943a7cd9072987af1b, type: 3}
   buildingDescription: Research new technologies & buildings
   buildingPrefab: {fileID: 1718341335737673364, guid: 54a1b7faa69f3df4081553dbcd4ced79, type: 3}

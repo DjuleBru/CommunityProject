@@ -19,7 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems: []
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -29,5 +29,6 @@ MonoBehaviour:
   buildingName: Wooden Chest
   buildingIconSprite: {fileID: 1710505256, guid: 0a6973059568138488c5adcd99af4344, type: 3}
   buildingDescriptionPanelSprite: {fileID: 1710505256, guid: 0a6973059568138488c5adcd99af4344, type: 3}
+  buildingTileMap: {fileID: 3993179464375814390, guid: 698cd6cc7e7b76e4693966283205990b, type: 3}
   buildingDescription: Store a small amount of items
   buildingPrefab: {fileID: 6541860286389352636, guid: 1b49dc48021f5884daa9f6a122df9e00, type: 3}

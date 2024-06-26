@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -32,5 +29,6 @@ MonoBehaviour:
   buildingName: Brick yard
   buildingIconSprite: {fileID: -291328146, guid: 331f0faed5a02a4439bdb335c8e5b10a, type: 3}
   buildingDescriptionPanelSprite: {fileID: 1197428316, guid: a68c72895a4270c4eaa8a360c92dee24, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: Crafts magic staffs
   buildingPrefab: {fileID: 1718341335737673364, guid: 285784b2e0cd0f8448a6bd8c58e6239a, type: 3}

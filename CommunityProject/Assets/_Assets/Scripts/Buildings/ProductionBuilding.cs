@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ProductionBuilding : Building
 {
@@ -25,6 +26,7 @@ public class ProductionBuilding : Building
     [SerializeField] protected BuildingHaulersUI_World buildingHaulersUI_World;
     [SerializeField] protected ProductionBuildingVisual productionBuildingvisual;
 
+    [SerializeField] protected GameObject groundTileMap;
     protected override void Awake() {
         base.Awake();
         itemWorldProducedList = new List<ItemWorld>();

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BuildingVisual : MonoBehaviour, IInteractable
 {
@@ -21,6 +22,8 @@ public class BuildingVisual : MonoBehaviour, IInteractable
 
     [SerializeField] protected TextMeshProUGUI buildingScoreText;
 
+    [SerializeField] protected Transform groundTileMap;
+
     protected virtual void Start() {
         building.OnBuildingIsUnvalidPlacement += Building_OnBuildingIsUnvalidPlacement;
         building.OnBuildingIsValidPlacement += Building_OnBuildingIsValidPlacement;
@@ -30,6 +33,12 @@ public class BuildingVisual : MonoBehaviour, IInteractable
         BuildingsManager.Instance.OnAnyBuildingSpawned += BuildingsManager_OnAnyBuildingSpawned;
 
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+
+        //foreach (Transform child in groundTileMap) {
+        //    Destroy(child.gameObject);
+        //}
+        //Instantiate(building.GetBuildingSO().buildingTileMap, groundTileMap);
+
         buildingHoveredVisual.gameObject.SetActive(false);
     }
 

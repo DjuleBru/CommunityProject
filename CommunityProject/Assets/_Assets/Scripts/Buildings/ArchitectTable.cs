@@ -9,9 +9,11 @@ public class ArchitectTable : ProductionBuilding
     protected override void Start() {
         base.Start();
         ChangeInventories();
+
         if (ResearchMenuUI.Instance.GetCurrentResearch() != null) {
             productionBuildingUIWorld.SetRecipeMissing(false);
         }
+
         ResearchMenuUI.Instance.OnSelectedResearchChanged += ResearchMenuUI_OnSelectedResearchChanged;
         ResearchMenuUI.Instance.OnSelectedResearchFinished += ResearchMenuUI_OnSelectedResearchFinished;
     }
@@ -151,6 +153,13 @@ public class ArchitectTable : ProductionBuilding
     public override bool GetInputItemsMissing() {
         CheckInputItems();
         return inputItemsMissing;
+    }
+
+    protected override void OnDestroy() {
+        base.OnDestroy();
+
+        ResearchMenuUI.Instance.OnSelectedResearchChanged -= ResearchMenuUI_OnSelectedResearchChanged;
+        ResearchMenuUI.Instance.OnSelectedResearchFinished -= ResearchMenuUI_OnSelectedResearchFinished;
     }
 
 }

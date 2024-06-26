@@ -8,7 +8,8 @@ public class ProductionBuildingVisual : BuildingVisual
     [SerializeField] Animator characterAnimator;
     [SerializeField] GameObject propVisual;
 
-    private void Awake() {
+    protected override void Start() {
+        base.Start();
         propVisual.SetActive(true);
         buildingAnimator.gameObject.SetActive(false);
         characterAnimator.gameObject.SetActive(false);

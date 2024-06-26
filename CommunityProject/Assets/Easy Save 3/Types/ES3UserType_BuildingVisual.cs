@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("placingBuildingBackgroundSprite", "buildingHoveredVisual", "validPlacementColor", "unValidPlacementColor", "solidBuildingCollider", "interactionBuildingCollider", "building", "playerInTriggerArea", "interactingWithBuilding", "buildingScoreText", "m_CancellationTokenSource")]
+	[ES3PropertiesAttribute("placingBuildingBackgroundSprite", "buildingHoveredVisual", "validPlacementColor", "unValidPlacementColor", "solidBuildingCollider", "interactionBuildingCollider", "building", "playerInTriggerArea", "interactingWithBuilding", "buildingScoreText", "groundTileMap", "m_CancellationTokenSource")]
 	public class ES3UserType_BuildingVisual : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -26,6 +26,7 @@ namespace ES3Types
 			writer.WritePrivateField("playerInTriggerArea", instance);
 			writer.WritePrivateField("interactingWithBuilding", instance);
 			writer.WritePrivateFieldByRef("buildingScoreText", instance);
+			writer.WritePrivateFieldByRef("groundTileMap", instance);
 			writer.WritePrivateField("m_CancellationTokenSource", instance);
 		}
 
@@ -66,6 +67,9 @@ namespace ES3Types
 					break;
 					case "buildingScoreText":
 					instance = (BuildingVisual)reader.SetPrivateField("buildingScoreText", reader.Read<TMPro.TextMeshProUGUI>(), instance);
+					break;
+					case "groundTileMap":
+					instance = (BuildingVisual)reader.SetPrivateField("groundTileMap", reader.Read<UnityEngine.Transform>(), instance);
 					break;
 					case "m_CancellationTokenSource":
 					instance = (BuildingVisual)reader.SetPrivateField("m_CancellationTokenSource", reader.Read<System.Threading.CancellationTokenSource>(), instance);

@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [CreateAssetMenu()]
 public class BuildingSO : ScriptableObject
@@ -28,6 +29,7 @@ public class BuildingSO : ScriptableObject
     public string buildingName;
     public Sprite buildingIconSprite;
     public Sprite buildingDescriptionPanelSprite;
+    public GameObject buildingTileMap;
     public string buildingDescription;
 
     public GameObject buildingPrefab;

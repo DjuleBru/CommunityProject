@@ -51,6 +51,7 @@ public class ResearchMenuUI : MonoBehaviour
 
     private void Start() {
         InitializeResearchProgressLists();
+        LoadResearchProgress();
     }
 
     private void InitializeResearchProgressLists() {
@@ -319,6 +320,18 @@ public class ResearchMenuUI : MonoBehaviour
 
         return ((float)totalItemAmount - (float)remainingItemAmount)/ (float)totalItemAmount;
 
+    }
+
+    public void SaveResearchProgress() {
+        ES3.Save("researchProgressList", researchProgressList);
+        ES3.Save("researchSelected", researchSelected);
+
+    }
+
+    private void LoadResearchProgress() {
+        researchProgressList = ES3.Load("researchProgressList", researchProgressList);
+        researchSelected = ES3.Load("researchSelected", researchProgressList[0]);
+        OnSelectedResearchChanged?.Invoke(this, EventArgs.Empty);
     }
 
 }

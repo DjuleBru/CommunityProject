@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -32,5 +29,6 @@ MonoBehaviour:
   buildingName: Loom
   buildingIconSprite: {fileID: 1998118039, guid: 15e365539ea8b564a96391f0aa4c8afc, type: 3}
   buildingDescriptionPanelSprite: {fileID: -89912685, guid: ab31ac04fb4b46940a572ee7c63766ca, type: 3}
+  buildingTileMap: {fileID: 5770961853342914587, guid: fea9de8a6a4489943a7cd9072987af1b, type: 3}
   buildingDescription: Crafts clothes from fabric
-  buildingPrefab: {fileID: 1718341335737673364, guid: 8ac8b0837b590104aa300de6794017a8, type: 3}
+  buildingPrefab: {fileID: 0}

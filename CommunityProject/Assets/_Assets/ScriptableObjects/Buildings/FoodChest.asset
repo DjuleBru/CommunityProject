@@ -19,7 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems: []
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -29,5 +29,6 @@ MonoBehaviour:
   buildingName: Food chest
   buildingIconSprite: {fileID: -938314305, guid: 0a6973059568138488c5adcd99af4344, type: 3}
   buildingDescriptionPanelSprite: {fileID: -938314305, guid: 0a6973059568138488c5adcd99af4344, type: 3}
+  buildingTileMap: {fileID: 3993179464375814390, guid: 698cd6cc7e7b76e4693966283205990b, type: 3}
   buildingDescription: Stores and distributes food to workers
   buildingPrefab: {fileID: 2673477164891949255, guid: bf487a18c28af07438776ab6e56238d2, type: 3}

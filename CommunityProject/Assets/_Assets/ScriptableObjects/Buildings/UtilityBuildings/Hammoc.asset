@@ -19,7 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 5
-  buildingUnlockItems: []
+  itemsToUnlockList: []
   canInteractWithBuilding: 0
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -29,5 +29,6 @@ MonoBehaviour:
   buildingName: Hammoc
   buildingIconSprite: {fileID: 1645623478, guid: c0c27d48206cb8444a08f1bb5540a095, type: 3}
   buildingDescriptionPanelSprite: {fileID: 1645623478, guid: c0c27d48206cb8444a08f1bb5540a095, type: 3}
+  buildingTileMap: {fileID: 7047646442464216716, guid: 2838aaace82eee14bb92e9e99560a4f2, type: 3}
   buildingDescription: Rudimentary housing for your workers
   buildingPrefab: {fileID: 6272838151758355292, guid: 13a49a6af86b4ff4cbecb53068646527, type: 3}

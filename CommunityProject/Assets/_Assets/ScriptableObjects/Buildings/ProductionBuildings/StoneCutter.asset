@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 1
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 9e93db43854f6254b80e3968f05e448f, type: 2}
@@ -33,5 +30,6 @@ MonoBehaviour:
   buildingName: Stone cutter
   buildingIconSprite: {fileID: -2047189166, guid: c1d1d8c0f592ed24f9b0ec0626058fee, type: 3}
   buildingDescriptionPanelSprite: {fileID: 835923586, guid: c1d1d8c0f592ed24f9b0ec0626058fee, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: Refines raw stone into cut stone
-  buildingPrefab: {fileID: 1718341335737673364, guid: dcab5e7724c79d54380c5d3729983ca2, type: 3}
+  buildingPrefab: {fileID: 0}

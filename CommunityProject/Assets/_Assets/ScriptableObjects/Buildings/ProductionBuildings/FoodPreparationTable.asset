@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -32,5 +29,6 @@ MonoBehaviour:
   buildingName: Food Preparation Table
   buildingIconSprite: {fileID: -1091379673, guid: fb1d43ee7de4aa847866dfb43cc0ae6f, type: 3}
   buildingDescriptionPanelSprite: {fileID: 1410991639, guid: b2e25ea7589deea4b9f83bba0ade1557, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: Processes raw food into cookable items
   buildingPrefab: {fileID: 1718341335737673364, guid: 5516da9e29ae88744a9245535af3a63e, type: 3}

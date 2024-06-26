@@ -30,6 +30,12 @@ public class ChestVisual : BuildingVisual, IInteractable {
     }
 
     protected override void Start() {
+
+        foreach (Transform child in groundTileMap) {
+            Destroy(child.gameObject);
+        }
+        Instantiate(building.GetBuildingSO().buildingTileMap, groundTileMap);
+
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
     }
 

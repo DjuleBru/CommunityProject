@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 70b85cc0ddd09ee48a4c66edc5fd8738, type: 2}
@@ -33,5 +30,6 @@ MonoBehaviour:
   buildingName: Furnace
   buildingIconSprite: {fileID: 1411262136, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}
   buildingDescriptionPanelSprite: {fileID: 1411262136, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: A versatile heat-inducing machine
   buildingPrefab: {fileID: 1718341335737673364, guid: 0cbb855a185c9c04687dfb2a73ce1aa3, type: 3}

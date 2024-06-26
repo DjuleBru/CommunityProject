@@ -9,13 +9,8 @@ public class HousingBuildingUIWorld : MonoBehaviour {
     [SerializeField] private Transform housedContainer;
     [SerializeField] private Transform housedTemplate;
 
-
-
-    private void Awake() {
-        ShowAssignedHoused(false);
-    }
-
     private void Start() {
+        ShowAssignedHoused(false);
         house.OnAssignedHumanoidChanged += House_OnAssignedHumanoidChanged;
     }
 
@@ -31,6 +26,7 @@ public class HousingBuildingUIWorld : MonoBehaviour {
     }
 
     public void RefreshAssignedHoused() {
+        Debug.Log("refresh");
         housedTemplate.gameObject.SetActive(false);
 
         foreach (Transform child in housedContainer.transform) {

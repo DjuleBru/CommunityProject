@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -32,5 +29,6 @@ MonoBehaviour:
   buildingName: Leather workbench
   buildingIconSprite: {fileID: -1498101883, guid: fb1d43ee7de4aa847866dfb43cc0ae6f, type: 3}
   buildingDescriptionPanelSprite: {fileID: 1197799970, guid: a88035baf6f23b041a349e8402f3f11c, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: Processed animal hides into leather
   buildingPrefab: {fileID: 0}

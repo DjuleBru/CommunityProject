@@ -19,7 +19,7 @@ MonoBehaviour:
   - itemType: 1
     itemTier: 0
     amount: 20
-  buildingUnlockItems: []
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 5a87078d691fdc5499d1b16f45b23d0f, type: 2}
@@ -36,5 +36,6 @@ MonoBehaviour:
   buildingName: Woodwork bench
   buildingIconSprite: {fileID: 1985936278, guid: dfa83d8eb7c785a4d99a699af38ad26d, type: 3}
   buildingDescriptionPanelSprite: {fileID: 911695891, guid: f8e0b972c3170a040bbf5dfe632f0271, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: Crafts wood-based items
   buildingPrefab: {fileID: 1718341335737673364, guid: 97a6576e261990447af640070ba8e653, type: 3}

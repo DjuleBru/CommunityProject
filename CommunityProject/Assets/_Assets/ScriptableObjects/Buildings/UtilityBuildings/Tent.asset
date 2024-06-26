@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 5
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 0
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -32,5 +29,6 @@ MonoBehaviour:
   buildingName: Tent
   buildingIconSprite: {fileID: -126680881, guid: 767cccf871712ad45a47acc6660aab52, type: 3}
   buildingDescriptionPanelSprite: {fileID: -126680881, guid: 767cccf871712ad45a47acc6660aab52, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: Basic housing for your workers
   buildingPrefab: {fileID: 6272838151758355292, guid: dbbde0917a496bc4fb4d60551092da98, type: 3}

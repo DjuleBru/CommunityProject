@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 1
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 7f6c593f0e0521f4f876d4c146fa66bb, type: 2}
@@ -33,5 +30,6 @@ MonoBehaviour:
   buildingName: Brick yard
   buildingIconSprite: {fileID: 502287045, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
   buildingDescriptionPanelSprite: {fileID: 802832355, guid: f2faeae9b88c9f3448c3fd3a3406b6b2, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: This building does bricks
-  buildingPrefab: {fileID: 1718341335737673364, guid: 8f547fcb24b4e4f4bbaa89297322f329, type: 3}
+  buildingPrefab: {fileID: 0}

@@ -46,6 +46,10 @@ public class BuildingsManager : MonoBehaviour
     }
 
     private void InitializeUnlockedBuildingsList() {
+        Debug.Log("initializing");
+        ES3.Load("unlockedBuildingSOList", unlockedBuildingSOList);
+        ES3.Load("lockedBuildingSOList", lockedBuildingSOList);
+
         if (unlockedBuildingSOList == null) {
             unlockedBuildingSOList = new List<BuildingSO>();
             lockedBuildingSOList = new List<BuildingSO>();
@@ -59,6 +63,8 @@ public class BuildingsManager : MonoBehaviour
                 }
             };
         }
+
+        Debug.Log(lockedBuildingSOList);
     }
 
     public void UnlockBuilding(BuildingSO buildingSO) {
@@ -77,7 +83,8 @@ public class BuildingsManager : MonoBehaviour
         }
 
         ES3.Save("buildingsSavedIDList", buildingsSavedIDList);
-        Debug.Log("savec building saved ids " + buildingsSavedIDList.Count);
+        ES3.Save("unlockedBuildingSOList", unlockedBuildingSOList);
+        ES3.Save("lockedBuildingSOList", lockedBuildingSOList);
     }
 
     public void LoadBuildingsInOverworld() {
@@ -123,6 +130,7 @@ public class BuildingsManager : MonoBehaviour
         return unlockedBuildingSOList;
     }
     public List<BuildingSO> GetLockedBuildingSOList() {
+        Debug.Log("getting");
         return lockedBuildingSOList;
     }
 

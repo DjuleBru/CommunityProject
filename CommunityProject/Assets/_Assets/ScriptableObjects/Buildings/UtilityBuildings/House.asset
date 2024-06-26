@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 5
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 0
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -32,5 +29,6 @@ MonoBehaviour:
   buildingName: House
   buildingIconSprite: {fileID: 999745045, guid: 087cefc84c3399f44807098bb42a3230, type: 3}
   buildingDescriptionPanelSprite: {fileID: 21300000, guid: 4ec718bf84d05d74694fbc3884492edd, type: 3}
+  buildingTileMap: {fileID: 8583580653652161249, guid: 033afad39a5caaa4584b2cf0f4c2d6de, type: 3}
   buildingDescription: Comfortable housing for your workers
   buildingPrefab: {fileID: 6272838151758355292, guid: aa45192bcc087df4683e985f0323e94f, type: 3}

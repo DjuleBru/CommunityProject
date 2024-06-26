@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 3
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 20e4f45c12e3ae0448385359cf07100e, type: 2}
@@ -34,5 +31,6 @@ MonoBehaviour:
   buildingName: Jewelry
   buildingIconSprite: {fileID: -1863786093, guid: fb1d43ee7de4aa847866dfb43cc0ae6f, type: 3}
   buildingDescriptionPanelSprite: {fileID: 1894087398, guid: 607c603328ead2044b6d1dc9eb9eca07, type: 3}
+  buildingTileMap: {fileID: 5770961853342914587, guid: fea9de8a6a4489943a7cd9072987af1b, type: 3}
   buildingDescription: Crafts trinkets
-  buildingPrefab: {fileID: 1718341335737673364, guid: 9b9332ceed6d6d04d8e7ad4598c87cbd, type: 3}
+  buildingPrefab: {fileID: 0}

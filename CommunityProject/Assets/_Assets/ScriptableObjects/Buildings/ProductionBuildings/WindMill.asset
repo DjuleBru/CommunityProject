@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 1
     itemTier: 0
     amount: 50
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: a322ecf24ea933f41a84448f90090a88, type: 2}
@@ -33,5 +30,6 @@ MonoBehaviour:
   buildingName: Windmill
   buildingIconSprite: {fileID: -25577975, guid: 3085a006acd0b764d907e72415506183, type: 3}
   buildingDescriptionPanelSprite: {fileID: -976223611, guid: 478ed34349dc0a042bc905bcb4c7652b, type: 3}
+  buildingTileMap: {fileID: 3495612473407556700, guid: 76f79fa932d417847be581a032368d39, type: 3}
   buildingDescription: Turns wheat into flour
   buildingPrefab: {fileID: 1718341335737673364, guid: 1316fcaca60424543ba9e91b3953a0cc, type: 3}

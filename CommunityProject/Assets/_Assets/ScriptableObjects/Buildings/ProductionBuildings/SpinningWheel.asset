@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -32,5 +29,6 @@ MonoBehaviour:
   buildingName: Spinning wheel
   buildingIconSprite: {fileID: 226701637, guid: ba4ac4fee2365d747b382456c755168c, type: 3}
   buildingDescriptionPanelSprite: {fileID: 982459617, guid: ab31ac04fb4b46940a572ee7c63766ca, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: Crafts fabric from raw materials
   buildingPrefab: {fileID: 1718341335737673364, guid: 8bc1affcd5e83bf4fb776a6388ee8403, type: 3}

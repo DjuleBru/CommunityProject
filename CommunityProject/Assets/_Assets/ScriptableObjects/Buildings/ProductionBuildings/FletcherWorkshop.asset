@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -32,5 +29,6 @@ MonoBehaviour:
   buildingName: Fletcher workshop
   buildingIconSprite: {fileID: 1069370142, guid: e36f96d4a259b67479e3da6f6aead650, type: 3}
   buildingDescriptionPanelSprite: {fileID: -1959501690, guid: 19aaded9c27c9d7499ef2aeddfa0f297, type: 3}
+  buildingTileMap: {fileID: 5770961853342914587, guid: fea9de8a6a4489943a7cd9072987af1b, type: 3}
   buildingDescription: Crafts bows & arrows
   buildingPrefab: {fileID: 1718341335737673364, guid: 89366f375fb7780418a58bd8e15067d9, type: 3}

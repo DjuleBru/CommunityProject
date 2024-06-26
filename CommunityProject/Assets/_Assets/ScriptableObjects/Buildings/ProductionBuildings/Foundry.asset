@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 5
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 2097e82e9d0fa264da3709f5f65425ec, type: 2}
@@ -34,5 +31,6 @@ MonoBehaviour:
   buildingName: Brick yard
   buildingIconSprite: {fileID: -1530609633, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}
   buildingDescriptionPanelSprite: {fileID: -1530609633, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}
+  buildingTileMap: {fileID: 1830340280397692406, guid: 2f005fd0b8b544343a374c305751b394, type: 3}
   buildingDescription: Melts raw ore into bars
   buildingPrefab: {fileID: 1718341335737673364, guid: a313c1497a4c81d43a7dab947419804e, type: 3}

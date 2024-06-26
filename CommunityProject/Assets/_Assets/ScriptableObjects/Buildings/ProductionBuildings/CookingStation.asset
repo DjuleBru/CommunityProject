@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 1eca915dcbc0d2a4e885f304b73a33c2, type: 2}
@@ -33,5 +30,6 @@ MonoBehaviour:
   buildingName: Cooking Station
   buildingIconSprite: {fileID: 439292697, guid: fb1d43ee7de4aa847866dfb43cc0ae6f, type: 3}
   buildingDescriptionPanelSprite: {fileID: 781388391, guid: 754905a7350d5454ea38c320815a4cfd, type: 3}
+  buildingTileMap: {fileID: 5770961853342914587, guid: fea9de8a6a4489943a7cd9072987af1b, type: 3}
   buildingDescription: Prepares advanced food recipes
   buildingPrefab: {fileID: 1718341335737673364, guid: c6ce65049f341254d91e39d29ee89b8d, type: 3}

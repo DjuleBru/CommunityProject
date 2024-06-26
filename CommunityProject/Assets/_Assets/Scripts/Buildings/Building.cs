@@ -95,18 +95,16 @@ public class Building : MonoBehaviour
     protected virtual void Awake() {
         buildingCollider = GetComponent<Collider2D>();
         buildingVisual = GetComponentInChildren<BuildingVisual>();
-        buildingCamera.enabled = false;
-
-        interactionCollider.enabled = false;
-
         rb = GetComponent<Rigidbody2D>();
-        buildingCollider.isTrigger = true;
-        isValidBuildingPlacement = true;
     }
 
     protected virtual void Start() {
         LoadBuilding();
         eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        buildingCamera.enabled = false;
+        interactionCollider.enabled = false;
+        buildingCollider.isTrigger = true;
+        isValidBuildingPlacement = true;
 
         GameInput.Instance.OnPlaceBuilding += GameInput_OnPlaceBuilding;
         GameInput.Instance.OnPlaceBuildingCancelled += GameInput_OnPlaceBuildingCancelled;
@@ -202,7 +200,7 @@ public class Building : MonoBehaviour
         }
     }
 
-    protected void OnDestroy() {
+    protected virtual void OnDestroy() {
         GameInput.Instance.OnPlaceBuilding -= GameInput_OnPlaceBuilding;
         GameInput.Instance.OnPlaceBuildingCancelled -= GameInput_OnPlaceBuildingCancelled;
     }

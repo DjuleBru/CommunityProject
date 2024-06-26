@@ -11,6 +11,7 @@ public class Chest : Building
     [SerializeField] private BuildingHaulersUI_World buildingHaulersUI_World;
 
     [SerializeField] private Item.ItemCategory itemCategoryToStore;
+    [SerializeField] private ChestVisual chestVisual;
 
     protected override void Awake() {
         rb = GetComponent<Rigidbody2D>();

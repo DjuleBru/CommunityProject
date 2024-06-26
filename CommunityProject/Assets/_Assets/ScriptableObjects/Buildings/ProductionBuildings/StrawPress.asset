@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes: []
   statAffectingProductivity: 0
@@ -32,5 +29,6 @@ MonoBehaviour:
   buildingName: Brick yard
   buildingIconSprite: {fileID: 274644571, guid: d6cb6f110a0be1142b07423244dcfea0, type: 3}
   buildingDescriptionPanelSprite: {fileID: -1704832411, guid: 667c004f9df4d1f4ba1f99a1418a2a37, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: Turns straw into haystacks
   buildingPrefab: {fileID: 1718341335737673364, guid: ba85a93d17dfb424d82c0f99302bde5a, type: 3}

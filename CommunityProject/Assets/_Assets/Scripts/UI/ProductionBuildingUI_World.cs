@@ -17,7 +17,7 @@ public class ProductionBuildingUI_World : MonoBehaviour
 
     private bool working;
 
-    private void Awake() {
+    private void Start() {
         missingItemsUI.SetActive(false);
         missingSelectedRecipeUI.SetActive(false);
         missingWorkerUI.SetActive(false);

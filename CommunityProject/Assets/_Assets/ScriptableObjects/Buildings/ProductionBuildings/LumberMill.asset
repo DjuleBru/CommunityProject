@@ -19,7 +19,7 @@ MonoBehaviour:
   - itemType: 0
     itemTier: 0
     amount: 20
-  buildingUnlockItems: []
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 78a08c77253ff2c46a4f8c04827bc6ee, type: 2}
@@ -30,5 +30,6 @@ MonoBehaviour:
   buildingName: Lumber mill
   buildingIconSprite: {fileID: 230917249, guid: dfa83d8eb7c785a4d99a699af38ad26d, type: 3}
   buildingDescriptionPanelSprite: {fileID: -373889290, guid: f19d10c4ddea4ed4fa315422e6625193, type: 3}
+  buildingTileMap: {fileID: 644372746520764483, guid: 71b367e78a8506342a9c6f085e5395fa, type: 3}
   buildingDescription: All about wood
   buildingPrefab: {fileID: 1718341335737673364, guid: 17ce62a35fb529744bfda00aebf8cca9, type: 3}
