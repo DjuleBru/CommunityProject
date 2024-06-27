@@ -8,10 +8,13 @@ public class ArchitectTable : ProductionBuilding
 
     protected override void Start() {
         base.Start();
+
         ChangeInventories();
+
         if (ResearchMenuUI.Instance.GetCurrentResearch() != null) {
             productionBuildingUIWorld.SetRecipeMissing(false);
         }
+
         ResearchMenuUI.Instance.OnSelectedResearchChanged += ResearchMenuUI_OnSelectedResearchChanged;
         ResearchMenuUI.Instance.OnSelectedResearchFinished += ResearchMenuUI_OnSelectedResearchFinished;
     }

@@ -17,6 +17,7 @@ MonoBehaviour:
   itemTier: 0
   itemSprite: {fileID: 1814963398, guid: 331f0faed5a02a4439bdb335c8e5b10a, type: 3}
   isStackable: 1
+  itemDescription: 
   maxStackableAmount: 9
   seedSprite: {fileID: 0}
   growth1Sprite: {fileID: 0}
@@ -27,8 +28,9 @@ MonoBehaviour:
   itemEquipmentType: 1
   strengthBonusValue: 0
   intelligenceBonusValue: 0
+  agilityBonusValue: 0
   moveSpeedBonusValue: 0
   healthBonusValue: 0
   damageBonusValue: 1
   armorBonusValue: 0
-  equipmentDurability: 10
+  equipmentDurability: 100

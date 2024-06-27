@@ -18,6 +18,7 @@ public class BuildingsManager : MonoBehaviour
     private List<BuildingSO> lockedBuildingSOList;
 
     [SerializeField] private List<int> buildingsSavedIDList;
+    [SerializeField] private List<int> architectTablesIDList;
 
     public event EventHandler OnAnyBuildingSpawned;
     public event EventHandler OnAnyBuildingPlacedOrCancelled;
@@ -69,25 +70,35 @@ public class BuildingsManager : MonoBehaviour
 
     public void SaveBuildingsInOverworld() {
         buildingsSavedIDList = new List<int>();
+        architectTablesIDList = new List<int>();
 
         foreach (Building building in buildingsSpawned) {
-            buildingsSavedIDList.Add(building.GetInstanceID());
-            ES3.Save(building.GetInstanceID().ToString(), building.gameObject);
-            Debug.Log("saving building " + building);
+            if(building is ArchitectTable) {
+                ArchitectTable architectTable = (ArchitectTable)building;
+                architectTablesIDList.Add(architectTable.GetInstanceID());
+                ES3.Save(architectTable.GetInstanceID().ToString(), architectTable.gameObject);
+            } else {
+                buildingsSavedIDList.Add(building.GetInstanceID());
+                ES3.Save(building.GetInstanceID().ToString(), building.gameObject);
+            }
         }
 
         ES3.Save("buildingsSavedIDList", buildingsSavedIDList);
-        Debug.Log("savec building saved ids " + buildingsSavedIDList.Count);
+        ES3.Save("architectTablesIDList", architectTablesIDList);
     }
 
     public void LoadBuildingsInOverworld() {
         buildingsSavedIDList = ES3.Load("buildingsSavedIDList", new List<int>());
-        Debug.Log("loaded building saved ids " + buildingsSavedIDList.Count);
+        architectTablesIDList = ES3.Load("architectTablesIDList", new List<int>());
 
         foreach (int id in buildingsSavedIDList) {
             ES3.Load(id.ToString());
-            Debug.Log("loading building " +  id);
         }
+
+        foreach (int id in architectTablesIDList) {
+            ES3.Load(id.ToString());
+        }
+
         overworldGridVisual.SetActive(false);
     }
 
@@ -291,7 +302,6 @@ public class BuildingsManager : MonoBehaviour
 
             // We have an equipment holding chest
             foreach (Item storedItem in chest.GetChestInventory().GetItemList()) {
-                    Debug.Log(storedItem.itemType);
                     // Check if we have the same item equipment type of equal or higher tier
                     if (ItemAssets.Instance.GetItemSO(storedItem.itemType).itemEquipmentType == equipmentType && (int)storedItem.itemTier == i) {
                         bestEquipment = storedItem;

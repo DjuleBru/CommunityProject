@@ -13,7 +13,6 @@ public class Player : MonoBehaviour, IDamageable
     private Inventory playerInventory;
     [SerializeField] private InventoryUI playerInventoryUI;
     [SerializeField] private GameObject playerVisual;
-
     public static Player Instance { get; private set; }
 
     public event EventHandler OnPlayerDamaged;
@@ -33,14 +32,13 @@ public class Player : MonoBehaviour, IDamageable
     private void Awake() {
         Instance = this;
         playerHP = playerBaseHP;
-
-        playerInventory = new Inventory(true, 3, 3, false, null);
-        playerInventoryUI.SetInventory(playerInventory);
     }
 
     private void Start() {
-        playerInventory.AddItem(new Item { itemType = Item.ItemType.Wood, amount = 5 });
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+
+        playerInventory = ES3.Load("playerInventory", new Inventory(true, 3, 3, false, null));
+        playerInventoryUI.SetInventory(playerInventory);
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e) {
@@ -294,6 +292,10 @@ public class Player : MonoBehaviour, IDamageable
         } else {
             interactable.ClosePanel();
         }
+    }
+
+    public void SavePlayer() {
+        ES3.Save("playerInventory", playerInventory);
     }
 
     #region SET PARAMETERS

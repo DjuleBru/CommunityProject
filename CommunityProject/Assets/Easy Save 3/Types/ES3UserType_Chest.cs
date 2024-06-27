@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("chestInventory", "chestInventoryUI", "isDungeonChest", "buildingHaulersUI_World", "buildingVisual", "buildingPlaced", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers")]
+	[ES3PropertiesAttribute("chestInventory", "chestInventoryUI", "isDungeonChest", "buildingHaulersUI_World", "itemCategoryToStore", "buildingSO", "buildingVisual", "buildingPlaced", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers")]
 	public class ES3UserType_Chest : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -20,6 +20,8 @@ namespace ES3Types
 			writer.WritePrivateFieldByRef("chestInventoryUI", instance);
 			writer.WritePrivateField("isDungeonChest", instance);
 			writer.WritePrivateFieldByRef("buildingHaulersUI_World", instance);
+			writer.WritePrivateField("itemCategoryToStore", instance);
+			writer.WritePrivateFieldByRef("buildingSO", instance);
 			writer.WritePrivateFieldByRef("buildingVisual", instance);
 			writer.WritePrivateField("buildingPlaced", instance);
 			writer.WritePrivateFieldByRef("assignedHumanoid", instance);
@@ -46,6 +48,12 @@ namespace ES3Types
 					break;
 					case "buildingHaulersUI_World":
 					instance = (Chest)reader.SetPrivateField("buildingHaulersUI_World", reader.Read<BuildingHaulersUI_World>(), instance);
+					break;
+					case "itemCategoryToStore":
+					instance = (Chest)reader.SetPrivateField("itemCategoryToStore", reader.Read<Item.ItemCategory>(), instance);
+					break;
+					case "buildingSO":
+					instance = (Chest)reader.SetPrivateField("buildingSO", reader.Read<BuildingSO>(), instance);
 					break;
 					case "buildingVisual":
 					instance = (Chest)reader.SetPrivateField("buildingVisual", reader.Read<BuildingVisual>(), instance);
