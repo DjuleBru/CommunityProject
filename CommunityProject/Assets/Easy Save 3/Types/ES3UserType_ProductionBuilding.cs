@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("selectedRecipeSO", "productionTimer", "inputInventoryList", "outputInventoryList", "itemWorldProducedList", "working", "inputItemsMissing", "outputInventoryFull", "productionBuildingUIWorld", "buildingHaulersUI_World", "productionBuildingvisual", "buildingSO", "buildingSizeX", "buildingSizeY", "buildingCamera", "buildingVisual", "interactionCollider", "buildingPlaced", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers", "workerInteractingWithBuilding")]
+	[ES3PropertiesAttribute("selectedRecipeSO", "productionTimer", "inputInventoryList", "outputInventoryList", "itemWorldProducedList", "working", "humanoidWorkingSpeed", "inputItemsMissing", "outputInventoryFull", "productionBuildingUIWorld", "buildingHaulersUI_World", "productionBuildingvisual", "buildingSO", "buildingSizeX", "buildingSizeY", "buildingCamera", "buildingVisual", "interactionCollider", "buildingPlaced", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers", "workerInteractingWithBuilding")]
 	public class ES3UserType_ProductionBuilding : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -22,6 +22,7 @@ namespace ES3Types
 			writer.WritePrivateField("outputInventoryList", instance);
 			writer.WritePrivateField("itemWorldProducedList", instance);
 			writer.WritePrivateField("working", instance);
+			writer.WritePrivateField("humanoidWorkingSpeed", instance);
 			writer.WritePrivateField("inputItemsMissing", instance);
 			writer.WritePrivateField("outputInventoryFull", instance);
 			writer.WritePrivateFieldByRef("productionBuildingUIWorld", instance);
@@ -65,6 +66,9 @@ namespace ES3Types
 					break;
 					case "working":
 					instance = (ProductionBuilding)reader.SetPrivateField("working", reader.Read<System.Boolean>(), instance);
+					break;
+					case "humanoidWorkingSpeed":
+					instance = (ProductionBuilding)reader.SetPrivateField("humanoidWorkingSpeed", reader.Read<System.Single>(), instance);
 					break;
 					case "inputItemsMissing":
 					instance = (ProductionBuilding)reader.SetPrivateField("inputItemsMissing", reader.Read<System.Boolean>(), instance);

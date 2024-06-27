@@ -95,7 +95,6 @@ public class FetchMissingEquipment : Action {
                 if (colliderDistance2DToChest.distance < .5f) {
 
                 int amountThatCanBeFetched = 0;
-                Debug.Log(closestChest.GetChestInventory().AmountInventoryHasOfType(itemToFetch));
 
                 if(closestChest.GetChestInventory().AmountInventoryHasOfType(itemToFetch) >= 5) {
                     amountThatCanBeFetched = 5;

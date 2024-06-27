@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("buildingAnimator", "characterAnimator", "propVisual", "placingBuildingBackgroundSprite", "buildingHoveredVisual", "validPlacementColor", "unValidPlacementColor", "solidBuildingCollider", "interactionBuildingCollider", "building", "playerInTriggerArea", "interactingWithBuilding", "buildingScoreText", "m_CancellationTokenSource")]
+	[ES3PropertiesAttribute("buildingAnimator", "characterAnimator", "propVisual", "placingBuildingBackgroundSprite", "buildingHoveredVisual", "validPlacementColor", "solidBuildingCollider", "interactionBuildingCollider", "building", "playerInTriggerArea", "interactingWithBuilding", "buildingScoreText", "m_CancellationTokenSource")]
 	public class ES3UserType_ProductionBuildingVisual : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -22,7 +22,6 @@ namespace ES3Types
 			writer.WritePrivateFieldByRef("placingBuildingBackgroundSprite", instance);
 			writer.WritePrivateFieldByRef("buildingHoveredVisual", instance);
 			writer.WritePrivateField("validPlacementColor", instance);
-			writer.WritePrivateField("unValidPlacementColor", instance);
 			writer.WritePrivateFieldByRef("solidBuildingCollider", instance);
 			writer.WritePrivateFieldByRef("interactionBuildingCollider", instance);
 			writer.WritePrivateFieldByRef("building", instance);
@@ -57,9 +56,6 @@ namespace ES3Types
 					break;
 					case "validPlacementColor":
 					instance = (ProductionBuildingVisual)reader.SetPrivateField("validPlacementColor", reader.Read<UnityEngine.Color>(), instance);
-					break;
-					case "unValidPlacementColor":
-					instance = (ProductionBuildingVisual)reader.SetPrivateField("unValidPlacementColor", reader.Read<UnityEngine.Color>(), instance);
 					break;
 					case "solidBuildingCollider":
 					instance = (ProductionBuildingVisual)reader.SetPrivateField("solidBuildingCollider", reader.Read<UnityEngine.Collider2D>(), instance);

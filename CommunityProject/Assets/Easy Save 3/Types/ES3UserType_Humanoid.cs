@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("assignedBuilding", "roamDistanceToBuilding", "humanoidSO", "job", "debugJob", "humanoidWork", "humanoidHaul", "humanoidNeeds", "humanoidDungeonCrawl", "humanoidAnimatorManager", "humanoidMovement", "humanoidCarry", "humanoidVisual", "humanoidInteraction", "collider2D", "humanoidName", "humanoidActionDesriprion", "strength", "intelligence", "moveSpeed", "agility", "damage", "armor", "carryCapacity", "jobAssigned", "autoAssign", "autoAssignBestEquipment", "freedFromDungeon", "health", "maxHealth", "healing", "OnHealingStarted", "OnHealingStopped", "behaviorTree", "OnEquipmentChanged", "mainHandItem", "secondaryHandItem", "helmetItem", "bootsItem", "necklaceItem", "ringItem", "mainHandItemDurability", "secondaryHandItemDurability", "helmetItemDurability", "bootsItemDurability", "necklaceItemDurability", "ringItemDurability", "mainHandItemMaxDurability", "secondaryHandItemMaxDurability", "helmetItemMaxDurability", "bootsItemMaxDurability", "necklaceItemMaxDurability", "ringItemMaxDurability", "equippedItems", "m_CancellationTokenSource")]
+	[ES3PropertiesAttribute("assignedBuilding", "humanoidSO", "job", "humanoidWork", "humanoidHaul", "humanoidNeeds", "humanoidDungeonCrawl", "humanoidAnimatorManager", "humanoidMovement", "humanoidCarry", "humanoidVisual", "humanoidName", "humanoidActionDesriprion", "strength", "intelligence", "moveSpeed", "agility", "damage", "armor", "carryCapacity", "jobAssigned", "autoAssign", "autoAssignBestEquipment", "freedFromDungeon", "health", "maxHealth", "healing", "behaviorTree", "mainHandItem", "secondaryHandItem", "helmetItem", "bootsItem", "necklaceItem", "ringItem", "mainHandItemDurability", "secondaryHandItemDurability", "helmetItemDurability", "bootsItemDurability", "necklaceItemDurability", "ringItemDurability", "mainHandItemMaxDurability", "secondaryHandItemMaxDurability", "helmetItemMaxDurability", "bootsItemMaxDurability", "necklaceItemMaxDurability", "ringItemMaxDurability", "equippedItems", "m_CancellationTokenSource")]
 	public class ES3UserType_Humanoid : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -17,10 +17,8 @@ namespace ES3Types
 			var instance = (Humanoid)obj;
 			
 			writer.WritePrivateFieldByRef("assignedBuilding", instance);
-			writer.WritePrivateField("roamDistanceToBuilding", instance);
 			writer.WritePrivateFieldByRef("humanoidSO", instance);
 			writer.WritePrivateField("job", instance);
-			writer.WritePrivateField("debugJob", instance);
 			writer.WritePrivateFieldByRef("humanoidWork", instance);
 			writer.WritePrivateFieldByRef("humanoidHaul", instance);
 			writer.WritePrivateFieldByRef("humanoidNeeds", instance);
@@ -29,8 +27,6 @@ namespace ES3Types
 			writer.WritePrivateFieldByRef("humanoidMovement", instance);
 			writer.WritePrivateFieldByRef("humanoidCarry", instance);
 			writer.WritePrivateFieldByRef("humanoidVisual", instance);
-			writer.WritePrivateFieldByRef("humanoidInteraction", instance);
-			writer.WritePrivateFieldByRef("collider2D", instance);
 			writer.WritePrivateField("humanoidName", instance);
 			writer.WritePrivateField("humanoidActionDesriprion", instance);
 			writer.WritePrivateField("strength", instance);
@@ -47,10 +43,7 @@ namespace ES3Types
 			writer.WritePrivateField("health", instance);
 			writer.WritePrivateField("maxHealth", instance);
 			writer.WritePrivateField("healing", instance);
-			writer.WritePrivateField("OnHealingStarted", instance);
-			writer.WritePrivateField("OnHealingStopped", instance);
 			writer.WritePrivateFieldByRef("behaviorTree", instance);
-			writer.WritePrivateField("OnEquipmentChanged", instance);
 			writer.WritePrivateField("mainHandItem", instance);
 			writer.WritePrivateField("secondaryHandItem", instance);
 			writer.WritePrivateField("helmetItem", instance);
@@ -84,17 +77,11 @@ namespace ES3Types
 					case "assignedBuilding":
 					instance = (Humanoid)reader.SetPrivateField("assignedBuilding", reader.Read<Building>(), instance);
 					break;
-					case "roamDistanceToBuilding":
-					instance = (Humanoid)reader.SetPrivateField("roamDistanceToBuilding", reader.Read<System.Single>(), instance);
-					break;
 					case "humanoidSO":
 					instance = (Humanoid)reader.SetPrivateField("humanoidSO", reader.Read<HumanoidSO>(), instance);
 					break;
 					case "job":
 					instance = (Humanoid)reader.SetPrivateField("job", reader.Read<Humanoid.Job>(), instance);
-					break;
-					case "debugJob":
-					instance = (Humanoid)reader.SetPrivateField("debugJob", reader.Read<System.Boolean>(), instance);
 					break;
 					case "humanoidWork":
 					instance = (Humanoid)reader.SetPrivateField("humanoidWork", reader.Read<HumanoidWork>(), instance);
@@ -119,12 +106,6 @@ namespace ES3Types
 					break;
 					case "humanoidVisual":
 					instance = (Humanoid)reader.SetPrivateField("humanoidVisual", reader.Read<HumanoidVisual>(), instance);
-					break;
-					case "humanoidInteraction":
-					instance = (Humanoid)reader.SetPrivateField("humanoidInteraction", reader.Read<HumanoidInteraction>(), instance);
-					break;
-					case "collider2D":
-					instance = (Humanoid)reader.SetPrivateField("collider2D", reader.Read<UnityEngine.Collider2D>(), instance);
 					break;
 					case "humanoidName":
 					instance = (Humanoid)reader.SetPrivateField("humanoidName", reader.Read<System.String>(), instance);
@@ -174,17 +155,8 @@ namespace ES3Types
 					case "healing":
 					instance = (Humanoid)reader.SetPrivateField("healing", reader.Read<System.Boolean>(), instance);
 					break;
-					case "OnHealingStarted":
-					instance = (Humanoid)reader.SetPrivateField("OnHealingStarted", reader.Read<System.EventHandler>(), instance);
-					break;
-					case "OnHealingStopped":
-					instance = (Humanoid)reader.SetPrivateField("OnHealingStopped", reader.Read<System.EventHandler>(), instance);
-					break;
 					case "behaviorTree":
 					instance = (Humanoid)reader.SetPrivateField("behaviorTree", reader.Read<BehaviorDesigner.Runtime.BehaviorTree>(), instance);
-					break;
-					case "OnEquipmentChanged":
-					instance = (Humanoid)reader.SetPrivateField("OnEquipmentChanged", reader.Read<System.EventHandler>(), instance);
 					break;
 					case "mainHandItem":
 					instance = (Humanoid)reader.SetPrivateField("mainHandItem", reader.Read<Item>(), instance);

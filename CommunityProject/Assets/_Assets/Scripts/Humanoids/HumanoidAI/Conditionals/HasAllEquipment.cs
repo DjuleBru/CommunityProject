@@ -48,7 +48,6 @@ public class HasAllEquipment : Conditional {
                 hasAllEquipment = false;
             }
         }
-
         if(hasAllEquipment) {
             return TaskStatus.Success;
         } else {

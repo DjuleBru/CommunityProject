@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("chestInventory", "chestInventoryUI", "isDungeonChest", "buildingHaulersUI_World", "itemCategoryToStore", "buildingSO", "buildingVisual", "buildingPlaced", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers")]
+	[ES3PropertiesAttribute("chestInventory", "isDungeonChest", "itemCategoryToStore", "buildingSO", "buildingVisual", "buildingPlaced", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers")]
 	public class ES3UserType_Chest : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -17,9 +17,7 @@ namespace ES3Types
 			var instance = (Chest)obj;
 			
 			writer.WritePrivateField("chestInventory", instance);
-			writer.WritePrivateFieldByRef("chestInventoryUI", instance);
 			writer.WritePrivateField("isDungeonChest", instance);
-			writer.WritePrivateFieldByRef("buildingHaulersUI_World", instance);
 			writer.WritePrivateField("itemCategoryToStore", instance);
 			writer.WritePrivateFieldByRef("buildingSO", instance);
 			writer.WritePrivateFieldByRef("buildingVisual", instance);
@@ -40,14 +38,8 @@ namespace ES3Types
 					case "chestInventory":
 					instance = (Chest)reader.SetPrivateField("chestInventory", reader.Read<Inventory>(), instance);
 					break;
-					case "chestInventoryUI":
-					instance = (Chest)reader.SetPrivateField("chestInventoryUI", reader.Read<InventoryUI_Interactable>(), instance);
-					break;
 					case "isDungeonChest":
 					instance = (Chest)reader.SetPrivateField("isDungeonChest", reader.Read<System.Boolean>(), instance);
-					break;
-					case "buildingHaulersUI_World":
-					instance = (Chest)reader.SetPrivateField("buildingHaulersUI_World", reader.Read<BuildingHaulersUI_World>(), instance);
 					break;
 					case "itemCategoryToStore":
 					instance = (Chest)reader.SetPrivateField("itemCategoryToStore", reader.Read<Item.ItemCategory>(), instance);

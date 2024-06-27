@@ -27,6 +27,7 @@ public class AssignDestinationBuilding : Action {
                 }
             }
             else {
+                Debug.Log("ruunning");
                 return TaskStatus.Running;
             }
         }

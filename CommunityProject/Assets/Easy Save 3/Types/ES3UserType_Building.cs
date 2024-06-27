@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("buildingSO", "buildingSizeX", "buildingSizeY", "buildingCamera", "buildingVisual", "rb", "buildingCollider", "interactionCollider", "isValidBuildingPlacement", "buildingPlaced", "collideCount", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers", "playerInteractingWithBuilding", "workerInteractingWithBuilding", "OnBuildingIsValidPlacement", "OnBuildingIsUnvalidPlacement", "OnBuildingPlaced", "eventSystem", "m_CancellationTokenSource")]
+	[ES3PropertiesAttribute("buildingSO", "buildingCamera", "buildingVisual", "rb", "buildingCollider", "interactionCollider", "isValidBuildingPlacement", "buildingPlaced", "collideCount", "assignedHumanoid", "assignedInputHauliers", "assignedOutputHauliers", "playerInteractingWithBuilding", "workerInteractingWithBuilding")]
 	public class ES3UserType_Building : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -17,8 +17,6 @@ namespace ES3Types
 			var instance = (Building)obj;
 			
 			writer.WritePrivateFieldByRef("buildingSO", instance);
-			writer.WritePrivateField("buildingSizeX", instance);
-			writer.WritePrivateField("buildingSizeY", instance);
 			writer.WritePrivateFieldByRef("buildingCamera", instance);
 			writer.WritePrivateFieldByRef("buildingVisual", instance);
 			writer.WritePrivateFieldByRef("rb", instance);
@@ -32,11 +30,6 @@ namespace ES3Types
 			writer.WritePrivateField("assignedOutputHauliers", instance);
 			writer.WritePrivateField("playerInteractingWithBuilding", instance);
 			writer.WritePrivateField("workerInteractingWithBuilding", instance);
-			writer.WritePrivateField("OnBuildingIsValidPlacement", instance);
-			writer.WritePrivateField("OnBuildingIsUnvalidPlacement", instance);
-			writer.WritePrivateField("OnBuildingPlaced", instance);
-			writer.WritePrivateFieldByRef("eventSystem", instance);
-			writer.WritePrivateField("m_CancellationTokenSource", instance);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -49,12 +42,6 @@ namespace ES3Types
 					
 					case "buildingSO":
 					instance = (Building)reader.SetPrivateField("buildingSO", reader.Read<BuildingSO>(), instance);
-					break;
-					case "buildingSizeX":
-					instance = (Building)reader.SetPrivateField("buildingSizeX", reader.Read<System.Int32>(), instance);
-					break;
-					case "buildingSizeY":
-					instance = (Building)reader.SetPrivateField("buildingSizeY", reader.Read<System.Int32>(), instance);
 					break;
 					case "buildingCamera":
 					instance = (Building)reader.SetPrivateField("buildingCamera", reader.Read<Cinemachine.CinemachineVirtualCamera>(), instance);
@@ -94,21 +81,6 @@ namespace ES3Types
 					break;
 					case "workerInteractingWithBuilding":
 					instance = (Building)reader.SetPrivateField("workerInteractingWithBuilding", reader.Read<System.Boolean>(), instance);
-					break;
-					case "OnBuildingIsValidPlacement":
-					instance = (Building)reader.SetPrivateField("OnBuildingIsValidPlacement", reader.Read<System.EventHandler>(), instance);
-					break;
-					case "OnBuildingIsUnvalidPlacement":
-					instance = (Building)reader.SetPrivateField("OnBuildingIsUnvalidPlacement", reader.Read<System.EventHandler>(), instance);
-					break;
-					case "OnBuildingPlaced":
-					instance = (Building)reader.SetPrivateField("OnBuildingPlaced", reader.Read<System.EventHandler>(), instance);
-					break;
-					case "eventSystem":
-					instance = (Building)reader.SetPrivateField("eventSystem", reader.Read<UnityEngine.EventSystems.EventSystem>(), instance);
-					break;
-					case "m_CancellationTokenSource":
-					instance = (Building)reader.SetPrivateField("m_CancellationTokenSource", reader.Read<System.Threading.CancellationTokenSource>(), instance);
 					break;
 					default:
 						reader.Skip();
