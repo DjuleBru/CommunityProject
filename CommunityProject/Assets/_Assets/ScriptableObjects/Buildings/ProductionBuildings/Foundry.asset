@@ -19,10 +19,7 @@ MonoBehaviour:
   - itemType: 5
     itemTier: 0
     amount: 20
-  buildingUnlockItems:
-  - itemType: 42
-    itemTier: 0
-    amount: 1
+  itemsToUnlockList: []
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: 2097e82e9d0fa264da3709f5f65425ec, type: 2}
@@ -31,6 +28,7 @@ MonoBehaviour:
   housingCapacity: 0
   energyFillRateMultiplier: 0
   healRate: 0
+  buildingTilemap: {fileID: 3649961698527750948, guid: 824e96c897e9e124195a0c24b3432410, type: 3}
   buildingName: Brick yard
   buildingIconSprite: {fileID: -1530609633, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}
   buildingDescriptionPanelSprite: {fileID: -1530609633, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}

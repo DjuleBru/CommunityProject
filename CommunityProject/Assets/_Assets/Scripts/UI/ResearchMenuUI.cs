@@ -47,13 +47,19 @@ public class ResearchMenuUI : MonoBehaviour
         Instance = this;
         researchTreePanel.gameObject.SetActive(false);
         researchDescriptionPanel.gameObject.SetActive(false);
+
+        researchProgressList = ES3.Load("researchProgressList", researchProgressList);
+        researchSelected = ES3.Load("researchSelected", researchSelected);
     }
 
     private void Start() {
         InitializeResearchProgressLists();
+        OnSelectedResearchChanged?.Invoke(this, EventArgs.Empty);
+        RefreshResearchDescriptionPanel(researchSelected);
     }
 
     private void InitializeResearchProgressLists() {
+
         if (researchProgressList == null) {
             researchProgressList = new List<ResearchProgress>();
 
@@ -165,6 +171,7 @@ public class ResearchMenuUI : MonoBehaviour
     }
 
     public void RefreshResearchDescriptionPanel(ResearchProgress researchProgress) {
+        if (researchProgress == null) return;
         if(researchProgress.recipeSO != null) {
             RefreshResearchDescriptionPanel(researchProgress.recipeSO);
         } else {
@@ -319,6 +326,11 @@ public class ResearchMenuUI : MonoBehaviour
 
         return ((float)totalItemAmount - (float)remainingItemAmount)/ (float)totalItemAmount;
 
+    }
+
+    public void SaveResearch() {
+        ES3.Save("researchProgressList", researchProgressList);
+        ES3.Save("researchSelected", researchSelected);
     }
 
 }

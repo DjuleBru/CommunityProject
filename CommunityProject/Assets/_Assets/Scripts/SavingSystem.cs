@@ -88,6 +88,7 @@ public class SavingSystem : MonoBehaviour {
     public void SaveOverworld() {
         HumanoidsManager.Instance.SaveHumanoidsInOverworld();
         BuildingsManager.Instance.SaveBuildingsInOverworld();
+        ResearchMenuUI.Instance.SaveResearch();
     }
 
     public void OnApplicationQuit() {
