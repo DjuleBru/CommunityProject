@@ -15,6 +15,7 @@ public class HumanoidEquipItemButton : MonoBehaviour, IPointerEnterHandler, IPoi
             Item itemToEquip = new Item { itemType = itemTypeToEquip, amount = 0};
 
             HumanoidUI.Instance.SetItemToEquip(itemToEquip);
+            EquipmentTooltipUI.Instance.EnableToolTip(false);
         });
     }
 

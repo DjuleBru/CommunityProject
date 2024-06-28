@@ -54,7 +54,11 @@ public class ItemSO : ScriptableObject
     [BoxGroup("Equipment")]
     public int damageBonusValue;
     [BoxGroup("Equipment")]
+    public float attackSpeedMultiplier;
+    [BoxGroup("Equipment")]
     public int armorBonusValue;
     [BoxGroup("Equipment")]
     public int equipmentDurability;
+    [BoxGroup("Equipment")]
+    public WeaponSO weaponSO;
 }

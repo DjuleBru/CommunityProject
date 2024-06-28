@@ -265,6 +265,56 @@ public class BuildingsManager : MonoBehaviour
         return allEquipmentItems;
     }
 
+    public int GetEquipmentItemAmountOfItemType(Item.ItemType itemType) {
+        int equipmentAmount = 0;
+
+        foreach (Building building in buildingsSpawned) {
+            if (!(building is Chest)) continue;
+
+            Chest chest = building as Chest;
+            if (chest.GetItemCategoryToStore() != Item.ItemCategory.Equipment) continue;
+
+            // We have an equipment holding chest
+            foreach (Item item in chest.GetChestInventory().GetItemList()) {
+                if (ItemAssets.Instance.GetItemSO(item.itemType).itemType == itemType) {
+                    equipmentAmount += item.amount;
+                }
+            }
+        }
+
+        return equipmentAmount;
+    }
+
+    public int RemoveEquipmentFromAnyChest(Item equipmentItem) {
+        int amountRemoved = 0;
+
+        foreach (Building building in buildingsSpawned) {
+            if (!(building is Chest)) continue;
+
+            Chest chest = building as Chest;
+            if (chest.GetItemCategoryToStore() != Item.ItemCategory.Equipment) continue;
+
+            // We have an equipment holding chest
+            int amountThatCanBeRemovedFromChest = chest.GetChestInventory().AmountInventoryHasOfType(equipmentItem);
+
+            if (amountThatCanBeRemovedFromChest != 0) {
+                // This chest contains this item type
+                int amountToRemoveFromChest = equipmentItem.amount;
+                if(amountThatCanBeRemovedFromChest < amountToRemoveFromChest) {
+                    amountToRemoveFromChest = amountThatCanBeRemovedFromChest;
+                }
+
+                Item itemToRemove = new Item { itemType = equipmentItem.itemType, amount = amountToRemoveFromChest };
+                chest.GetChestInventory().RemoveItemAmount(itemToRemove);
+
+                amountRemoved += amountToRemoveFromChest;
+                if (amountRemoved >= equipmentItem.amount) break;
+            }
+        }
+
+        return amountRemoved;
+    }
+
     public List<Chest> GetChestStoringEquipment(Item item) {
 
         List<Chest> chestsStoringEquipment = new List<Chest>();

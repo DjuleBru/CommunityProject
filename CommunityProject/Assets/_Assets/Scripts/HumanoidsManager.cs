@@ -22,6 +22,10 @@ public class HumanoidsManager : MonoBehaviour
     [SerializeField] ExternalBehaviorTree joblessBehaviorTree;
     [SerializeField] ExternalBehaviorTree justFreedBehaviorTree;
 
+    [SerializeField] Sprite speedSprite;
+    [SerializeField] Sprite strengthSprite;
+    [SerializeField] Sprite intelligenceSprite;
+    [SerializeField] Sprite agilitySprite;
 
 
     private void Awake() {
@@ -121,5 +125,25 @@ public class HumanoidsManager : MonoBehaviour
             }
         }
         return humanoidWithProficiency;
+    }
+
+    public Sprite GetStatSprite(Humanoid.Stat stat) {
+        if(stat == Humanoid.Stat.speed) {
+            return speedSprite;
+        }
+
+        if (stat == Humanoid.Stat.intelligence) {
+            return intelligenceSprite;
+        }
+
+        if (stat == Humanoid.Stat.agility) {
+            return agilitySprite;
+        }
+
+        if (stat == Humanoid.Stat.strength) {
+            return strengthSprite;
+        }
+        return null;
+
     }
 }

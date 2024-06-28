@@ -56,7 +56,7 @@ public class EquipmentTooltipUI : MonoBehaviour
             Input.mousePosition, parentCanvas.worldCamera,
             out movePos);
 
-        tooltipGameObject.transform.position = parentCanvas.transform.TransformPoint(movePos);
+        tooltipGameObject.transform.position = parentCanvas.transform.TransformPoint(movePos) - Vector3.one*10;
     }
 
     public void EnableToolTip(bool enabled) {

@@ -265,8 +265,9 @@ public class HumanoidUI : MonoBehaviour
     public void OpenInventoryUI(Item.ItemEquipmentCategory category, HumanoidEquipmentButton humanoidEquipmentButton) {
         equipmentInventoryUI.gameObject.SetActive(true);
 
-        Inventory equipmentInventory = new Inventory(false, 0, 0, 0);
+        Inventory equipmentInventory = new Inventory(false, 0, 0, 1000000);
 
+        List<Item.ItemType> equipmentItemsTypes = new List<Item.ItemType>();
         foreach(Item item in BuildingsManager.Instance.GetAllEquipmentItemsOfCategory(category)) {
             equipmentInventory.AddItem(item);
         }

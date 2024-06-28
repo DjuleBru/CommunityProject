@@ -54,6 +54,7 @@ public class Item
         knowledgePotionT3,
         Poppy,
         PoppyPowder,
+        WoodenSpear,
     }
 
     public enum ItemCategory {
@@ -70,7 +71,7 @@ public class Item
         head,
         boots,
         necklace,
-        ring
+        ring,
     }
 
     public enum ItemEquipmentType {

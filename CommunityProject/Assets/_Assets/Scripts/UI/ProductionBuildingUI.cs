@@ -46,6 +46,12 @@ public class ProductionBuildingUI : BuildingUI
 
     [SerializeField] private Image progressionBarFill;
 
+    [SerializeField] private Image buildingIcon;
+    [SerializeField] private Transform preferredWorkersContainer;
+    [SerializeField] private Transform preferredWorkersTemplate;
+
+    [SerializeField] private Image statAffectingProductivity;
+
     private bool panelOpen;
     private ProductionBuilding productionBuilding;
 
@@ -77,6 +83,7 @@ public class ProductionBuildingUI : BuildingUI
 
         nameText.text = productionBuilding.GetBuildingSO().name;
         RefreshWorkerPanel();
+        RefreshNamePanel();
 
         if (productionBuilding is ArchitectTable) {
             RefreshArchitectTableUI();
@@ -95,6 +102,24 @@ public class ProductionBuildingUI : BuildingUI
         if(productionBuilding.GetSelectedRecipeSO() != null) {
             RefreshRecipeTimer();
         }
+    }
+
+    private void RefreshNamePanel() {
+        buildingIcon.sprite = productionBuilding.GetBuildingSO().buildingIconSprite;
+        statAffectingProductivity.sprite = HumanoidsManager.Instance.GetStatSprite(productionBuilding.GetBuildingSO().statAffectingProductivity);
+
+        foreach (Transform child in preferredWorkersContainer) {
+            if (child == preferredWorkersTemplate) continue;
+            Destroy(child.gameObject);
+        }
+
+        List<HumanoidSO> humanoidSOList = HumanoidsManager.Instance.GetBuildingHumanoidTypeProficiency(productionBuilding.GetBuildingSO());
+        foreach (HumanoidSO humanoidSO in humanoidSOList) {
+            Transform preferredWorker = Instantiate(preferredWorkersTemplate, preferredWorkersContainer);
+            preferredWorker.Find("Icon").GetComponent<Image>().sprite = humanoidSO.humanoidSprite;
+            preferredWorker.gameObject.SetActive(true);
+        }
+
     }
 
     public void RefreshRecipeTimer() {
@@ -156,7 +181,7 @@ public class ProductionBuildingUI : BuildingUI
             if(productionBuilding.GetHumanoidWorkingSpeed() != 0) {
 
                 float productionSpeed = productionBuilding.GetHumanoidWorkingSpeed() * 100f;
-                workerProductionSpeedText.text = productionSpeed.ToString() + "%";
+                workerProductionSpeedText.text = "(" + productionSpeed.ToString() + "%)";
                 float modifiedProductionTime = (selectedRecipeSO.standardProductionTime / (productionSpeed / 100));
                 modifiedProductionTime = Mathf.Round(modifiedProductionTime * 10.0f) * 0.1f;
                 recipeModifiedTimeText.text = modifiedProductionTime.ToString() + "s";

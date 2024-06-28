@@ -18,9 +18,7 @@ public class Player : MonoBehaviour, IDamageable
     public event EventHandler OnPlayerDamaged;
     public event EventHandler<IDamageable.OnIDamageableHealthChangedEventArgs> OnIDamageableHealthChanged;
 
-    private int playerBaseHP = 100;
     private int playerHP;
-    private int playerBaseDamage = 5;
 
     [SerializeField] private float workingSpeed;
     private bool working;
@@ -31,11 +29,12 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Awake() {
         Instance = this;
-        playerHP = playerBaseHP;
     }
 
     private void Start() {
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+
+        playerHP = (int)PlayerEquipment.Instance.GetMaxHealth();
 
         playerInventory = ES3.Load("playerInventory", new Inventory(true, 3, 3, false, null));
         playerInventoryUI.SetInventory(playerInventory);
@@ -86,15 +85,17 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     public void TakeDamage(int damage) {
-        playerHP -= damage;
+        int damageToTake = damage - (int)PlayerEquipment.Instance.GetArmor();
+        if(damageToTake <0 ) {
+            damageToTake = 0;
+        }
+
+        playerHP -= damageToTake;
+
         OnIDamageableHealthChanged?.Invoke(this, new IDamageable.OnIDamageableHealthChangedEventArgs {
             previousHealth = playerHP + damage,
             newHealth = playerHP
         });
-    }
-
-    public int GetPlayerBaseAttackDamage() {
-        return playerBaseDamage;
     }
 
     public void DisablePlayerActions() {
@@ -296,6 +297,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void SavePlayer() {
         ES3.Save("playerInventory", playerInventory);
+        ES3.Save("playerEquipment", PlayerEquipment.Instance.GetEquippmentItems());
     }
 
     #region SET PARAMETERS
@@ -317,7 +319,7 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     public int GetMaxHP() {
-        return playerBaseHP;
+        return (int)PlayerEquipment.Instance.GetMaxHealth();
     }
     public Inventory GetInventory() {
         return playerInventory;

@@ -21,6 +21,9 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
     [SerializeField] private Transform preferredWorkersContainer;
     [SerializeField] private Transform preferredWorkersTemplate;
 
+    [SerializeField] private Image statAffectingProductivity;
+    [SerializeField] private GameObject statAffectingProductivityGameObject;
+
     [SerializeField] Transform buildingCostContainer;
     [SerializeField] Transform itemCostTemplate;
     [SerializeField] Transform recipeContainer;
@@ -47,8 +50,9 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
         buildingWorksText.text = buildingSO.buildingCategory.ToString();
 
         buildingWorksCategory.sprite = BuildingsManager.Instance.GetWorkingCategorySprite(buildingSO.buildingCategory);
+        RefreshStatAffectingProductivity();
 
-        if(buildingSO.buildingCategory != Building.BuildingCategory.Housing) {
+        if (buildingSO.buildingCategory != Building.BuildingCategory.Housing) {
             recipeContainer.GetComponent<GridLayoutGroup>().spacing = new Vector2(5,0);
             preferredWorkersText.gameObject.SetActive(true);
             recipeText.text = "Recipes";
@@ -89,6 +93,15 @@ public class BuildingDescriptionPanelUI : MonoBehaviour
             Transform preferredWorker = Instantiate(preferredWorkersTemplate, preferredWorkersContainer);
             preferredWorker.Find("Icon").GetComponent<Image>().sprite = humanoidSO.humanoidSprite;
             preferredWorker.gameObject.SetActive(true);
+        }
+    }
+
+    private void RefreshStatAffectingProductivity() {
+        if(buildingSO.buildingUICategory != Building.BuildingUICategory.Storage && buildingSO.buildingUICategory != Building.BuildingUICategory.Utility) {
+            statAffectingProductivityGameObject.SetActive(true);
+            statAffectingProductivity.sprite = HumanoidsManager.Instance.GetStatSprite(buildingSO.statAffectingProductivity);
+        } else {
+            statAffectingProductivityGameObject.SetActive(false);
         }
     }
 

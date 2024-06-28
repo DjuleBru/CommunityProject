@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDirNormalized;
     private Vector2 watchDirNormalized;
 
-    [SerializeField] private float moveSpeed;
     private bool canMove = true;
 
     private void Awake() {
@@ -52,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void HandleMovement() {
-        Vector2 force = moveDirNormalized * moveSpeed * Time.fixedDeltaTime;
+        Vector2 force = moveDirNormalized * PlayerEquipment.Instance.GetMoveSpeed() * Time.fixedDeltaTime;
         rb.velocity = force;
     }
 

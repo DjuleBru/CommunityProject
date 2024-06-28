@@ -68,7 +68,7 @@ public class Inventory
     private void AddStackableItemToInventory(Item item) {
         bool itemAlreadyInInventory = false;
         bool stackIsFull = false;
-        int maxStackableAmount = 0;
+        int maxStackableAmount = inventoryMaxStackAmount;
 
         if(inventoryMaxStackAmount == 0) {
             maxStackableAmount = ItemAssets.Instance.GetItemSO(item.itemType).maxStackableAmount;

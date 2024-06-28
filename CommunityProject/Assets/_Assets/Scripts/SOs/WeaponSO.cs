@@ -8,13 +8,12 @@ public class WeaponSO : ScriptableObject
     public enum WeaponBodyAnimationType {
         Thrust,
         Slash,
+        TwoHanded,
         CutTree,
     }
 
     public Sprite weaponSprite;
     public Sprite weaponSpriteUI;
-    public int weaponDamage;
-    public float weaponAttackRate;
     public bool weaponCanPierce;
     public float weaponKnockback;
     public float weaponDazeTime;
