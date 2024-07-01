@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
+using System;
 
 public class InventoryUI : MonoBehaviour {
     protected Inventory inventory;
@@ -15,6 +16,9 @@ public class InventoryUI : MonoBehaviour {
 
     protected Image interactionImage;
     protected GridLayout gridLayout;
+
+    public static event EventHandler OnAnyInventoryOpened;
+    public static event EventHandler OnAnyInventoryClosed;
 
     protected virtual void Awake() {
         interactionImage = GetComponent<Image>();
@@ -97,4 +101,12 @@ public class InventoryUI : MonoBehaviour {
         }
     }
 
+
+    public void OnEnable() {
+        OnAnyInventoryOpened?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void OnDisable() {
+        OnAnyInventoryClosed?.Invoke(this, EventArgs.Empty);
+    }
 }

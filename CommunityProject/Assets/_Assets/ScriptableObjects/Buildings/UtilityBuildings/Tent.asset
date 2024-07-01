@@ -16,13 +16,16 @@ MonoBehaviour:
   buildingType: 9
   buildingCategory: 7
   buildingCostItems:
-  - itemType: 0
+  - itemType: 1
     itemTier: 0
-    amount: 5
-  buildingUnlockItems:
+    amount: 10
+  - itemType: 59
+    itemTier: 0
+    amount: 10
+  itemsToUnlockList:
   - itemType: 42
     itemTier: 0
-    amount: 1
+    amount: 30
   canInteractWithBuilding: 0
   buildingRecipes: []
   statAffectingProductivity: 0

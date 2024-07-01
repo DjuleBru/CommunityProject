@@ -108,7 +108,7 @@ public class Mob : MonoBehaviour, IDamageable
                         int dropAmount = 1;
 
                         if (droppedItemSO.isStackable) {
-                            dropAmount = UnityEngine.Random.Range(0, mobSO.itemDropRateList[j].maxDropAmount);
+                            dropAmount = UnityEngine.Random.Range(1, mobSO.itemDropRateList[j].maxDropAmount);
                         }
 
                         SpawnItem(mobSO.itemDropRateList[j].itemSO, dropAmount);

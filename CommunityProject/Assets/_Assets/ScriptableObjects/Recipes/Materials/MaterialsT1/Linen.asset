@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fbae1f91d76d554ca4d3b7c41e640b2, type: 3}
+  m_Name: Linen
+  m_EditorClassIdentifier: 
+  recipeName: Thread
+  recipeSprite: {fileID: -61365084, guid: 25c5120c59be79a4db79461f8f837360, type: 3}
+  inputItems: []
+  outputItems:
+  - itemType: 56
+    itemTier: 0
+    amount: 9
+  itemsToUnlockList: []
+  standardProductionTime: 10

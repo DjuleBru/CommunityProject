@@ -55,6 +55,19 @@ public class Item
         Poppy,
         PoppyPowder,
         WoodenSpear,
+        CopperAxe,
+        CopperDagger,
+        CopperFlail,
+        IronLongSword,
+        IronWaraxe,
+        LeatherWhip,
+        Bones,
+        BonePowder,
+        Linen,
+        Silk,
+        Wool,
+        Thread,
+        WoolThread,
     }
 
     public enum ItemCategory {
@@ -90,6 +103,9 @@ public class Item
         intelligenceNecklace,
         helmet,
         speedBoots,
+        dagger,
+        whip,
+        waraxe,
     }
 
     public enum ItemTier {

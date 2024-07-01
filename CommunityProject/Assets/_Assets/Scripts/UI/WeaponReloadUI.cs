@@ -16,6 +16,7 @@ public class WeaponReloadUI : MonoBehaviour
     private void Start() {
         PlayerAttack.Instance.OnPlayerAttackEnded += PlayerAttack_OnPlayerAttackEnded;
         PlayerAttack.Instance.OnActiveWeaponSOChanged += PlayerAttack_OnActiveWeaponSOChanged;
+        weaponIcon.sprite = PlayerAttack.Instance.GetActiveWeaponSO().weaponSpriteUI;
     }
 
     private void PlayerAttack_OnActiveWeaponSOChanged(object sender, System.EventArgs e) {

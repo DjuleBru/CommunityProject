@@ -72,9 +72,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void UpdateActiveStats() {
         attackDamage = (int)PlayerEquipment.Instance.GetDamage();
-
-        attackRate = PlayerEquipment.Instance.GetAttackSpeed();
-
+        if(activeWeaponSO.isTool) {
+            attackRate = activeWeaponSO.toolAttackRate;
+        } else {
+            attackRate = PlayerEquipment.Instance.GetAttackSpeed();
+        }
         attackKnockback = activeWeaponSO.weaponKnockback;
     }
 

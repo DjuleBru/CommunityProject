@@ -220,7 +220,6 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         return transferItemsUI;
     }
 
-
     public void DropItem() {
         if(item != null) {
             Item droppedItem = new Item { itemType = item.itemType, amount = item.amount };
@@ -230,7 +229,13 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
     }
 
     public void OnPointerDown(PointerEventData eventData) {
+        if (Input.GetKey(KeyCode.LeftControl)) {
+            //Identify other opened inventory
+            InventoryUI otherOpenedInventory = OpenedInventoryHandler.Instance.GetOtherInventoryOpened(parentInventoryUI);
+            if (!otherOpenedInventory.GetInventory().InventoryCanAcceptItem(item)) return;
 
+            TransferItemBetweenInventories(otherOpenedInventory.GetInventory());
+        }
     }
 
     public void OnDrop(PointerEventData eventData) {

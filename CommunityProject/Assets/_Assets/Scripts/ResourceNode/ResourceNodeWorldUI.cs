@@ -22,7 +22,7 @@ public class ResourceNodeWorldUI : MonoBehaviour
     }
 
     private void ResourceNode_OnResourceNodeDepleted(object sender, System.EventArgs e) {
-        progressionBarGameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void ResourceNode_OnResourceNodeHit(object sender, System.EventArgs e) {

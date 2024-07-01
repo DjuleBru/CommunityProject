@@ -15,14 +15,20 @@ MonoBehaviour:
   recipeName: Knowledge Potion T1
   recipeSprite: {fileID: -930637474, guid: 15e365539ea8b564a96391f0aa4c8afc, type: 3}
   inputItems:
-  - itemType: 46
+  - itemType: 55
     itemTier: 0
-    amount: 2
+    amount: 10
+  - itemType: 14
+    itemTier: 0
+    amount: 1
   outputItems:
   - itemType: 42
     itemTier: 0
     amount: 1
   itemsToUnlockList:
+  - itemType: 55
+    itemTier: 0
+    amount: 25
   - itemType: 14
     itemTier: 0
     amount: 10

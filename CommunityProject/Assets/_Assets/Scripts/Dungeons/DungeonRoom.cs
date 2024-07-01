@@ -159,7 +159,7 @@ public class DungeonRoom : MonoBehaviour
 
                 // Spawn if we have not reached the room difficulty value
 
-                Vector3 spawnPosition = Utils.Randomize2DPoint(mobSpawnPoint.transform.position, 1.5f);
+                Vector3 spawnPosition = Utils.Randomize2DPoint(mobSpawnPoint.transform.position, .5f);
 
                 Mob mobSpawned = Instantiate(mobToSwawn, spawnPosition, Quaternion.identity, this.transform).GetComponent<Mob>();
                 mobSpawned.SetParentDungeonRoom(this);
@@ -174,14 +174,13 @@ public class DungeonRoom : MonoBehaviour
     private void SpawnResources() {
         foreach (Transform resourceNodeSpawnPoint in resourceNodesSpawnPointsList) {
 
-            if (resourcesSpawnedInRoom < dungeonRoomResourceValue) {
+            if (resourcesSpawnedInRoom < dungeonRoomResourceValue && resourcesSpawnedInRoom < resourceNodesSpawnPointsList.Count) {
                 // Spawn if we have not reached the room's resource node number
 
                 // Pick a random resource node
                 Transform resourceNodeToSpawn = DungeonManager.Instance.GetResourceNodesList()[Random.Range(0, DungeonManager.Instance.GetResourceNodesList().Count)].transform;
 
-                Vector3 spawnPosition = Utils.Randomize2DPoint(resourceNodeSpawnPoint.transform.position, 0f);
-                Instantiate(resourceNodeToSpawn, spawnPosition, Quaternion.identity, this.transform).GetComponent<Mob>();
+                Instantiate(resourceNodeToSpawn, resourceNodeSpawnPoint.transform.position, Quaternion.identity, this.transform).GetComponent<Mob>();
 
                 resourcesSpawnedInRoom++;
             }

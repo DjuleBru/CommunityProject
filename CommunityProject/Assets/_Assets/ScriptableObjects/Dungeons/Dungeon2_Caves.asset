@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73784fc4f355db4d8a889d8c52850bf, type: 3}
+  m_Name: Dungeon2_Caves
+  m_EditorClassIdentifier: 
+  dungeonName: Deep Caves
+  dungeonType: 2
+  dungeonRoomPoolList:
+  - {fileID: 1698908917215491978, guid: 26206c22352a4584cb6c44c5950c035a, type: 3}
+  - {fileID: 1698908917215491978, guid: 21b60f5a7aaedeb4b9177be7e9df6867, type: 3}
+  - {fileID: 1698908917215491978, guid: e3757a91e2325034f88bc39acd4b03f3, type: 3}
+  dungeonDifficulty: 10
+  totalRoomNumber: 4
+  itemsFoundInDungeon:
+  - {fileID: 11400000, guid: 5f2ccccebc13bb0489de364857405e36, type: 2}
+  resourceNodesInDungeon:
+  - {fileID: 840820483134563200, guid: 20233f6683774254e9687a51d405b05a, type: 3}
+  resourceNodesNumberInDungeon: 2
+  mobsFoundInDungeon:
+  - {fileID: 11400000, guid: 7a0537e99590b8b45811aa1a82600dc8, type: 2}
+  humanoidTypeFoundInDungeon: {fileID: 11400000, guid: 5474f6fd72cdbe84ea28d92795cee655, type: 2}
+  humanoidsToSaveFromDungeon: 0
+  dungeonSprite: {fileID: 1308879337, guid: 6a12f61ca3b2d7d43a0bb1b51684d940, type: 3}
+  proficiencyHumanoidType: 0
+  recommendedHealth: 2
+  recommendedDamage: 4

@@ -16,16 +16,22 @@ MonoBehaviour:
   buildingType: 18
   buildingCategory: 2
   buildingCostItems:
-  - itemType: 0
+  - itemType: 40
     itemTier: 0
     amount: 20
-  itemsToUnlockList:
-  - itemType: 14
-    itemTier: 0
-    amount: 3
   - itemType: 3
     itemTier: 0
-    amount: 3
+    amount: 10
+  - itemType: 1
+    itemTier: 0
+    amount: 10
+  itemsToUnlockList:
+  - itemType: 55
+    itemTier: 0
+    amount: 100
+  - itemType: 14
+    itemTier: 0
+    amount: 50
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: e30428d77eb91004b9fb213c24be1982, type: 2}

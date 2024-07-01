@@ -6,9 +6,13 @@ public class DungeonManager : MonoBehaviour {
     public enum DungeonType {
         GreenForest,
         AutumnForest,
+        Cave,
+        Swamp,
+        Desert,
+
     }
 
-    public DungeonType dungeonType;
+    private DungeonType dungeonType;
 
     public static DungeonManager Instance { get; private set; }
 
@@ -37,6 +41,7 @@ public class DungeonManager : MonoBehaviour {
     private void Awake() {
         Instance = this;
         dungeonSO = ES3.Load("lastDungeonEnteredDungeonSO", defaultDungeonSO);
+        dungeonType = dungeonSO.dungeonType;
         FillCompleteMobList();
 
         dungeonMobList = dungeonSO.mobsFoundInDungeon;
@@ -107,5 +112,9 @@ public class DungeonManager : MonoBehaviour {
 
     public Inventory GetDungeonInventory() {
         return dungeonInventory;
+    }
+
+    public DungeonSO GetDungeonSO() {
+        return dungeonSO;
     }
 }

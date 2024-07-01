@@ -3,7 +3,7 @@ guid: bccc10ab5203df6488f8a34008272261
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -33,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -70,11 +72,12 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -111,11 +116,3120 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BuildersTileset_0
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 495
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8786227a41088044aaf61dc957ba716d
+      internalID: 1129124299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_1
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 496
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35658b58c4bad7d4bbb7f45815595677
+      internalID: -1488592667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_2
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 496
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94ad5ca9791cdd84194896c71260dfe6
+      internalID: -2049695730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_3
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 488
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbb8ead6937a69e49b41dcb92b78b127
+      internalID: 2133645945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_4
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 423
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c40ea2fa71ab1074da77da3d1fc65616
+      internalID: -1226779381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_5
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 440
+        width: 8
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5428adcdac78f0b4b83e37510a9cf8c3
+      internalID: 294682068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_6
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 424
+        width: 56
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7915469751b254c43bba66a31c474765
+      internalID: -6764848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_7
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 479
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d4528baa08cf374b87beec048c26e33
+      internalID: -1876521728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_8
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 439
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c6cbfb7483d49346be00916be24bf3c
+      internalID: 493014121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_9
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 457
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3e8bd8004f857a41a03748be02fba67
+      internalID: -695352080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_10
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 457
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd92818ba58e2be4c9673c7e948bfa0e
+      internalID: 1900150704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_11
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 440
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff48e194c97eb8a429e96a482dbb790c
+      internalID: -1070853073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_12
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 392
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0836897bd931e6145b4f39ceb06c0714
+      internalID: 567215575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_13
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 391
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c53f80b4c155b7b41a3074f82a97d7c0
+      internalID: 287366463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_14
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 391
+        width: 26
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfa0a449cfa195542b2b6ae76070f333
+      internalID: -1343988047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_15
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 391
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e19d386c2ea7cf54d9d7a659fb9b3919
+      internalID: 1662788810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_16
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 391
+        width: 26
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d1c5c351baa28e4ebe1d24eb4236d1c
+      internalID: 232075003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_17
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 391
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff4b8eed135927c46be3b029a48b800a
+      internalID: 397026230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_18
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 391
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abbf689e158e87347866ce3a054cb4c0
+      internalID: 344924304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_19
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 349
+        width: 78
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2489a05a0a5d53e4aa54686a952c9fe9
+      internalID: -1893395871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_20
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 392
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f07f2ebe3cc5ddf47bd833151fc0a8f0
+      internalID: 27463354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_21
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 392
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d4e09e9f1ba2e547a998ee690db21aa
+      internalID: -409458838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_22
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 319
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62a980d33e63e6648a017f2ad2642eea
+      internalID: 1864933408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_23
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 319
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cd67eda308241a47948af396ad0f1e8
+      internalID: 1929256704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_24
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 319
+        width: 58
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da087559bf818b940bcf6386f48106d5
+      internalID: -838718403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_25
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 368
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48832d135ef000d4985d4ca5ecf2e5e1
+      internalID: -407114806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_26
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 368
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beddea5907a55a34a906a660ac4c9a39
+      internalID: -165183553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_27
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 368
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eda123d9be7a8f748b6c2ab9bbb6f107
+      internalID: -157866234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_28
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 368
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d36a6c52d2569d45b3b38bfdf707807
+      internalID: -1027683626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_29
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 376
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7009d175e57c5443bf702bb07f95f6d
+      internalID: -1569977507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_30
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 376
+        width: 24
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea6af0ae3d4df2f4685fc74babacb74d
+      internalID: 1532742561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_31
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 368
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eea5743bd3365f94581c121640b5d55d
+      internalID: 1214124838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_32
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 368
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0819c31ab3212b14ead18083be9dc54d
+      internalID: -1640137354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_33
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 335
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b442eb0f51059f4fa27b2bbcda5626b
+      internalID: -778731258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_34
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 335
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1015c5d47bdb3f147937bc9053752adf
+      internalID: 265061524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_35
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 335
+        width: 10
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef1a4d4fe062f584d9b3fb6a4c904cef
+      internalID: -1118824939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_36
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 344
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4de96fbb37767b40a18035a5ab6ee22
+      internalID: 932874980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_37
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 344
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f4a0f91225de9f4eb42ee7a2fb976a2
+      internalID: 1546243165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_38
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 344
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b01c989b3bf4d1347a42058a7c5ed557
+      internalID: 1666151272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_39
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 344
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4354c2582ed31bd44941a9033aaa4e54
+      internalID: -2093129999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_40
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 320
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 512b32a7f8e499644a6e2bd7f3cf0332
+      internalID: 497644677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_41
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 320
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 509c3b6d8dcf0434786de138b3cf2987
+      internalID: -553735583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_42
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 320
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8a130eab99cd2a4f9b3d9abb46d2107
+      internalID: -1225936364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_43
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 320
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b63fbdc81a9e68e429e017d6c367592f
+      internalID: -2128052184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_44
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 320
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9e02285970e0364292412bf4bc5fc9b
+      internalID: 825061337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_45
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 320
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b504bdcd175f32b4293724fd73bf39af
+      internalID: 386938883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_46
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 288
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d217f4f0691baec4989175777a54aa74
+      internalID: 1749855413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_47
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 287
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e64d28ce3b0a504db7b78f0b1579b21
+      internalID: 1696967629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_48
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 287
+        width: 26
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79f8ccbc4f427fc4bae726dd4754e546
+      internalID: 2036592492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_49
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 287
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21ab0d807ebd09244b13fbb738bbd00b
+      internalID: 188178938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_50
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 287
+        width: 26
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd8bc0650a10730488f28349cf0158b3
+      internalID: -1958967421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_51
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 287
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06c57a4f90f1dc947964c63e86bff9df
+      internalID: 1467229618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_52
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 287
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 509ee34a4d925b64e939914583aa8f96
+      internalID: -1370383493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_53
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 245
+        width: 78
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99e2dc37fe32c854aaf814d453c304d1
+      internalID: 369387613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_54
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 288
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 250b422d26663264daae578bcd432e6a
+      internalID: -262993635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_55
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 288
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7daf2a227629c134fb93c372bd13284e
+      internalID: -846872164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_56
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 215
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eb4c94cf13d513479aafe44d1240058
+      internalID: 1071386828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_57
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 215
+        width: 58
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf0f7e5525cbe5847a78d64fc3ec421a
+      internalID: 1668816106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_58
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 215
+        width: 58
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c8b433af9b39d6468dcf0692d0ff879
+      internalID: 1156940419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_59
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 264
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41a87431c06fe1740980a4a69cf65fe1
+      internalID: -1563616175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_60
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 264
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1939f49a6bf632746ad997c8446badaf
+      internalID: -1752701071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_61
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 264
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fced4eef834678a4cb44e7680c84f97d
+      internalID: 1599558823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_62
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 264
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 356772dfcd2c32e4b9f2bb9b9faa3eb5
+      internalID: -1480420579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_63
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 272
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8daee208fc7690b4295efdf36fdd5bb7
+      internalID: 1975774323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_64
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 272
+        width: 24
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41e2a772722b4a54ba7679b7b4684dc4
+      internalID: 1100557751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_65
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 264
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0b07052e1dd9f04aa9ab6c50732b97e
+      internalID: -1994221622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_66
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 264
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3316bb1991345d1429546a6a53f2b3fe
+      internalID: -1988358175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_67
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 231
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e137e5821dc5a949a853dcd4469443e
+      internalID: -575027044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_68
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 231
+        width: 10
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7edffc7dfe1a7843811e623fa062428
+      internalID: 154220419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_69
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 231
+        width: 10
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a60dee92bcd65d0439fbf9324aae248b
+      internalID: 2058164586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_70
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 240
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62f6d3772047c704da1ca77eb4e03828
+      internalID: -841356586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_71
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 240
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43ae93c2a683e4f428c16b71b9413df4
+      internalID: -2035603457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_72
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 240
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 954f5abbfb6b34042bf89e77861acaf3
+      internalID: 394294696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_73
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 240
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15e7d062d03b2134aa3c8a4781d87533
+      internalID: -1278201174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_74
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad33adf0b78e49645aab4f06633dca12
+      internalID: 1149758854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_75
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36c3441662eb76c4585141ec3b58ae53
+      internalID: 1314955963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_76
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 216
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52289cab3b43eb648999b208dc90bed5
+      internalID: 1344805703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_77
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 216
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a672fbcf9c2d7aa408eb63fc430157ed
+      internalID: -1468204201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_78
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 216
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec16725e2c3647542b4fb69465c0fe3f
+      internalID: -2051018040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_79
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 216
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abe5f636aeb78024e99c7575f7b78b58
+      internalID: -1255737199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_80
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 184
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fa15f070548c424dbdbe708054f61b5
+      internalID: 917306240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_81
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 183
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d4f68c1af5e7a14396c839a8dfd6262
+      internalID: 1461715301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_82
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 183
+        width: 26
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2835c48f11d9914686c4381136bfe7f
+      internalID: 1625083343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_83
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 183
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 436d0bc3b8b87794f864dd9c664d6235
+      internalID: -1422909926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_84
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 183
+        width: 26
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eee7fc6d11daba48b225cb23319d589
+      internalID: -1203354909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_85
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 183
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f31cb432c0e1ad47b4d7832b141f79b
+      internalID: -759813304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_86
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 183
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a666fcbe89c9b94b9950a86474aa1d3
+      internalID: -365008867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_87
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 140
+        width: 80
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfbf188656015694fa7da7a83a6cdd03
+      internalID: 1853081956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_88
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 184
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72286a14f5e69154ea7b5d8c067722a5
+      internalID: -1041767854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_89
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 184
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 310fba1df832bcf45923fb252f2c115b
+      internalID: -963171621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_90
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 111
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8723129d7d8856b40af0926e5d8e9298
+      internalID: 1122799122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_91
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 111
+        width: 58
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a895843b233a9f448b1be20971c9e7e0
+      internalID: 4059455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_92
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 111
+        width: 58
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ba7b4da6d65bd4e9cdf9d3c96356a3
+      internalID: 695556540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_93
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 160
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1572df1b68a4fd428e1439c064c07a8
+      internalID: -485441947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_94
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 160
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29bfb03902bac0d4d8d015edb2b4bcbe
+      internalID: 347428008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_95
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 160
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4f34582c805d204e9b806c027df4738
+      internalID: -364582709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_96
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 160
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6039ffc2b4d323141b55be4a2ca9bcb1
+      internalID: -901053326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_97
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 168
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adaa23c9f6174fa45af6f3a24f17ee2f
+      internalID: -1284654920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_98
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 168
+        width: 24
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1295cb851df7a94f8c2ec65abe5a96e
+      internalID: 1631301111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_99
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 160
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed2641aed6b61eb499589b2e49730617
+      internalID: 2085501482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_100
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 160
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f680f6c4832e5c64db2daca01e036402
+      internalID: 72103963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_101
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 127
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c545cf55d692ec41b62b14f724fcaf1
+      internalID: -117192825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_102
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 127
+        width: 10
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e20e3e720a3e6bc47815e338d7cb930b
+      internalID: -605020584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_103
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 127
+        width: 10
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c585a3a296836a64a8d713d4971b784c
+      internalID: -1300790666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_104
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 136
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c09b91ccda041bc4caba2add99894509
+      internalID: -1192423932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_105
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 136
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c30fb09c426ad64f849fc34e77a39e5
+      internalID: -1055442667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_106
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 136
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8b4a5370a7119949b771cd9e01374c6
+      internalID: 1633409234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_107
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 136
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9722defe60e3d22468a6176353846fbd
+      internalID: -589637128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_108
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f96a8233bf886134a99aadf21740d99c
+      internalID: -1546850853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_109
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 114e1ab631c0c144fb145f609fde11ec
+      internalID: -1336367668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_110
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 112
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a313d5abc5b6bc6469b96343ca4ce538
+      internalID: -1648674580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_111
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 112
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 099dffc4b177baa40b7bdc30683b408f
+      internalID: -2076343051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_112
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 112
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a083e7345fa85d4eae20119e2a54cb5
+      internalID: 1106468521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_113
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 112
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12859a8219319604b9055f68d1955faf
+      internalID: 960007094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_114
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 326d56d4742d4db458819eb366fba2e6
+      internalID: -1166716121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_115
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 79
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef050719eed75d74eb10e401275be1e5
+      internalID: 1541098924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_116
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 79
+        width: 26
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 943401822e3c5734aba2d2014ad3019a
+      internalID: 441200569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_117
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 79
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdaa5aba496e1b140b02e80e53d0034a
+      internalID: -1261126394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_118
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 79
+        width: 26
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 122bae9c0171e924694d8035f808d1f9
+      internalID: 1871895500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_119
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 79
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5928cd76049185b4496445b4ada20817
+      internalID: 1724927535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_120
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 79
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe19d4c62d75dde48bcf0b2b5108ca02
+      internalID: 1512910164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_121
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 37
+        width: 78
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcc49c59537445f42b204e7422fcb841
+      internalID: -435518786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_122
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 80
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b6bf093edc434a4893dd7880d1b3b99
+      internalID: 709703292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_123
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 80
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d36229e77c412974fb90a9b6db573e28
+      internalID: -854209000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_124
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 7
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 686a06882397a3948bed94e77cef6135
+      internalID: -1192134365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_125
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 7
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06c149393661b2540b9710d20edb4f80
+      internalID: -141260853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_126
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 7
+        width: 58
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17a9c1b4e92f3364393ff43d13267f5c
+      internalID: -1460944779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_127
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 56
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 450a8ec6d3957784d96f4140ec9e49e9
+      internalID: -1139664106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_128
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 56
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ded097c100bcb41afb2434de47e7b1
+      internalID: -430065836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_129
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 56
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d54502274e0272f4cb61227ba7459f54
+      internalID: -1620469829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_130
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 56
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff78516439d5d634880c9af7de2a35d6
+      internalID: -621569243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_131
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 64
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac4eb31a20ba077409b3a4b709061aff
+      internalID: -156990464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_132
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 64
+        width: 24
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc8e6ba243b6834d932af591d7b572e
+      internalID: -1679047029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_133
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32cf15b09bf6ad645a925d210c71ca42
+      internalID: -1466994393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_134
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96dc626b926ffdd489293011a915533b
+      internalID: -1934214434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_135
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 23
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bce9da92109d204082354c628e374dc
+      internalID: -1919913405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_136
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 23
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22681d20cfae195438caac4201f27b44
+      internalID: 1021764409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_137
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 23
+        width: 10
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b856a8dec42f5384ebb53317f8f80eaa
+      internalID: -410406902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_138
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 32
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adb7f3516ab874345b926b674906d104
+      internalID: -979976119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_139
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 32
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2373f6b1ef27bc44ab13f3b9b11ecef
+      internalID: 1338229402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_140
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 32
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bebb6640dcf0e144a3e8d749593632d
+      internalID: -282396569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_141
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 32
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de11d4cde2f217b469b73e3af3ffd456
+      internalID: -1536979914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_142
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af993814a1a18b043a7a9d929e75ceef
+      internalID: 2055233606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_143
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e1bad30f3f73e642a99ca8dd8c551c9
+      internalID: -1054114768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_144
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 8
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac2aa84d4fad5ab438ff149d6866aca1
+      internalID: 1882510239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_145
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 8
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9933918afa17f6479f19b58d7f90fb3
+      internalID: -1894806174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_146
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 8
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e10c094848b03494a98bb91c83ac6af5
+      internalID: -825329480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuildersTileset_147
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 8
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9928d40082e03d4994f8b2d7810fc3e
+      internalID: 1443230219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,10 +3240,157 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
-  spritePackingTag: 
+    nameFileIdTable:
+      BuildersTileset_0: 1129124299
+      BuildersTileset_1: -1488592667
+      BuildersTileset_10: 1900150704
+      BuildersTileset_100: 72103963
+      BuildersTileset_101: -117192825
+      BuildersTileset_102: -605020584
+      BuildersTileset_103: -1300790666
+      BuildersTileset_104: -1192423932
+      BuildersTileset_105: -1055442667
+      BuildersTileset_106: 1633409234
+      BuildersTileset_107: -589637128
+      BuildersTileset_108: -1546850853
+      BuildersTileset_109: -1336367668
+      BuildersTileset_11: -1070853073
+      BuildersTileset_110: -1648674580
+      BuildersTileset_111: -2076343051
+      BuildersTileset_112: 1106468521
+      BuildersTileset_113: 960007094
+      BuildersTileset_114: -1166716121
+      BuildersTileset_115: 1541098924
+      BuildersTileset_116: 441200569
+      BuildersTileset_117: -1261126394
+      BuildersTileset_118: 1871895500
+      BuildersTileset_119: 1724927535
+      BuildersTileset_12: 567215575
+      BuildersTileset_120: 1512910164
+      BuildersTileset_121: -435518786
+      BuildersTileset_122: 709703292
+      BuildersTileset_123: -854209000
+      BuildersTileset_124: -1192134365
+      BuildersTileset_125: -141260853
+      BuildersTileset_126: -1460944779
+      BuildersTileset_127: -1139664106
+      BuildersTileset_128: -430065836
+      BuildersTileset_129: -1620469829
+      BuildersTileset_13: 287366463
+      BuildersTileset_130: -621569243
+      BuildersTileset_131: -156990464
+      BuildersTileset_132: -1679047029
+      BuildersTileset_133: -1466994393
+      BuildersTileset_134: -1934214434
+      BuildersTileset_135: -1919913405
+      BuildersTileset_136: 1021764409
+      BuildersTileset_137: -410406902
+      BuildersTileset_138: -979976119
+      BuildersTileset_139: 1338229402
+      BuildersTileset_14: -1343988047
+      BuildersTileset_140: -282396569
+      BuildersTileset_141: -1536979914
+      BuildersTileset_142: 2055233606
+      BuildersTileset_143: -1054114768
+      BuildersTileset_144: 1882510239
+      BuildersTileset_145: -1894806174
+      BuildersTileset_146: -825329480
+      BuildersTileset_147: 1443230219
+      BuildersTileset_15: 1662788810
+      BuildersTileset_16: 232075003
+      BuildersTileset_17: 397026230
+      BuildersTileset_18: 344924304
+      BuildersTileset_19: -1893395871
+      BuildersTileset_2: -2049695730
+      BuildersTileset_20: 27463354
+      BuildersTileset_21: -409458838
+      BuildersTileset_22: 1864933408
+      BuildersTileset_23: 1929256704
+      BuildersTileset_24: -838718403
+      BuildersTileset_25: -407114806
+      BuildersTileset_26: -165183553
+      BuildersTileset_27: -157866234
+      BuildersTileset_28: -1027683626
+      BuildersTileset_29: -1569977507
+      BuildersTileset_3: 2133645945
+      BuildersTileset_30: 1532742561
+      BuildersTileset_31: 1214124838
+      BuildersTileset_32: -1640137354
+      BuildersTileset_33: -778731258
+      BuildersTileset_34: 265061524
+      BuildersTileset_35: -1118824939
+      BuildersTileset_36: 932874980
+      BuildersTileset_37: 1546243165
+      BuildersTileset_38: 1666151272
+      BuildersTileset_39: -2093129999
+      BuildersTileset_4: -1226779381
+      BuildersTileset_40: 497644677
+      BuildersTileset_41: -553735583
+      BuildersTileset_42: -1225936364
+      BuildersTileset_43: -2128052184
+      BuildersTileset_44: 825061337
+      BuildersTileset_45: 386938883
+      BuildersTileset_46: 1749855413
+      BuildersTileset_47: 1696967629
+      BuildersTileset_48: 2036592492
+      BuildersTileset_49: 188178938
+      BuildersTileset_5: 294682068
+      BuildersTileset_50: -1958967421
+      BuildersTileset_51: 1467229618
+      BuildersTileset_52: -1370383493
+      BuildersTileset_53: 369387613
+      BuildersTileset_54: -262993635
+      BuildersTileset_55: -846872164
+      BuildersTileset_56: 1071386828
+      BuildersTileset_57: 1668816106
+      BuildersTileset_58: 1156940419
+      BuildersTileset_59: -1563616175
+      BuildersTileset_6: -6764848
+      BuildersTileset_60: -1752701071
+      BuildersTileset_61: 1599558823
+      BuildersTileset_62: -1480420579
+      BuildersTileset_63: 1975774323
+      BuildersTileset_64: 1100557751
+      BuildersTileset_65: -1994221622
+      BuildersTileset_66: -1988358175
+      BuildersTileset_67: -575027044
+      BuildersTileset_68: 154220419
+      BuildersTileset_69: 2058164586
+      BuildersTileset_7: -1876521728
+      BuildersTileset_70: -841356586
+      BuildersTileset_71: -2035603457
+      BuildersTileset_72: 394294696
+      BuildersTileset_73: -1278201174
+      BuildersTileset_74: 1149758854
+      BuildersTileset_75: 1314955963
+      BuildersTileset_76: 1344805703
+      BuildersTileset_77: -1468204201
+      BuildersTileset_78: -2051018040
+      BuildersTileset_79: -1255737199
+      BuildersTileset_8: 493014121
+      BuildersTileset_80: 917306240
+      BuildersTileset_81: 1461715301
+      BuildersTileset_82: 1625083343
+      BuildersTileset_83: -1422909926
+      BuildersTileset_84: -1203354909
+      BuildersTileset_85: -759813304
+      BuildersTileset_86: -365008867
+      BuildersTileset_87: 1853081956
+      BuildersTileset_88: -1041767854
+      BuildersTileset_89: -963171621
+      BuildersTileset_9: -695352080
+      BuildersTileset_90: 1122799122
+      BuildersTileset_91: 4059455
+      BuildersTileset_92: 695556540
+      BuildersTileset_93: -485441947
+      BuildersTileset_94: 347428008
+      BuildersTileset_95: -364582709
+      BuildersTileset_96: -901053326
+      BuildersTileset_97: -1284654920
+      BuildersTileset_98: 1631301111
+      BuildersTileset_99: 2085501482
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

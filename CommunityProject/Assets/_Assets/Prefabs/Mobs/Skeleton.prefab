@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 367348136124216153, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
@@ -35,6 +36,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 7528308055919220745, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 2f8bcd224dd7e71479cb24adad96d086, type: 2}
     - target: {fileID: 8365579109153928039, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -88,4 +93,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7c56f084211a3c47b50dcb53e7a31f7, type: 3}

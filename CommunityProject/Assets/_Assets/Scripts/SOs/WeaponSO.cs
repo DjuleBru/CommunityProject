@@ -10,7 +10,12 @@ public class WeaponSO : ScriptableObject
         Slash,
         TwoHanded,
         CutTree,
+        PickAxe,
+        Shovel,
     }
+
+    public bool isTool;
+    public float toolAttackRate;
 
     public Sprite weaponSprite;
     public Sprite weaponSpriteUI;

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86dbb87dd1e773344aa61522f3be7eec, type: 3}
+  m_Name: CopperFlail
+  m_EditorClassIdentifier: 
+  itemType: 50
+  itemCategory: 2
+  itemTier: 0
+  itemSprite: {fileID: -2049653733, guid: 331f0faed5a02a4439bdb335c8e5b10a, type: 3}
+  isStackable: 1
+  itemDescription: 
+  maxStackableAmount: 9
+  seedSprite: {fileID: 0}
+  growth1Sprite: {fileID: 0}
+  growth2Sprite: {fileID: 0}
+  growth3Sprite: {fileID: 0}
+  foodValue: 0
+  itemEquipmentCategory: 0
+  itemEquipmentType: 2
+  strengthBonusValue: 0
+  intelligenceBonusValue: 0
+  agilityBonusValue: 0
+  moveSpeedBonusValue: 0
+  healthBonusValue: 0
+  damageBonusValue: 1
+  attackSpeedMultiplier: 1.5
+  armorBonusValue: 0
+  equipmentDurability: 10
+  weaponSO: {fileID: 11400000, guid: 16d42c53fcf5b244a90207789cb812d5, type: 2}

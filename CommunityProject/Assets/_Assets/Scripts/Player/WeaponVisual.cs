@@ -29,7 +29,7 @@ public class WeaponVisual : MonoBehaviour {
 
     private void Update() {
         HandleWeaponIdleVisual();
-        HandleWeaponSortingLayer();
+        HandleWeaponSortingLayerAndXScale();
 
         if (PlayerAttack.Instance.GetAttacking()) return;
         if (animator.runtimeAnimatorController == null) return;
@@ -53,7 +53,7 @@ public class WeaponVisual : MonoBehaviour {
         }
     }
 
-    private void HandleWeaponSortingLayer() {
+    private void HandleWeaponSortingLayerAndXScale() {
         Vector2 moveDir = PlayerMovement.Instance.GetMovementVectorNormalized();
         Vector2 watchDir = PlayerMovement.Instance.GetWatchVectorNormalized();
 
@@ -63,6 +63,13 @@ public class WeaponVisual : MonoBehaviour {
                 weaponIdleSpriteRenderer.sortingOrder = -1;
             } else {
                 weaponIdleSpriteRenderer.sortingOrder = 1;
+            }
+
+            if (watchDir.x > 0) {
+                weaponIdleSpriteRenderer.transform.localScale = new Vector2(1, 1);
+            }
+            else {
+                weaponIdleSpriteRenderer.transform.localScale = new Vector2(-1, 1);
             }
 
         } else {

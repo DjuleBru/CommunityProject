@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73784fc4f355db4d8a889d8c52850bf, type: 3}
+  m_Name: Dungeon1_Forest
+  m_EditorClassIdentifier: 
+  dungeonName: Dense Forest
+  dungeonType: 0
+  dungeonRoomPoolList:
+  - {fileID: 1698908917215491978, guid: d83e7f971e1cde946af41ba886e1af6d, type: 3}
+  - {fileID: 1698908917215491978, guid: 2c297d7bec0781b4e9c993398c33b562, type: 3}
+  - {fileID: 1698908917215491978, guid: eb1fc81b5c97b2c48995c330dfa6bd45, type: 3}
+  - {fileID: 9125058671887655520, guid: cabd086c3337b7d408c7503a88fa5777, type: 3}
+  dungeonDifficulty: 10
+  totalRoomNumber: 2
+  itemsFoundInDungeon:
+  - {fileID: 11400000, guid: 611e91fb308509f4d949ba22d4b85478, type: 2}
+  resourceNodesInDungeon:
+  - {fileID: 840820483134563200, guid: a63c362565e146c40887a97e2cce95bf, type: 3}
+  resourceNodesNumberInDungeon: 2
+  mobsFoundInDungeon:
+  - {fileID: 11400000, guid: 305b1c4b4b660b342b6ed635128bd4bf, type: 2}
+  humanoidTypeFoundInDungeon: {fileID: 11400000, guid: 5474f6fd72cdbe84ea28d92795cee655, type: 2}
+  humanoidsToSaveFromDungeon: 0
+  dungeonSprite: {fileID: 1308879337, guid: 6a12f61ca3b2d7d43a0bb1b51684d940, type: 3}
+  proficiencyHumanoidType: 0
+  recommendedHealth: 2
+  recommendedDamage: 4

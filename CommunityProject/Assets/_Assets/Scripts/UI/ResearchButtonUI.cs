@@ -86,6 +86,7 @@ public class ResearchButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void SetResearchUnlocked() {
         button.enabled = false;
         selectedGameObject.SetActive(false);
+
         foreach (ResearchButtonUI researchButtonUI in researchUnlockedByThis) {
             researchButtonUI.SetResearchSelectable();
         }

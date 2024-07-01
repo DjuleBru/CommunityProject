@@ -7,6 +7,7 @@ public class DungeonSO : ScriptableObject
 {
     public string dungeonName;
     public DungeonManager.DungeonType dungeonType;
+    public List<DungeonRoom> dungeonRoomPoolList;
 
     public int dungeonDifficulty;
     public int totalRoomNumber;

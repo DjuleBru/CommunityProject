@@ -16,10 +16,19 @@ MonoBehaviour:
   buildingType: 16
   buildingCategory: 11
   buildingCostItems:
-  - itemType: 0
+  - itemType: 1
     itemTier: 0
     amount: 20
-  buildingUnlockItems: []
+  - itemType: 3
+    itemTier: 0
+    amount: 10
+  itemsToUnlockList:
+  - itemType: 54
+    itemTier: 0
+    amount: 50
+  - itemType: 14
+    itemTier: 0
+    amount: 20
   canInteractWithBuilding: 1
   buildingRecipes:
   - {fileID: 11400000, guid: de2cdccf98887814db211a5272bc64d6, type: 2}
@@ -29,6 +38,6 @@ MonoBehaviour:
   healRate: 0
   buildingName: Grinder
   buildingIconSprite: {fileID: 1578100095, guid: 12b8a5dc38a5f974398f8d07edac6523, type: 3}
-  buildingDescriptionPanelSprite: {fileID: 1411262136, guid: 0a1898fbe050a2547b12add670a901d4, type: 3}
+  buildingDescriptionPanelSprite: {fileID: 21300000, guid: b78912b729fbbb34489c0b613f639bac, type: 3}
   buildingDescription: Grinds materials into powder
   buildingPrefab: {fileID: 1718341335737673364, guid: 8e57dab08a734c842bf19aa018c2b0c0, type: 3}

@@ -8,9 +8,8 @@ public class PlayerAnimatorManager : MonoBehaviour {
 
     public enum PlayerInteractBool {
         CutTree,
-        Mine,
-
-
+        PickAxe,
+        Shovel,
     }
 
     private Animator animator;
@@ -66,7 +65,7 @@ public class PlayerAnimatorManager : MonoBehaviour {
     }
 
     private void CheckIfPlayerFinishedAttackAnimation() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_CutTree")) {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_CutTree") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Punch") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Swing") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_TwoHanded") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_CutTree") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Punch") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Swing") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_TwoHanded") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Pickaxe") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Shovel")) {
             // Attack animation is playing
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < .7f) {
                 attacking = true;
@@ -90,7 +89,7 @@ public class PlayerAnimatorManager : MonoBehaviour {
     }
 
     public bool CheckAttackingAnimationProgress(float animationProgress) {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_CutTree")) {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Thrust") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Slash") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_CutTree") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Punch") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Swing") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_TwoHanded") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Pickaxe") | animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Shovel")) {
             // Attack animation is playing
             if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < animationProgress) {
                 return true;

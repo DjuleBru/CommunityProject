@@ -6,8 +6,8 @@ using UnityEngine;
 public class DungeonGenerationManager : MonoBehaviour {
     public static DungeonGenerationManager Instance { get; private set; }
 
-    [SerializeField] private DungeonRoom firstDungeonRoom;
-    [SerializeField] private List<DungeonRoom> dungeonRoomPoolList;
+    private DungeonRoom firstDungeonRoom;
+    private List<DungeonRoom> dungeonRoomPoolList;
 
     private List<DungeonRoom> dungeonRoomList = new List<DungeonRoom>();
     private Dictionary<int, Vector3> dungeonRoomPositionDictionary = new Dictionary<int, Vector3>();
@@ -16,6 +16,12 @@ public class DungeonGenerationManager : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
+    }
+
+    private void Start() {
+        Debug.Log(DungeonManager.Instance.GetDungeonSO());
+        dungeonRoomPoolList = DungeonManager.Instance.GetDungeonSO().dungeonRoomPoolList;
+
         GenerateDungeon();
         SetRoomDifficultyValues();
         SetRoomTotalResourceNodes();
@@ -27,6 +33,7 @@ public class DungeonGenerationManager : MonoBehaviour {
         Vector3 absoluteRoomPosition = new Vector3(0, 0, 0);
 
         DungeonRoom initialDungeonRoom = dungeonRoomPoolList[UnityEngine.Random.Range(0, dungeonRoomPoolList.Count)];
+        firstDungeonRoom = dungeonRoomPoolList[0];
         previousDungeonRoom = initialDungeonRoom;
 
         for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
@@ -123,10 +130,10 @@ public class DungeonGenerationManager : MonoBehaviour {
 
 
         for (int i = 0; i < DungeonManager.Instance.GetTotalRoomNumber(); i++) {
-            float roomDifficultyValue = roomResourceNodesNumber[i];
-            float roomDifficultyValueScaled = (roomDifficultyValue / totalResourcesNodesNumber) * dungeonTotalResourceNodes;
+            float roomResourceValue = roomResourceNodesNumber[i];
+            float roomResourceValueScaled = (roomResourceValue / totalResourcesNodesNumber) * dungeonTotalResourceNodes;
 
-            dungeonRoomList[i].SetRoomResourceValue((int)Math.Round(roomDifficultyValueScaled));
+            dungeonRoomList[i].SetRoomResourceValue((int)Math.Round(roomResourceValueScaled));
         }
     }
 

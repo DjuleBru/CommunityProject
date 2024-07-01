@@ -1,0 +1,3128 @@
+fileFormatVersion: 2
+guid: 1da4565770d11b441a593955ec4656ac
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CavesTilesetShadows_0
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 240
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 211fd397e33e4364eb35f8ce094cc377
+      internalID: 34571682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_1
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 240
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec58955b1cc277b4da5145ea97d4f853
+      internalID: 1114912087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_2
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 240
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f41ee0b106480b148bb8f03e41c4a929
+      internalID: -848271321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 240
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dfa078cd9c12a148ba891730108cff5
+      internalID: 1480837589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_4
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 232
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cffc3cea62ca1374c86b683188031147
+      internalID: 1723314974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_5
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 224
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ad2f716c24de6c4d9864a120fd1d95c
+      internalID: -1485895520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 224
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0ebde47a69ed0f4598a950e4f877328
+      internalID: -868086117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_7
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 224
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41ea4ee37d183e44782d35be862ecc2e
+      internalID: 2061752216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_8
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 224
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bd35847e597aca42a6f1df79e6a3c3e
+      internalID: -275990251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_9
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 224
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0ce3dca6fa0d8a4d9bbec6b5fa80a66
+      internalID: -1560569722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_10
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 224
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce3cbc713cada1c40a98e548086db3a7
+      internalID: -1402800649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_11
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 224
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c6a7ddf48514e946942d0c43bc8fdc3
+      internalID: 1947751881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_12
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 224
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92a9ad738164086448e1ee91b1dd74eb
+      internalID: -37602862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_13
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 216
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e23cccb2ad5aec84599d2d09efa64553
+      internalID: 1701034891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_14
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 216
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60394eae92230a44ea04da911efae1a1
+      internalID: -787522960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_15
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 216
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3b23e40d88dfc54d9ae3d221a872d72
+      internalID: -641718217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_16
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 216
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a75471792ae65944960d28f0862d1d4
+      internalID: -2076284762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_17
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 216
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa3984d165a611d41a7ac6b39d0cea47
+      internalID: -1850182519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_18
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 208
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b36f206690065ca47860c9a00dd88a85
+      internalID: -303187595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_19
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 208
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca277588b9a0fdd4184c9f3c79329f83
+      internalID: -1417334235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_20
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 208
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f465641b560f77048a1c2cb32d87ed4f
+      internalID: -617141604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_21
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 208
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fe0fd395bd87e04c9b54d12d1fdc825
+      internalID: 970883123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_22
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 208
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 357258e1f7dbe334d824a963930d8fb5
+      internalID: -88203816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_23
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 208
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4f96562533731b4496ddf3a42dbfb50
+      internalID: 1246966090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_24
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 208
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82ac13c2cf1542349ab497e145292fa3
+      internalID: 1766259645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_25
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 208
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f9e6dc639a832444bc36c494c132b78
+      internalID: -1890604997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_26
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 192
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b1c04e4d62233949b627f29827dca27
+      internalID: -899596568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_27
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 184
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e825f7d0c22591f40ac2a1533720a6c4
+      internalID: -769608391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 184
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 140ec7351f6c5944fbeac019527b75a6
+      internalID: -1693897294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_29
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 184
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a37dfbd7394bcc4c8f63f81b7f1590d
+      internalID: 1361650117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_30
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 176
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1bf2e3ba61306f43ac982fb7ba3aa35
+      internalID: -922994439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_31
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 176
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40c4c445baaf50e46a4fadca0b2cb9b5
+      internalID: -1881561471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_32
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 176
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15b1089f7024a5c44904ebb9eed8f2b0
+      internalID: -904815264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_33
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 176
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57c890084cc082a40872b479a67997ca
+      internalID: -821404009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_34
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 176
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6370adcbb6135604ba1b57554eb7b63b
+      internalID: -602930090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_35
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 176
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 848d0a7622d2485448eefe80b70870ca
+      internalID: -303608395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_36
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 176
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51962c1c81754214a98a40056ddef477
+      internalID: 1375538549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_37
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 168
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 697fd259509b0814d882242e6918fba2
+      internalID: 1019909692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_38
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 168
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c5647fd44e534458eada1fa298cff8
+      internalID: -1048834030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_39
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 168
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d91a086dfd71f84da2fe0614327ffc4
+      internalID: 1069070408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_40
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 160
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6d89d05d86394042b3020f951ccbe1c
+      internalID: 1537511964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_41
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 160
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dede8cd0abdb7c040b4927e1888a68c1
+      internalID: 436887155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_42
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 160
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f583849f24d8df0409ecd03a45a26e8e
+      internalID: 1233625533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_43
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 160
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e89b16e6b77a0ca40a67f6e0affa3ab3
+      internalID: -277167793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_44
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 160
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 871e63c80428ca94f9b044099314b3e5
+      internalID: 648323330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_45
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 152
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1001789952287f0478253d81d79bffde
+      internalID: -1863789250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_46
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 152
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0e293bf941510a4d9e4d34b0e0cbda7
+      internalID: 973148106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_47
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 144
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3ee61cfab2752245a66aaa91723978f
+      internalID: -1355354203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_48
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 144
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4df23ed54f2015e49a150b02f8622074
+      internalID: 1789042698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_49
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 136
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b923858ce11730141be98822b06a260d
+      internalID: 1436610375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_50
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 136
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1be127b9d594352429d9bf18e53daf9a
+      internalID: -138782764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_51
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 136
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59f889646cc04dd4cad6d59479cc88ab
+      internalID: -78455284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_52
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 136
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4345637dfa9e27a429cc50e65cf20535
+      internalID: 1164037820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_53
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 136
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f987cff42fac4a74fb12a4b12f0f05f7
+      internalID: 569607256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_54
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 743182fe044b69a4a9f1d3c8a246ef09
+      internalID: 1671732075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_55
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 128
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ccef02ffe572264bb157d523e35668c
+      internalID: 2018634685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_56
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 543987b037df30e48924d2a53b107db9
+      internalID: 483003801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_57
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 128
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9eb440aae01e924cbba503278dff108
+      internalID: -378752057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_58
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 128
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 492db9f738e4bdb428e3506336bde79e
+      internalID: -1436973978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_59
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 128
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d620984694e950e48ad458272c59814f
+      internalID: 1029247242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_60
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 128
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5084dbefd3d577144abdf2668c521592
+      internalID: 290755968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_61
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17bc1dfd54b0b1f4fa58c7156040b43f
+      internalID: -2068777523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_62
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c84a65201413daf4486d889179513229
+      internalID: 1868190350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_63
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 219a8ce18bd8e6d41ad942940946c39b
+      internalID: -1528169441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_64
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25de26001a9a5334586106be62d3184d
+      internalID: 2066367652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_65
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f04d28f01c8eb8a46b3a6aaea900827b
+      internalID: -1188418650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_66
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ef766a99050a8c48ad570ce151873cc
+      internalID: 1757741425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_67
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c067316fa9fb5c142b5ef91e32eb30f2
+      internalID: -675199505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_68
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e6807a80610f944eabed0967ff2ffc8
+      internalID: -20383941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_69
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d85981bcb82aff34a922e1ac993d8b2f
+      internalID: 181359417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_70
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93d7025766056134c8436b8b85ae1d9f
+      internalID: 18262519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_71
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39ecc3a673b66b64bb041d29d2be66e8
+      internalID: -1947173230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_72
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd202a524437cf042ac5c01c08b1c5b5
+      internalID: 178588149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_73
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78df739ee7f9a214cbcc28924b188041
+      internalID: -712981235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_74
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa1a1f59764d2b545a291c8042db4f1f
+      internalID: 300528121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_75
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe7610f19f337414dbfe6dd5a6192256
+      internalID: -602488951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_76
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ac0e492db85a324a9048503eea89ac6
+      internalID: -1029561919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_77
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43c07120d093fcb4a83d8e0b51a5b261
+      internalID: -1626476410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_78
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d02632d9343f40438340c81dda8e1c7
+      internalID: 2024527823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_79
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e27ce4b54341b4393eb3fc0a3ad7a7
+      internalID: -1762680798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_80
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23fa6543a1b920e48bd6453f5ff25a31
+      internalID: 1984839997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_81
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d092d339340025e45a46c3c5243b68bb
+      internalID: -2005049639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_82
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41264bef3ae7bdb439c9e6b6d6c84cc4
+      internalID: 1335902757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_83
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e674229e25a8ef4887a09568ee11f02
+      internalID: 1874112273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_84
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c9a8e2fff2686b41b65d461a55a82c6
+      internalID: -2064810843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_85
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b21310f746a97c408ca309906ad6fac
+      internalID: 789832705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_86
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 112
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d786dcc77e1d21142ab9d47fd68caf7f
+      internalID: -464585767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_87
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 104
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8d54620f1c6daa47bab9f97b88eefa0
+      internalID: -1353153155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_88
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 104
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2f703a18582d5b4cafdc0a630ce7788
+      internalID: -991846651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_89
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 104
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4141d46d3ba4be4aac15bf81349879d
+      internalID: 1739611857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_90
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 104
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2430cc6607064643947dc296c81adb7
+      internalID: 1793736342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_91
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 104
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0543c9691c27a8948a84c59d32a5c48b
+      internalID: -2085921646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_92
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 104
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 949b96549373e834b84abba6515c55f7
+      internalID: 1660880830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_93
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 104
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1111bc1fbfac5a049bb9a5d263bc59db
+      internalID: 299143517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_94
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 104
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a253cd14cc37b54ca3c98f36da7b244
+      internalID: 692568947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_95
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 96
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8155f9a5f0dc905468f870c214bc2700
+      internalID: -1022257240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_96
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31156d8d1bf78164490818e4421644e8
+      internalID: 1531835382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_97
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 96
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12fe8e95f039e6e458c33ddc7b46fa9f
+      internalID: -1695206908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_98
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 234ca5a5c00bc644bb42bba081b61f35
+      internalID: -52341143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_99
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bea893a0f1178842b928770b851d6ed
+      internalID: 1691542911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_100
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6076c8b748786d84caf034a3cada2c3c
+      internalID: 814086586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_101
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 72
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2df9b252650c9e44ad63e522467231b
+      internalID: -1905935573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_102
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 72
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8a6f71be753f554098f2f0cc978c685
+      internalID: -722112349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_103
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 72
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bf7ecf4c5e8eca44a4da2d685ea499e
+      internalID: 2121682528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_104
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 72
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77ac2499d9fdb4e4288a03f2bb14c0da
+      internalID: 48030039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_105
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 72
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b1fb7a0b458bdc419f77fb569c36c01
+      internalID: 13407861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_106
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 72
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35f9d51718f2fa74691f9f926db1c32e
+      internalID: -1958801442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_107
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caa94454965bcfb4886820b94a696c7e
+      internalID: 148439841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_108
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 64
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a65dc8f9f86cdb34697665205106da04
+      internalID: 267353350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_109
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 64
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3bc8144b2cdf5144b471ae9b4a9a85e
+      internalID: -1458969784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_110
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 64
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd219b3e1694ae640ad04a1d7376be3d
+      internalID: 1253124226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_111
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 64
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc2277d4a9abed045a1d050f6e6be152
+      internalID: 884538502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_112
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 64
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df036eec5f3d8df48b3dbad821cec273
+      internalID: 1047495718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_113
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23fad5e8d7b7fd14fa9101bce3045858
+      internalID: 110602602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_114
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b593e69515fce184fa3f1f7781091a1d
+      internalID: 1835308061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_115
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4a59cbfb115450428b1da46e76cffb9
+      internalID: 446101360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_116
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ba448bd73c3e0541b3d65e95775e0dc
+      internalID: -430812248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_117
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf0363e0cedf0f1409d9918c5e1b42ae
+      internalID: -304530146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_118
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 48
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9765bdf2ac701b24680404e469d5a94a
+      internalID: 353539191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_119
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c2e63a23ed26b3479e901f944faa15d
+      internalID: -45276204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_120
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 48
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be6dfb6938a64794d88ca59efff8cd33
+      internalID: 2009579458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_121
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a09b33fa0dd30484ea860fc8651a7520
+      internalID: 767810018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_122
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7becb7860af45e5428775485c2d082d7
+      internalID: 1874696229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_123
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ecdafcfe0eb7e4498d61cc7ce5a14f
+      internalID: 851271678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_124
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dbae09313f928648b3ec0019292d251
+      internalID: -4172021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_125
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef0f9fe7b2693274b925f15b7d7b050f
+      internalID: 2071055645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_126
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1f993bff1495c54fb1d53de8e33620b
+      internalID: -1240514129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_127
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af7e143f340048144b178fcdedf191b8
+      internalID: 2099081259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_128
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 116d7887ff8da304cb2d96e0e2b77ff7
+      internalID: -183861280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_129
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 776aa501175ec254ea819ae64b31b5b7
+      internalID: -1969854760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_130
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85f9fd416ed229d41874849902bcfa90
+      internalID: -176095621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_131
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02a713fea35c1f345a0fbfb7b49cea8b
+      internalID: 1912847808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_132
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5847c0f65d4321649911cadbf3c3e967
+      internalID: 72833734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_133
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb84765f818528f40855b65c053dbc84
+      internalID: 339330238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_134
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19f4d084c9ef3ba4995c088268baecc6
+      internalID: 1550127554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_135
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9103ea488ead33546a18ffce91a85d2f
+      internalID: 1379354170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CavesTilesetShadows_136
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 851fbeef4619e4c4da33c7381d797519
+      internalID: -1993162596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      CavesTilesetShadows_0: 34571682
+      CavesTilesetShadows_1: 1114912087
+      CavesTilesetShadows_10: -1402800649
+      CavesTilesetShadows_100: 814086586
+      CavesTilesetShadows_101: -1905935573
+      CavesTilesetShadows_102: -722112349
+      CavesTilesetShadows_103: 2121682528
+      CavesTilesetShadows_104: 48030039
+      CavesTilesetShadows_105: 13407861
+      CavesTilesetShadows_106: -1958801442
+      CavesTilesetShadows_107: 148439841
+      CavesTilesetShadows_108: 267353350
+      CavesTilesetShadows_109: -1458969784
+      CavesTilesetShadows_11: 1947751881
+      CavesTilesetShadows_110: 1253124226
+      CavesTilesetShadows_111: 884538502
+      CavesTilesetShadows_112: 1047495718
+      CavesTilesetShadows_113: 110602602
+      CavesTilesetShadows_114: 1835308061
+      CavesTilesetShadows_115: 446101360
+      CavesTilesetShadows_116: -430812248
+      CavesTilesetShadows_117: -304530146
+      CavesTilesetShadows_118: 353539191
+      CavesTilesetShadows_119: -45276204
+      CavesTilesetShadows_12: -37602862
+      CavesTilesetShadows_120: 2009579458
+      CavesTilesetShadows_121: 767810018
+      CavesTilesetShadows_122: 1874696229
+      CavesTilesetShadows_123: 851271678
+      CavesTilesetShadows_124: -4172021
+      CavesTilesetShadows_125: 2071055645
+      CavesTilesetShadows_126: -1240514129
+      CavesTilesetShadows_127: 2099081259
+      CavesTilesetShadows_128: -183861280
+      CavesTilesetShadows_129: -1969854760
+      CavesTilesetShadows_13: 1701034891
+      CavesTilesetShadows_130: -176095621
+      CavesTilesetShadows_131: 1912847808
+      CavesTilesetShadows_132: 72833734
+      CavesTilesetShadows_133: 339330238
+      CavesTilesetShadows_134: 1550127554
+      CavesTilesetShadows_135: 1379354170
+      CavesTilesetShadows_136: -1993162596
+      CavesTilesetShadows_14: -787522960
+      CavesTilesetShadows_15: -641718217
+      CavesTilesetShadows_16: -2076284762
+      CavesTilesetShadows_17: -1850182519
+      CavesTilesetShadows_18: -303187595
+      CavesTilesetShadows_19: -1417334235
+      CavesTilesetShadows_2: -848271321
+      CavesTilesetShadows_20: -617141604
+      CavesTilesetShadows_21: 970883123
+      CavesTilesetShadows_22: -88203816
+      CavesTilesetShadows_23: 1246966090
+      CavesTilesetShadows_24: 1766259645
+      CavesTilesetShadows_25: -1890604997
+      CavesTilesetShadows_26: -899596568
+      CavesTilesetShadows_27: -769608391
+      CavesTilesetShadows_28: -1693897294
+      CavesTilesetShadows_29: 1361650117
+      CavesTilesetShadows_3: 1480837589
+      CavesTilesetShadows_30: -922994439
+      CavesTilesetShadows_31: -1881561471
+      CavesTilesetShadows_32: -904815264
+      CavesTilesetShadows_33: -821404009
+      CavesTilesetShadows_34: -602930090
+      CavesTilesetShadows_35: -303608395
+      CavesTilesetShadows_36: 1375538549
+      CavesTilesetShadows_37: 1019909692
+      CavesTilesetShadows_38: -1048834030
+      CavesTilesetShadows_39: 1069070408
+      CavesTilesetShadows_4: 1723314974
+      CavesTilesetShadows_40: 1537511964
+      CavesTilesetShadows_41: 436887155
+      CavesTilesetShadows_42: 1233625533
+      CavesTilesetShadows_43: -277167793
+      CavesTilesetShadows_44: 648323330
+      CavesTilesetShadows_45: -1863789250
+      CavesTilesetShadows_46: 973148106
+      CavesTilesetShadows_47: -1355354203
+      CavesTilesetShadows_48: 1789042698
+      CavesTilesetShadows_49: 1436610375
+      CavesTilesetShadows_5: -1485895520
+      CavesTilesetShadows_50: -138782764
+      CavesTilesetShadows_51: -78455284
+      CavesTilesetShadows_52: 1164037820
+      CavesTilesetShadows_53: 569607256
+      CavesTilesetShadows_54: 1671732075
+      CavesTilesetShadows_55: 2018634685
+      CavesTilesetShadows_56: 483003801
+      CavesTilesetShadows_57: -378752057
+      CavesTilesetShadows_58: -1436973978
+      CavesTilesetShadows_59: 1029247242
+      CavesTilesetShadows_6: -868086117
+      CavesTilesetShadows_60: 290755968
+      CavesTilesetShadows_61: -2068777523
+      CavesTilesetShadows_62: 1868190350
+      CavesTilesetShadows_63: -1528169441
+      CavesTilesetShadows_64: 2066367652
+      CavesTilesetShadows_65: -1188418650
+      CavesTilesetShadows_66: 1757741425
+      CavesTilesetShadows_67: -675199505
+      CavesTilesetShadows_68: -20383941
+      CavesTilesetShadows_69: 181359417
+      CavesTilesetShadows_7: 2061752216
+      CavesTilesetShadows_70: 18262519
+      CavesTilesetShadows_71: -1947173230
+      CavesTilesetShadows_72: 178588149
+      CavesTilesetShadows_73: -712981235
+      CavesTilesetShadows_74: 300528121
+      CavesTilesetShadows_75: -602488951
+      CavesTilesetShadows_76: -1029561919
+      CavesTilesetShadows_77: -1626476410
+      CavesTilesetShadows_78: 2024527823
+      CavesTilesetShadows_79: -1762680798
+      CavesTilesetShadows_8: -275990251
+      CavesTilesetShadows_80: 1984839997
+      CavesTilesetShadows_81: -2005049639
+      CavesTilesetShadows_82: 1335902757
+      CavesTilesetShadows_83: 1874112273
+      CavesTilesetShadows_84: -2064810843
+      CavesTilesetShadows_85: 789832705
+      CavesTilesetShadows_86: -464585767
+      CavesTilesetShadows_87: -1353153155
+      CavesTilesetShadows_88: -991846651
+      CavesTilesetShadows_89: 1739611857
+      CavesTilesetShadows_9: -1560569722
+      CavesTilesetShadows_90: 1793736342
+      CavesTilesetShadows_91: -2085921646
+      CavesTilesetShadows_92: 1660880830
+      CavesTilesetShadows_93: 299143517
+      CavesTilesetShadows_94: 692568947
+      CavesTilesetShadows_95: -1022257240
+      CavesTilesetShadows_96: 1531835382
+      CavesTilesetShadows_97: -1695206908
+      CavesTilesetShadows_98: -52341143
+      CavesTilesetShadows_99: 1691542911
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
