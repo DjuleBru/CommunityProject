@@ -9,8 +9,17 @@ public class AttackTarget : Action {
     }
 
     public override TaskStatus OnUpdate() {
-        mobAttack.AttackTarget(Player.Instance.transform.position);
-        return TaskStatus.Running;
+
+        if (mobAttack.GetAttackType() == MobAttack.AttackType.Melee) {
+            mobAttack.AttackTarget(Player.Instance.transform.position);
+        }
+
+        if (mobAttack.GetAttackType() == MobAttack.AttackType.Ranged) {
+            mobAttack.RangedAttackTarget(Player.Instance.transform.position);
+        }
+
+        return TaskStatus.Success;
+
     }
 
 }

@@ -15,7 +15,9 @@ public class DungeonSO : ScriptableObject
     public List<ItemSO> itemsFoundInDungeon;
     public List<GameObject> resourceNodesInDungeon;
     public int resourceNodesNumberInDungeon;
-    public List<MobSO> mobsFoundInDungeon;
+    public List<MobSO> commonMobsFoundInDungeon;
+    public List<MobSO> rareMobsFoundInDungeon;
+    public List<MobSO> epicMobsFoundInDungeon;
     public HumanoidSO humanoidTypeFoundInDungeon;
     public int humanoidsToSaveFromDungeon;
     public Sprite dungeonSprite;

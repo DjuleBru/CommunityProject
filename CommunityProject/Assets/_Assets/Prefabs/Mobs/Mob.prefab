@@ -187,6 +187,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mobAttack: {fileID: 8150395440505920038}
+--- !u!1 &2928068131935325603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 228257120831475260}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &228257120831475260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928068131935325603}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3820119706843548284}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3165531398014200375
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6bd49391841624b9572d70c82ef8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileGameObject: {fileID: 1412350858639447711, guid: 077e2d6282cc2b24196d590889633048, type: 3}
+  projectileSpawnPosition: {fileID: 228257120831475260}
 --- !u!114 &3793543984068504053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,11 +617,11 @@ MonoBehaviour:
       startIndex: 
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(232.31813,-290.0328)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-0.385572433,125.271408)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"IsAlive","NodeData":{"Offset":"(-180.309875,188.074936)"},"ID":2,"Name":"Is
-        Alive","Instant":true},{"Type":"AllMobsSpawned","NodeData":{"Offset":"(-4.00239563,194.178665)"},"ID":3,"Name":"All
-        Mobs Spawned","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Parallel","NodeData":{"Offset":"(175.675644,195.714233)"},"ID":4,"Name":"Parallel","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-93.1138153,140.1961)"},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"WithinAttackRange","NodeData":{"Offset":"(-83.6392441,172.531845)"},"ID":6,"Name":"Within
-        Attack Range","Instant":true,"SingleattackRange":0},{"Type":"AttackTarget","NodeData":{"Offset":"(65.29692,172.531845)"},"ID":7,"Name":"Attack
-        Target","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(166.3381,140.1961)"},"ID":8,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"WithinAggroRange","NodeData":{"Offset":"(-58.4615326,172.771973)"},"ID":9,"Name":"Within
-        Aggro Range","Instant":true,"SingleaggroRange":0},{"Type":"MoveTowards","NodeData":{"Offset":"(73.0769348,172.771988)"},"ID":10,"Name":"Move
+        Alive","Instant":true},{"Type":"AllMobsSpawned","NodeData":{"Offset":"(-33.4141464,194.178665)"},"ID":3,"Name":"All
+        Mobs Spawned","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(391.679871,198.690582)"},"ID":4,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-270,160)"},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"WithinAttackRange","NodeData":{"Offset":"(-83.6392441,172.531845)"},"ID":6,"Name":"Within
+        Attack Range","Instant":true,"SinglemeleeAttackRange":0,"SinglerangedAttackRange":0,"AttackTypeattackType":"Melee"},{"Type":"AttackTarget","NodeData":{"Offset":"(65.29692,172.531845)"},"ID":7,"Name":"Attack
+        Target","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(209.36171,160)"},"ID":8,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"WithinAggroRange","NodeData":{"Offset":"(-68.46153,172.771973)"},"ID":9,"Name":"Within
+        Aggro Range","Instant":true,"SingleaggroRange":0},{"Type":"MoveTowards","NodeData":{"Offset":"(103.076935,172.771988)"},"ID":10,"Name":"Move
         Towards","Instant":true,"SinglemoveSpeed":0}]}]}]}}'
       fieldSerializationData:
         typeName: []
@@ -850,6 +883,7 @@ Transform:
   - {fileID: 3535587565543858332}
   - {fileID: 3086914941771822526}
   - {fileID: 4468897498226599172}
+  - {fileID: 228257120831475260}
   m_Father: {fileID: 8535267799325228242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7528308055919220745

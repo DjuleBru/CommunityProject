@@ -149,16 +149,28 @@ public class DungeonRoom : MonoBehaviour
     }
 
     private void SpawnMobs() {
-        List<MobSO> mobSOs = DungeonManager.Instance.GetDungeonMobList();
+        List<MobSO> commonMobSOs = DungeonManager.Instance.GetCommonDungeonMobList();
+        List<MobSO> rareMobSOs = DungeonManager.Instance.GetRareDungeonMobList();
+        List<MobSO> epicMobSOs = DungeonManager.Instance.GetEpicDungeonMobList();
 
         foreach (Transform mobSpawnPoint in mobSpawnPointsList) {
+
             if(setDifficultyValue < dungeonRoomDifficultyValue) {
+
                 // Pick a random dungeon mob
-                MobSO mobToSpawnSO = mobSOs[Random.Range(0, mobSOs.Count)];
+                int randomNumber = Random.Range(0, 100);
+                MobSO mobToSpawnSO = commonMobSOs[Random.Range(0, commonMobSOs.Count)];
+                if (randomNumber > 65 && randomNumber < 90) {
+                    mobToSpawnSO = rareMobSOs[Random.Range(0, rareMobSOs.Count)];
+                }
+
+                if (randomNumber >= 90) {
+                    mobToSpawnSO = epicMobSOs[Random.Range(0, epicMobSOs.Count)];
+                }
+
                 Transform mobToSwawn = mobToSpawnSO.mobToSpawnPrefab;
 
                 // Spawn if we have not reached the room difficulty value
-
                 Vector3 spawnPosition = Utils.Randomize2DPoint(mobSpawnPoint.transform.position, .5f);
 
                 Mob mobSpawned = Instantiate(mobToSwawn, spawnPosition, Quaternion.identity, this.transform).GetComponent<Mob>();

@@ -20,10 +20,10 @@ public class SavingSystem : MonoBehaviour {
         // Did the player just exit a dungeon ?
         playerExitedDungeon = ES3.Load("playerExitedDungeon", false);
 
-        if (SceneManager.GetActiveScene().name == SceneLoader.Scene.OverWorld.ToString()) {
+        if (SceneManager.GetActiveScene().name == SceneTransitionManager.Scene.OverWorld.ToString()) {
             sceneIsOverWorld = true;
         }
-        if (SceneManager.GetActiveScene().name == SceneLoader.Scene.Dungeon.ToString()) {
+        if (SceneManager.GetActiveScene().name == SceneTransitionManager.Scene.Dungeon.ToString()) {
             sceneIsDungeon = true;
         }
     }

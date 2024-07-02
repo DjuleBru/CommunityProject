@@ -21,10 +21,15 @@ public class WeaponVisual : MonoBehaviour {
     }
 
     private void Start() {
+        Player.Instance.OnPlayerDied += Player_OnPlayerDied;
         PlayerAttack.Instance.OnPlayerAttack += PlayerAttack_OnPlayerAttack;
         PlayerAttack.Instance.OnActiveWeaponSOChanged += PlayerAttack_OnActiveWeaponSOChanged;
 
         UpdateWeaponVisuals();
+    }
+
+    private void Player_OnPlayerDied(object sender, System.EventArgs e) {
+        weaponIdleSpriteRenderer.gameObject.SetActive(false);
     }
 
     private void Update() {

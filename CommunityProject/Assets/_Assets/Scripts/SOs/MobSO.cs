@@ -8,7 +8,6 @@ public class MobSO : ScriptableObject
     public int mobDifficultyValue;
     public Transform mobToSpawnPrefab;
     public Sprite mobIconSprite;
-    public List<DungeonManager.DungeonType> foundInDungeonTypes;
 
     public int mobHP;
     public int mobMoveSpeed;
@@ -17,9 +16,16 @@ public class MobSO : ScriptableObject
     public int attackDmg;
     public float mobAttackRate;
     public float mobAttackDelay;
-    public float mobAttackRange;
-
+    public float mobMeleeAttackRange;
+    public float mobRangedAttackRange;
+    public float projectileSpeed;
+    public int projectileDamage;
+    public Sprite projectileSprite;
+    public float rangedAttackAnimationDelay;
     public float mobAggroRange;
+
+    public float meleeAttackKnockback;
+    public float rangedAttackKnockback;
 
     public float dropProbability;
     public int maxItemDrops;

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d955697926fe3224cb82d0abe09f3391, type: 3}
+  m_Name: BrainSlayer
+  m_EditorClassIdentifier: 
+  mobDifficultyValue: 5
+  mobToSpawnPrefab: {fileID: 2762617982298062805, guid: 3c4282cc34d82f44fb58ee024d17d6f4, type: 3}
+  mobIconSprite: {fileID: 1662335183, guid: 64cdb0ef6caea9b49949289eed7d346a, type: 3}
+  mobHP: 20
+  mobMoveSpeed: 100
+  attackType: 1
+  attackDmg: 5
+  mobAttackRate: 2
+  mobAttackDelay: 0.5
+  mobMeleeAttackRange: 8
+  mobRangedAttackRange: 16
+  projectileSpeed: 15
+  projectileDamage: 5
+  projectileSprite: {fileID: 246683928, guid: 04df5d279cd908248b86dc9291b6ee90, type: 3}
+  rangedAttackAnimationDelay: 0.5
+  mobAggroRange: 20
+  meleeAttackKnockback: 0
+  rangedAttackKnockback: 0
+  dropProbability: 100
+  maxItemDrops: 1
+  itemDropRateList: []

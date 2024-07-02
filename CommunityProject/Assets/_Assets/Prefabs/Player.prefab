@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370577dd31c2f834ca66b5a51c43d761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeWeaponSO: {fileID: 11400000, guid: 90619486673dff742abb7a3efb556618, type: 2}
+  activeWeaponSO: {fileID: 11400000, guid: 3850bdb5a70de8842849ad0a4ee4ddce, type: 2}
 --- !u!114 &8043433427404981221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
   playerBaseHealthMax: 100
   playerBaseStrength: 5
   playerBaseArmor: 0
-  playerBaseMoveSpeed: 400
+  playerBaseMoveSpeed: 250
   playerBaseDamage: 50
   playerBaseAttackSpeed: 2
   playerBaseMaxItemHold: 5
@@ -286,7 +286,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 80
-  m_LinearDrag: 0
+  m_LinearDrag: 8
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

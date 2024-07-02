@@ -1,6 +1,7 @@
 using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
 
@@ -19,7 +20,7 @@ public class MobMovement : MonoBehaviour
     #region PATH PARAMETERS
 
     // Length of the path
-    protected int theGScoreToStopAt = 6000;
+    protected int theGScoreToStopAt = 5000;
 
     [SerializeField] protected float nextWaypointDistance = 1.5f;
     [SerializeField] protected float roamPointRadius = 4f;
@@ -36,6 +37,7 @@ public class MobMovement : MonoBehaviour
     private Mob mob;
     private float moveSpeed;
     private bool dead;
+    private bool canMove;
 
     protected Vector3 moveDirNormalized;
     protected Vector2 moveDir2DNormalized;
@@ -60,7 +62,8 @@ public class MobMovement : MonoBehaviour
     protected virtual void FixedUpdate() {
         pathCalculationTimer -= Time.fixedDeltaTime;
         roamCalculationTimer -= Time.fixedDeltaTime;
-        if (path != null) {
+
+        if (path != null && canMove) {
             Move(velocity);
         }
     }
@@ -96,16 +99,33 @@ public class MobMovement : MonoBehaviour
     }
 
     protected virtual void Move(Vector3 velocity) {
-        if (!reachedEndOfPath & !dead) {
+        if (!reachedEndOfPath && !dead && canMove) {
             rb.AddForce(velocity * Time.fixedDeltaTime * 100);
         }
     }
 
     public void CalculatePath(Vector3 startPoint, Vector3 destinationPoint) {
+        canMove = true;
         if (pathCalculationTimer <= 0) {
             seeker.StartPath(startPoint, destinationPoint, PathComplete);
             pathCalculationTimer = pathCalculationRate;
         }
+    }
+
+    public void CalculateFleePath(Vector3 thePointToFleeFrom) {
+        canMove = true;
+        // Create a path object
+        theGScoreToStopAt = 3000;
+        FleePath path = FleePath.Construct(transform.position, thePointToFleeFrom, theGScoreToStopAt);
+
+        // This is how strongly it will try to flee, if you set it to 0 it will behave like a RandomPath
+        path.aimStrength = .3f;
+        // Determines the variation in path length that is allowed
+        path.spread = 0;
+
+        // Start the path and return the result to MyCompleteFunction (which is a function you have to define, the name can of course be changed)
+        seeker.StartPath(path, PathComplete);
+        pathCalculationTimer = pathCalculationRate;
     }
 
     protected void PathComplete(Path p) {
@@ -113,19 +133,30 @@ public class MobMovement : MonoBehaviour
         currentWaypoint = 0;
     }
     public Vector3 GetMoveDirNormalized() {
-        return moveDirNormalized;
+        if (canMove) {
+            return moveDirNormalized;
+        } else {
+            return (Player.Instance.transform.position - transform.position).normalized;
+        }
+
+        return Vector3.zero;
     }
     public bool GetReachedEndOfPath() {
         return reachedEndOfPath;
     }
 
     private void Mob_OnMobDied(object sender, System.EventArgs e) {
-        StopMoving();
-    }
-
-    public void StopMoving() {
         dead = true;
         rb.velocity = Vector3.zero;
     }
 
+    public void StopMoving() {
+        canMove = false;
+
+        rb.velocity = Vector3.zero;
+    }
+
+    public bool GetCanMove() {
+        return canMove;
+    }
 }

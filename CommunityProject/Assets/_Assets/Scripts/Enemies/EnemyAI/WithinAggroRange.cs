@@ -12,9 +12,11 @@ public class WithinAggroRange : Conditional
     }
 
     public override TaskStatus OnUpdate() {
+
         if(Vector3.Distance(Player.Instance.transform.position, transform.position) < aggroRange) {
             return TaskStatus.Success;
         }
+
         return TaskStatus.Failure;
     }
 

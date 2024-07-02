@@ -52,7 +52,7 @@ public class DungeonEntrance : MonoBehaviour
             HumanoidsManager.Instance.SaveHumanoidsInOverworld();
             SavingSystem.Instance.SetLastDungeonEntrance(this);
             SavingSystem.Instance.SaveOverworld();
-            SceneLoader.Load(SceneLoader.Scene.Dungeon);
+            SceneTransitionManager.Instance.LoadScene(SceneTransitionManager.Scene.Dungeon);
         }
     }
 

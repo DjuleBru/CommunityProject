@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Processors;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +18,14 @@ public class PlayerMovement : MonoBehaviour
     private void Awake() {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start() {
+        Player.Instance.OnPlayerDied += Player_OnPlayerDied;
+    }
+
+    private void Player_OnPlayerDied(object sender, System.EventArgs e) {
+        DisableMovement();
     }
 
     private void FixedUpdate() {
@@ -51,8 +60,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void HandleMovement() {
-        Vector2 force = moveDirNormalized * PlayerEquipment.Instance.GetMoveSpeed() * Time.fixedDeltaTime;
-        rb.velocity = force;
+        Vector2 force = moveDirNormalized * PlayerEquipment.Instance.GetMoveSpeed() * Time.fixedDeltaTime *500;
+        rb.AddForce(force);
     }
 
     public Vector2 GetMovementVectorNormalized() {
@@ -72,4 +81,11 @@ public class PlayerMovement : MonoBehaviour
     public void EnableMovement() {
         canMove = true;
     }
+
+    public void TakeKnockback(Vector3 knockBackOrigin, float knockBackForce) {
+        Vector2 knockBackDir = (transform.position - knockBackOrigin).normalized;
+        Vector2 knockBack = knockBackDir * knockBackForce;
+        rb.AddForce(knockBack * 100);
+    }
+
 }

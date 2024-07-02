@@ -12,20 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73784fc4f355db4d8a889d8c52850bf, type: 3}
   m_Name: Dungeon3_Swamp
   m_EditorClassIdentifier: 
-  dungeonName: Desolate Desert
-  dungeonType: 4
-  dungeonRoomPoolList: []
+  dungeonName: Silent Swamp
+  dungeonType: 3
+  dungeonRoomPoolList:
+  - {fileID: 1698908917215491978, guid: df6fc069d9226df4e884e60609078ab8, type: 3}
+  - {fileID: 1698908917215491978, guid: 76129acc03b73af49817e951634fa54e, type: 3}
+  - {fileID: 1698908917215491978, guid: ebfb877bee55fdf40ad5f271aa00cb00, type: 3}
   dungeonDifficulty: 10
   totalRoomNumber: 4
   itemsFoundInDungeon:
-  - {fileID: 11400000, guid: 1d21872bcf7f053488f1df4bc7626350, type: 2}
+  - {fileID: 11400000, guid: 10cf712d752c3f64f8286615b6060846, type: 2}
+  - {fileID: 11400000, guid: 62529f2d1d3a9e543a44066ccd884fd2, type: 2}
   resourceNodesInDungeon:
-  - {fileID: 7273981155401663440, guid: ebfb877bee55fdf40ad5f271aa00cb00, type: 3}
-  - {fileID: 7273981155401663440, guid: df6fc069d9226df4e884e60609078ab8, type: 3}
-  - {fileID: 7273981155401663440, guid: 76129acc03b73af49817e951634fa54e, type: 3}
+  - {fileID: 840820483134563200, guid: 67392b2605163874db0a18c76ce9dcd8, type: 3}
   resourceNodesNumberInDungeon: 2
-  mobsFoundInDungeon:
-  - {fileID: 11400000, guid: 7a0537e99590b8b45811aa1a82600dc8, type: 2}
+  commonMobsFoundInDungeon:
+  - {fileID: 11400000, guid: 6618c37ec120c63498b3d53478beb1c8, type: 2}
+  rareMobsFoundInDungeon:
+  - {fileID: 11400000, guid: 5b2e3d6cb3e502d4aabfd21159645b20, type: 2}
+  epicMobsFoundInDungeon:
+  - {fileID: 11400000, guid: b928a7d6cba0e964fa63af549311b60c, type: 2}
   humanoidTypeFoundInDungeon: {fileID: 11400000, guid: 5474f6fd72cdbe84ea28d92795cee655, type: 2}
   humanoidsToSaveFromDungeon: 0
   dungeonSprite: {fileID: 1308879337, guid: 6a12f61ca3b2d7d43a0bb1b51684d940, type: 3}

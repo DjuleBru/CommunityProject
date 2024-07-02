@@ -13,12 +13,15 @@ public class MobAI : MonoBehaviour
     private Mob mob;
     private MobMovement mobMovement;
     private MobAttack mobAttack;
+    private MobAttack.AttackType attackType;
     private Collider2D collider2D;
     private Collider2D playerCollider;
 
     private float aggroRange;
-    private float attackRange;
-    private float attackTriggerRange;
+    private float meleeAttackRange;
+    private float rangedAttackRange;
+    private float meleeAttackTriggerRange;
+    private float rangedAttackTriggerRange;
     private bool playerEnteredAggroRange;
 
     private float distanceToPlayerCollider;
@@ -32,10 +35,14 @@ public class MobAI : MonoBehaviour
         mob = GetComponent<Mob>();
         playerCollider = Player.Instance.GetComponent<Collider2D>();
 
+        attackType = mob.GetMobSO().attackType;
+        Debug.Log(attackType);
         aggroRange = mob.GetMobSO().mobAggroRange;
-        attackRange = mob.GetMobSO().mobAttackRange;
+        meleeAttackRange = mob.GetMobSO().mobMeleeAttackRange;
+        rangedAttackRange = mob.GetMobSO().mobRangedAttackRange;
 
-        attackTriggerRange = attackRange / 2;
+        meleeAttackTriggerRange = meleeAttackRange / 2;
+        rangedAttackTriggerRange = rangedAttackRange / 2;
     }
 
     private void Start() {
@@ -44,7 +51,7 @@ public class MobAI : MonoBehaviour
 
     private void Update() {
 
-        if(dead) {
+        if (dead) {
             return;
         }
 
@@ -54,16 +61,44 @@ public class MobAI : MonoBehaviour
         if (!playerEnteredAggroRange) {
             CheckIfPlayerEntersAggroRange();
         } else {
-            if(distanceToPlayerCollider < attackTriggerRange) {
-                mobAttack.AttackTarget(Player.Instance.transform.position);
-            } else {
-                FollowPlayer(colliderDistance2DToPlayerCollider);
+
+            if(attackType == MobAttack.AttackType.Melee) {
+                if (distanceToPlayerCollider < meleeAttackTriggerRange) {
+                    mobAttack.AttackTarget(Player.Instance.transform.position);
+                }
+                else {
+                    FollowPlayer(colliderDistance2DToPlayerCollider);
+                }
             }
+
+            if (attackType == MobAttack.AttackType.Ranged) {
+                if (distanceToPlayerCollider < rangedAttackTriggerRange) {
+                    mobAttack.RangedAttackTarget(Player.Instance.transform.position);
+                }
+                else {
+                    FleePlayer(colliderDistance2DToPlayerCollider);
+                }
+            }
+
+
+            if (attackType == MobAttack.AttackType.MeleeAndRanged) {
+                if (distanceToPlayerCollider < rangedAttackTriggerRange) {
+                    mobAttack.AttackTarget(Player.Instance.transform.position);
+                }
+                else {
+                    FleePlayer(colliderDistance2DToPlayerCollider);
+                }
+            }
+
         }
     }
 
     private void FollowPlayer(ColliderDistance2D colliderDistance2DToPlayerCollider) {
         mobMovement.CalculatePath(colliderDistance2DToPlayerCollider.pointB, colliderDistance2DToPlayerCollider.pointA);
+    }
+
+    private void FleePlayer(ColliderDistance2D colliderDistance2DToPlayerCollider) {
+        mobMovement.CalculateFleePath(colliderDistance2DToPlayerCollider.pointA);
     }
 
     private void CheckIfPlayerEntersAggroRange() {

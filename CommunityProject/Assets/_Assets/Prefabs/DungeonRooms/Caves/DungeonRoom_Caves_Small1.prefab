@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 868175204703906797}
   - component: {fileID: 2976415480810166271}
   m_Layer: 6
-  m_Name: ExitPassage_Ground
+  m_Name: ExitPassageGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 30ecd7538b7e6a541bd7ec00541ca675, type: 2}
+  - {fileID: 2100000, guid: 8cc43087c3f3b41448c0edf5d6ae4054, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 5014376649103671579}
   - component: {fileID: 6238818457941401715}
   m_Layer: 6
-  m_Name: EnterPassage_Ground
+  m_Name: EntryPassageGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -740,7 +740,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 30ecd7538b7e6a541bd7ec00541ca675, type: 2}
+  - {fileID: 2100000, guid: 8cc43087c3f3b41448c0edf5d6ae4054, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

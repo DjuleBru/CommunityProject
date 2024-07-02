@@ -38,7 +38,17 @@ public class DungeonRecapUI : MonoBehaviour
     }
 
     private void InstantiateMobTemplates() {
-        foreach(MobSO mobSO in dungeonSO.mobsFoundInDungeon) {
+        foreach(MobSO mobSO in dungeonSO.commonMobsFoundInDungeon) {
+            GameObject mobPrefab = Instantiate(mobTemplatePrefab, mobTemplateContainer);
+            mobPrefab.transform.Find("MobSprite").GetComponent<Image>().sprite = mobSO.mobIconSprite;
+        }
+
+        foreach (MobSO mobSO in dungeonSO.rareMobsFoundInDungeon) {
+            GameObject mobPrefab = Instantiate(mobTemplatePrefab, mobTemplateContainer);
+            mobPrefab.transform.Find("MobSprite").GetComponent<Image>().sprite = mobSO.mobIconSprite;
+        }
+
+        foreach (MobSO mobSO in dungeonSO.epicMobsFoundInDungeon) {
             GameObject mobPrefab = Instantiate(mobTemplatePrefab, mobTemplateContainer);
             mobPrefab.transform.Find("MobSprite").GetComponent<Image>().sprite = mobSO.mobIconSprite;
         }

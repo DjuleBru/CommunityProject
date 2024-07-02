@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d955697926fe3224cb82d0abe09f3391, type: 3}
+  m_Name: GiantSpider
+  m_EditorClassIdentifier: 
+  mobDifficultyValue: 5
+  mobToSpawnPrefab: {fileID: 2762617982298062805, guid: 75c8bf218502e9e43a680b042fcb82ec, type: 3}
+  mobIconSprite: {fileID: -931358613, guid: 9922f22d93dfb4646ac3e21d9dd8f0d8, type: 3}
+  foundInDungeonTypes: 01000000
+  mobHP: 20
+  mobMoveSpeed: 100
+  attackType: 1
+  attackDmg: 5
+  mobAttackRate: 2
+  mobAttackDelay: 0.5
+  mobMeleeAttackRange: 8
+  mobRangedAttackRange: 12
+  projectileSpeed: 15
+  projectileDamage: 5
+  projectileSprite: {fileID: -497543275, guid: 94d57540394205b4982ad1e06b978389, type: 3}
+  rangedAttackAnimationDelay: 0.9
+  mobAggroRange: 20
+  dropProbability: 100
+  maxItemDrops: 1
+  itemDropRateList:
+  - itemSO: {fileID: 11400000, guid: 2dfa0f7b30dc8784bbf046d3b32b6232, type: 2}
+    dropRate: 100
+    maxDropAmount: 2

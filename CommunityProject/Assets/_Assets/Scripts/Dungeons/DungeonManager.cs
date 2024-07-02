@@ -23,7 +23,9 @@ public class DungeonManager : MonoBehaviour {
     private int dungeonDifficultyValue;
 
     [SerializeField] private List<MobSO> completeMobList;
-    private List<MobSO> dungeonMobList = new List<MobSO>();
+    private List<MobSO> commonDungeonMobList = new List<MobSO>();
+    private List<MobSO> rareDungeonMobList = new List<MobSO>();
+    private List<MobSO> epicDungeonMobList = new List<MobSO>();
 
     [SerializeField] private List<GameObject> humanoidsCagesList;
     private GameObject humanoidSpawnedInDungeon;
@@ -42,9 +44,11 @@ public class DungeonManager : MonoBehaviour {
         Instance = this;
         dungeonSO = ES3.Load("lastDungeonEnteredDungeonSO", defaultDungeonSO);
         dungeonType = dungeonSO.dungeonType;
-        FillCompleteMobList();
 
-        dungeonMobList = dungeonSO.mobsFoundInDungeon;
+        commonDungeonMobList = dungeonSO.commonMobsFoundInDungeon;
+        rareDungeonMobList = dungeonSO.rareMobsFoundInDungeon;
+        epicDungeonMobList = dungeonSO.epicMobsFoundInDungeon;
+
         resourceNodesInDungeon = dungeonSO.resourceNodesInDungeon;
         resourceNodesNumberInDungeon = dungeonSO.resourceNodesNumberInDungeon;
         humanoidCageNumberInDungeon = ES3.Load("lastDungeonEnteredRemainingHumanoidsToSave", 0);
@@ -62,13 +66,6 @@ public class DungeonManager : MonoBehaviour {
         dungeonTimer += Time.deltaTime;
     }
 
-    private void FillCompleteMobList() {
-        foreach(MobSO mobSO in completeMobList) {
-            if(mobSO.foundInDungeonTypes.Contains(dungeonType)) {
-                dungeonMobList.Add(mobSO);
-            }
-        }
-    }
 
     public void SetHumanoidsAsSaved() {
         humanoidsSaved++;
@@ -78,8 +75,16 @@ public class DungeonManager : MonoBehaviour {
         SavingSystem.Instance.CompleteDungeon(dungeonInventory.GetItemList(), dungeonTimer, humanoidsSaved);
     }
 
-    public List<MobSO> GetDungeonMobList() {
-        return dungeonMobList;
+    public List<MobSO> GetCommonDungeonMobList() {
+        return commonDungeonMobList;
+    }
+
+    public List<MobSO> GetRareDungeonMobList() {
+        return rareDungeonMobList;
+    }
+
+    public List<MobSO> GetEpicDungeonMobList() {
+        return epicDungeonMobList;
     }
 
     public List<GameObject> GetResourceNodesList() {

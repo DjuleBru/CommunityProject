@@ -19,15 +19,21 @@ MonoBehaviour:
   - {fileID: 1698908917215491978, guid: 2c297d7bec0781b4e9c993398c33b562, type: 3}
   - {fileID: 1698908917215491978, guid: eb1fc81b5c97b2c48995c330dfa6bd45, type: 3}
   - {fileID: 9125058671887655520, guid: cabd086c3337b7d408c7503a88fa5777, type: 3}
-  dungeonDifficulty: 10
-  totalRoomNumber: 2
+  dungeonDifficulty: 50
+  totalRoomNumber: 5
   itemsFoundInDungeon:
   - {fileID: 11400000, guid: 611e91fb308509f4d949ba22d4b85478, type: 2}
+  - {fileID: 11400000, guid: d8a7fdb6a0720a647b2da8e85498f833, type: 2}
+  - {fileID: 11400000, guid: 62529f2d1d3a9e543a44066ccd884fd2, type: 2}
   resourceNodesInDungeon:
   - {fileID: 840820483134563200, guid: a63c362565e146c40887a97e2cce95bf, type: 3}
   resourceNodesNumberInDungeon: 2
-  mobsFoundInDungeon:
-  - {fileID: 11400000, guid: 305b1c4b4b660b342b6ed635128bd4bf, type: 2}
+  commonMobsFoundInDungeon:
+  - {fileID: 11400000, guid: 7a0537e99590b8b45811aa1a82600dc8, type: 2}
+  rareMobsFoundInDungeon:
+  - {fileID: 11400000, guid: ff18246e8008acb48a59dc30c35490f6, type: 2}
+  epicMobsFoundInDungeon:
+  - {fileID: 11400000, guid: 8bad1c33fef3ecf46aa6168e09f40e5e, type: 2}
   humanoidTypeFoundInDungeon: {fileID: 11400000, guid: 5474f6fd72cdbe84ea28d92795cee655, type: 2}
   humanoidsToSaveFromDungeon: 0
   dungeonSprite: {fileID: 1308879337, guid: 6a12f61ca3b2d7d43a0bb1b51684d940, type: 3}

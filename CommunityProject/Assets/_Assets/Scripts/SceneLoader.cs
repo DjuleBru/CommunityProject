@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public static class SceneLoader
 {
+
     public enum Scene {
         MainMenuScene,
         LoadingScene,
@@ -15,6 +16,7 @@ public static class SceneLoader
     private static Scene targetScene;
 
     public static void Load(Scene targetScene) {
+
         SceneLoader.targetScene = targetScene;
         SceneManager.LoadScene(targetScene.ToString());
     }
@@ -22,5 +24,6 @@ public static class SceneLoader
     public static void LoaderCallback() {
         SceneManager.LoadScene(targetScene.ToString());
     }
+
 
 }

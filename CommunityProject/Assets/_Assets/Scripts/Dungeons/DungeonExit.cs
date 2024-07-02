@@ -7,6 +7,6 @@ public class DungeonExit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.GetComponent<Player>() == null) return;
         DungeonManager.Instance.CompleteDungeon();
-        SceneLoader.Load(SceneLoader.Scene.OverWorld);
+        SceneTransitionManager.Instance.LoadScene(SceneTransitionManager.Scene.OverWorld);
     }
 }

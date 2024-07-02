@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a507851cbae87c74faf7bf505155e85b, type: 3}
+  m_Name: Punch
+  m_EditorClassIdentifier: 
+  isTool: 0
+  toolAttackRate: 0
+  weaponSprite: {fileID: 0}
+  weaponSpriteUI: {fileID: 1885157978, guid: 2f4124a9ab65f96439a4dd825058b469, type: 3}
+  weaponCanPierce: 0
+  weaponKnockback: 0
+  weaponDazeTime: 0
+  bodyAnimationType: 0
+  weaponAnimatorController: {fileID: 0}

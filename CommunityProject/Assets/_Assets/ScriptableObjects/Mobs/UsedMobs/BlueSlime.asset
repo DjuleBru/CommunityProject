@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d955697926fe3224cb82d0abe09f3391, type: 3}
+  m_Name: BlueSlime
+  m_EditorClassIdentifier: 
+  mobDifficultyValue: 1
+  mobToSpawnPrefab: {fileID: 2762617982298062805, guid: 35c9d027d762740469491d12ee90ae92, type: 3}
+  mobIconSprite: {fileID: -1033818191, guid: 54ff3329be0bc8b4b84393c7fb8d5eee, type: 3}
+  mobHP: 0
+  mobMoveSpeed: 100
+  attackType: 0
+  attackDmg: 1
+  mobAttackRate: 0.5
+  mobAttackDelay: 0.2
+  mobMeleeAttackRange: 0.5
+  mobRangedAttackRange: 0
+  projectileSpeed: 0
+  projectileDamage: 0
+  projectileSprite: {fileID: 0}
+  rangedAttackAnimationDelay: 0
+  mobAggroRange: 10
+  meleeAttackKnockback: 0
+  rangedAttackKnockback: 0
+  dropProbability: 0
+  maxItemDrops: 0
+  itemDropRateList: []

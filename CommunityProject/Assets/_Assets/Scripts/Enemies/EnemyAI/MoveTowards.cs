@@ -19,9 +19,29 @@ public class MoveTowards : Action
 
     public override TaskStatus OnUpdate() {
         ColliderDistance2D colliderDistance2DToPlayerCollider = playerCollider.Distance(collider);
-        mobMovement.CalculatePath(colliderDistance2DToPlayerCollider.pointB, colliderDistance2DToPlayerCollider.pointA);
 
-        return TaskStatus.Running;
+        if(mobMovement.GetComponent<Mob>().GetMobSO().attackType == MobAttack.AttackType.Ranged) {
+
+            if(Vector3.Distance(Player.Instance.transform.position, transform.position) < GetComponent<Mob>().GetMobSO().mobMeleeAttackRange/2) {
+
+                mobMovement.CalculateFleePath(colliderDistance2DToPlayerCollider.pointA);
+
+            } else {
+
+                if(Vector3.Distance(Player.Instance.transform.position, transform.position) > GetComponent<Mob>().GetMobSO().mobRangedAttackRange / 2) {
+                    mobMovement.CalculatePath(colliderDistance2DToPlayerCollider.pointB, colliderDistance2DToPlayerCollider.pointA);
+                }
+
+            }
+
+
+        } else {
+
+            mobMovement.CalculatePath(colliderDistance2DToPlayerCollider.pointB, colliderDistance2DToPlayerCollider.pointA);
+
+        }
+
+        return TaskStatus.Success;
     }
 
 }

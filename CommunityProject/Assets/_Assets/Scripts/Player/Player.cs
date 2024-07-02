@@ -13,11 +13,12 @@ public class Player : MonoBehaviour, IDamageable
     private Inventory playerInventory;
     [SerializeField] private InventoryUI playerInventoryUI;
     [SerializeField] private GameObject playerVisual;
+
     public static Player Instance { get; private set; }
 
     public event EventHandler OnPlayerDamaged;
+    public event EventHandler OnPlayerDied;
     public event EventHandler<IDamageable.OnIDamageableHealthChangedEventArgs> OnIDamageableHealthChanged;
-
     private int playerHP;
 
     [SerializeField] private float workingSpeed;
@@ -26,6 +27,9 @@ public class Player : MonoBehaviour, IDamageable
     private List<IInteractable> interactablesInTriggerArea = new List<IInteractable>();
     private IInteractable closestInteractable = null;
     private float closestInteractableDistance = Mathf.Infinity;
+
+    private bool dead;
+    private float deadTimer;
 
     private void Awake() {
         Instance = this;
@@ -42,7 +46,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void GameInput_OnInteractAction(object sender, EventArgs e) {
         // Check if there is a humanoid in trigger area
-
+        if (SavingSystem.Instance.GetSceneIsDungeon()) return;
         bool humanoidsInTriggerArea = false;
         if (interactablesInTriggerArea.Count > 0) {
             foreach (IInteractable interactable1 in interactablesInTriggerArea) {
@@ -60,6 +64,15 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Update() {
 
+        if(dead) {
+            Debug.Log(deadTimer);
+            deadTimer += Time.deltaTime;
+            if(deadTimer >2f) {
+                dead = false;
+                SceneTransitionManager.Instance.LoadScene(SceneTransitionManager.Scene.OverWorld);
+            }
+        }
+
         if (interactablesInTriggerArea.Count > 1) {
             //There are interactables in trigger area
             HandleClosestInteractableChange();
@@ -71,6 +84,7 @@ public class Player : MonoBehaviour, IDamageable
         HandleInteractableTriggerEnter(collider);
         HandleResourceNodeTriggerEnter(collider);
     }
+
     private void OnTriggerExit2D(Collider2D collider) {
         HandleInteractableTriggerExit(collider);
         HandleResourceNodeTriggerExit(collider);
@@ -96,6 +110,20 @@ public class Player : MonoBehaviour, IDamageable
             previousHealth = playerHP + damage,
             newHealth = playerHP
         });
+
+        if(playerHP < 0 ) {
+            Die();
+        }
+    }
+
+    private void Die() {
+        dead = true;
+        OnPlayerDied?.Invoke(this, EventArgs.Empty);
+        GetComponent<Collider2D>().enabled = false;
+    }
+
+    public void TakeKnockback(float knockBackForce, Vector3 knockBackOrigin) {
+        GetComponent<PlayerMovement>().TakeKnockback(knockBackOrigin, knockBackForce);
     }
 
     public void DisablePlayerActions() {

@@ -23,6 +23,13 @@ public class MobAnimatorManager : MonoBehaviour
         mob.OnIDamageableHealthChanged += Mob_OnIDamageableHealthChanged;
         mob.OnMobDied += Mob_OnModDied;
         mobAttack.OnMobAttack += MobAttack_OnMobAttack;
+        mobAttack.OnMobRangedAttack += MobAttack_OnMobRangedAttack;
+    }
+
+    private void MobAttack_OnMobRangedAttack(object sender, System.EventArgs e) {
+        animator.SetBool("Idle", false);
+        animator.SetBool("Walking", false);
+        animator.SetTrigger("RangedAttack");
     }
 
     private void Mob_OnIDamageableHealthChanged(object sender, IDamageable.OnIDamageableHealthChangedEventArgs e) {
@@ -32,6 +39,8 @@ public class MobAnimatorManager : MonoBehaviour
     }
 
     private void MobAttack_OnMobAttack(object sender, System.EventArgs e) {
+        animator.SetBool("Idle", false);
+        animator.SetBool("Walking", false);
         animator.SetTrigger("Attack");
     }
 
@@ -52,15 +61,26 @@ public class MobAnimatorManager : MonoBehaviour
         Vector3 moveDirNormalized = mobMovement.GetMoveDirNormalized();
         bool reachedEndOfPath = mobMovement.GetReachedEndOfPath();
 
+        animator.SetFloat("X", moveDirNormalized.x);
+        animator.SetFloat("Y", moveDirNormalized.y);
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsName("RangedAttack")) {
+
+            animator.SetBool("Walking", false);
+            animator.SetBool("Idle", false);
+            return;
+        }
+
+        if (!mobMovement.GetCanMove()) {
+            animator.SetBool("Walking", false);
+            animator.SetBool("Idle", true);
+            return;
+        }
+
         if (!reachedEndOfPath) {
             animator.SetBool("Walking", true);
             animator.SetBool("Idle", false);
         }
-        else {
-            animator.SetBool("Walking", false);
-            animator.SetBool("Idle", true);
-        }
-        animator.SetFloat("X", moveDirNormalized.x);
-        animator.SetFloat("Y", moveDirNormalized.y);
+
     }
 }

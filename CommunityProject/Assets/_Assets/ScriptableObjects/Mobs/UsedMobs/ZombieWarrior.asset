@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d955697926fe3224cb82d0abe09f3391, type: 3}
+  m_Name: ZombieWarrior
+  m_EditorClassIdentifier: 
+  mobDifficultyValue: 1
+  mobToSpawnPrefab: {fileID: 2762617982298062805, guid: 2dc5ebc7657dc224d9965dc239050db5, type: 3}
+  mobIconSprite: {fileID: -1586644394, guid: 9cbaa7344d8f91c4ab0f62cc9dda364b, type: 3}
+  mobHP: 20
+  mobMoveSpeed: 100
+  attackType: 0
+  attackDmg: 5
+  mobAttackRate: 2
+  mobAttackDelay: 0.5
+  mobMeleeAttackRange: 3
+  mobRangedAttackRange: 0
+  projectileSpeed: 0
+  projectileDamage: 0
+  projectileSprite: {fileID: 0}
+  rangedAttackAnimationDelay: 0
+  mobAggroRange: 20
+  meleeAttackKnockback: 0
+  rangedAttackKnockback: 0
+  dropProbability: 100
+  maxItemDrops: 1
+  itemDropRateList:
+  - itemSO: {fileID: 11400000, guid: d8a7fdb6a0720a647b2da8e85498f833, type: 2}
+    dropRate: 100
+    maxDropAmount: 3

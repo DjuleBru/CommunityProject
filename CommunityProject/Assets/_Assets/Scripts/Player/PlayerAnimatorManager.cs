@@ -20,6 +20,7 @@ public class PlayerAnimatorManager : MonoBehaviour {
     private string bodyAnimationType;
 
     private bool attacking;
+    private bool dead;
     private void Awake() {
         Instance = this;
         animator = GetComponent<Animator>();
@@ -27,6 +28,7 @@ public class PlayerAnimatorManager : MonoBehaviour {
 
     private void Start() {
         Player.Instance.OnIDamageableHealthChanged += Player_OnIDamageableHealthChanged;
+        Player.Instance.OnPlayerDied += Player_OnPlayerDied;
         PlayerAttack.Instance.OnPlayerAttack += PlayerAttack_OnPlayerAttack;
         PlayerAttack.Instance.OnActiveWeaponSOChanged += PlayerAttack_OnActiveWeaponSOChanged;
 
@@ -34,8 +36,15 @@ public class PlayerAnimatorManager : MonoBehaviour {
         animator.SetBool(bodyAnimationType, true);
     }
 
+    private void Player_OnPlayerDied(object sender, EventArgs e) {
+        dead = true;
+        animator.SetTrigger("Die");
+    }
 
     private void Update() {
+        if(dead) {
+
+        }
 
         CheckIfPlayerFinishedAttackAnimation();
 

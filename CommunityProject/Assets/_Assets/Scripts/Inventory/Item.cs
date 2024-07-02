@@ -68,6 +68,7 @@ public class Item
         Wool,
         Thread,
         WoolThread,
+        Meat,
     }
 
     public enum ItemCategory {
