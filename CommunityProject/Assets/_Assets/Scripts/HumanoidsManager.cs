@@ -15,6 +15,7 @@ public class HumanoidsManager : MonoBehaviour
     [SerializeField] private List<int> humanoidsSavedFromDungeonIDList;
 
     [SerializeField] private GameObject defaultHumanoid;
+    [SerializeField] private Transform humanoidSpawnPosition;
 
     [SerializeField] ExternalBehaviorTree workerBehaviorTree;
     [SerializeField] ExternalBehaviorTree haulierBehaviorTree;
@@ -46,6 +47,7 @@ public class HumanoidsManager : MonoBehaviour
         if(humanoidsInOverworld.Contains(humanoid)) return;
         humanoidsInOverworld.Add(humanoid);
     }
+
     public void AddHumanoidSavedFromDungeon(Humanoid humanoid) {
         humanoidsSavedFromDungeon.Add(humanoid);
     }
@@ -58,9 +60,9 @@ public class HumanoidsManager : MonoBehaviour
         humanoidsSavedIDList = new List<int>();
 
         foreach (Humanoid humanoid in humanoidsInOverworld) {
-            humanoidsSavedIDList.Add(humanoid.GetInstanceID());
-            ES3.Save(humanoid.GetInstanceID().ToString(), humanoid.gameObject);
-            Debug.Log("saved " + humanoid);
+            humanoidsSavedIDList.Add(humanoid.GetHumanoidSaveID());
+            ES3.Save(humanoid.GetHumanoidSaveID().ToString(), humanoid.gameObject);
+            Debug.Log("saved humanoid" + humanoid.GetHumanoidSaveID());
 
         }
 
@@ -72,8 +74,9 @@ public class HumanoidsManager : MonoBehaviour
         humanoidsSavedFromDungeonIDList = new List<int>();
 
         foreach (Humanoid humanoid in humanoidsSavedFromDungeon) {
-            humanoidsSavedFromDungeonIDList.Add(humanoid.GetInstanceID());
-            ES3.Save(humanoid.GetInstanceID().ToString(), humanoid.gameObject);
+            humanoidsSavedFromDungeonIDList.Add(humanoid.GetHumanoidSaveID());
+            ES3.Save(humanoid.GetHumanoidSaveID().ToString(), humanoid.gameObject);
+            Debug.Log("saved humanoid" + humanoid.GetHumanoidSaveID());
         }
 
         ES3.Save("humanoidsSavedFromLastDungeon", humanoidsSavedFromDungeonIDList);
@@ -81,9 +84,9 @@ public class HumanoidsManager : MonoBehaviour
 
     public void LoadHumanoidsInOverworld() {
         humanoidsSavedIDList = ES3.Load("humanoidsSavedIDList", new List<int>());
-        Debug.Log("loading " + humanoidsSavedIDList.Count + " humanoids ");
         foreach (int id in humanoidsSavedIDList) {
             ES3.Load(id.ToString());
+            Debug.Log("loaded humanoid " +  id);
         }
     }
 
@@ -93,6 +96,7 @@ public class HumanoidsManager : MonoBehaviour
 
         foreach (int id in humanoidsSavedFromDungeonIDList) {
             ES3.Load(id.ToString());
+            Debug.Log("loaded humanoid " + id);
         }
     }
 
@@ -145,5 +149,9 @@ public class HumanoidsManager : MonoBehaviour
         }
         return null;
 
+    }
+
+    public Vector3 GetHumanoidSpawnPosition() {
+        return humanoidSpawnPosition.transform.position;
     }
 }

@@ -70,7 +70,6 @@ public class DungeonEntrance : MonoBehaviour
     }
 
     public void AddItemsToInventory(List<Item> itemList) {
-        Debug.Log("adding items to dungeon chest");
         dungeonChest.AddItemsToChest(itemList);
     }
 
@@ -129,7 +128,6 @@ public class DungeonEntrance : MonoBehaviour
         if(dungeonStatsBoard.GetRecordedDungeonTime() != 0) {
             dungeonChest.gameObject.SetActive(true);
             dungeonIsComplete = true;
-            Debug.Log(dungeonIsComplete);
         }
 
     }

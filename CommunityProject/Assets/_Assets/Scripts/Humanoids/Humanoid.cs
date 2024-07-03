@@ -94,6 +94,8 @@ public class Humanoid : MonoBehaviour
     private float necklaceItemMaxDurability;
     private float ringItemMaxDurability;
 
+    private int humanoidSaveID;
+
     private List<Item> equippedItems = new List<Item>();
 
     private void Awake() {
@@ -115,12 +117,14 @@ public class Humanoid : MonoBehaviour
             AssignBehaviorTree();
         }
 
-        if (humanoidName == null) {
-            humanoidName = HumanoidNames.GetRandomName(humanoidSO.humanoidType);
-        }
     }
 
     private void Start() {
+
+        if (humanoidName == null) {
+            humanoidName = HumanoidNames.GetRandomName(humanoidSO.humanoidType);
+        }
+
         humanoidWork.OnHumanoidWorkStarted += HumanoidWork_OnHumanoidWorkStarted;
         humanoidWork.OnHumanoidWorkStopped += HumanoidWork_OnHumanoidWorkStopped;
 
@@ -268,7 +272,7 @@ public class Humanoid : MonoBehaviour
     }
 
     public void AssignBehaviorTree() {
-
+        Debug.Log(jobAssigned);
         if (jobAssigned == Job.Worker) {
             behaviorTree.ExternalBehavior = HumanoidsManager.Instance.GetWorkerBehaviorTree();
             return;
@@ -632,9 +636,11 @@ public class Humanoid : MonoBehaviour
     }
 
     public void LoadHumanoid() {
+
         if(freedFromDungeon) {
             freedFromDungeon = false;
-            transform.position = Vector3.zero;
+            transform.position = HumanoidsManager.Instance.GetHumanoidSpawnPosition();
+            humanoidMovement.CalculatePath(transform.position, transform.position);
         }
 
         AssignBehaviorTree();
@@ -677,6 +683,15 @@ public class Humanoid : MonoBehaviour
         if (carryCapacity == 0) {
             carryCapacity = humanoidSO.carryCapacity;
         }
+    }
+
+    public int GetHumanoidSaveID() {
+
+        if(humanoidSaveID == 0) {
+            humanoidSaveID = (int)UnityEngine.Random.Range(0, 9999999);
+        }
+
+        return humanoidSaveID;
     }
 
 }

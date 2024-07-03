@@ -208,7 +208,7 @@ public class Inventory
     public int AmountInventoryCanReceiveOfType(Item item) {
         if (!InventoryCanAcceptItem(item)) return 0;
 
-        int maxStackableAmount = 0;
+        int maxStackableAmount = inventoryMaxStackAmount;
 
         if (inventoryMaxStackAmount == 0) {
             maxStackableAmount = ItemAssets.Instance.GetItemSO(item.itemType).maxStackableAmount;

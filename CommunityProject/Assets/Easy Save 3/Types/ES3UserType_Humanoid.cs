@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("assignedBuilding", "humanoidSO", "job", "humanoidWork", "humanoidHaul", "humanoidNeeds", "humanoidDungeonCrawl", "humanoidAnimatorManager", "humanoidMovement", "humanoidCarry", "humanoidVisual", "humanoidName", "humanoidActionDesriprion", "strength", "intelligence", "moveSpeed", "agility", "damage", "armor", "carryCapacity", "jobAssigned", "autoAssign", "autoAssignBestEquipment", "freedFromDungeon", "health", "maxHealth", "healing", "behaviorTree", "mainHandItem", "secondaryHandItem", "helmetItem", "bootsItem", "necklaceItem", "ringItem", "mainHandItemDurability", "secondaryHandItemDurability", "helmetItemDurability", "bootsItemDurability", "necklaceItemDurability", "ringItemDurability", "mainHandItemMaxDurability", "secondaryHandItemMaxDurability", "helmetItemMaxDurability", "bootsItemMaxDurability", "necklaceItemMaxDurability", "ringItemMaxDurability", "equippedItems", "m_CancellationTokenSource")]
+	[ES3PropertiesAttribute("assignedBuilding", "humanoidSO", "job", "humanoidWork", "humanoidHaul", "humanoidNeeds", "humanoidDungeonCrawl", "humanoidAnimatorManager", "humanoidMovement", "humanoidCarry", "humanoidVisual", "humanoidName", "humanoidActionDesriprion", "strength", "intelligence", "moveSpeed", "agility", "damage", "armor", "carryCapacity", "jobAssigned", "autoAssign", "autoAssignBestEquipment", "freedFromDungeon", "health", "maxHealth", "healing", "behaviorTree", "mainHandItem", "secondaryHandItem", "helmetItem", "bootsItem", "necklaceItem", "ringItem", "mainHandItemDurability", "secondaryHandItemDurability", "helmetItemDurability", "bootsItemDurability", "necklaceItemDurability", "ringItemDurability", "mainHandItemMaxDurability", "secondaryHandItemMaxDurability", "helmetItemMaxDurability", "bootsItemMaxDurability", "necklaceItemMaxDurability", "ringItemMaxDurability", "humanoidSaveID", "equippedItems", "m_CancellationTokenSource")]
 	public class ES3UserType_Humanoid : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -62,6 +62,7 @@ namespace ES3Types
 			writer.WritePrivateField("bootsItemMaxDurability", instance);
 			writer.WritePrivateField("necklaceItemMaxDurability", instance);
 			writer.WritePrivateField("ringItemMaxDurability", instance);
+			writer.WritePrivateField("humanoidSaveID", instance);
 			writer.WritePrivateField("equippedItems", instance);
 			writer.WritePrivateField("m_CancellationTokenSource", instance);
 		}
@@ -211,6 +212,9 @@ namespace ES3Types
 					break;
 					case "ringItemMaxDurability":
 					instance = (Humanoid)reader.SetPrivateField("ringItemMaxDurability", reader.Read<System.Single>(), instance);
+					break;
+					case "humanoidSaveID":
+					instance = (Humanoid)reader.SetPrivateField("humanoidSaveID", reader.Read<System.Int32>(), instance);
 					break;
 					case "equippedItems":
 					instance = (Humanoid)reader.SetPrivateField("equippedItems", reader.Read<System.Collections.Generic.List<Item>>(), instance);

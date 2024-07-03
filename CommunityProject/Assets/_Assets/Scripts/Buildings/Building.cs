@@ -92,6 +92,8 @@ public class Building : MonoBehaviour
 
     private EventSystem eventSystem;
 
+    private int buildingSaveID;
+
     protected virtual void Awake() {
         buildingCollider = GetComponent<Collider2D>();
         buildingVisual = GetComponentInChildren<BuildingVisual>();
@@ -295,7 +297,6 @@ public class Building : MonoBehaviour
     }
 
     public virtual void LoadBuilding() {
-        Debug.Log("buiding placed " + buildingPlaced);
 
         if(buildingPlaced) {
             buildingCollider.isTrigger = false;
@@ -307,5 +308,14 @@ public class Building : MonoBehaviour
         else {
             BuildingsManager.Instance.SetBuildingSpawned();
         }
+    }
+
+    public int GetBuildingSaveID() {
+
+        if (buildingSaveID == 0) {
+            buildingSaveID = (int)UnityEngine.Random.Range(0, 9999999);
+        }
+
+        return buildingSaveID;
     }
 }

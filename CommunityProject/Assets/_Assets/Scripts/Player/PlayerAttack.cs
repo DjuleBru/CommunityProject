@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     public event EventHandler OnActiveWeaponSOChanged;
 
     private bool attacking;
+    private bool attackButtonHeldDown;
     private bool canAttack = true;
 
     private int attackDamage;
@@ -29,23 +30,42 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start() {
         GameInput.Instance.OnAttackAction += GameInput_OnAttackAction;
+        GameInput.Instance.OnAttackStarted += GameInput_OnAttackStarted;
+        GameInput.Instance.OnAttackCanceled += GameInput_OnAttackCanceled;
+
         UpdateActiveStats();
+    }
+
+
+    private void GameInput_OnAttackStarted(object sender, EventArgs e) {
+        attackButtonHeldDown = true;
     }
 
     private void Update() {
         if(!attacking) {
             attackTimer -= Time.deltaTime;
         }
+        //Debug.Log(attackButtonHeldDown);
+        if(attackButtonHeldDown) {
+            TryAttacking();
+        }
     }
 
     private void GameInput_OnAttackAction(object sender, EventArgs e) {
+        TryAttacking();
+    }
+
+    private void GameInput_OnAttackCanceled(object sender, EventArgs e) {
+        attackButtonHeldDown = false;
+    }
+
+    private void TryAttacking() {
         if (!canAttack) return;
-        if(attackTimer < 0) {
+        if (attackTimer < 0) {
             attackTimer = attackRate;
             OnPlayerAttack?.Invoke(this, EventArgs.Empty);
         }
     }
-
 
     public WeaponSO GetActiveWeaponSO() {
         return activeWeaponSO;

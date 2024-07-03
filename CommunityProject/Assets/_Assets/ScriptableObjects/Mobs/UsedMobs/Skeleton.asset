@@ -15,8 +15,7 @@ MonoBehaviour:
   mobDifficultyValue: 1
   mobToSpawnPrefab: {fileID: 2762617982298062805, guid: cba97bd85035b504a848ed11049f6ed1, type: 3}
   mobIconSprite: {fileID: 2034544169, guid: 64b8d7d3023fa454e886679aea95cfbd, type: 3}
-  foundInDungeonTypes: 01000000
-  mobHP: 20
+  mobHP: 10
   mobMoveSpeed: 100
   attackType: 0
   attackDmg: 5
@@ -27,7 +26,10 @@ MonoBehaviour:
   projectileSpeed: 0
   projectileDamage: 0
   projectileSprite: {fileID: 0}
+  rangedAttackAnimationDelay: 0
   mobAggroRange: 20
+  meleeAttackKnockback: 0
+  rangedAttackKnockback: 0
   dropProbability: 100
   maxItemDrops: 1
   itemDropRateList:

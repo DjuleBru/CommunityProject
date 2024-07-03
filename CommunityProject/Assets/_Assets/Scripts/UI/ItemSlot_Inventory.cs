@@ -77,14 +77,13 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         group.alpha = 1f;
 
         Inventory inventoryDraggedOn = GetInventoryDraggedOn();
-
         if (inventoryDraggedOn != null) {
             // Dragged on an inventory
 
             if (inventoryDraggedOn != parentInventoryUI.GetInventory() && GetInventoryUI_InteractedDraggedOn() != null && GetInventoryUI_InteractedDraggedOn().GetCanReceiveItems()) {
                 // Dragged on another inventory, interactable inventory that can receive items
-                    TransferItemBetweenInventories(inventoryDraggedOn);
-                    GetInventoryUI_InteractedDraggedOn().CloseTransferItemsPanelGameObject();
+                TransferItemBetweenInventories(inventoryDraggedOn);
+                GetInventoryUI_InteractedDraggedOn().CloseTransferItemsPanelGameObject();
             } else {
                 rectTransform.anchoredPosition = initialPosition;
             }
@@ -157,6 +156,7 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
 
         return newInventory;
     }
+
     private InventoryUI GetInventoryUIDraggedOn() {
         PointerEventData pointer = new PointerEventData(EventSystem.current);
         pointer.position = Input.mousePosition;

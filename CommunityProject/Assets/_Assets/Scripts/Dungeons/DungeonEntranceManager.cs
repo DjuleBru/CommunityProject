@@ -33,7 +33,6 @@ public class DungeonEntranceManager : MonoBehaviour
         foreach (DungeonEntrance dungeonEntrance in dungeonEntranceList) {
             dungeonEntrancesSavedIDList.Add(dungeonEntrance.GetInstanceID());
             ES3.Save(dungeonEntrance.GetInstanceID().ToString(), dungeonEntrance);
-            Debug.Log("saved dungeon entrance " + dungeonEntrance.GetInstanceID().ToString());
         }
 
         ES3.Save("dungeonEntrancesSavedIDList", dungeonEntrancesSavedIDList);
@@ -44,7 +43,6 @@ public class DungeonEntranceManager : MonoBehaviour
         foreach (DungeonStatsBoard statsBoard in statsBoardsList) {
             statsBoardsSavesIDList.Add(statsBoard.GetInstanceID());
             ES3.Save(statsBoard.GetInstanceID().ToString(), statsBoard);
-            Debug.Log("saved stats board " + statsBoard.GetInstanceID().ToString());
         }
 
         ES3.Save("statsBoardsSavesIDList", statsBoardsSavesIDList);
@@ -55,7 +53,6 @@ public class DungeonEntranceManager : MonoBehaviour
 
         foreach (int id in dungeonEntrancesSavedIDList) {
             ES3.Load(id.ToString());
-            Debug.Log("loaded dungeon entrance " + id.ToString());
         }
     } 
     
@@ -64,7 +61,6 @@ public class DungeonEntranceManager : MonoBehaviour
 
         foreach (int id in statsBoardsSavesIDList) {
             ES3.Load(id.ToString());
-            Debug.Log("loaded stats board " + id.ToString());
         }
     }
 

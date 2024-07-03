@@ -42,6 +42,10 @@ public class Player : MonoBehaviour, IDamageable
 
         playerInventory = ES3.Load("playerInventory", new Inventory(true, 3, 3, false, null));
         playerInventoryUI.SetInventory(playerInventory);
+
+        if(SavingSystem.Instance.GetSceneIsOverworld()) {
+            transform.position = ES3.Load("playerPosition", new Vector3(0,10,0));
+        }
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e) {
@@ -326,6 +330,7 @@ public class Player : MonoBehaviour, IDamageable
     public void SavePlayer() {
         ES3.Save("playerInventory", playerInventory);
         ES3.Save("playerEquipment", PlayerEquipment.Instance.GetEquippmentItems());
+        ES3.Save("playerPosition", transform.position);
     }
 
     #region SET PARAMETERS

@@ -19,7 +19,6 @@ public class DungeonGenerationManager : MonoBehaviour {
     }
 
     private void Start() {
-        Debug.Log(DungeonManager.Instance.GetDungeonSO());
         dungeonRoomPoolList = DungeonManager.Instance.GetDungeonSO().dungeonRoomPoolList;
 
         GenerateDungeon();

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using ES3Internal;
+using UnityEngine.UI;
 
 namespace ES3Types
 {
@@ -33,6 +34,11 @@ namespace ES3Types
 
         protected override void ReadUnityObject<T>(ES3Reader reader, object obj)
         {
+            //Debug.Log(obj.ToString());
+            //if(obj is Image) {
+            //    Image image = obj as Image;
+            //    Debug.Log(image.sprite);
+            //}
             ReadComponent<T>(reader, obj);
         }
 

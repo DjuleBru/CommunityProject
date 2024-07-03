@@ -75,17 +75,19 @@ public class BuildingsManager : MonoBehaviour
         foreach (Building building in buildingsSpawned) {
             if(building is ArchitectTable) {
                 ArchitectTable architectTable = (ArchitectTable)building;
-                architectTablesIDList.Add(architectTable.GetInstanceID());
-                ES3.Save(architectTable.GetInstanceID().ToString(), architectTable.gameObject);
+                architectTablesIDList.Add(architectTable.GetBuildingSaveID());
+                ES3.Save(architectTable.GetBuildingSaveID().ToString(), architectTable.gameObject);
             } else {
-                buildingsSavedIDList.Add(building.GetInstanceID());
-                ES3.Save(building.GetInstanceID().ToString(), building.gameObject);
+                buildingsSavedIDList.Add(building.GetBuildingSaveID());
+                ES3.Save(building.GetBuildingSaveID().ToString(), building.gameObject);
             }
         }
 
         ES3.Save("buildingsSavedIDList", buildingsSavedIDList);
         ES3.Save("architectTablesIDList", architectTablesIDList);
     }
+
+
 
     public void LoadBuildingsInOverworld() {
         buildingsSavedIDList = ES3.Load("buildingsSavedIDList", new List<int>());

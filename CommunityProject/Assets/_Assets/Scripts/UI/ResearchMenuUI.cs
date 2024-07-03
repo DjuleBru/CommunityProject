@@ -128,6 +128,7 @@ public class ResearchMenuUI : MonoBehaviour
             Transform recipeTransform = Instantiate(buildingRecipeTemplate, buildingRecipeContainer);
             recipeTransform.gameObject.SetActive(true);
             recipeTransform.GetComponent<RecipeSlotTemplate>().SetRecipe(recipeSO);
+            recipeTransform.Find("RecipeIcon").GetComponent<Image>().sprite = ItemAssets.Instance.GetItemSO(recipeSO.outputItems[0].itemType).itemSprite;
         }
 
         foreach(Item item in GetResearchProgress(buildingSO).remainingItemList) {

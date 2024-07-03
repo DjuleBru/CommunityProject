@@ -57,7 +57,6 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
     }
 
     public void RecordDungeon(List<Item> loot, float time, int humanoidsSaved) {
-        Debug.Log("recording dungeon loot " + time + " " + humanoidsSaved);
         recordedDungeonLoot = loot;
         recordedDungeonTime = time;
         recordedhumanoidsSaved = humanoidsSaved;
@@ -147,7 +146,6 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
     }
 
     public void LoadStatsBoardUI() {
-        Debug.Log("load stats board ui " + recordedDungeonLoot.Count);
         recordedStatsBoardUI.SetDungeonLootUI(recordedDungeonLoot);
         recordedStatsBoardUI.SetDungeonTimeUI(recordedDungeonTime);
     }

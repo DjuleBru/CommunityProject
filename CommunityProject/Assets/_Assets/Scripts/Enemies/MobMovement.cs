@@ -138,8 +138,6 @@ public class MobMovement : MonoBehaviour
         } else {
             return (Player.Instance.transform.position - transform.position).normalized;
         }
-
-        return Vector3.zero;
     }
     public bool GetReachedEndOfPath() {
         return reachedEndOfPath;

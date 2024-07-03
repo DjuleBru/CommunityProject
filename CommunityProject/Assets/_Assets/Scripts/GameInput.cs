@@ -10,6 +10,8 @@ public class GameInput : MonoBehaviour
 
     public event EventHandler OnInteractAction;
     public event EventHandler OnAttackAction;
+    public event EventHandler OnAttackStarted;
+    public event EventHandler OnAttackCanceled;
     public event EventHandler OnPlaceBuilding;
     public event EventHandler OnPlaceBuildingCancelled;
 
@@ -22,8 +24,14 @@ public class GameInput : MonoBehaviour
 
         playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.Attack.performed += Attack_performed;
+        playerInputActions.Player.Attack.started += Attack_started;
+        playerInputActions.Player.Attack.canceled += Attack_canceled;
         playerInputActions.Player.PlaceBuilding.performed += PlaceBuilding_performed;
         playerInputActions.Player.CancelPlaceBuilding.performed += CancelPlaceBuilding_performed;
+    }
+
+    private void Attack_canceled(InputAction.CallbackContext obj) {
+        OnAttackCanceled?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetZoomVector() {
@@ -38,6 +46,10 @@ public class GameInput : MonoBehaviour
 
     private void PlaceBuilding_performed(InputAction.CallbackContext obj) {
         OnPlaceBuilding?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Attack_started(InputAction.CallbackContext obj) {
+        OnAttackStarted?.Invoke(this, EventArgs.Empty);
     }
 
     private void Attack_performed(InputAction.CallbackContext obj) {

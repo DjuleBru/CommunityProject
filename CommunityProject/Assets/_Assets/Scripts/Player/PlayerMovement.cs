@@ -61,6 +61,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement() {
         Vector2 force = moveDirNormalized * PlayerEquipment.Instance.GetMoveSpeed() * Time.fixedDeltaTime *500;
+
+        if(SavingSystem.Instance.GetSceneIsOverworld()) {
+            force *= 2f;
+        }
+
         rb.AddForce(force);
     }
 
