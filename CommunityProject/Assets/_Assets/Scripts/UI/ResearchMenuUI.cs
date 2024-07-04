@@ -38,6 +38,9 @@ public class ResearchMenuUI : MonoBehaviour
 
     [SerializeField] private Image researchProgressImage;
 
+    [SerializeField] private GameObject buildingResearchButtonsContainer;
+    [SerializeField] private GameObject recipeResearchButtonsContainer;
+
     private List<ResearchProgress> researchProgressList;
     private ResearchProgress researchSelected;
 
@@ -50,6 +53,25 @@ public class ResearchMenuUI : MonoBehaviour
 
         researchProgressList = ES3.Load("researchProgressList", researchProgressList);
         researchSelected = ES3.Load("researchSelected", researchSelected);
+
+        if(researchSelected != null) {
+            foreach (ResearchButtonUI researchButton in buildingResearchButtonsContainer.GetComponentsInChildren<ResearchButtonUI>()) {
+                if (researchButton.GetBuildingSO() != null) {
+                    if (researchButton.GetBuildingSO() == researchSelected.buildingSO) {
+                        researchButtonSelected = researchButton;
+                    }
+                }
+            }
+
+            foreach (ResearchButtonUI researchButton in recipeResearchButtonsContainer.GetComponentsInChildren<ResearchButtonUI>()) {
+                if (researchButton.GetRecipeSO() != null) {
+                    if (researchButton.GetRecipeSO() == researchSelected.recipeSO) {
+                        researchButtonSelected = researchButton;
+                    }
+                }
+
+            }
+        }
     }
 
     private void Start() {
@@ -173,6 +195,7 @@ public class ResearchMenuUI : MonoBehaviour
 
     public void RefreshResearchDescriptionPanel(ResearchProgress researchProgress) {
         if (researchProgress == null) return;
+
         if(researchProgress.recipeSO != null) {
             RefreshResearchDescriptionPanel(researchProgress.recipeSO);
         } else {

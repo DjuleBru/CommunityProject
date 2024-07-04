@@ -62,6 +62,7 @@ public class BuildMenuUI : MonoBehaviour, IPointerExitHandler {
         foreach(Building.BuildingCategory category in buildingCategoryList) {
             // Check if there is at least one building unlocked in that category
             bool categoryLocked = true;
+
             foreach(BuildingSO buildingSO in BuildingAssets.Instance.GetBuildingSOsInCategory(buildingUICategory, category)) {
                 if(BuildingsManager.Instance.GetUnlockedBuildingSOList().Contains(buildingSO)) {
                     categoryLocked = false;

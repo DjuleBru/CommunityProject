@@ -30,6 +30,7 @@ public class CrawlInDungeon : Action
 
         if(humanoidCrawl.IsCrawling()) {
             crawlSuccess = false;
+
             return TaskStatus.Running;
         } else {
             return TaskStatus.Failure;

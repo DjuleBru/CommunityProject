@@ -232,9 +232,35 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         if (Input.GetKey(KeyCode.LeftControl)) {
             //Identify other opened inventory
             InventoryUI otherOpenedInventory = OpenedInventoryHandler.Instance.GetOtherInventoryOpened(parentInventoryUI);
+            if (otherOpenedInventory == null) return;
             if (!otherOpenedInventory.GetInventory().InventoryCanAcceptItem(item)) return;
 
             TransferItemBetweenInventories(otherOpenedInventory.GetInventory());
+        }
+
+        if(Input.GetKey(KeyCode.LeftShift)) {
+            //Split item stack
+            Item itemToSplit = new Item { itemType = item.itemType, amount = item.amount };
+
+            float itemAmount = item.amount;
+            float floatItemSplittedAmount = itemAmount / 2;
+            int intItemSplittedAmount = (int)(itemAmount / 2);
+            
+
+            Item item1Splitted = new Item { itemType = item.itemType, amount = intItemSplittedAmount };
+            if((parentInventory.GetItemList().Count +1) >= parentInventory.GetSlotNumberX() * parentInventory.GetSlotNumberY()) {
+                return;
+            }
+
+            parentInventory.RemoveItemStack(itemToSplit);
+            parentInventory.AddItemStack(item1Splitted);
+
+            Item item2Splitted = new Item { itemType = item.itemType, amount = intItemSplittedAmount};
+
+            if (intItemSplittedAmount < floatItemSplittedAmount) {
+                item2Splitted = new Item { itemType = item.itemType, amount = intItemSplittedAmount +1 };
+            }
+            parentInventory.AddItemStack(item2Splitted);
         }
     }
 

@@ -16,10 +16,12 @@ public class ResearchButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private List<ResearchButtonUI> researchUnlockedByThis;
 
     private bool researchSelected;
+
     public static event EventHandler OnAnyResearchButtonPressed;
 
     public void OnPointerEnter(PointerEventData eventData) {
         ResearchMenuUI.Instance.OpenResearchDescriptionPanel(true);
+
         if (buildingSO != null) {
             ResearchMenuUI.Instance.RefreshResearchDescriptionPanel(buildingSO);
         }
@@ -36,6 +38,7 @@ public class ResearchButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
         button = GetComponent<Button>();
 
         button.onClick.AddListener(() => {
+
             ResearchMenuUI.Instance.SetResearchButtonSelected(this);
             if (buildingSO != null) {
                 ResearchMenuUI.Instance.SetResearchSelected(buildingSO);
@@ -64,7 +67,27 @@ public class ResearchButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
         } else {
             selectedGameObject.SetActive(false);
         }
-       
+
+        if (buildingSO != null) {
+            Debug.Log(buildingSO + " " + ResearchMenuUI.Instance.GetResearchProgress(buildingSO).remainingItemList.Count);
+            if (ResearchMenuUI.Instance.GetResearchProgress(buildingSO).remainingItemList.Count == 0) {
+                SetResearchUnlocked();
+
+                foreach (ResearchButtonUI researchButtonUI in researchUnlockedByThis) {
+                    researchButtonUI.SetResearchSelectable();
+                }
+            }
+        }
+
+        if(recipeSO != null) {
+            if (ResearchMenuUI.Instance.GetResearchProgress(recipeSO).remainingItemList.Count == 0) {
+                SetResearchUnlocked();
+
+                foreach (ResearchButtonUI researchButtonUI in researchUnlockedByThis) {
+                    researchButtonUI.SetResearchSelectable();
+                }
+            }
+        }
     }
 
     private void ResearchButtonUI_OnAnyResearchButtonPressed(object sender, EventArgs e) {
@@ -90,6 +113,14 @@ public class ResearchButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
         foreach (ResearchButtonUI researchButtonUI in researchUnlockedByThis) {
             researchButtonUI.SetResearchSelectable();
         }
+    }
+
+    public RecipeSO GetRecipeSO() {
+        return recipeSO;
+    }
+
+    public BuildingSO GetBuildingSO() {
+        return buildingSO;
     }
 
 }

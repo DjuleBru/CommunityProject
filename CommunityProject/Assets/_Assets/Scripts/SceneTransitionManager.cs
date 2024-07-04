@@ -9,7 +9,7 @@ public class SceneTransitionManager : MonoBehaviour
     [SerializeField] private Animator transitionAnimator;
 
     public enum Scene {
-        MainMenuScene,
+        MainMenu,
         LoadingScene,
         OverWorld,
         Dungeon,
@@ -17,6 +17,13 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void Awake() {
         Instance = this;
+    }
+
+    private void Start() {
+        if(!(SceneManager.GetActiveScene().name == Scene.MainMenu.ToString())) {
+            transitionAnimator.SetTrigger("End");
+        }
+
     }
 
     public void TriggerTransition() {

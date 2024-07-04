@@ -16,7 +16,6 @@ public class EatFood : Action {
     }
 
     public override TaskStatus OnUpdate() {
-
         eatTimer += Time.deltaTime;
 
         if (eatTimer >= eatRate) {

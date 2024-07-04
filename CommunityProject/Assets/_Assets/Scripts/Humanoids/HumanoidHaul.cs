@@ -87,6 +87,7 @@ public class HumanoidHaul : MonoBehaviour
     }
 
     public Building IdentifyBestSourceBuilding(Item itemToCarry) {
+        Debug.Log("assigning sourcfe building");
 
         List<Building> sourceBuildingsList = BuildingsManager.Instance.GetSourceBuildingsList(humanoid.GetCarryCapacity(), itemToCarry);
 

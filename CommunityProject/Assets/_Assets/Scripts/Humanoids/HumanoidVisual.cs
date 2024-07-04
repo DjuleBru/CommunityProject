@@ -7,6 +7,7 @@ public class HumanoidVisual : MonoBehaviour
     private Humanoid humanoid;
     private HumanoidCarry humanoidCarry;
     private HumanoidDungeonCrawl humanoidDungeonCrawl;
+    private HumanoidNeeds humanoidNeeds;
 
     [SerializeField] private GameObject questionMarkGameObject;
     [SerializeField] private GameObject hungryStatusGameObject;
@@ -36,6 +37,7 @@ public class HumanoidVisual : MonoBehaviour
         humanoid = GetComponentInParent<Humanoid>();
         humanoidCarry = GetComponentInParent<HumanoidCarry>();
         humanoidDungeonCrawl = GetComponentInParent<HumanoidDungeonCrawl>();
+        humanoidNeeds = GetComponentInParent<HumanoidNeeds>();
     }
 
     private void Start() {
@@ -47,6 +49,14 @@ public class HumanoidVisual : MonoBehaviour
 
         humanoid.OnHealingStarted += Humanoid_OnHealingStarted;
         humanoid.OnHealingStopped += Humanoid_OnHealingStopped;
+
+        if(humanoidNeeds.GetHunger() < 10) {
+            SetHungryStatusActive(true);
+        }
+
+        if(humanoidNeeds.GetExhausted()) {
+            SetExhaustedStatusActive(true);
+        }
     }
 
     public void SetEating(Item itemEating) {
@@ -93,7 +103,6 @@ public class HumanoidVisual : MonoBehaviour
         statusesContainer.SetActive(false);
     }
 
-
     public void SetQuestionMarkActive(bool active) {
         questionMarkGameObject.SetActive(active);
     }
@@ -107,17 +116,26 @@ public class HumanoidVisual : MonoBehaviour
     }
 
     private void Humanoid_OnHealingStopped(object sender, System.EventArgs e) {
-        bodyGameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-        shadowGameObject.SetActive(true);
-        ShowStatuses();
-        healingPS.Stop();
+        StopHealing();
     }
 
     private void Humanoid_OnHealingStarted(object sender, System.EventArgs e) {
+        StopHealing();
+    }
+
+    public void StartHealing() {
+        Debug.Log("stop healing");
         bodyGameObject.transform.eulerAngles = new Vector3(0, 0, 44f);
         shadowGameObject.SetActive(false);
         healingPS.Play();
         HideStatuses();
+    }
+
+    public void StopHealing() {
+        bodyGameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        shadowGameObject.SetActive(true);
+        ShowStatuses();
+        healingPS.Stop();
     }
 
     public void SetSleeping(bool sleeping) {

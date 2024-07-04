@@ -32,6 +32,9 @@ public class HumanoidDungeonCrawl : MonoBehaviour
             if(crawlTimer < 0 || newHealth <= 0) {
                 EndCrawl(crawlTimer);
             }
+
+            int percentageCrawled = (int)((1 - crawlTimer/dungeonEntranceAssigned.GetDungeonTimerRecorded()) * 100);
+            humanoid.SetHumanoidActionDescription("Crawling dungeon " + percentageCrawled + "%");
         }
     }
 
@@ -49,9 +52,6 @@ public class HumanoidDungeonCrawl : MonoBehaviour
                 itemAmountDeBuffDueToUnfinishedDungeon = itemAmount * crawlTimer/ dungeonEntranceAssigned.GetDungeonTimerRecorded();
             } 
 
-            Debug.Log("item debuff due to damage " + itemAmountBuffDueToDamageStat);
-            Debug.Log("item debuff due to unfinished dungeon " + itemAmountDeBuffDueToUnfinishedDungeon);
-
             float itemAmountLooted = itemAmount + itemAmountBuffDueToDamageStat - itemAmountDeBuffDueToUnfinishedDungeon;
 
             Item itemLooted = new Item { itemType = item.itemType, amount = (int)itemAmountLooted };
@@ -61,7 +61,13 @@ public class HumanoidDungeonCrawl : MonoBehaviour
     }
 
     public void AssignDungeonEntrance(DungeonEntrance dungeonEtrance) {
+        Debug.Log("assigning dungeon entrance");
+        if(dungeonEntranceAssigned != null) {
+            dungeonEntranceAssigned.DeAssignHumanoid(humanoid);
+        }
+
         dungeonEntranceAssigned = dungeonEtrance;
+
         if(dungeonEntranceAssigned != null) {
             humanoid.AssignBuilding(dungeonEtrance.GetDungeonChest());
         }
@@ -107,17 +113,10 @@ public class HumanoidDungeonCrawl : MonoBehaviour
     }
 
     public void LoadHumanoidDungeonCrawl() {
-        string humanoidID = humanoid.GetInstanceID().ToString();
-        dungeonEntranceAssigned = ES3.Load(humanoidID + "dungeonEntranceAssigned", dungeonEntranceAssigned);
-        crawling = ES3.Load(humanoidID + "crawling", crawling);
-        crawlTimer = ES3.Load(humanoidID + "crawlTimer", crawlTimer);
+        if(crawling) {
+            OnCrawlStarted?.Invoke(this, EventArgs.Empty);
+        }
     }
 
-    public void SaveHumanoidDungeonCrawl() {
-        string humanoidID = humanoid.GetInstanceID().ToString();
-        ES3.Save(humanoidID + "dungeonEntranceAssigned", dungeonEntranceAssigned);
-        ES3.Save(humanoidID + "crawling", crawling);
-        ES3.Save(humanoidID + "crawlTimer", crawlTimer);
-    }
 
 }

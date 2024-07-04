@@ -10,6 +10,7 @@ public class ArchitectTable : ProductionBuilding
         base.Start();
 
         ChangeInventories();
+        RefreshProductionBuildingUIWorld();
 
         if (ResearchMenuUI.Instance.GetCurrentResearch() != null) {
             productionBuildingUIWorld.SetRecipeMissing(false);
@@ -35,27 +36,39 @@ public class ArchitectTable : ProductionBuilding
     }
 
     protected override void ChangeInventories() {
+        Debug.Log("changing inventories");
+
+        List<Item> inventoryItemList = new List<Item>();
+
         // Unsub from previous inventory events
         if (inputInventoryList != null) {
             foreach (var inventory in inputInventoryList) {
-                inventory.OnItemListChanged -= NewInventory_OnItemListChanged;
+                inventory.OnItemListChanged -= NewInventory_OnItemListChanged; 
+                foreach (Item item in inventory.GetItemList()) {
+                    inventoryItemList.Add(item);
+                }
             }
         }
 
         //Drop all items in previous inventories
-        DropInventoryItems();
+        //DropInventoryItems();
 
         inputInventoryList = new List<Inventory>();
 
         if (ResearchMenuUI.Instance.GetCurrentResearch() == null) return;
 
         foreach (Item item in ResearchMenuUI.Instance.GetCurrentResearch().remainingItemList) {
-            Debug.Log("creating an inventory for " +  item.itemType);
             List<Item> inputInventoryItem = new List<Item>();
             inputInventoryItem.Add(item);
             Inventory newInventory = new Inventory(true, 1, 1, true, inputInventoryItem);
             inputInventoryList.Add(newInventory);
             newInventory.OnItemListChanged += NewInventory_OnItemListChanged;
+
+            foreach (Item inputItem in inventoryItemList) {
+                if (inputItem.itemType == item.itemType) {
+                    newInventory.AddItem(inputItem);
+                }
+            }
         }
 
         productionBuildingUIWorld.SetItemsMissing(true);
@@ -94,7 +107,6 @@ public class ArchitectTable : ProductionBuilding
 
         return true;
     }
-
 
     private void ResearchMenuUI_OnSelectedResearchFinished(object sender, System.EventArgs e) {
         ChangeInventories();

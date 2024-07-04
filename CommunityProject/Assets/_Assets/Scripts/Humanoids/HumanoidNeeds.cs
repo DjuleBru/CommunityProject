@@ -50,13 +50,6 @@ public class HumanoidNeeds : MonoBehaviour {
         RefreshHungerStatuses();
         RefreshEnergyStatuses();
 
-        if(hunger < 10) {
-            humanoid.StopTask();
-        }
-        if(energy < 10) {
-            humanoid.StopTask();
-        }
-
     }
 
     private void TryAssignHousing() {
@@ -82,6 +75,7 @@ public class HumanoidNeeds : MonoBehaviour {
                 fullBelly = false;
                 hungry = true;
                 humanoidVisual.SetHungryStatusActive(true);
+                humanoid.StopTask();
             }
         }
         else {
@@ -123,18 +117,19 @@ public class HumanoidNeeds : MonoBehaviour {
         List<Item> foodItems = ItemAssets.Instance.GetItemListOfCategory(Item.ItemCategory.Food);
         humanoid.SetHumanoidActionDescription("Going to eat.");
 
+
         if (bestFoodSourceBuilding is Chest) {
 
             Chest chest = bestFoodSourceBuilding as Chest;
 
             foreach (Item item in foodItems) {
 
-                if (chest.GetChestInventory().HasItem(item)) {
+                Item itemToEat = new Item { itemType = item.itemType, amount = 1 };
 
-                    itemEating = new Item { itemType = item.itemType, amount = 1 };
-                    chest.GetChestInventory().RemoveItemAmount(itemEating);
-                    humanoidVisual.SetEating(itemEating);
-
+                if (chest.GetChestInventory().HasItem(itemToEat)) {
+                    itemEating = itemToEat;
+                    chest.GetChestInventory().RemoveItemAmount(itemToEat);
+                    humanoidVisual.SetEating(itemToEat);
                     return true;
                 }
 
@@ -149,6 +144,7 @@ public class HumanoidNeeds : MonoBehaviour {
 
     public void Eat() {
         Feed(ItemAssets.Instance.GetItemSO(itemEating.itemType).foodValue);
+        humanoid.SetHumanoidActionDescription("Eating");
     }
 
     public void Feed(float hungerAddition) {
@@ -185,6 +181,7 @@ public class HumanoidNeeds : MonoBehaviour {
             if (!exhausted) {
                 exhausted = true;
                 humanoidVisual.SetExhaustedStatusActive(true);
+                humanoid.StopTask();
             }
         }
 
@@ -229,6 +226,10 @@ public class HumanoidNeeds : MonoBehaviour {
 
     public void SetSleeping(bool sleeping) {
         this.sleeping = sleeping;
+
+        if(sleeping) {
+            humanoid.SetHumanoidActionDescription("Sleeping");
+        }
 
         humanoidVisual.SetSleeping(sleeping);
         humanoidAnimatorManager.PauseAnimator(sleeping);

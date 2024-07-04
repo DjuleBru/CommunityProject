@@ -231,10 +231,21 @@ public class Building : MonoBehaviour
     }
 
     public List<Humanoid> GetAssignedInputHauliersList() {
+        foreach(Humanoid humanoid in assignedInputHauliers) {
+            if(humanoid == null) {
+                assignedInputHauliers.Remove(humanoid);
+                Debug.Log("removing null");
+            }
+        }
         return assignedInputHauliers;
     }
 
     public List<Humanoid> GetAssignedOutputHauliersList() {
+        foreach (Humanoid humanoid in assignedOutputHauliers) {
+            if (humanoid == null) {
+                assignedOutputHauliers.Remove(humanoid);
+            }
+        }
         return assignedOutputHauliers;
     }
 
@@ -317,5 +328,9 @@ public class Building : MonoBehaviour
         }
 
         return buildingSaveID;
+    }
+
+    public Humanoid GetAssignedHumanoid() {
+        return assignedHumanoid;
     }
 }

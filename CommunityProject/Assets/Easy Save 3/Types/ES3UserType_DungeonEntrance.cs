@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("playerIsInEntranceArea", "dungeonEntranceUI", "enterUI", "dungeonSO", "exitDungeonSpawnPoint", "dungeonChest", "dungeonStatsBoard", "dungeonIsComplete", "dungeonEntranceColliderForDungeoneers", "humanoidsAssigned", "m_CancellationTokenSource")]
+	[ES3PropertiesAttribute("dungeonEntranceUI", "enterUI", "dungeonSO", "exitDungeonSpawnPoint", "dungeonChest", "dungeonStatsBoard", "dungeonIsComplete", "dungeonEntranceColliderForDungeoneers", "humanoidsAssigned", "m_CancellationTokenSource")]
 	public class ES3UserType_DungeonEntrance : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -16,7 +16,6 @@ namespace ES3Types
 		{
 			var instance = (DungeonEntrance)obj;
 			
-			writer.WritePrivateField("playerIsInEntranceArea", instance);
 			writer.WritePrivateFieldByRef("dungeonEntranceUI", instance);
 			writer.WritePrivateFieldByRef("enterUI", instance);
 			writer.WritePrivateFieldByRef("dungeonSO", instance);
@@ -37,9 +36,6 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
-					case "playerIsInEntranceArea":
-					instance = (DungeonEntrance)reader.SetPrivateField("playerIsInEntranceArea", reader.Read<System.Boolean>(), instance);
-					break;
 					case "dungeonEntranceUI":
 					instance = (DungeonEntrance)reader.SetPrivateField("dungeonEntranceUI", reader.Read<UnityEngine.GameObject>(), instance);
 					break;

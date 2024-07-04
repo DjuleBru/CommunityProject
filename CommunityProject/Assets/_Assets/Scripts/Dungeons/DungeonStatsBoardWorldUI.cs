@@ -33,6 +33,7 @@ public class DungeonStatsBoardWorldUI : MonoBehaviour
         }
 
         foreach (Humanoid humanoid in dungeonEntrance.GetHumanoidsAssigned()) {
+            if(humanoid == null) continue;
             Transform assignedHaulerIcon = Instantiate(assignedDungeoneersTemplate, assignedDungeoneersContainer);
             assignedHaulerIcon.gameObject.SetActive(true);
             assignedHaulerIcon.GetComponent<CanvasGroup>().alpha = 1f;

@@ -40,7 +40,7 @@ public class Player : MonoBehaviour, IDamageable
 
         playerHP = (int)PlayerEquipment.Instance.GetMaxHealth();
 
-        playerInventory = ES3.Load("playerInventory", new Inventory(true, 3, 3, false, null));
+        playerInventory = ES3.Load("playerInventory", new Inventory(true, 3, 4, false, null));
         playerInventoryUI.SetInventory(playerInventory);
 
         if(SavingSystem.Instance.GetSceneIsOverworld()) {

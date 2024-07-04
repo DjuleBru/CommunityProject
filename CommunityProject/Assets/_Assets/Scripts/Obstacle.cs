@@ -8,6 +8,7 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private GameObject obstacleUI;
     [SerializeField] private List<Item> itemsToRemoveGrid;
     [SerializeField] private Rigidbody2D gridRB;
+    private int obstacleID;
 
     private Inventory obstacleInventory;
     [SerializeField] private InventoryUI obstacleInventoryUI;
@@ -24,7 +25,7 @@ public class Obstacle : MonoBehaviour
     private void Start() {
 
         if(obstacleInventory == null) {
-            obstacleInventory = new Inventory(true, 2, 2, 10000);
+            obstacleInventory = new Inventory(true, 1, 3, 10000);
         }
 
         if(obstacleRemoved) {
@@ -82,5 +83,13 @@ public class Obstacle : MonoBehaviour
 
     public void RemoveObstacle() {
         gameObject.SetActive(false);
+    }
+
+    public int GetObstacleID() {
+        if (obstacleID == 0) {
+            obstacleID = (int)UnityEngine.Random.Range(0, 9999999);
+        }
+
+        return obstacleID;
     }
 }

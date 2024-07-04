@@ -104,6 +104,8 @@ public class HumanoidUI : MonoBehaviour
             hungerBarFillImage.fillAmount = humanoidNeeds.GetHunger() / 100;
             energyBarFillImage.fillAmount = humanoidNeeds.GetEnergy() / 100;
             healthBarFillImage.fillAmount = humanoid.GetHealthNormalized();
+
+            humanoidDescriptionText.text = humanoid.GetHumanoidActionDescription();
         }
     }
 

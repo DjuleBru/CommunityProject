@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HumanoidAssignJobButton : MonoBehaviour
 {
-    private List<Humanoid.Job> jobList = new List<Humanoid.Job> { Humanoid.Job.Worker, Humanoid.Job.Haulier, Humanoid.Job.Dungeoneer, Humanoid.Job.Shipper };
+    private List<Humanoid.Job> jobList = new List<Humanoid.Job> { Humanoid.Job.Worker, Humanoid.Job.Haulier, Humanoid.Job.Dungeoneer};
 
     public void ChangeAssignedJob() {
         Humanoid.Job job = GetComponentInParent<HumanoidTemplateUI>().GetHumanoid().GetJob();

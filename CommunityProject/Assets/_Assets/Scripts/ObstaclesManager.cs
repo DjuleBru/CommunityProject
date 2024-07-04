@@ -15,8 +15,8 @@ public class ObstaclesManager : MonoBehaviour
 
         foreach (Obstacle obstacle in obstacles) {
             obstacle.enabled = true;
-            obstaclesSavedIDList.Add(obstacle.GetInstanceID());
-            ES3.Save(obstacle.GetInstanceID().ToString(), obstacle.gameObject);
+            obstaclesSavedIDList.Add(obstacle.GetObstacleID());
+            ES3.Save(obstacle.GetObstacleID().ToString(), obstacle.gameObject);
         }
 
         ES3.Save("obstaclesSavedIDList", obstaclesSavedIDList);

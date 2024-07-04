@@ -78,6 +78,7 @@ public class HumanoidManualAssignManager : MonoBehaviour
 
     private void HandleDungeoneerDungeonAssignment() {
         if (dungeonEntranceHovered != null) {
+            humanoid.GetComponent<HumanoidDungeonCrawl>().AssignDungeonEntrance(dungeonEntranceHovered);
             dungeonEntranceHovered.AssignHumanoid(humanoid);
         }
         StopAssignmentMode();

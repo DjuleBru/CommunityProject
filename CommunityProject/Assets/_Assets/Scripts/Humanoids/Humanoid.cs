@@ -13,7 +13,6 @@ public class Humanoid : MonoBehaviour
         Dungeoneer,
         Worker,
         Haulier,
-        Shipper
     }
 
     public enum Stat {
@@ -130,6 +129,7 @@ public class Humanoid : MonoBehaviour
 
         LoadHumanoid();
         InitializeHumanoidStats();
+        
 
         if (DungeonManager.Instance != null) {
             // This is a dungeon scene : Humanoid is being freed from dungeon
@@ -145,8 +145,8 @@ public class Humanoid : MonoBehaviour
 
     private void Update() {
         HandleEquipmentDurability();
+        CheckAssignedBuildingsCoherence();
     }
-
     private void HandleEquipmentDurability() {
 
         if(mainHandItem != null && mainHandItem.amount > 0) {
@@ -242,6 +242,13 @@ public class Humanoid : MonoBehaviour
 
     }
 
+    private void CheckAssignedBuildingsCoherence() {
+        if (assignedBuilding == null) return;
+        if(assignedBuilding.GetAssignedHumanoid() == null) {
+            assignedBuilding.AssignHumanoid(this);
+        }
+    }
+
     #region EVENT RESPONSES
     private void HumanoidWork_OnHumanoidWorkStopped(object sender, System.EventArgs e) {
         humanoidVisual.gameObject.SetActive(true);
@@ -272,7 +279,6 @@ public class Humanoid : MonoBehaviour
     }
 
     public void AssignBehaviorTree() {
-        Debug.Log(jobAssigned);
         if (jobAssigned == Job.Worker) {
             behaviorTree.ExternalBehavior = HumanoidsManager.Instance.GetWorkerBehaviorTree();
             return;
@@ -300,6 +306,7 @@ public class Humanoid : MonoBehaviour
 
     public void RemoveAssignedBuilding() {
         assignedBuilding = null;
+        StopTask();
     }
 
     public void SetAutoAssign(bool autoAssignActive) {
@@ -515,10 +522,6 @@ public class Humanoid : MonoBehaviour
         return jobAssigned == Job.Worker;
     }
 
-    public bool IsShipper() {
-        return jobAssigned == Job.Shipper;
-    }
-
     public bool IsHaulier() {
         return jobAssigned == Job.Haulier;
     }
@@ -632,6 +635,7 @@ public class Humanoid : MonoBehaviour
 
         if (IsDungeoneer()) {
             humanoidDungeonCrawl.StopCrawling();
+            OnHealingStopped?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -648,6 +652,7 @@ public class Humanoid : MonoBehaviour
         humanoidAnimatorManager.SetAnimator(humanoidSO.animatorController);
         humanoidMovement.LoadHumanoidMovement();
         humanoidWork.LoadHumanoidWork();
+        humanoidDungeonCrawl.LoadHumanoidDungeonCrawl();
     }
 
     public void InitializeHumanoidStats() {

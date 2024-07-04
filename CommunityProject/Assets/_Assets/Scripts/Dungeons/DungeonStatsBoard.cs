@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DungeonStatsBoard : MonoBehaviour, IInteractable {
@@ -57,12 +58,22 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
     }
 
     public void RecordDungeon(List<Item> loot, float time, int humanoidsSaved) {
-        recordedDungeonLoot = loot;
+        List<Item> lootCopy = new List<Item>();
+
+        foreach(Item item in loot) {
+            Item itemToAdd = new Item {itemType = item.itemType, amount = item.amount};
+            lootCopy.Add(itemToAdd);
+        }
+        recordedDungeonLoot = lootCopy;
         recordedDungeonTime = time;
         recordedhumanoidsSaved = humanoidsSaved;
 
         recordedStatsBoardUI.SetDungeonLootUI(recordedDungeonLoot);
         recordedStatsBoardUI.SetDungeonTimeUI(recordedDungeonTime);
+
+        foreach(Item item in loot) {
+            Debug.Log(item.itemType + " " + item.amount);
+        }
     }
 
     public void RecordLastRun(List<Item> loot, float time, int newHumanoidsSaved) {
@@ -146,6 +157,11 @@ public class DungeonStatsBoard : MonoBehaviour, IInteractable {
     }
 
     public void LoadStatsBoardUI() {
+
+        foreach(Item item in recordedDungeonLoot) {
+            Debug.Log(item.itemType + " " + item.amount);
+        }
+
         recordedStatsBoardUI.SetDungeonLootUI(recordedDungeonLoot);
         recordedStatsBoardUI.SetDungeonTimeUI(recordedDungeonTime);
     }

@@ -30,6 +30,10 @@ public class ProductionBuilding : Building
         itemWorldProducedList = new List<ItemWorld>();
     }
 
+    protected override void Start() {
+        base.Start();
+    }
+
     protected override void Update() {
         base.Update();
 
@@ -38,8 +42,11 @@ public class ProductionBuilding : Building
             return;
         }
 
-        if(assignedHumanoid != null) {
+        if (assignedHumanoid != null) {
             if(working) {
+                if(humanoidWorkingSpeed == 0) {
+                    SetHumanoidWorkingSpeed();
+                }
                 Work(humanoidWorkingSpeed, false);
             }
         }
@@ -160,8 +167,7 @@ public class ProductionBuilding : Building
 
     protected override void PlaceBuilding() {
         base.PlaceBuilding();
-        productionBuildingUIWorld.SetWorkerMissing(true);
-        productionBuildingUIWorld.SetRecipeMissing(true);
+        RefreshProductionBuildingUIWorld();
     }
 
     public virtual void SetSelectedRecipeSO(RecipeSO selectedRecipeSO) {
@@ -176,10 +182,16 @@ public class ProductionBuilding : Building
     }
 
     protected virtual void ChangeInventories() {
+        List<Item> inventoryItemList = new List<Item>();
+
+
         // Unsub from previous inventory events
-        if(inputInventoryList != null) {
+        if (inputInventoryList != null) {
             foreach(var inventory in inputInventoryList) {
                 inventory.OnItemListChanged -= NewInventory_OnItemListChanged;
+                foreach(Item item in inventory.GetItemList()) {
+                    inventoryItemList.Add(item);
+                }
             }
         }
         if(outputInventoryList != null) {
@@ -188,8 +200,6 @@ public class ProductionBuilding : Building
             }
         }
 
-        //Drop all items in previous inventories
-        DropInventoryItems();
 
         inputInventoryList = new List<Inventory>();
         outputInventoryList = new List<Inventory>();
@@ -200,6 +210,12 @@ public class ProductionBuilding : Building
             Inventory newInventory = new Inventory(true, 1, 1, true, inputInventoryItem);
             inputInventoryList.Add(newInventory);
             newInventory.OnItemListChanged += NewInventory_OnItemListChanged;
+
+            foreach(Item inputItem in inventoryItemList) {
+                if(inputItem.itemType == item.itemType) {
+                    newInventory.AddItem(inputItem);
+                } 
+            }
         }
 
         foreach (Item item in selectedRecipeSO.outputItems) {
@@ -309,6 +325,7 @@ public class ProductionBuilding : Building
     }
 
     public override void AssignHumanoid(Humanoid humanoid) {
+        Debug.Log("assigning humanoid");
         this.assignedHumanoid = humanoid;
         productionBuildingUIWorld.SetWorkerMissing(false);
 
@@ -317,7 +334,8 @@ public class ProductionBuilding : Building
     }
 
     public override void ReplaceAssignedHumanoid(Humanoid humanoid) {
-        if(assignedHumanoid != null) {
+        Debug.Log("replacing humanoid");
+        if (assignedHumanoid != null) {
             assignedHumanoid.RemoveAssignedBuilding();
         }
         assignedHumanoid = humanoid;
@@ -327,6 +345,7 @@ public class ProductionBuilding : Building
     }
 
     public override void RemoveAssignedHumanoid() {
+        Debug.Log("removing humanoid");
         this.assignedHumanoid = null;
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
         productionBuildingUIWorld.SetWorkerMissing(true);
@@ -339,6 +358,7 @@ public class ProductionBuilding : Building
         }
 
         if (buildingSO.statAffectingProductivity == Humanoid.Stat.intelligence) {
+            Debug.Log(assignedHumanoid.GetIntelligence());
             humanoidWorkingSpeed = assignedHumanoid.GetIntelligence() / 5f;
         }
 

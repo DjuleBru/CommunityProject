@@ -34,9 +34,11 @@ public class FetchFoodToEat : Action {
         }
         else {
             // Humanoid is close to destination building
-            humanoidNeeds.FetchFoodInBuilding();
-            return TaskStatus.Success;
-
+            if(humanoidNeeds.FetchFoodInBuilding()) {
+                return TaskStatus.Success;
+            } else {
+                return TaskStatus.Failure;
+            }
         }
 
     }

@@ -27,7 +27,7 @@ public class AssignBestBuilding : Action
             if (humanoid.GetAssignedBuilding() != null) {
                 return TaskStatus.Success;
             } else {
-                return TaskStatus.Running;
+                return TaskStatus.Failure;
             }
         }
 

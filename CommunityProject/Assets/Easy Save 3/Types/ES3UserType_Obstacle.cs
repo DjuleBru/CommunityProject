@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("itemsToRemoveGrid", "obstacleInventory", "obstacleInventoryUI", "itemsRequiredContainer", "itemsRequiredTemplate", "obstacleRemoved")]
+	[ES3PropertiesAttribute("itemsToRemoveGrid", "obstacleInventory", "itemsRequiredContainer", "itemsRequiredTemplate", "obstacleRemoved")]
 	public class ES3UserType_Obstacle : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -18,7 +18,6 @@ namespace ES3Types
 			
 			writer.WritePrivateField("itemsToRemoveGrid", instance);
 			writer.WritePrivateField("obstacleInventory", instance);
-			writer.WritePrivateFieldByRef("obstacleInventoryUI", instance);
 			writer.WritePrivateFieldByRef("itemsRequiredContainer", instance);
 			writer.WritePrivateFieldByRef("itemsRequiredTemplate", instance);
 			writer.WritePrivateField("obstacleRemoved", instance);
@@ -37,9 +36,6 @@ namespace ES3Types
 					break;
 					case "obstacleInventory":
 					instance = (Obstacle)reader.SetPrivateField("obstacleInventory", reader.Read<Inventory>(), instance);
-					break;
-					case "obstacleInventoryUI":
-					instance = (Obstacle)reader.SetPrivateField("obstacleInventoryUI", reader.Read<InventoryUI>(), instance);
 					break;
 					case "itemsRequiredContainer":
 					instance = (Obstacle)reader.SetPrivateField("itemsRequiredContainer", reader.Read<UnityEngine.Transform>(), instance);

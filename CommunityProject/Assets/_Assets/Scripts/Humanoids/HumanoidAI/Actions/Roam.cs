@@ -12,7 +12,7 @@ public class Roam : Action
 
     public override TaskStatus OnUpdate() {
 
-        humanoidMovement.Roam(transform.position, 4f);
+        humanoidMovement.Roam(transform.position, 1.5f);
         return TaskStatus.Success;
     }
 }

@@ -49,7 +49,6 @@ public class DungeonEntrance : MonoBehaviour
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
         if (playerIsInEntranceArea) {
-            HumanoidsManager.Instance.SaveHumanoidsInOverworld();
             SavingSystem.Instance.SetLastDungeonEntrance(this);
             SavingSystem.Instance.SaveOverworld();
             SceneTransitionManager.Instance.LoadScene(SceneTransitionManager.Scene.Dungeon);
@@ -61,6 +60,9 @@ public class DungeonEntrance : MonoBehaviour
     }
 
     public void RecordDungeon(List<Item> loot, float time, int humanoidsSaved) {
+        foreach(Item item in loot) {
+            Debug.Log(item.itemType + " " + item.amount);
+        }
         dungeonStatsBoard.RecordDungeon(loot, time, humanoidsSaved);
         SaveDungeon();
     }
@@ -95,6 +97,12 @@ public class DungeonEntrance : MonoBehaviour
     }
 
     public List<Humanoid> GetHumanoidsAssigned() {
+        foreach(Humanoid humanoid in humanoidsAssigned) {
+            Debug.Log(humanoid);
+            if(humanoid == null) {
+                humanoidsAssigned.Remove(humanoid);
+            }
+        }
         return humanoidsAssigned;
     }
 

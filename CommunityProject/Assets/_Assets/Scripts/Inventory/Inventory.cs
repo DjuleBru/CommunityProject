@@ -132,6 +132,14 @@ public class Inventory
             Debug.Log("There is no space in inventory");
         }
     }
+    public void AddItemStack(Item item) {
+        if(hasLimitedSlots) {
+            if (itemList.Count < slotNumberX * slotNumberY) {
+                itemList.Add(item);
+            }
+        }
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+    }
 
     public void RemoveItemStack(Item item) {
         if (ItemAssets.Instance.GetItemSO(item.itemType).isStackable) {

@@ -160,12 +160,17 @@ public class DungeonRoom : MonoBehaviour
                 // Pick a random dungeon mob
                 int randomNumber = Random.Range(0, 100);
                 MobSO mobToSpawnSO = commonMobSOs[Random.Range(0, commonMobSOs.Count)];
+
                 if (randomNumber > 65 && randomNumber < 90) {
-                    mobToSpawnSO = rareMobSOs[Random.Range(0, rareMobSOs.Count)];
+                    if(rareMobSOs.Count >0) {
+                        mobToSpawnSO = rareMobSOs[Random.Range(0, rareMobSOs.Count)];
+                    }
                 }
 
                 if (randomNumber >= 90) {
-                    mobToSpawnSO = epicMobSOs[Random.Range(0, epicMobSOs.Count)];
+                    if (epicMobSOs.Count > 0) {
+                        mobToSpawnSO = epicMobSOs[Random.Range(0, epicMobSOs.Count)];
+                    }
                 }
 
                 Transform mobToSwawn = mobToSpawnSO.mobToSpawnPrefab;

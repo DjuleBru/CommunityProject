@@ -28,6 +28,7 @@ public class DungeonEntranceManager : MonoBehaviour
     }
 
     public void SaveDungeonEntrancesInOverworld() {
+        Debug.Log("saving dungeon entrances");
         dungeonEntrancesSavedIDList = new List<int>();
 
         foreach (DungeonEntrance dungeonEntrance in dungeonEntranceList) {
@@ -39,6 +40,7 @@ public class DungeonEntranceManager : MonoBehaviour
     }
 
     public void SaveStatsBoardsInOverworld() {
+        Debug.Log("saving stats boards");
         statsBoardsSavesIDList = new List<int>();
         foreach (DungeonStatsBoard statsBoard in statsBoardsList) {
             statsBoardsSavesIDList.Add(statsBoard.GetInstanceID());
@@ -49,6 +51,7 @@ public class DungeonEntranceManager : MonoBehaviour
     }
 
     public void LoadDungeonEntrancesInOverworld() {
+        Debug.Log("loading dungeon entrances");
         dungeonEntrancesSavedIDList = ES3.Load("dungeonEntrancesSavedIDList", new List<int>());
 
         foreach (int id in dungeonEntrancesSavedIDList) {
@@ -57,6 +60,7 @@ public class DungeonEntranceManager : MonoBehaviour
     } 
     
     public void LoadStatsBoardsInOverworld() {
+        Debug.Log("loading stat boards");
         statsBoardsSavesIDList = ES3.Load("statsBoardsSavesIDList", new List<int>());
 
         foreach (int id in statsBoardsSavesIDList) {

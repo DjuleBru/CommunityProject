@@ -92,15 +92,11 @@ public class HumanoidsMenuUI : MonoBehaviour
         humanoidJobFilterList.Add(Humanoid.Job.Worker);
         humanoidJobFilterList.Add(Humanoid.Job.Haulier);
         humanoidJobFilterList.Add(Humanoid.Job.Dungeoneer);
-        humanoidJobFilterList.Add(Humanoid.Job.Shipper);
     }
 
     public Sprite GetHumanoidWorkerBackgroundSprite(Humanoid.Job job) {
         if(job == Humanoid.Job.Haulier) {
             return humanoidHaulerBackgroundSprite;
-        }
-        if(job == Humanoid.Job.Shipper) {
-            return humanoidShipperBackgroundSprite;
         }
         if(job == Humanoid.Job.Dungeoneer) {
             return humanoidDungeoneerBackgroundSprite;

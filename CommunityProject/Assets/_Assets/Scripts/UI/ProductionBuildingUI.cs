@@ -86,12 +86,21 @@ public class ProductionBuildingUI : BuildingUI
         RefreshNamePanel();
 
         if (productionBuilding is ArchitectTable) {
+            inputIngredientsContainer.gameObject.SetActive(false);
+            outputIngredientsContainer.gameObject.SetActive(false);
+            outputInventoryContainer.gameObject.SetActive(false);
+            recipeContainer.gameObject.SetActive(false);
             RefreshArchitectTableUI();
             return;
+
         } else {
             processingGameObject.SetActive(true);
             researchPanelGameObject.SetActive(false);
             remainingItemsContainer.gameObject.SetActive(false);
+            outputInventoryContainer.gameObject.SetActive(true);
+            inputIngredientsContainer.gameObject.SetActive(true);
+            outputIngredientsContainer.gameObject.SetActive(true);
+            recipeContainer.gameObject.SetActive(true);
         }
 
         RefreshRecipeList();
@@ -281,6 +290,7 @@ public class ProductionBuildingUI : BuildingUI
     }
 
     public void RefreshArchitectTableUI() {
+        Debug.Log("RefreshArchitectTableUI");
 
         processingGameObject.SetActive(false);
 
@@ -310,6 +320,8 @@ public class ProductionBuildingUI : BuildingUI
             if (child == remainingItemsTemplate) continue;
             Destroy(child.gameObject);
         }
+
+        if (ResearchMenuUI.Instance.GetCurrentResearch() == null) return;
 
         foreach (Item item in ResearchMenuUI.Instance.GetCurrentResearch().remainingItemList) {
 

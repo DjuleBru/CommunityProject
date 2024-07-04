@@ -30,6 +30,7 @@ public class SpawnBuildingButton : MonoBehaviour, IPointerEnterHandler, IPointer
         this.buildingSO = buildingSO;
         buildingIcon.sprite = buildingSO.buildingIconSprite;
 
+        if (button == null) return;
         if(buildingLocked) {
             button.interactable = false;
         } else {

@@ -47,6 +47,10 @@ public class BuildingsManager : MonoBehaviour
     }
 
     private void InitializeUnlockedBuildingsList() {
+
+        unlockedBuildingSOList = ES3.Load("unlockedBuildingSOList", unlockedBuildingSOList);
+        lockedBuildingSOList = ES3.Load("lockedBuildingSOList", lockedBuildingSOList);
+
         if (unlockedBuildingSOList == null) {
             unlockedBuildingSOList = new List<BuildingSO>();
             lockedBuildingSOList = new List<BuildingSO>();
@@ -65,6 +69,9 @@ public class BuildingsManager : MonoBehaviour
     public void UnlockBuilding(BuildingSO buildingSO) {
         unlockedBuildingSOList.Add(buildingSO);
         lockedBuildingSOList.Remove(buildingSO);
+
+        ES3.Save("unlockedBuildingSOList", unlockedBuildingSOList);
+        ES3.Save("lockedBuildingSOList", lockedBuildingSOList);
     }
 
 
@@ -120,8 +127,6 @@ public class BuildingsManager : MonoBehaviour
         if(building is ProductionBuilding) {
             productionBuildingsSpawned.Add(building as ProductionBuilding);
         }
-
-        SaveBuildingsInOverworld();
     }
 
     public void RemoveBuilding(Building building) {

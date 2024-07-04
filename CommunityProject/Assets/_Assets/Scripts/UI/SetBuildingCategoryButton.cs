@@ -20,6 +20,7 @@ public class SetBuildingCategoryButton : MonoBehaviour
         this.buildingCategory = buildingCategory;
         icon.sprite = BuildingsManager.Instance.GetWorkingCategorySprite(buildingCategory);
 
+        if (button == null) return;
         if(categoryLocked) {
             button.interactable = false;
         } else {

@@ -11,9 +11,6 @@ public class IsShipper : Conditional {
     }
 
     public override TaskStatus OnUpdate() {
-        if (humanoid.IsShipper()) {
-            return TaskStatus.Success;
-        }
         return TaskStatus.Failure;
     }
 }

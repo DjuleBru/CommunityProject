@@ -62,7 +62,6 @@ public class HumanoidsManager : MonoBehaviour
         foreach (Humanoid humanoid in humanoidsInOverworld) {
             humanoidsSavedIDList.Add(humanoid.GetHumanoidSaveID());
             ES3.Save(humanoid.GetHumanoidSaveID().ToString(), humanoid.gameObject);
-            Debug.Log("saved humanoid" + humanoid.GetHumanoidSaveID());
 
         }
 
@@ -76,7 +75,6 @@ public class HumanoidsManager : MonoBehaviour
         foreach (Humanoid humanoid in humanoidsSavedFromDungeon) {
             humanoidsSavedFromDungeonIDList.Add(humanoid.GetHumanoidSaveID());
             ES3.Save(humanoid.GetHumanoidSaveID().ToString(), humanoid.gameObject);
-            Debug.Log("saved humanoid" + humanoid.GetHumanoidSaveID());
         }
 
         ES3.Save("humanoidsSavedFromLastDungeon", humanoidsSavedFromDungeonIDList);
@@ -86,7 +84,6 @@ public class HumanoidsManager : MonoBehaviour
         humanoidsSavedIDList = ES3.Load("humanoidsSavedIDList", new List<int>());
         foreach (int id in humanoidsSavedIDList) {
             ES3.Load(id.ToString());
-            Debug.Log("loaded humanoid " +  id);
         }
     }
 
@@ -96,7 +93,6 @@ public class HumanoidsManager : MonoBehaviour
 
         foreach (int id in humanoidsSavedFromDungeonIDList) {
             ES3.Load(id.ToString());
-            Debug.Log("loaded humanoid " + id);
         }
     }
 
