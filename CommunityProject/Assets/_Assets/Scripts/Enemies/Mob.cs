@@ -17,6 +17,9 @@ public class Mob : MonoBehaviour, IDamageable
     private bool allMobsSpawned;
     private bool dead;
 
+    public static event EventHandler OnAnyMobDamaged;
+    public static event EventHandler OnAnyMobDied;
+
     public MobSO GetMobSO() {
         return mobSO;
     }
@@ -33,8 +36,10 @@ public class Mob : MonoBehaviour, IDamageable
         mobHP -= damage;
         OnIDamageableHealthChanged?.Invoke(this, new IDamageable.OnIDamageableHealthChangedEventArgs {
             previousHealth = mobHP + damage,
-            newHealth = mobHP
+            newHealth = mobHP,
         });
+
+        OnAnyMobDamaged?.Invoke(this, EventArgs.Empty);
         if (mobHP <= 0 ) {
             SetDead();
         }
@@ -53,6 +58,7 @@ public class Mob : MonoBehaviour, IDamageable
         parentDungeonRoom.RemoveMobFromDungeonRoomMobList(this);
         SpawnItems();
         dead = true;
+        OnAnyMobDied?.Invoke(this, EventArgs.Empty);
     }
 
     public void SetAllMobsSpawned() {

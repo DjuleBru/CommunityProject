@@ -69,10 +69,12 @@ public class HumanoidManualAssignManager : MonoBehaviour
     }
 
     private void HandleWorkerBuildingAssignment() {
+
         if (productionBuildingHovered != null) {
             productionBuildingHovered.ReplaceAssignedHumanoid(humanoid);
             ProductionBuildingUI.Instance.StopSettingWorkerReplacement();
         }
+
         StopAssignmentMode();
     }
 

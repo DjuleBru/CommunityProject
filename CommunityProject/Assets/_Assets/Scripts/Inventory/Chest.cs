@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class Chest : Building
     [SerializeField] private BuildingHaulersUI_World buildingHaulersUI_World;
 
     [SerializeField] private Item.ItemCategory itemCategoryToStore;
+
+    public static event EventHandler OnAnyChestOpened;
+    public static event EventHandler OnAnyChestClosed;
 
     protected override void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -60,10 +64,12 @@ public class Chest : Building
     public void OpenInventory() {
         chestInventoryUI.SetInventory(chestInventory); 
         chestInventoryUI.OpenCloseInventoryPanel();
+        OnAnyChestOpened?.Invoke(this, EventArgs.Empty);
     }
 
     public void CloseInventory() {
         chestInventoryUI.CloseInventoryPanel();
+        OnAnyChestClosed?.Invoke(this, EventArgs.Empty);
     }
 
     public Inventory GetChestInventory() {

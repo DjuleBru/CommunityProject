@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class RecipeSlot_Selectable : MonoBehaviour, IPointerEnterHandler, IPoint
 
     private RecipeSO recipeSO;
     private ProductionBuilding linkedProductionBuilding;
+    public static event EventHandler OnAnyRecipeSlotHovered;
+    public static event EventHandler OnAnyRecipeSlotSelected;
+
 
     private void Awake() {
         selectedGameObject.SetActive(false);
@@ -17,9 +21,11 @@ public class RecipeSlot_Selectable : MonoBehaviour, IPointerEnterHandler, IPoint
     public void OnPointerDown(PointerEventData eventData) {
         linkedProductionBuilding.SetSelectedRecipeSO(recipeSO);
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
+        OnAnyRecipeSlotSelected?.Invoke(this, EventArgs.Empty);
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
+        OnAnyRecipeSlotHovered?.Invoke(this, EventArgs.Empty);
 
     }
 

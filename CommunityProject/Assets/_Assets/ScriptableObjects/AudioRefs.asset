@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f29fc42ef8be81c468dbed0adf6d3137, type: 3}
+  m_Name: AudioRefs
+  m_EditorClassIdentifier: 
+  itemHover: {fileID: 8300000, guid: a9a23b7455da64b4e9b1143a2a7c0687, type: 3}
+  itemDrop: {fileID: 8300000, guid: 1d83aaf83d8874445a44277db75d0424, type: 3}
+  itemTransfer: {fileID: 8300000, guid: 63d98aa09005e0342bf5a5aac9318d21, type: 3}
+  itemSplit: {fileID: 8300000, guid: 17becccba2c3519488d6b96309b2a16e, type: 3}
+  itemFailedError: {fileID: 8300000, guid: b733f0562d6c97345a08ae828899428e, type: 3}
+  itemEquip: {fileID: 8300000, guid: 098a04dce3a83aa488f8d8b5f71fe0e8, type: 3}
+  itemUnequip: {fileID: 8300000, guid: d1a360e3231ad054b810666912978afc, type: 3}
+  equipmentHover: {fileID: 8300000, guid: 13a8f34906ab72f428f6b603596a3086, type: 3}
+  equipmentPress: {fileID: 8300000, guid: 9de8f2fdcef2d2e4281f64cb8a52056b, type: 3}
+  buttonPress: {fileID: 8300000, guid: 045b37413283f834097c32b2579294ca, type: 3}
+  pauseMenuOpen: {fileID: 8300000, guid: 28ef5f145c7159b4d843382da4c57766, type: 3}
+  pauseMenuClose: {fileID: 8300000, guid: 9bb6b586b5f532749a7433b37ede251c, type: 3}
+  recipeSlotSelected: {fileID: 8300000, guid: f32f67cb2518f7a4d929db223d10b4f4, type: 3}
+  recipeSlotHovered: {fileID: 8300000, guid: 1753c38bdc3f7d843b99e9fb93d5d883, type: 3}
+  playerDamaged: {fileID: 0}
+  buildingDestroyed: {fileID: 8300000, guid: d013073c9745f324c8038cf43375cf05, type: 3}
+  buildingPlaced: {fileID: 8300000, guid: 11307c5c61f872642ac87136ac5cd912, type: 3}
+  chestOpen: {fileID: 8300000, guid: 502641ae5f5b33543bda71676eca4c56, type: 3}
+  chestClosed: {fileID: 8300000, guid: fcea794833254144293b3b18bed337ed, type: 3}
+  eating: []
+  sleeping: []
+  mobAppear:
+  - {fileID: 8300000, guid: a9992f07af75bc2489c6b5e339ff3ace, type: 3}
+  doorClose:
+  - {fileID: 8300000, guid: 4e83ff779e5af94408b1cb940e92a347, type: 3}
+  dungeonRoomCleared: []

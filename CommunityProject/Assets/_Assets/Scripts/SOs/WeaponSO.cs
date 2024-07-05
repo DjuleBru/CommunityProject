@@ -24,4 +24,6 @@ public class WeaponSO : ScriptableObject
     public float weaponDazeTime;
     public WeaponBodyAnimationType bodyAnimationType;
     public AnimatorOverrideController weaponAnimatorController;
+
+    public AudioClip[] attackAudioClips;
 }

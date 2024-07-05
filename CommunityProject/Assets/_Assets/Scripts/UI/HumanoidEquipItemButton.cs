@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HumanoidEquipItemButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HumanoidEquipItemButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     private Button button;
+
+    public static event EventHandler OnAnyEquipItemHovered;
+    public static event EventHandler OnAnyEquipItemPressed;
 
     private void Awake() {
         button = GetComponent<Button>();
@@ -26,5 +30,10 @@ public class HumanoidEquipItemButton : MonoBehaviour, IPointerEnterHandler, IPoi
     public void OnPointerEnter(PointerEventData eventData) {
         EquipmentTooltipUI.Instance.SetToolTip(GetComponent<ItemSlot>().GetItem());
         EquipmentTooltipUI.Instance.EnableToolTip(true);
+        OnAnyEquipItemHovered?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void OnPointerDown(PointerEventData eventData) {
+        OnAnyEquipItemPressed?.Invoke(this, EventArgs.Empty);
     }
 }

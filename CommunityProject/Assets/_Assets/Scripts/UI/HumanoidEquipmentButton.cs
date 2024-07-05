@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HumanoidEquipmentButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HumanoidEquipmentButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     private Button button;
     [SerializeField] private Image equipmentImage;
@@ -20,6 +21,9 @@ public class HumanoidEquipmentButton : MonoBehaviour, IPointerEnterHandler, IPoi
 
     public static HumanoidEquipmentButton lastButtonPressed;
     private bool inventoryOpen;
+
+    public static event EventHandler OnAnyEquipmentButtonHovered;
+    public static event EventHandler OnAnyEquipmentButtonPressed;
 
     private void Awake() {
         button = GetComponent<Button>();
@@ -81,5 +85,11 @@ public class HumanoidEquipmentButton : MonoBehaviour, IPointerEnterHandler, IPoi
 
         EquipmentTooltipUI.Instance.SetToolTip(HumanoidUI.Instance.GetHumanoid().GetEquipmentItem(category));
         EquipmentTooltipUI.Instance.EnableToolTip(true);
+        OnAnyEquipmentButtonHovered?.Invoke(this, EventArgs.Empty);
+    }
+
+
+    public void OnPointerDown(PointerEventData eventData) {
+        OnAnyEquipmentButtonPressed?.Invoke(this, EventArgs.Empty);
     }
 }

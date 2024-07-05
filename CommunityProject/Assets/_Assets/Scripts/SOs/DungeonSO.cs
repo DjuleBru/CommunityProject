@@ -25,4 +25,6 @@ public class DungeonSO : ScriptableObject
     public HumanoidSO.HumanoidType proficiencyHumanoidType;
     public int recommendedHealth;
     public int recommendedDamage;
+
+    public AudioClip dungonAudioClip;
 }

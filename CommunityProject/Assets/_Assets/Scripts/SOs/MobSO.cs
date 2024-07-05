@@ -30,4 +30,9 @@ public class MobSO : ScriptableObject
     public float dropProbability;
     public int maxItemDrops;
     public List<ItemDropRate> itemDropRateList;
+
+    public AudioClip[] hitAudioClip;
+    public AudioClip[] attackAudioClip;
+    public AudioClip[] rangedAttackReleaseAudioClip;
+    public AudioClip[] DieAudioClip;
 }

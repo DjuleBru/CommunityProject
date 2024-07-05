@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a507851cbae87c74faf7bf505155e85b, type: 3}
   m_Name: Whip
   m_EditorClassIdentifier: 
+  isTool: 0
+  toolAttackRate: 0
   weaponSprite: {fileID: -316245752, guid: 97de20bdab8e858488e2cba91d056929, type: 3}
   weaponSpriteUI: {fileID: -2108498762, guid: f17544f41ac799d4ead2db4f588c838e, type: 3}
   weaponCanPierce: 0
@@ -19,3 +21,6 @@ MonoBehaviour:
   weaponDazeTime: 0
   bodyAnimationType: 0
   weaponAnimatorController: {fileID: 22100000, guid: 4109e6a385b7bc04dac7f61df3bac0bc, type: 2}
+  attackAudioClips:
+  - {fileID: 8300000, guid: 8739cd949520273429d5bd0fd3f1e88d, type: 3}
+  - {fileID: 8300000, guid: 6217d2634d93e2f49ad23eca38670049, type: 3}

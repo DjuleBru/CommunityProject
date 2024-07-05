@@ -14,7 +14,7 @@ public class ProductionBuildingVisual : BuildingVisual
         characterAnimator.gameObject.SetActive(false);
     }
 
-    public void SetWorking(bool working, HumanoidSO.HumanoidType humanoidType) {
+    public void SetWorking(bool working, HumanoidSO.HumanoidType humanoidType = HumanoidSO.HumanoidType.Human) {
         propVisual.SetActive(!working);
 
         buildingAnimator.gameObject.SetActive(working);

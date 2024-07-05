@@ -92,6 +92,9 @@ public class Building : MonoBehaviour
 
     private EventSystem eventSystem;
 
+    public static event EventHandler OnAnyBuildingPlaced;
+    public static event EventHandler OnAnyBuildingDestroyed;
+
     private int buildingSaveID;
 
     protected virtual void Awake() {
@@ -163,9 +166,11 @@ public class Building : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
 
         OnBuildingPlaced?.Invoke(this, EventArgs.Empty);
+        OnAnyBuildingPlaced?.Invoke(this, EventArgs.Empty);
         BuildingsManager.Instance.SetBuildingPlacedOrCancelled();
         BuildingsManager.Instance.AddBuilding(this);
         AstarPath.active.UpdateGraphs(buildingCollider.bounds);
+
     }
 
     protected void SpendBuildingMaterials() {
@@ -322,7 +327,6 @@ public class Building : MonoBehaviour
     }
 
     public int GetBuildingSaveID() {
-
         if (buildingSaveID == 0) {
             buildingSaveID = (int)UnityEngine.Random.Range(0, 9999999);
         }
@@ -332,5 +336,10 @@ public class Building : MonoBehaviour
 
     public Humanoid GetAssignedHumanoid() {
         return assignedHumanoid;
+    }
+
+    public void DestroyBuilding() {
+        OnAnyBuildingDestroyed?.Invoke(this, EventArgs.Empty);
+        Destroy(gameObject);
     }
 }

@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -148,7 +149,7 @@ public class FreeCameraViewManager : MonoBehaviour
                 
                 buildingToDestroy.RemoveAssignedHumanoid();
                 BuildingsManager.Instance.RemoveBuilding(buildingToDestroy);
-                Destroy(buildingToDestroy.gameObject);
+                buildingToDestroy.DestroyBuilding();
             }
         }
 

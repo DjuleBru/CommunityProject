@@ -32,6 +32,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b5f6fd0cf958988408bcaf11e8504882, type: 2}
   - {fileID: 11400000, guid: 2f4492154ee445c43b11d009d3340937, type: 2}
   statAffectingProductivity: 0
+  buildingProductionLoopClip:
+  - {fileID: 8300000, guid: b5c40d94975bc774ab48d9822ebf8dbe, type: 3}
+  - {fileID: 8300000, guid: 7902bafb04877b14985e41975eda28ba, type: 3}
+  - {fileID: 8300000, guid: 1f5938e7697b18248a42f6584cb49a8f, type: 3}
+  buildingProductionLoopClipVolumeMultiplier: 0.5
+  buildingProductionClip: []
   housingCapacity: 0
   energyFillRateMultiplier: 0
   healRate: 0

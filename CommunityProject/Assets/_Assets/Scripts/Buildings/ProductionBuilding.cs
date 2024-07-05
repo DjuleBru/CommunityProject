@@ -25,9 +25,16 @@ public class ProductionBuilding : Building
     [SerializeField] protected BuildingHaulersUI_World buildingHaulersUI_World;
     [SerializeField] protected ProductionBuildingVisual productionBuildingvisual;
 
+    public static event EventHandler OnAnyRecipeProduced;
+
+    private AudioSource audioSource;
+    private float audioClipLength;
+    private float audioClipTimer;
+
     protected override void Awake() {
         base.Awake();
         itemWorldProducedList = new List<ItemWorld>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected override void Start() {
@@ -48,12 +55,31 @@ public class ProductionBuilding : Building
                     SetHumanoidWorkingSpeed();
                 }
                 Work(humanoidWorkingSpeed, false);
+            } else {
+                audioClipTimer = 0;
+                audioSource.Stop();
             }
         }
     }
 
     protected virtual void Work(float productionSpeed, bool isPlayerWorking) {
         productionTimer += Time.deltaTime * productionSpeed;
+        audioClipTimer -= Time.deltaTime;
+
+        if (audioClipTimer <= 0) {
+            if (GetBuildingSO().buildingProductionLoopClip != null && GetBuildingSO().buildingProductionLoopClip.Length > 0) {
+                AudioClip audioClip = GetBuildingSO().buildingProductionLoopClip[UnityEngine.Random.Range(0, GetBuildingSO().buildingProductionLoopClip.Length)];
+                if (audioClip != null) {
+
+                    audioSource.clip = audioClip;
+                    audioClipLength = audioClip.length;
+                    audioClipTimer = audioClipLength;
+                    audioSource.volume = SoundManager.Instance.GetSFXVolume() * buildingSO.buildingProductionLoopClipVolumeMultiplier;
+                    audioSource.Play();
+                }
+            }
+        }
+
 
         if (productionTimer >= selectedRecipeSO.standardProductionTime) {
             if(ProduceSelectedRecipe(isPlayerWorking)) {
@@ -84,7 +110,7 @@ public class ProductionBuilding : Building
 
                             // Add output item to this inventory
                             outputInventory.AddItem(itemToProduce);
-
+                            OnAnyRecipeProduced?.Invoke(this, EventArgs.Empty);
                         }
                         else {
                             // Inventory has not enough space for output item
@@ -155,7 +181,7 @@ public class ProductionBuilding : Building
         OnWorkerFinishedWorking?.Invoke(this, EventArgs.Empty);
     }
 
-    public void SetHumanoidWorking(bool working, HumanoidSO.HumanoidType humanoidType) {
+    public void SetHumanoidWorking(bool working, HumanoidSO.HumanoidType humanoidType = HumanoidSO.HumanoidType.Human) {
 
         if(!playerInteractingWithBuilding) {
             this.working = working;
@@ -334,10 +360,17 @@ public class ProductionBuilding : Building
     }
 
     public override void ReplaceAssignedHumanoid(Humanoid humanoid) {
-        Debug.Log("replacing humanoid");
+
         if (assignedHumanoid != null) {
             assignedHumanoid.RemoveAssignedBuilding();
+            SetHumanoidWorking(false);
         }
+
+        if(humanoid.GetAssignedBuilding() != null) {
+            humanoid.RemoveAssignedBuilding();
+        }
+
+
         assignedHumanoid = humanoid;
         assignedHumanoid.AssignBuilding(this);
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
@@ -345,10 +378,10 @@ public class ProductionBuilding : Building
     }
 
     public override void RemoveAssignedHumanoid() {
-        Debug.Log("removing humanoid");
         this.assignedHumanoid = null;
         ProductionBuildingUI.Instance.RefreshProductionBuildingUI();
-        productionBuildingUIWorld.SetWorkerMissing(true);
+        SetHumanoidWorking(false);
+        working = false;
     }
 
     private void SetHumanoidWorkingSpeed() {
@@ -422,9 +455,14 @@ public class ProductionBuilding : Building
  
         if(assignedHumanoid == null) {
             productionBuildingUIWorld.SetWorkerMissing(true);
+            
         } else {
+            if (working) {
+                productionBuildingvisual.SetWorking(true, assignedHumanoid.GetHumanoidSO().humanoidType);
+            }
             productionBuildingUIWorld.SetWorkerMissing(false);
         }
+
 
         if (selectedRecipeSO == null) {
             productionBuildingUIWorld.SetRecipeMissing(true);

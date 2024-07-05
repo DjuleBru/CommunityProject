@@ -46,13 +46,17 @@ public class HumanoidDungeonCrawl : MonoBehaviour
 
             int itemAmount = item.amount;
             float itemAmountBuffDueToDamageStat = itemAmount * ((humanoid.GetDamage() - dungeonEntranceAssigned.GetDungeonSO().recommendedDamage) / 10);
+            float itemAmountBuffDueToArmorStat = itemAmount * ((humanoid.GetArmor() * .1f));
             float itemAmountDeBuffDueToUnfinishedDungeon = 0;
+
+            Debug.Log("item buff due to damage stat = " + itemAmountBuffDueToDamageStat);
+            Debug.Log("item buff due to armor stat = " + itemAmountBuffDueToArmorStat);
 
             if (crawlTimer > 0) {
                 itemAmountDeBuffDueToUnfinishedDungeon = itemAmount * crawlTimer/ dungeonEntranceAssigned.GetDungeonTimerRecorded();
             } 
 
-            float itemAmountLooted = itemAmount + itemAmountBuffDueToDamageStat - itemAmountDeBuffDueToUnfinishedDungeon;
+            float itemAmountLooted = itemAmount + itemAmountBuffDueToDamageStat + itemAmountDeBuffDueToUnfinishedDungeon - itemAmountDeBuffDueToUnfinishedDungeon;
 
             Item itemLooted = new Item { itemType = item.itemType, amount = (int)itemAmountLooted };
             humanoidCarry.AddItemCarrying(itemLooted); 
@@ -61,7 +65,6 @@ public class HumanoidDungeonCrawl : MonoBehaviour
     }
 
     public void AssignDungeonEntrance(DungeonEntrance dungeonEtrance) {
-        Debug.Log("assigning dungeon entrance");
         if(dungeonEntranceAssigned != null) {
             dungeonEntranceAssigned.DeAssignHumanoid(humanoid);
         }
@@ -89,7 +92,9 @@ public class HumanoidDungeonCrawl : MonoBehaviour
 
     public void StartCrawling() {
         crawling = true;
-        crawlTimer = dungeonEntranceAssigned.GetDungeonTimerRecorded();
+
+        crawlTimer = dungeonEntranceAssigned.GetDungeonTimerRecorded() + (humanoid.GetArmor() + 0.05f * dungeonEntranceAssigned.GetDungeonTimerRecorded());
+        Debug.Log("time debuff due to armor = " + humanoid.GetArmor() + 0.1f * dungeonEntranceAssigned.GetDungeonTimerRecorded());
         OnCrawlStarted?.Invoke(this, EventArgs.Empty);
     }
 

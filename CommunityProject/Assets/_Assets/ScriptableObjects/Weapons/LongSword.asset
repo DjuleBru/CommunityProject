@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a507851cbae87c74faf7bf505155e85b, type: 3}
   m_Name: LongSword
   m_EditorClassIdentifier: 
+  isTool: 0
+  toolAttackRate: 0
   weaponSprite: {fileID: 1368379842, guid: 97de20bdab8e858488e2cba91d056929, type: 3}
   weaponSpriteUI: {fileID: 1091638698, guid: 58b088fb9fc95034eacea5aac7489d92, type: 3}
   weaponCanPierce: 1
@@ -19,3 +21,7 @@ MonoBehaviour:
   weaponDazeTime: 0
   bodyAnimationType: 2
   weaponAnimatorController: {fileID: 22100000, guid: 837f99a14e787454083fd6e63e446339, type: 2}
+  attackAudioClips:
+  - {fileID: 8300000, guid: aca689839af196f4b8dd25e6a503884b, type: 3}
+  - {fileID: 8300000, guid: 80d422ccfd04f8946bfd319690037175, type: 3}
+  - {fileID: 8300000, guid: e80d39009292d1149b7e58ad684bde09, type: 3}

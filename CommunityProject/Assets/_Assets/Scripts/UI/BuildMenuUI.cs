@@ -22,6 +22,8 @@ public class BuildMenuUI : MonoBehaviour, IPointerExitHandler {
     [SerializeField] private List<Building.BuildingCategory> containerCategories;
     [SerializeField] private List<Building.BuildingCategory> utilityCategories;
 
+    [SerializeField] private bool debugMode;
+
     private Building.BuildingUICategory buildingUICategory;
     private Building.BuildingCategory buildingCategory;
 
@@ -63,11 +65,15 @@ public class BuildMenuUI : MonoBehaviour, IPointerExitHandler {
             // Check if there is at least one building unlocked in that category
             bool categoryLocked = true;
 
-            foreach(BuildingSO buildingSO in BuildingAssets.Instance.GetBuildingSOsInCategory(buildingUICategory, category)) {
-                if(BuildingsManager.Instance.GetUnlockedBuildingSOList().Contains(buildingSO)) {
+            foreach (BuildingSO buildingSO in BuildingAssets.Instance.GetBuildingSOsInCategory(buildingUICategory, category)) {
+                if (BuildingsManager.Instance.GetUnlockedBuildingSOList().Contains(buildingSO)) {
                     categoryLocked = false;
                 }
             };
+
+            if(debugMode) {
+                categoryLocked = false;
+            }
 
             RectTransform buildingButtonRectTransform = Instantiate(buildingCategoryTemplate, buildingCategoryContainer).GetComponent<RectTransform>();
             buildingButtonRectTransform.gameObject.SetActive(true);
@@ -93,8 +99,13 @@ public class BuildMenuUI : MonoBehaviour, IPointerExitHandler {
             SpawnBuildingButton buildingButton = buildingButtonRectTransform.GetComponent<SpawnBuildingButton>();
 
             // Is the building unlocked ?
+
             bool buildingLocked = true;
             if(BuildingsManager.Instance.GetUnlockedBuildingSOList().Contains(buildingSO)) {
+                buildingLocked = false;
+            }
+
+            if(debugMode) {
                 buildingLocked = false;
             }
             buildingButton.SetBuildingSO(buildingSO, buildingLocked);

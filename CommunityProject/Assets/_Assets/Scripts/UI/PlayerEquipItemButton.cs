@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 public class PlayerEquipItemButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     private Button button;
 
+    public static event EventHandler OnAnyPlayerEquipmentItemEquipped;
+    public static event EventHandler OnAnyPlayerEquipmentItemHovered;
 
     private void Awake() {
         button = GetComponent<Button>();
@@ -15,6 +18,7 @@ public class PlayerEquipItemButton : MonoBehaviour, IPointerEnterHandler, IPoint
 
             EquipmentMenuUI.Instance.SetItemToEquip(itemToEquip);
             EquipmentTooltipUI.Instance.EnableToolTip(false);
+            OnAnyPlayerEquipmentItemEquipped?.Invoke(this, EventArgs.Empty);
         });
     }
 
@@ -23,6 +27,7 @@ public class PlayerEquipItemButton : MonoBehaviour, IPointerEnterHandler, IPoint
 
         EquipmentTooltipUI.Instance.SetToolTip(GetComponent<ItemSlot>().GetItem());
         EquipmentTooltipUI.Instance.EnableToolTip(true);
+        OnAnyPlayerEquipmentItemHovered?.Invoke(this, EventArgs.Empty);
     }
 
     public void OnPointerExit(PointerEventData eventData) {

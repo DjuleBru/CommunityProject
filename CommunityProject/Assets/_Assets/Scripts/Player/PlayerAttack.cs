@@ -45,7 +45,7 @@ public class PlayerAttack : MonoBehaviour
         if(!attacking) {
             attackTimer -= Time.deltaTime;
         }
-        //Debug.Log(attackButtonHeldDown);
+
         if(attackButtonHeldDown) {
             TryAttacking();
         }

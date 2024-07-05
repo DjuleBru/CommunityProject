@@ -18,6 +18,12 @@ public class BuildingSO : ScriptableObject
     public List<RecipeSO> buildingRecipes;
     [BoxGroup("ProductionBuilding")]
     public Humanoid.Stat statAffectingProductivity;
+    [BoxGroup("ProductionBuilding")]
+    public AudioClip[] buildingProductionLoopClip;
+    [BoxGroup("ProductionBuilding")]
+    public float buildingProductionLoopClipVolumeMultiplier = 1f;
+    [BoxGroup("ProductionBuilding")]
+    public AudioClip[] buildingProductionClip;
 
     [BoxGroup("Housing")]
     public int housingCapacity;

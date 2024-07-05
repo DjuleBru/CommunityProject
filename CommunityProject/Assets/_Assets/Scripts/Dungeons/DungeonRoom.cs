@@ -1,7 +1,9 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DungeonRoom : MonoBehaviour
 {
@@ -46,6 +48,10 @@ public class DungeonRoom : MonoBehaviour
     private bool isLastDungeonRoom;
     private bool roomIsComplete;
     private bool playerIsInRoom;
+
+    public static event EventHandler OnAnyMobAppear;
+    public static event EventHandler OnAnyDoorClosed;
+    public static event EventHandler OnAnyRoomCleared;
 
     private void Awake() {
         roomCenterSprite.SetActive(false);
@@ -158,18 +164,18 @@ public class DungeonRoom : MonoBehaviour
             if(setDifficultyValue < dungeonRoomDifficultyValue) {
 
                 // Pick a random dungeon mob
-                int randomNumber = Random.Range(0, 100);
-                MobSO mobToSpawnSO = commonMobSOs[Random.Range(0, commonMobSOs.Count)];
+                int randomNumber = UnityEngine.Random.Range(0, 100);
+                MobSO mobToSpawnSO = commonMobSOs[UnityEngine.Random.Range(0, commonMobSOs.Count)];
 
                 if (randomNumber > 65 && randomNumber < 90) {
                     if(rareMobSOs.Count >0) {
-                        mobToSpawnSO = rareMobSOs[Random.Range(0, rareMobSOs.Count)];
+                        mobToSpawnSO = rareMobSOs[UnityEngine.Random.Range(0, rareMobSOs.Count)];
                     }
                 }
 
                 if (randomNumber >= 90) {
                     if (epicMobSOs.Count > 0) {
-                        mobToSpawnSO = epicMobSOs[Random.Range(0, epicMobSOs.Count)];
+                        mobToSpawnSO = epicMobSOs[UnityEngine.Random.Range(0, epicMobSOs.Count)];
                     }
                 }
 
@@ -182,7 +188,6 @@ public class DungeonRoom : MonoBehaviour
                 mobSpawned.SetParentDungeonRoom(this);
                 mobSpawned.gameObject.SetActive(false);
                 mobsInRoom.Add(mobSpawned);
-
                 setDifficultyValue += mobToSpawnSO.mobDifficultyValue;
             } 
         }
@@ -195,7 +200,7 @@ public class DungeonRoom : MonoBehaviour
                 // Spawn if we have not reached the room's resource node number
 
                 // Pick a random resource node
-                Transform resourceNodeToSpawn = DungeonManager.Instance.GetResourceNodesList()[Random.Range(0, DungeonManager.Instance.GetResourceNodesList().Count)].transform;
+                Transform resourceNodeToSpawn = DungeonManager.Instance.GetResourceNodesList()[UnityEngine.Random.Range(0, DungeonManager.Instance.GetResourceNodesList().Count)].transform;
 
                 Instantiate(resourceNodeToSpawn, resourceNodeSpawnPoint.transform.position, Quaternion.identity, this.transform).GetComponent<Mob>();
 
@@ -211,7 +216,7 @@ public class DungeonRoom : MonoBehaviour
                 // Spawn if we have not reached the room's resource node number
 
                 // Pick a random humanoid cage
-                Transform humanoidCageToSpawn = DungeonManager.Instance.GetHumanoidCagesList()[Random.Range(0, DungeonManager.Instance.GetHumanoidCagesList().Count)].transform;
+                Transform humanoidCageToSpawn = DungeonManager.Instance.GetHumanoidCagesList()[UnityEngine.Random.Range(0, DungeonManager.Instance.GetHumanoidCagesList().Count)].transform;
 
                 Vector3 spawnPosition = Utils.Randomize2DPoint(humanoidCageSpawnPoint.transform.position, 0f);
                 HumanoidCage humanoidCageSpawned = Instantiate(humanoidCageToSpawn, spawnPosition, Quaternion.identity, this.transform).GetComponent<HumanoidCage>();
@@ -238,7 +243,7 @@ public class DungeonRoom : MonoBehaviour
 
         OpenExitDoor();
         OpenNextDungeonRoom();
-
+        OnAnyRoomCleared?.Invoke(this, EventArgs.Empty);
         if(!isFirstDungeonRoom) {
             OpenDungeonRoomEntrance();
         }
@@ -288,6 +293,7 @@ public class DungeonRoom : MonoBehaviour
         float delayToPlayerDeActivation = .5f;
         yield return new WaitForSeconds(delayToPlayerDeActivation);
         Player.Instance.DisablePlayerActions();
+        OnAnyDoorClosed?.Invoke(this, EventArgs.Empty);
 
         float delayToMonsterActivation = 1f;
         yield return new WaitForSeconds(delayToMonsterActivation);
@@ -305,6 +311,7 @@ public class DungeonRoom : MonoBehaviour
         if (mobsInRoom.Count > 0) {
             foreach (Mob mob in mobsInRoom) {
                 mob.gameObject.SetActive(true);
+                OnAnyMobAppear?.Invoke(this, EventArgs.Empty);
                 yield return new WaitForSeconds(delayBetweenMobActivation);
             }
 

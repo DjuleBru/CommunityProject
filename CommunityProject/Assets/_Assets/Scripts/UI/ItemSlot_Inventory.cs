@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler {
+public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerEnterHandler {
 
 
     private Vector2 initialPosition;
@@ -15,6 +16,12 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
     private bool draggedOnInventory;
 
     [SerializeField] private bool disableInteraction;
+
+    public static event EventHandler OnAnyItemHovered;
+    public static event EventHandler OnAnyItemSplitted;
+    public static event EventHandler OnAnyItemTransfered;
+    public static event EventHandler OnAnyItemDropped;
+    public static event EventHandler OnAnyItemFailedAction;
 
     protected override void Awake() {
         base.Awake();
@@ -84,7 +91,9 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
                 // Dragged on another inventory, interactable inventory that can receive items
                 TransferItemBetweenInventories(inventoryDraggedOn);
                 GetInventoryUI_InteractedDraggedOn().CloseTransferItemsPanelGameObject();
+                OnAnyItemTransfered?.Invoke(this, EventArgs.Empty);
             } else {
+                OnAnyItemFailedAction?.Invoke(this, EventArgs.Empty);
                 rectTransform.anchoredPosition = initialPosition;
             }
 
@@ -101,6 +110,7 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
                 Item droppedItem = new Item { itemType = item.itemType, amount = item.amount };
                 parentInventoryUI.GetInventory().RemoveItemStack(item);
                 ItemWorld.DropItem(Player.Instance.transform.position, droppedItem, 5f, true);
+                OnAnyItemDropped?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -128,10 +138,11 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
             }
             
             newInventory.AddItem(transferedItem);
-            
+            OnAnyItemTransfered?.Invoke(this, EventArgs.Empty);
         }
         else {
             // Failed transfer : Reset position
+            OnAnyItemFailedAction?.Invoke(this, EventArgs.Empty);
             rectTransform.anchoredPosition = initialPosition;
         }
     }
@@ -225,6 +236,7 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
             Item droppedItem = new Item { itemType = item.itemType, amount = item.amount };
             parentInventoryUI.GetInventory().RemoveItemStack(item);
             ItemWorld.DropItem(Player.Instance.transform.position, droppedItem, 5f, true);
+            OnAnyItemDropped?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -232,8 +244,16 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         if (Input.GetKey(KeyCode.LeftControl)) {
             //Identify other opened inventory
             InventoryUI otherOpenedInventory = OpenedInventoryHandler.Instance.GetOtherInventoryOpened(parentInventoryUI);
-            if (otherOpenedInventory == null) return;
-            if (!otherOpenedInventory.GetInventory().InventoryCanAcceptItem(item)) return;
+
+            if (otherOpenedInventory == null) {
+                OnAnyItemFailedAction?.Invoke(this, EventArgs.Empty);
+                return;
+            }
+
+            if (!otherOpenedInventory.GetInventory().InventoryCanAcceptItem(item)) {
+                OnAnyItemFailedAction?.Invoke(this, EventArgs.Empty);
+                return;
+            }
 
             TransferItemBetweenInventories(otherOpenedInventory.GetInventory());
         }
@@ -249,6 +269,7 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
 
             Item item1Splitted = new Item { itemType = item.itemType, amount = intItemSplittedAmount };
             if((parentInventory.GetItemList().Count +1) >= parentInventory.GetSlotNumberX() * parentInventory.GetSlotNumberY()) {
+                OnAnyItemFailedAction?.Invoke(this, EventArgs.Empty);
                 return;
             }
 
@@ -261,6 +282,8 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
                 item2Splitted = new Item { itemType = item.itemType, amount = intItemSplittedAmount +1 };
             }
             parentInventory.AddItemStack(item2Splitted);
+
+            OnAnyItemSplitted?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -268,4 +291,7 @@ public class ItemSlot_Inventory : ItemSlot, IPointerDownHandler, IBeginDragHandl
         // Drop Item
     }
 
+    public void OnPointerEnter(PointerEventData eventData) {
+        OnAnyItemHovered?.Invoke(this, EventArgs.Empty);
+    }
 }

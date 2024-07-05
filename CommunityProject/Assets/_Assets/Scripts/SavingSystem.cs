@@ -10,6 +10,7 @@ public class SavingSystem : MonoBehaviour {
 
     private bool sceneIsOverWorld;
     private bool sceneIsDungeon;
+    private bool sceneIsMainMenu;
 
     private bool playerExitedDungeon;
 
@@ -25,6 +26,9 @@ public class SavingSystem : MonoBehaviour {
         }
         if (SceneManager.GetActiveScene().name == SceneTransitionManager.Scene.Dungeon.ToString()) {
             sceneIsDungeon = true;
+        }
+        if (SceneManager.GetActiveScene().name == SceneTransitionManager.Scene.MainMenu.ToString()) {
+            sceneIsMainMenu = true;
         }
     }
 
@@ -83,6 +87,10 @@ public class SavingSystem : MonoBehaviour {
 
     public bool GetSceneIsDungeon() {
         return sceneIsDungeon;
+    }
+
+    public bool GetSceneIsMainMenu() {
+        return sceneIsMainMenu;
     }
 
     public void SaveOverworld() {

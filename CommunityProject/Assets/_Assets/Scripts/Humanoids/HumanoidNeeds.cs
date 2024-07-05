@@ -41,6 +41,9 @@ public class HumanoidNeeds : MonoBehaviour {
 
     private void Start() {
         InitializeHumanoidNeedStats();
+        humanoidVisual.SetExhaustedStatusActive(false);
+        humanoidVisual.SetHungryStatusActive(false);
+
     }
 
     private void Update() {

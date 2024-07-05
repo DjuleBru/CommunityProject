@@ -305,6 +305,8 @@ public class Humanoid : MonoBehaviour
     }
 
     public void RemoveAssignedBuilding() {
+        if (assignedBuilding == null) return;
+        assignedBuilding.RemoveAssignedHumanoid();
         assignedBuilding = null;
         StopTask();
     }

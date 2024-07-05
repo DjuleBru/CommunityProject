@@ -31,6 +31,9 @@ public class MobAttack : MonoBehaviour
 
     private bool attackAnimationStarted;
 
+    public static event EventHandler OnAnyMobAttack;
+    public static event EventHandler OnAnyMobRangedAttack;
+
     private void Awake() {
         mob = GetComponent<Mob>();
         attackType = mob.GetMobSO().attackType;
@@ -49,6 +52,7 @@ public class MobAttack : MonoBehaviour
             attackTimer = attackRate;
 
             OnMobAttack?.Invoke(this, EventArgs.Empty);
+            OnAnyMobAttack?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -71,6 +75,7 @@ public class MobAttack : MonoBehaviour
                 rangedAttackTimer = mob.GetMobSO().rangedAttackAnimationDelay;
                 InstantiateProjectile(targetPosition);
                 attackAnimationStarted = false;
+                OnAnyMobRangedAttack?.Invoke(this, EventArgs.Empty);
             }
         }
     }
